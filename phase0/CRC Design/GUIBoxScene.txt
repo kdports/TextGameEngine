@@ -1,5 +1,5 @@
 Class name: GUIBoxScene
-Parent class: GUIBox
+Parent class: GUIObject
 Subclasses: 
 
 Responsibilities:
@@ -9,5 +9,5 @@ Responsibilities:
 * Does not directly interact with Scene!
 
 Collaborators:
-* GUIBox
+* GUIObject
 * GUIArrow

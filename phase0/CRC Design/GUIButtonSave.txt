@@ -1,0 +1,10 @@
+Class name: GUIButtonSave
+Parent class: GUIButton
+Subclasses: 
+
+Responsibilities:
+* Saves all scenes and decisions when clicked
+
+Collaborators:
+* GUIButton
+* Save

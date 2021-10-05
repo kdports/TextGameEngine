@@ -1,4 +1,4 @@
-Class name: GUIBox
+Class name: GUIObject
 Parent class: 
 Subclasses: 
 

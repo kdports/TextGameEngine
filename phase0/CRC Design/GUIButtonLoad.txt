@@ -1,0 +1,10 @@
+Class name: GUIButtonLoad
+Parent class: GUIButton
+Subclasses: 
+
+Responsibilities:
+* Loads from an RDF file using the Load class when clicked
+
+Collaborators:
+* GUIButton
+* Load

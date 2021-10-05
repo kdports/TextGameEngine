@@ -1,0 +1,10 @@
+Class name: GUIButtonNewDecision
+Parent class: GUIButton
+Subclasses: 
+
+Responsibilities:
+* Creates a new GUIArrow when clicked
+
+Collaborators:
+* GUIButton
+* GUIArrow

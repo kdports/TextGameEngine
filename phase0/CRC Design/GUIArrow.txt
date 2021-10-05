@@ -1,11 +1,12 @@
 Class name: GUIArrow
-Parent class: 
+Parent class: GUIObject
 Subclasses: 
 
 Responsibilities:
-* Contains a start and end point that refers to a GUIBoxDecision and GUIBoxScene class respectively
-* Automatically created when a GUIBoxDecision is
+* Contains the details that would be present in a Decision instance
+* Used to show and take input for those details
+* Arrows can be drawn from it to a GUIBoxScene
+* Does not directly interact with Decision!
 
 Collaborators:
-* GUIBoxDecision
 * GUIBoxScene
