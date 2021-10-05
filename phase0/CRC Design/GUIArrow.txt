@@ -1,8 +1,11 @@
-Class name: 
+Class name: GUIArrow
 Parent class: 
 Subclasses: 
 
 Responsibilities:
-
+* Contains a start and end point that refers to a GUIBoxDecision and GUIBoxScene class respectively
+* Automatically created when a GUIBoxDecision is
 
 Collaborators:
+* GUIBoxDecision
+* GUIBoxScene

@@ -1,8 +1,10 @@
-Class name: 
+Class name: Player
 Parent class: 
 Subclasses: 
 
 Responsibilities:
-
+* Stores all previous decisions taken in an ArrayList
+* Contains functions to check if a previous decision has been taken
 
 Collaborators:
+* Decision

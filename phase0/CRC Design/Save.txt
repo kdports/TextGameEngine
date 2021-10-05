@@ -1,8 +1,13 @@
-Class name: 
+Class name: Save
 Parent class: 
 Subclasses: 
 
 Responsibilities:
-
+* Saves the current GUI layout to an RDF file
+* GUIBoxScene and GUIBoxDecision are converted to Scene and Decision
+* GUIArrows are incorporated into their respective Scene and Decision instances
 
 Collaborators:
+* GUIBoxScene
+* GUIBoxDecision
+* GUIArrow

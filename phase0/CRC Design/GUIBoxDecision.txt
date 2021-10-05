@@ -1,0 +1,13 @@
+Class name: GUIBoxDecision
+Parent class: GUIBox
+Subclasses: 
+
+Responsibilities:
+* Contains the details that would be present in a Decision instance
+* Used to show and take input for those details
+* Arrows can be drawn from it to a GUIBoxScene
+* Does not directly interact with Decision!
+
+Collaborators:
+* GUIBoxScene
+* GUIArrow

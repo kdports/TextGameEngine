@@ -1,0 +1,11 @@
+Class name: GUICanvas
+Parent class: 
+Subclasses: 
+
+Responsibilities:
+* A Canvas for other GUI classes to be drawn onto.
+* Supports the GUI outside of those direct classes
+* Contains buttons for new GUIBoxes or GUIArrows
+* Contains save and load buttons
+
+Collaborators:

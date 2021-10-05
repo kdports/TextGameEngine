@@ -1,0 +1,11 @@
+Class name: InOut
+Parent class: 
+Subclasses: 
+
+Responsibilities:
+* Handles the input of text into the game
+* Used for selecting decisions
+* Similar to JShell example in class
+
+Collaborators:
+* Game

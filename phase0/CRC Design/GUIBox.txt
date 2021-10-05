@@ -1,8 +1,11 @@
-Class name: 
+Class name: GUIBox
 Parent class: 
 Subclasses: 
 
 Responsibilities:
-
+* An abstract class that contains a string and nid
+* Can show the details of the Scene or Decision it holds
 
 Collaborators:
+* GUIBox
+* GUIArrow

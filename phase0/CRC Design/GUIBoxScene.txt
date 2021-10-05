@@ -1,0 +1,13 @@
+Class name: GUIBoxScene
+Parent class: GUIBox
+Subclasses: 
+
+Responsibilities:
+* Contains the details of a Scene instance
+* Used to show and take input for those details
+* Takes arrows from GUIBoxDecision
+* Does not directly interact with Scene!
+
+Collaborators:
+* GUIBox
+* GUIArrow

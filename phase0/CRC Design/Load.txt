@@ -1,8 +1,11 @@
-Class name: 
+Class name: Load
 Parent class: 
 Subclasses: 
 
 Responsibilities:
-
+* Takes an RDF file of Scenes and Decisions and converts them to GUIBoxScene, GUIBoxDecision, and GUIArrow
 
 Collaborators:
+* GUIArrow
+* GUIBoxDecision
+* GUIBoxScene

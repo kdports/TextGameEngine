@@ -1,13 +1,12 @@
-Class name: Decision
-Parent class: 
-Subclasses: TimeDecision
+Class name: TimeDecision
+Parent class: Decision
+Subclasses: 
 
 Responsibilities:
 * Contains a prerequisite for the decision to be possible
 * Contains an outcome Scene for if it is selected
 * Contains a string describing the decision
-* Contains an nid unique from all other Decisions
-* Does not tie itself to beloning in a Scene
+* Contains a timer that makes the decision unavailable upon completion
 
 Collaborators:
 * Scene
