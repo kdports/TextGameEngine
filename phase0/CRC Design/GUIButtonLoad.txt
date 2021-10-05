@@ -3,7 +3,7 @@ Parent class: GUIButton
 Subclasses: 
 
 Responsibilities:
-* Loads from an RDF file using the Load class when clicked
+* Calls the Load class when clicked to Load from an RDF file
 
 Collaborators:
 * GUIButton
