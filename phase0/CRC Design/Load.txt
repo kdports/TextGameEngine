@@ -1,11 +1,10 @@
 Class name: Load
 Parent class: 
-Subclasses: 
+Subclasses: GameLoad, EngineLoad
 
 Responsibilities:
-* Takes an RDF file of Scenes and Decisions and converts them to GUIBoxScene, GUIBoxDecision, and GUIArrow
+* Loads the basic details of an RDF file
 
 Collaborators:
-* GUIArrow
-* GUIBoxDecision
-* GUIBoxScene
+* EngineLoad
+* GameLoad

@@ -1,0 +1,12 @@
+Class name: GameManager
+Parent class: None
+Subclasses: 
+
+Responsibilities:
+* Opens the terminal and loads the first scene
+* Reads from the loaded string
+* Keeps track of where the game is and where to go next
+
+Collaborators:
+* Scene
+* Decision

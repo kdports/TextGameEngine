@@ -3,11 +3,10 @@ Parent class: None
 Subclasses: 
 
 Responsibilities:
-* Opens the terminal and loads the first scene
-* Reads from the loaded string
 * Switches between scenes
 * Calls Scene functions to determine if decisions are valid/invalid
 * Contains main function
+* Remains in both engine and game
 
 Collaborators:
 * Scene

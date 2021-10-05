@@ -1,0 +1,10 @@
+Class name: GameLoad
+Parent class: Load
+Subclasses: 
+
+Responsibilities:
+* Takes an RDF file of Scenes and Decisions and sends them to the GameManager
+
+Collaborators:
+* Scene
+* Decision
