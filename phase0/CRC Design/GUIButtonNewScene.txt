@@ -1,0 +1,10 @@
+Class name: GUIButtonNewScene
+Parent class: GUIButton
+Subclasses: 
+
+Responsibilities:
+* Creates a new GUIBoxScene when clicked
+
+Collaborators:
+* GUIButton
+* GUIBoxScene
