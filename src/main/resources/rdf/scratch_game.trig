@@ -1,0 +1,23 @@
+prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
+prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
+
+# Just the description of a scene that has two options: "Do literally nothing" and "Also literally nothing, but more!".
+# These two decisions lead back into the same scene in a loop forever.
+
+tged:_scene_1 a tgeo:Scene ;
+    tgeo:decision [
+        tgeo:order 1 ;
+        tgeo:content tged:_decision_1 ;
+    ] ;
+    tgeo:decision [
+        tgeo:order 1 ;
+        tgeo:content tged:_decision_2;
+    ] .
+
+tged:_decision_1 a tgeo:Decision ;
+    tgeo:hasText "Do literally nothing" ;
+    tged:directsTo tged:_scene_1 .
+
+tged:_decision_2 a tgeo:Decision ;
+    tgeo:hasText "Also literally nothing, but more!" ;
+    tged:directsTo tged:_scene_1 .
