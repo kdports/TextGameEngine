@@ -1,0 +1,13 @@
+Class name: Slide
+Parent class:
+Subclasses: TimeSlide (future phases)
+
+Responsibilities:
+* Has a prompt (string)
+* Has an ArrayList of Decisions
+* Has functions to add or check decision prerequisites (future phases)
+* Contains an nid unique from all other Slides
+
+Collaborators:
+* Decision
+* Game

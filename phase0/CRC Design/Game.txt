@@ -3,13 +3,13 @@ Parent class: None
 Subclasses: 
 
 Responsibilities:
-* Opens the terminal and loads the first scene
-* Reads from the loaded string
-* Switches between scenes
-* Calls Scene functions to determine if decisions are valid/invalid
-* Contains main function
+* Holds Slides and Decisions
+* Indicates a single Slide to be the first one.
+* Add, delete, edit those slides and decisions
 
 Collaborators:
-* Scene
+* Slide
+* Decision
 * Player
-* InOut
+* RDFLoad
+* RDFSave
