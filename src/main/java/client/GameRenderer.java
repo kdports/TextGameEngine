@@ -1,4 +1,4 @@
-package client;
+package main.java.client;
 import entities.*;
 
 // GUI class!!!11!11!!!!
