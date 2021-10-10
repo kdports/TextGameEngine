@@ -1,45 +1,38 @@
 package main.java.client;
 import main.java.entities.*;
+import main.java.interfaces.DisplayGame;
 import javax.swing.*;
 import java.util.ArrayList;
-
+import java.util.Scanner;
 // GUI class!!!11!11!!!!
-public class GameRenderer {
+public class GameRenderer implements DisplayGame{
     public GameRenderer() {
     }
-    public void render(Game game){
-        JFrame f= new JFrame("Test");
-        f.setSize(500,500);
-        f.setResizable(true);
-        JTextArea t1;
-        t1=new JTextArea(game.firstSlide.prompt);
-        t1.setLineWrap(true);
-        //t1.setBounds(20,20, 200,200);
-        JScrollPane scroll = new JScrollPane(t1);
-        f.add(scroll);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        //f.setSize(400,400);
-        //f.setLayout(null);
-        f.setVisible(true);
+    // Currently just displays the game by entering stuff into the terminal
+    public void display(Slide slide){
+        Scanner response = new Scanner(System.in);
+        System.out.println(slide.prompt);
+        ArrayList<Decision> validDecisions;
+        // It keeps count of the decisions and you make a decision by entering the number
+        // next to the decision that you are making
+        int count = 1;
+
+        // Check if decisions are valid
+        // TODO add the prerequisites
+        validDecisions = Player.checkValidChoices(slide.decisions);
+        for(Decision d: validDecisions){
+            System.out.println("Enter the number next to the choice to choose.");
+            System.out.print(count + " : ");
+            System.out.println(d.text);
+            count++;
+        }
+
+        // Does not ask for a decision if there are none, IE the last slide
+        if (!validDecisions.isEmpty()){
+            int t = response.nextInt();
+            Player.currentSlide = validDecisions.get(t - 1).target;
+        }
+
     }
 
-    public static void main(String[] args) {
-        Decision d1 = new Decision("back");
-        ArrayList<Decision> a1 = new ArrayList<>();
-        a1.add(d1);
-        Decision d2 = new Decision("back");
-        ArrayList<Decision> a2 = new ArrayList<>();
-        a2.add(d2);
-        Slide s1 = new Slide("Thicker than a bowl of oatmeal p1", a1);
-        Slide s2 = new Slide("Thicker than a bowl of oatmeal p2", a2);
-        d1.setTarget(s2);
-        d2.setTarget(s1);
-
-        Game game = new Game(s1);
-        game.addSlide(s1);
-        game.addSlide(s2);
-
-        GameRenderer gr = new GameRenderer();
-        gr.render(game);
-    }
 }
