@@ -1,5 +1,5 @@
-package rdf;
-import entities.*;
+package main.java.rdf;
+import main.java.entities.*;
 
 public abstract class RDFLoad {
     public void loadFromTrig(String filepath) {

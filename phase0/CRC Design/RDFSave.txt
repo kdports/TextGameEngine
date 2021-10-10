@@ -1,9 +1,0 @@
-Class name: RDFSave
-Parent class: 
-Subclasses: 
-
-Responsibilities:
-* Saves the game to a .trig file
-
-Collaborators:
-* Game
