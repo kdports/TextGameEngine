@@ -3,11 +3,11 @@ Parent class:
 Subclasses: TimeDecision
 
 Responsibilities:
-* Contains a prerequisite for the decision to be possible
-* Contains an outcome Scene for if it is selected
+* Contains a prerequisite for the decision to be possible (true by default)
+* Contains an outcome Slide for if it is selected
 * Contains a string describing the decision
 * Contains an nid unique from all other Decisions
-* Does not tie itself to beloning in a Scene
+* Does not tie itself to belonging to a single Slide
 
 Collaborators:
-* Scene
+* Slide

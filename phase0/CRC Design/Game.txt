@@ -3,12 +3,13 @@ Parent class: None
 Subclasses: 
 
 Responsibilities:
-* Switches between scenes
-* Calls Scene functions to determine if decisions are valid/invalid
-* Contains main function
-* Remains in both engine and game
+* Holds Slides and Decisions
+* Indicates a single Slide to be the first one.
+* Add, delete, edit those slides and decisions
 
 Collaborators:
-* Scene
+* Slide
+* Decision
 * Player
-* InOut
+* RDFLoad
+* RDFSave
