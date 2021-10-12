@@ -47,8 +47,8 @@ public class GUIScene extends StackPane {
         //TextArea dialogue = new TextArea(); IDEAL CODE
         //dialogue.setWrapText(true);
         TextField dialogue = new TextField();
-        dialogue.setMaxWidth(130);
         dialogue.setStyle("-fx-background-color: #c72c41;");
+        dialogue.setMaxWidth(130);
         dialogue.setPromptText("Enter Dialogue...");
         StackPane.setAlignment(dialogue, Pos.CENTER);
 

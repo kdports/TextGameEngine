@@ -1,3 +1,13 @@
-.text-area .content{
+.button {
+    -fx-background-color: #c72c41;
+    -fx-text-fill: #2d2d2d;
+}
+
+.rectangle {
+    -fx-background-color: #510a32;
+    -fx-border-color: #801336;
+}
+
+.text-field {
     -fx-background-color: #c72c41;
 }
