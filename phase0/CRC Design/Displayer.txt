@@ -1,0 +1,6 @@
+Interface Name: Displayer
+Implementers: GameRenderer
+
+Responsibilities:
+- Contains a display() method to show either a Slide or Decision
+- Used in order to help code adhere to SOLID design principles and Clean Architecture
