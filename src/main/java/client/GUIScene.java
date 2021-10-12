@@ -4,11 +4,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -19,13 +24,14 @@ public class GUIScene extends StackPane {
 
     public GUIScene(String s, int idControl, Pane root) {
         this.setMaxSize(300, 100);
-        this.setStyle("-fx-background-color: Gainsboro;-fx-border-color: blue;");
+        this.setStyle("-fx-background-color: #510a32;-fx-border-color: #801336;");
         this.setId(s + idControl);
 
+        //TODO: Add slide number to slide
 
-
+        //Rectangle code
         Rectangle rect = new Rectangle(300, 100);
-
+        rect.setFill(Color.web("510a32"));
         rect.setOnMousePressed(mouseEvent -> {
             mouseAnchorX = mouseEvent.getX();
             mouseAnchorY = mouseEvent.getY();
@@ -36,11 +42,25 @@ public class GUIScene extends StackPane {
             this.setLayoutY(mouseEvent.getSceneY() - mouseAnchorY);
         });
 
-        Button b1 = new Button("Create Decision");
-        Button b2 = new Button("Delete Scene");
-        this.getChildren().addAll(rect, b1, b2);
-        StackPane.setAlignment(b1, Pos.TOP_RIGHT);
-        StackPane.setAlignment(b2, Pos.BOTTOM_RIGHT);
+        //text box code
+        //TODO: Figure out how the change text field background colour
+        //TextArea dialogue = new TextArea(); IDEAL CODE
+        //dialogue.setWrapText(true);
+        TextField dialogue = new TextField();
+        dialogue.setMaxWidth(130);
+        dialogue.setStyle("-fx-background-color: #c72c41;");
+        dialogue.setPromptText("Enter Dialogue...");
+        StackPane.setAlignment(dialogue, Pos.CENTER);
+
+        //Button Code
+        //TODO: Decide better method for applying colours. Perhaps CSS Styling
+        Button b1 = new Button("+Decision");
+        b1.setStyle("-fx-background-color: #c72c41; ");
+        Button b2 = new Button("X");
+        b2.setStyle("-fx-background-color: #c72c41; ");
+        this.getChildren().addAll(rect, b1, b2, dialogue);
+        StackPane.setAlignment(b1, Pos.CENTER_RIGHT);
+        StackPane.setAlignment(b2, Pos.TOP_LEFT);
 
         b1.setOnMousePressed(mouseEvent -> {
             decisionIdControl++;
