@@ -24,6 +24,7 @@ public class GUIDecision extends StackPane {
 
     public GUIDecision(GUIScene firstScene, Pane root, int decisionIdControl){
         this.initialScene = firstScene;
+        this.secondScene = firstScene;
         this.setMaxSize(300, 5);
         this.setMinSize(300, 5);
         this.setStyle("-fx-background-color: red");
@@ -34,6 +35,18 @@ public class GUIDecision extends StackPane {
         });
 
         this.setId(firstScene.getId() + "," + decisionIdControl);
+
+        Circle centerCircle = new Circle(5);
+        centerCircle.setFill(Color.GRAY);
+        centerCircle.setOnMousePressed(mouseEvent -> {
+            mouseAnchorX = mouseEvent.getX();
+            mouseAnchorY = mouseEvent.getY();
+        });
+
+        centerCircle.setOnMouseDragged(mouseEvent -> {
+            this.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
+            this.setLayoutY(mouseEvent.getSceneY() - mouseAnchorY);
+        });
 
         Circle rightConnection = new Circle(5);
         rightConnection.setFill(Color.YELLOW);
@@ -60,10 +73,11 @@ public class GUIDecision extends StackPane {
             db.setContent(content);
         });
 
-        this.getChildren().addAll(leftConnection, EditBtn, rightConnection);
+        this.getChildren().addAll(leftConnection, EditBtn, rightConnection, centerCircle);
         StackPane.setAlignment(leftConnection, Pos.BASELINE_LEFT);
         StackPane.setAlignment(EditBtn, Pos.CENTER);
         StackPane.setAlignment(rightConnection, Pos.TOP_RIGHT);
+        StackPane.setAlignment(centerCircle, Pos.BOTTOM_CENTER);
 
 
 
