@@ -5,19 +5,14 @@ import java.util.ArrayList;
 
 public class Player {
     public static Slide currentSlide;
+    public static GameRenderer gr = new GameRenderer();
 
     public static void playGame(Game game) {
-        // Starts at the first slide
         currentSlide = game.firstSlide;
-        GameRenderer gr = new GameRenderer();
-        // Displays the slides until there are no more decisions to make
-        while(!currentSlide.decisions.isEmpty()){
-            // Tells the gamerenderer to display the slide
-            // TODO make the gamerenderer display stuff
-            gr.display(currentSlide);
+        playScene();
+    }
 
-        }
-        // Displays the last slide
+    public static void playScene(){
         gr.display(currentSlide);
     }
 
