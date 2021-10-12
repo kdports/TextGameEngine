@@ -18,7 +18,6 @@ public class GUIScene extends StackPane {
     private double mouseAnchorY;
 
     public GUIScene(String s, int idControl, Pane root) {
-        decisionIdControl++;
         this.setMaxSize(300, 100);
         this.setStyle("-fx-background-color: Gainsboro;-fx-border-color: blue;");
         this.setId(s + idControl);
@@ -44,6 +43,7 @@ public class GUIScene extends StackPane {
         StackPane.setAlignment(b2, Pos.BOTTOM_RIGHT);
 
         b1.setOnMousePressed(mouseEvent -> {
+            decisionIdControl++;
             GUIDecision decision = new GUIDecision(this, root, decisionIdControl);
             root.getChildren().add(decision);
             decision.setLayoutX(this.getLayoutX() + 150);
