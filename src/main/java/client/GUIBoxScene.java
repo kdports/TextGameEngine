@@ -3,6 +3,7 @@ package main.java.client;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,24 +35,19 @@ public class GUIBoxScene extends Application
             public void handle(ActionEvent event)
             {
                 idControl++;
-                GUIScene Scene = new GUIScene("Scene", idControl, root);
-                Scene.createDecision.setOnAction(new EventHandler<ActionEvent>(){
-                    @Override
-                    public void handle(ActionEvent event){
-                        root.getChildren().remove(Scene);
-                    }
+                GUIScene GuiScene = new GUIScene("Scene", idControl, root);
 
-                });
 
-                root.getChildren().add(Scene);
+                root.getChildren().add(GuiScene);
 
 
             }
         });
+
         root.getChildren().add(btn);
-        Scene scene = new Scene(root, 900, 900);
+        Scene window = new Scene(root, 900, 900);
         primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(window);
         primaryStage.show();
     }
 
