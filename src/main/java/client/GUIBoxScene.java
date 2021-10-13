@@ -43,6 +43,7 @@ public class GUIBoxScene extends Application
         btnAddSlide.setLayoutX(10);
         btnAddSlide.setLayoutY(10);
         btnAddSlide.setPrefHeight(90);
+        btnAddSlide.setPrefWidth(70);
         //DECIDES BUTTON COLOUR
         btnAddSlide.setStyle("-fx-background-color: #c72c41; ");
         btnAddSlide.setOnAction(new EventHandler<ActionEvent>()

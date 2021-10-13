@@ -37,6 +37,7 @@ public class GUIScene extends StackPane {
             mouseAnchorY = mouseEvent.getY();
         });
 
+
         rect.setOnMouseDragged(mouseEvent -> {
             this.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
             this.setLayoutY(mouseEvent.getSceneY() - mouseAnchorY);
@@ -44,10 +45,10 @@ public class GUIScene extends StackPane {
 
         //text box code
         //TODO: Figure out how the change text field background colour
-        //TextArea dialogue = new TextArea(); IDEAL CODE
-        //dialogue.setWrapText(true);
-        TextField dialogue = new TextField();
-        dialogue.setStyle("-fx-background-color: #c72c41;");
+        TextArea dialogue = new TextArea();
+        dialogue.setWrapText(true);
+//        TextField dialogue = new TextField();
+        dialogue.setStyle("-fx-background-color: #801336;" + "-fx-blend-mode: overlay");
         dialogue.setMaxWidth(130);
         dialogue.setPromptText("Enter Dialogue...");
         StackPane.setAlignment(dialogue, Pos.CENTER);
