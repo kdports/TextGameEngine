@@ -1,0 +1,15 @@
+Class name: Game
+Parent class: None
+Subclasses: 
+
+Responsibilities:
+* Holds Slides and Decisions
+* Indicates a single Slide to be the first one.
+* Add, delete, edit those slides and decisions
+
+Collaborators:
+* Slide
+* Decision
+* Player
+* RDFLoad
+* RDFSave

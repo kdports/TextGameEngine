@@ -1,0 +1,11 @@
+Class name: GameRenderer
+Parent class: 
+Subclasses: 
+
+Responsibilities:
+* Handles the input of text into the game
+* Used for selecting decisions
+* Rendering the data from Player
+
+Collaborators:
+* Player

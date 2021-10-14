@@ -1,0 +1,13 @@
+Class name: TimeSlide (future phases)
+Parent class: Slide
+Subclasses: 
+
+Responsibilities:
+* Has a prompt (string)
+* Has an ArrayList of decisions
+* Has functions to add or check decision prerequisites
+* Has a timer that makes a random decision auto-chosen when selected
+
+Collaborators:
+* Decision
+* Game

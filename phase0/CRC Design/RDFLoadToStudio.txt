@@ -1,0 +1,10 @@
+Class name: RDFLoadToStudio
+Parent class: RDFLoad
+Subclasses:
+
+Responsibilities:
+* Sends the loaded game to a studio for the user to play
+
+Collaborators:
+* Game
+* Studio

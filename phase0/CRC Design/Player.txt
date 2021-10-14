@@ -1,0 +1,11 @@
+Class name: entities.Player
+Parent class: 
+Subclasses: 
+
+Responsibilities:
+* Stores all previous decisions taken in an ArrayList
+* Calls Slide functions to determine if decisions are valid/invalid
+* Contains functions to check if a previous decision has been taken
+
+Collaborators:
+* entities.Decision
