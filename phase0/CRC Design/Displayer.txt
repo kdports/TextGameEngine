@@ -1,5 +1,6 @@
 Interface Name: Displayer
 Implementers: GameRenderer
+Architecture Section: GUI
 
 Responsibilities:
 - Contains a display() method to show either a Slide or Decision

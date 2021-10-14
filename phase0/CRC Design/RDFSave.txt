@@ -1,6 +1,7 @@
 Class name: RDFSave
 Parent class: 
-Subclasses: 
+Subclasses:
+Architecture Section: Use Case
 
 Responsibilities:
 * Saves the game to a .trig file

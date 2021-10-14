@@ -1,11 +1,12 @@
 Class name: EngineLoad
 Parent class: Load
-Subclasses: 
+Subclasses:
+Architecture Section: Use Case
 
 Responsibilities:
-* Takes an RDF file of Scenes and Decisions and converts them to GUIBoxScene, GUIBoxDecision, and GUIArrow
+* Takes an RDF file of Scenes and Decisions and converts them to GUIBoxScene, GUIBoxDecision, and GUISlide
 
 Collaborators:
-* GUIArrow
+* GUISlide
 * GUIBoxDecision
 * GUIBoxScene

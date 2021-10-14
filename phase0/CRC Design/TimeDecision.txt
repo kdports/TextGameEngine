@@ -1,6 +1,7 @@
 Class name: TimeDecision (future phases)
 Parent class: entities.Decision
-Subclasses: 
+Subclasses:
+Architecture Section: Entity
 
 Responsibilities:
 * Contains a prerequisite for the decision to be possible

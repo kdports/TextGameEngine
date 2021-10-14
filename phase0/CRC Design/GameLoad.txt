@@ -1,9 +1,10 @@
-Class name: GameLoad
+Class name: PlayerLoad
 Parent class: Load
-Subclasses: 
+Subclasses:
+Architecture Section: Use Case
 
 Responsibilities:
-* Takes an RDF file of Scenes and Decisions and sends them to the GameManager
+* Takes an RDF file of Scenes and Decisions and sends them to the Player
 
 Collaborators:
 * Scene
