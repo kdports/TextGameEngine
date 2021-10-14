@@ -73,7 +73,7 @@ public abstract class RDFLoad {
 
     public static void main(String[] args) throws FileNotFoundException {
         // For debug purposes. Just run this, and if Player.playGame() is hooked up correctly, it should work.
-        String rdfFilepath = "src/main/java/rdf/scratch_game.ttl";
+        String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
         RDFLoad loader = new RDFLoadToPlayer(rdfFilepath);
         loader.loadFromFile(rdfFilepath);
     }
