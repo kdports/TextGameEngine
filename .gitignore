@@ -3,3 +3,6 @@
 
 # Ignore developer-specific settings
 .idea/
+
+# Ignore built class binaries
+build/
