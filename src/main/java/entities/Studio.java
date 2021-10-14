@@ -1,5 +1,7 @@
 package main.java.entities;
 
+import main.java.client.GameRenderer;
+
 public class Studio {
     public static Game game;
 
@@ -8,7 +10,9 @@ public class Studio {
     }
 
     public static void playGame() {
-        Player.playGame(game);
+        GameRenderer gr = new GameRenderer();
+        Player p = new Player(gr, game);
+        p.playGame();
     }
 
     public static void addSlide(Slide newSlide) {
