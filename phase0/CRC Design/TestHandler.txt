@@ -1,0 +1,11 @@
+Class name: TestHandler
+Parent class:
+Subclasses:
+
+Responsibilities:
+*
+*
+*
+
+Collaborators:
+*

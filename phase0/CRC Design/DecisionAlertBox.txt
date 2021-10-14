@@ -1,0 +1,11 @@
+Class name: DecisionAlertBox
+Parent class:
+Subclasses:
+
+Responsibilities:
+*
+*
+*
+
+Collaborators:
+*

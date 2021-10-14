@@ -1,0 +1,11 @@
+Class name: SlideHandler
+Parent class:
+Subclasses:
+
+Responsibilities:
+*
+*
+*
+
+Collaborators:
+*

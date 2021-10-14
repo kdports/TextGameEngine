@@ -1,0 +1,11 @@
+Class name: SaveHandler
+Parent class:
+Subclasses:
+
+Responsibilities:
+*
+*
+*
+
+Collaborators:
+*

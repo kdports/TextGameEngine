@@ -1,0 +1,11 @@
+Class name: GUIDecision
+Parent class: StackPane
+Subclasses:
+
+Responsibilities:
+*
+*
+*
+
+Collaborators:
+*

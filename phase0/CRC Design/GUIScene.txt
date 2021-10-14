@@ -1,0 +1,11 @@
+Class name: GUIScene
+Parent class: StackPane
+Subclasses:
+
+Responsibilities:
+*
+*
+*
+
+Collaborators:
+*
