@@ -1,7 +1,5 @@
 package rdf;
-import client.GameRenderer;
 import entities.*;
-import interfaces.Displayer;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
 
@@ -9,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class RDFLoad {
+public abstract class RDFLoad {
     private Model model;
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
@@ -71,16 +69,5 @@ public class RDFLoad {
         sendGame(game);
     }
 
-    public void sendGame(Game game) {
-        Displayer dp = new GameRenderer();
-        Player p = new Player(dp, game);
-        p.playGame();
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        // For debug purposes. Just run this, and if Player.playGame() is hooked up correctly, it should work.
-        String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
-        RDFLoad loader = new RDFLoad(rdfFilepath);
-        loader.loadFromFile(rdfFilepath);
-    }
+    public abstract void sendGame(Game game);
 }
