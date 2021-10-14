@@ -4,5 +4,5 @@
 # Ignore developer-specific settings
 .idea/
 
-# Ignore built class binaries
+# Ignore binaries
 build/
