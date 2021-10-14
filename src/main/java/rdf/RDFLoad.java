@@ -36,17 +36,18 @@ public abstract class RDFLoad {
         return decisions;
     }
 
-    public void loadFromTrig(String filepath) throws FileNotFoundException {
+    public void loadFromFile(String filepath) throws FileNotFoundException {
         Game game = new Game();
 
         // Find and add all Slides
         ResIterator iter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
         if (iter.hasNext()) {
-            System.out.println("The database contains slides for:");
             while (iter.hasNext()) {
+                // Find the data about a single slide
                 Resource slideNode = iter.nextResource();
+                // Get the slide's prompt
                 String slideText = slideNode.getProperty(TGEO.hasText).getString();
-
+                // Get the slide's decisions
                 ArrayList<Decision> decisions = getDecisionsOfSlide(slideNode);
                 Slide slide = new Slide(slideText, decisions);
 
@@ -74,6 +75,6 @@ public abstract class RDFLoad {
         // For debug purposes. Just run this, and if Player.playGame() is hooked up correctly, it should work.
         String rdfFilepath = "src/main/java/rdf/scratch_game.ttl";
         RDFLoad loader = new RDFLoadToPlayer(rdfFilepath);
-        loader.loadFromTrig(rdfFilepath);
+        loader.loadFromFile(rdfFilepath);
     }
 }
