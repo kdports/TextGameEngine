@@ -3,5 +3,5 @@ module TextGameEngine.main {
     requires javafx.fxml;
     requires java.desktop;
 
-    opens main.java.client;
+    opens client;
 }

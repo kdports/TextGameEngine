@@ -1,4 +1,4 @@
-package main.java.client;
+package client;
 
 import javafx.css.Style;
 import javafx.geometry.Pos;

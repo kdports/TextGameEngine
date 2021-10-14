@@ -1,5 +1,5 @@
-package main.java.rdf;
-import main.java.entities.*;
+package rdf;
+import entities.*;
 
 import java.io.FileNotFoundException;
 

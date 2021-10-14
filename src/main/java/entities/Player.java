@@ -1,6 +1,6 @@
-package main.java.entities;
-import main.java.client.GameRenderer;
-import main.java.interfaces.Displayer;
+package entities;
+import client.GameRenderer;
+import interfaces.Displayer;
 
 import java.util.ArrayList;
 

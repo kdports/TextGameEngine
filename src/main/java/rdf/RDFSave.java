@@ -1,5 +1,5 @@
-package main.java.rdf;
-import main.java.entities.*;
+package rdf;
+import entities.*;
 
 public class RDFSave {
     public static void saveToTrig(Game game) {

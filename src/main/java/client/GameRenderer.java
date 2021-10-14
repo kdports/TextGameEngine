@@ -1,7 +1,7 @@
-package main.java.client;
+package client;
 
-import main.java.entities.*;
-import main.java.interfaces.Displayer;
+import entities.*;
+import interfaces.Displayer;
 
 import javax.swing.*;
 import java.awt.*;

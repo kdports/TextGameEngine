@@ -1,6 +1,6 @@
-package main.java.entities;
+package entities;
 
-import main.java.entities.Decision;
+import entities.Decision;
 
 import java.util.*;
 

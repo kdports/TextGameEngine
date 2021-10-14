@@ -1,6 +1,6 @@
-package main.java.entities;
+package entities;
 
-import main.java.client.GameRenderer;
+import client.GameRenderer;
 
 public class Studio {
     public static Game game;
