@@ -1,4 +1,4 @@
-package main.java.client;
+package client;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -15,21 +15,22 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class GUIDecision extends StackPane {
-    public String message = "Insert message here";
+    public String message = "Insert Dialogue...";
     public GUIScene initialScene;
     public GUIScene secondScene;
     private double mouseAnchorX;
     private double mouseAnchorY;
 
-
+    //TODO: Create aesthetically pleasing decision rod
     public GUIDecision(GUIScene firstScene, Pane root, int decisionIdControl){
         this.initialScene = firstScene;
         this.secondScene = firstScene;
         this.setMaxSize(300, 5);
         this.setMinSize(300, 5);
-        this.setStyle("-fx-background-color: red");
+        this.setStyle("-fx-background-color: #ee4540");
 
-        Button EditBtn = new Button("Edit this Scene");
+        Button EditBtn = new Button("Edit Decision");
+        EditBtn.setStyle("-fx-background-color: #c72c41");
         EditBtn.setOnMousePressed(mouseEvent -> {
             DecisionAlertBox.display(root, this);
         });
