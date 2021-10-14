@@ -53,7 +53,7 @@ public abstract class RDFLoad {
 
                 // Add the slide as the target after the fact
                 for (Decision d : decisions) {
-                    d.addTarget(slide);
+                    d.setTarget(slide);
                 }
 
                 // Add as first slide if there aren't slides yet
@@ -70,11 +70,4 @@ public abstract class RDFLoad {
     }
 
     public abstract void sendGame(Game game);
-
-    public static void main(String[] args) throws FileNotFoundException {
-        // For debug purposes. Just run this, and if Player.playGame() is hooked up correctly, it should work.
-        String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
-        RDFLoad loader = new RDFLoadToPlayer(rdfFilepath);
-        loader.loadFromFile(rdfFilepath);
-    }
 }
