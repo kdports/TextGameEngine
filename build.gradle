@@ -13,7 +13,7 @@ repositories {
 sourceSets {
     main {
         java {
-            srcDirs = ['src']
+            srcDirs = ['src/main/java']
         }
     }
 }
@@ -23,10 +23,12 @@ javafx {
     modules = [ 'javafx.controls','javafx.fxml']
 }
 
-
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.apache.jena:jena:4.2.0'
+    implementation 'org.apache.jena:apache-jena:4.2.0'
+    implementation 'org.apache.jena:apache-jena-libs:4.2.0'
 }
 
 test {
