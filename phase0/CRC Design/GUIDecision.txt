@@ -3,9 +3,9 @@ Parent class: StackPane
 Subclasses:
 
 Responsibilities:
-*
-*
-*
+* Creates and displays the decision arrow
+* Makes decision arrow draggable
+* Applies connections to slide boxes
 
 Collaborators:
 *

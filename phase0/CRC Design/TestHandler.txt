@@ -3,9 +3,10 @@ Parent class:
 Subclasses:
 
 Responsibilities:
-*
+* Runs the current state of the game in a new window
 *
 *
 
 Collaborators:
-*
+* Player
+* RDFSave

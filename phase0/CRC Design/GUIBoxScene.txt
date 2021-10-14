@@ -3,9 +3,9 @@ Parent class: Application
 Subclasses:
 
 Responsibilities:
-* Handles the input of text into the game
-* Used for selecting decisions
-* Rendering the data from Player
+* The main function for the GUI
+* Creates the window, splash screen, buttons initially seen
+* Gives buttons tasks to do when clicked such as add a slide to screen
 
 Collaborators:
-* Player
+*

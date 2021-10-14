@@ -3,9 +3,9 @@ Parent class: StackPane
 Subclasses:
 
 Responsibilities:
-*
-*
-*
+* The design and function of a slide
+* Makes the slide interactive with more buttons and a text box that each have their own functions
+* Gives the slide the ability to be dragged
 
 Collaborators:
 *

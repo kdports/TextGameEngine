@@ -3,8 +3,8 @@ Parent class:
 Subclasses:
 
 Responsibilities:
-*
-*
+* Handles the event to add a slide when the button 'Add Slide' is clicked
+* Adds slide to main window by adding it to the root's children
 *
 
 Collaborators:

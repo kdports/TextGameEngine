@@ -3,9 +3,9 @@ Parent class:
 Subclasses:
 
 Responsibilities:
-*
-*
+* Saves the state of the GUI in an RDF
+* Exports RDF
 *
 
 Collaborators:
-*
+* RDFSave
