@@ -7,6 +7,6 @@ public class TestHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
-        // calls player
+        // calls gamerenderer
     }
 }

@@ -16,7 +16,7 @@ Kaspar P:
 Has been working on RDFSave and RDFLoad classes, as well as general implementation of .trig files. Will continue to work on this.
 
 Kevin P:
-Has been working on CRC Design and writing specifications/progress report. Will be switching to helping code, most likely assisting the GUI group.
+Has been working on CRC Design and writing specifications/progress report as well as bug fixing and some GUI work. Will be switching to helping code and double checking adherence to the Clean architecture, most likely assisting the GUI group.
 
 Kevin L:
 Has been working on GameRenderer to display the Player class' logic and a Game instance's slides and decisions. Will work on additional code on the player side.
@@ -29,3 +29,5 @@ Has been working on GameRenderer to display the Player class' logic and a Game i
 
 Jason S:
 Has been working on the GUI for the engine and having it properly interact with lower level code. Will continue to work on this.
+
+One major question: In one sense, our project is really two different applications roled into one package. Both the GameRenderer and GUIBoxScene have their own Clean Architecture circles, which sometimes makes determining adherence to the Clean Architecture difficult. Do you have any advice for making the distinction clearer to us as developers?
