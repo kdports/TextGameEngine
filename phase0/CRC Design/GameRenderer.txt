@@ -1,7 +1,7 @@
 Class name: GameRenderer
 Parent class: 
 Subclasses:
-Architecture Section: Controller
+Architecture Section: GUI
 
 Responsibilities:
 * Handles the input of text into the game

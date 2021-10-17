@@ -1,7 +1,7 @@
 Class name: Player
 Parent class: 
 Subclasses:
-Architecture Section: Entity
+Architecture Section: Controller
 
 Responsibilities:
 * Stores all previous decisions taken in an ArrayList
