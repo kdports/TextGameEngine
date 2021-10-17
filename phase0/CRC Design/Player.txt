@@ -1,6 +1,7 @@
-Class name: entities.Player
+Class name: Player
 Parent class: 
-Subclasses: 
+Subclasses:
+Architecture Section: Controller
 
 Responsibilities:
 * Stores all previous decisions taken in an ArrayList

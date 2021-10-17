@@ -1,0 +1,12 @@
+Class name: TestHandler
+Parent class: EventHandler
+Subclasses:
+Architecture Section: Use Case
+
+Responsibilities:
+* Called when the user wishes to test their creation in the GameRenderer
+* Calls the player to setup and run the game
+
+Collaborators:
+* GUIScene
+* GUIBoxScene

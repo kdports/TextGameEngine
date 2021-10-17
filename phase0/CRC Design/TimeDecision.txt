@@ -1,12 +1,13 @@
 Class name: TimeDecision (future phases)
-Parent class: entities.Decision
-Subclasses: 
+Parent class: Decision
+Subclasses:
+Architecture Section: Entity
 
 Responsibilities:
 * Contains a prerequisite for the decision to be possible
-* Contains an outcome entities.Slide for if it is selected
+* Contains an outcome Slide for if it is selected
 * Contains a string describing the decision
 * Contains a timer that makes the decision unavailable upon completion
 
 Collaborators:
-* entities.Slide
+* Slide
