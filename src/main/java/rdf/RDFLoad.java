@@ -1,3 +1,4 @@
+/*
 package rdf;
 import entities.*;
 import org.apache.jena.rdf.model.*;
@@ -71,3 +72,4 @@ public abstract class RDFLoad {
 
     public abstract void sendGame(Game game);
 }
+*/
