@@ -1,3 +1,4 @@
+/*
 package rdf;
 import entities.*;
 
@@ -13,3 +14,4 @@ public class RDFLoadToStudio extends RDFLoad {
         Studio.loadGame(game);
     }
 }
+*/

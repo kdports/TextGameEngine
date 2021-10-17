@@ -1,3 +1,4 @@
+/*
 package rdf;
 
 import client.GameRenderer;
@@ -26,3 +27,4 @@ public class RDFLoadToPlayer extends RDFLoad {
         loader.loadFromFile(rdfFilepath);
     }
 }
+*/

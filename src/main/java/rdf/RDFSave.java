@@ -1,3 +1,4 @@
+/*
 package rdf;
 import entities.*;
 
@@ -6,3 +7,4 @@ public class RDFSave {
         // Use Jena Apache to save to Trig.
     }
 }
+*/
