@@ -5,11 +5,8 @@ import interfaces.Displayer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// GUI class!!!11!11!!!!
 public class GameRenderer implements Displayer {
     JFrame frame; // Creates JFrame that the gamerenderer will use to display the window
     Player player;
@@ -55,11 +52,9 @@ public class GameRenderer implements Displayer {
          */
         for (Decision d : validDecisions) {
             JButton b = new JButton(d.text);
-            b.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    player.currentSlide = d.target;
-                    player.playScene();
-                }
+            b.addActionListener(e -> {
+                player.currentSlide = d.target;
+                player.playScene();
             });
             b.setAlignmentX(Component.LEFT_ALIGNMENT);
             panel.add(b);
@@ -68,6 +63,9 @@ public class GameRenderer implements Displayer {
     }
 
     public static void main(String[] args) {
+        /*
+        Creates a simple game
+         */
         Decision d1 = new Decision(" choice 1");
         ArrayList<Decision> a1 = new ArrayList<>();
         a1.add(d1);
