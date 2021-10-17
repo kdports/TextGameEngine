@@ -7,4 +7,5 @@ display a simple test game in a new window
 Running the main method of src/main/java/rdf/RDFLoadToPlayer.java will load a preset
 RDF file into a playable game using gamerenderer
 
-\\TODO what does launching the GUIBOXSCENE do?
+Running the main method of src/main/java/client/GUIBoxScene.java will create a new 
+window to build a game in.
