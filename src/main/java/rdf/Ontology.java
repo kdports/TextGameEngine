@@ -1,3 +1,4 @@
+/*
 package rdf;
 
 import org.apache.jena.rdf.model.*;
@@ -31,3 +32,4 @@ public class Ontology {
         return m.createProperty(prefix + localName);
     }
 }
+*/
