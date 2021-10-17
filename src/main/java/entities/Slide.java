@@ -19,11 +19,11 @@ public class Slide {
     }
 
     public boolean addDecision(Decision decision) {
-        if (decisions.contains(decision)){
-            return false;
-        }else {
-            this.decisions.add(decision);
-            return true;
-        }
+        return this.decisions.add(decision);
+
+    }
+
+    public boolean removeDecision(Decision decision) {
+        return this.decisions.remove(decision);
     }
 }

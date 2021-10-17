@@ -16,9 +16,18 @@ public class Game {
         this.slides = new ArrayList<Slide>();
     }
 
+    public boolean setFirstSlide(Slide slide) {
+        this.firstSlide = slide;
+        return true;
+    }
+
     public boolean addSlide(Slide slide) {
         this.slides.add(slide);
         return true;
+    }
+
+    public boolean deleteSlide(Slide slide) {
+        return this.slides.remove(slide);
     }
 
     public boolean addDecision(Slide parentSlide, Decision decision) {
