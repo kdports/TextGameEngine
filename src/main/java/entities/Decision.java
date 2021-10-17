@@ -16,4 +16,8 @@ public class Decision {
     public void setTarget(Slide target) {
         this.target = target;
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }
