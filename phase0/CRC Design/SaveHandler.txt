@@ -1,0 +1,11 @@
+Class name: SaveHandler
+Parent class: EventHandler
+Subclasses:
+Architecture Section: Use Case
+
+Responsibilities:
+* Called when the user wishes to save their engine in an rdf file
+
+Collaborators:
+* RDFSave
+* GUIBoxScene
