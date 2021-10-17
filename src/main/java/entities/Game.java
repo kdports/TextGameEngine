@@ -22,8 +22,8 @@ public class Game {
     }
 
     public boolean addSlide(Slide slide) {
-        this.slides.add(slide);
-        return true;
+        return this.slides.add(slide);
+
     }
 
     public boolean deleteSlide(Slide slide) {

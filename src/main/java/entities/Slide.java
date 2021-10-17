@@ -1,7 +1,5 @@
 package entities;
 
-import entities.Decision;
-
 import java.util.*;
 
 public class Slide {
@@ -20,7 +18,6 @@ public class Slide {
 
     public boolean addDecision(Decision decision) {
         return this.decisions.add(decision);
-
     }
 
     public boolean removeDecision(Decision decision) {
