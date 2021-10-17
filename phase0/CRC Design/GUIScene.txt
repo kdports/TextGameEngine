@@ -1,6 +1,7 @@
 Class name: GUIScene
 Parent class: StackPane
 Subclasses:
+Architecture Section: Controller
 
 Responsibilities:
 * The design and function of a slide

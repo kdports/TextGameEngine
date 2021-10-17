@@ -1,6 +1,7 @@
 Class name: DecisionAlertBox
 Parent class:
 Subclasses:
+Architecture Section: Controller
 
 Responsibilities:
 * Controls the window that appears when adding a new decision
@@ -8,4 +9,4 @@ Responsibilities:
 * Relays the information from the text field to the decision attributes
 
 Collaborators:
-*
+*GUIBoxScene
