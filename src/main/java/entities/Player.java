@@ -1,5 +1,4 @@
 package entities;
-import client.GameRenderer;
 import interfaces.Displayer;
 
 import java.util.ArrayList;
@@ -28,31 +27,30 @@ public class Player {
         dp.display(currentSlide);
     }
 
-    // Checks the choices to see if the player is allowed to go to that slide
-    // Not sure how we are going to check the prerequisites just yet
+    /**
+     * CURRENTLY JUST A PLACEHOLDER
+     * takes in a list of decisions and return a subset of the list of valid decisions
+     * @param decisions a list of decisions to check
+     * @return ArrayList<Decision> a list of valid decision
+     */
     public static ArrayList<Decision> checkValidChoices(ArrayList<Decision> decisions) {
-//        ArrayList<Decision> ar = new ArrayList<>();
-//        for (Decision d: decisions){
-//            if(checkChoice(d)){
-//                ar.add(d);
-//            }
-//        }
-//        return ar;
-        return decisions;
+        ArrayList<Decision> ar = new ArrayList<>();
+        for (Decision d: decisions){
+            if(checkChoice(d)){
+                ar.add(d);
+            }
+        }
+        return ar;
     }
 
-    // Checks each choice to see if the prerequisites are met
-    // Currently just returns every choice
+    /**
+     * CURRENTLY JUST A PLACEHOLDER
+     * takes in a decision and checks if its valid
+     * @param d a decision
+     * @return boolean returns whether the decision is valid
+     */
     public static boolean checkChoice(Decision d){
-//        if(true){
-//            return true;
-//        }else{
-//            return false;
-//        }
-        return true;
+        return d != null;
     }
 
-    // Initiates a simple game
-    public static void main(String[] args) {
-    }
 }
