@@ -1,0 +1,13 @@
+Class name: GUIDecision
+Parent class: StackPane
+Subclasses:
+Architecture Section: Controller
+
+Responsibilities:
+* Creates and displays the decision arrow
+* Makes decision arrow draggable
+* Applies connections to slide boxes
+
+Collaborators:
+* GUIScene
+* GUIAlertBox

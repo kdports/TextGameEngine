@@ -1,6 +1,7 @@
 Class name: RDFLoadToStudio
 Parent class: RDFLoad
 Subclasses:
+Architecture Section: Use Case
 
 Responsibilities:
 * Sends the loaded game to a studio for the user to play

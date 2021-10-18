@@ -1,4 +1,4 @@
-package main.java.client;
+package client;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;

@@ -1,4 +1,4 @@
-package main.java.client;
+package client;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,7 +44,6 @@ public class GUIScene extends StackPane {
         });
 
         //text box code
-        //TODO: Figure out how the change text field background colour
         TextArea dialogue = new TextArea();
         dialogue.setWrapText(true);
 //        TextField dialogue = new TextField();

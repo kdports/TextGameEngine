@@ -1,6 +1,7 @@
 Class name: Slide
 Parent class: 
 Subclasses: TimeSlide (future phases)
+Architecture Section: Entity
 
 Responsibilities:
 * Has a prompt (string)

@@ -1,6 +1,7 @@
 Class name: Decision
 Parent class: 
 Subclasses: TimeDecision
+Architecture Section: Entity
 
 Responsibilities:
 * Contains a prerequisite for the decision to be possible (true by default)

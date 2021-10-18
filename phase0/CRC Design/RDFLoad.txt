@@ -1,6 +1,7 @@
 Class name: RDFLoad
 Parent class: 
 Subclasses: RDFLoadToPlayer, RDFLoadToStudio
+Architecture Section: Use Case
 
 Responsibilities:
 * Takes an RDF file of Scenes and Decisions and converts them to a Game instance

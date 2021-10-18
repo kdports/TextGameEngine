@@ -8,7 +8,16 @@ public class Decision {
         this.text = text;
     }
 
-    public void addTarget(Slide target) {
+    public Decision(String text, Slide target) {
+        this.text = text;
         this.target = target;
+    }
+
+    public void setTarget(Slide target) {
+        this.target = target;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
