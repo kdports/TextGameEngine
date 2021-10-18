@@ -1,4 +1,3 @@
-/*
 package rdf;
 
 import org.apache.jena.rdf.model.Property;
@@ -22,4 +21,3 @@ public class TGEO {
         return Ontology.makeProperty(Ontology.prefixes.get("tgeo"), localName);
     }
 }
-*/

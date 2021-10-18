@@ -1,5 +1,5 @@
-prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/>
-prefix tged: <https://github.com/kdports/TextGameEngine/data/>
+@prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
+@prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
 
 # Just the description of a slide that has two options: "Do literally nothing" and "Also literally nothing, but more!".
 # These two decisions lead back into the same slide in a loop forever.

@@ -1,4 +1,3 @@
-/*
 package rdf;
 import entities.*;
 import org.apache.jena.rdf.model.*;
@@ -9,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public abstract class RDFLoad {
-    private Model model;
+    private final Model model;
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
         this.model.setNsPrefixes(Ontology.prefixes);
@@ -37,7 +36,8 @@ public abstract class RDFLoad {
         return decisions;
     }
 
-    public void loadFromFile(String filepath) throws FileNotFoundException {
+    public void loadFromFile() {
+
         Game game = new Game();
 
         // Find and add all Slides
@@ -72,4 +72,3 @@ public abstract class RDFLoad {
 
     public abstract void sendGame(Game game);
 }
-*/
