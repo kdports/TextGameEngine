@@ -7,13 +7,26 @@
 tged:_scene_1 a tgeo:Slide ;
     tgeo:categorizedAs tgeo:firstSlide ;
     tgeo:hasText "This is crazy! You are in a game!" ;
-    tgeo:hasDecision tged:_decision_1 ;
-    tgeo:hasDecision tged:_decision_2 .
+    tgeo:hasDecision tged:_decision_1_1 ;
+    tgeo:hasDecision tged:_decision_1_2 .
 
-tged:_decision_1 a tgeo:Decision ;
+tged:_decision_1_1 a tgeo:Decision ;
     tgeo:hasText "Do literally nothing" ;
-    tged:directsTo tged:_scene_1 .
+    tgeo:directsTo tged:_scene_1 .
 
-tged:_decision_2 a tgeo:Decision ;
-    tgeo:hasText "Also literally nothing, but more!" ;
-    tged:directsTo tged:_scene_1 .
+tged:_decision_1_2 a tgeo:Decision ;
+    tgeo:hasText "Go a little further!" ;
+    tgeo:directsTo tged:_scene_2 .
+
+tged:_scene_2 a tgeo:Slide ;
+    tgeo:hasText "At this point, what do you do?" ;
+    tgeo:hasDecision tged:_decision_2_1 ;
+    tgeo:hasDecision tged:_decision_2_2 .
+
+tged:_decision_2_1 a tgeo:Decision ;
+    tgeo:hasText "Do nothing again!" ;
+    tgeo:directsTo tged:_scene_2 .
+
+tged:_decision_2_2 a tgeo:Decision ;
+    tgeo:hasText "Go back to the beginning!" ;
+    tgeo:directsTo tged:_scene_1 .

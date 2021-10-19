@@ -6,9 +6,14 @@ import org.apache.jena.vocabulary.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class RDFLoad {
     private final Model model;
+    private final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
+    private final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
+
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
         this.model.setNsPrefixes(Ontology.prefixes);
@@ -16,6 +21,55 @@ public abstract class RDFLoad {
         // Read the TTL file into model
         FileInputStream in = new FileInputStream(filepath);
         this.model.read(in,null,"TTL");
+
+        this.populateResourceMaps();
+    }
+
+    /**
+     * Populate the slideNodeMap and decisionNodeMap from the loaded model
+     */
+    private void populateResourceMaps() {
+        // Populate slideNodeMap
+        ResIterator slideIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
+        if (slideIter.hasNext()) {
+            while (slideIter.hasNext()) {
+                Resource slideNode = slideIter.nextResource();
+
+                String slideText = slideNode.getProperty(TGEO.hasText).getString();
+                Slide slide = new Slide(slideText);
+
+                this.slideNodeMap.put(slideNode, slide);
+            }
+        }
+
+        // Populate decisionNodeMap
+        ResIterator decisionIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Decision);
+
+        // For each decision, build a Decision instance
+        if (decisionIter.hasNext()) {
+            while(decisionIter.hasNext()) {
+                Resource decisionNode = decisionIter.nextResource();
+
+                String decisionText = decisionNode.getProperty(TGEO.hasText).getString();
+                Decision decision = new Decision(decisionText);
+
+                this.decisionNodeMap.put(decisionNode, decision);
+            }
+        }
+
+        // Set slide decisions
+        for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
+            entry.getValue().setDecisions(this.getDecisionsOfSlide(entry.getKey()));
+        }
+
+        // Set decision targets
+        for (Map.Entry<Resource, Decision> entry : this.decisionNodeMap.entrySet()) {
+            Resource decisionNode = entry.getKey();
+            Decision decision = entry.getValue();
+
+            Resource targetSlideNode = decisionNode.getPropertyResourceValue(TGEO.directsTo);
+            decision.setTarget(this.slideNodeMap.get(targetSlideNode));
+        }
     }
 
     private ArrayList<Decision> getDecisionsOfSlide(Resource slideNode) {
@@ -28,43 +82,27 @@ public abstract class RDFLoad {
         for (RDFNode decisionNode : results) {
             // Get decision text
             if (decisionNode instanceof Resource) {
-                String decisionText = ((Resource) decisionNode).getProperty(TGEO.hasText).getString();
-                Decision d = new Decision(decisionText);
-                decisions.add(d);
+                decisions.add(this.decisionNodeMap.get(decisionNode));
             }
         }
+
         return decisions;
     }
 
     public void loadFromFile() {
-
         Game game = new Game();
 
-        // Find and add all Slides
-        ResIterator iter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
-        if (iter.hasNext()) {
-            while (iter.hasNext()) {
-                // Find the data about a single slide
-                Resource slideNode = iter.nextResource();
-                // Get the slide's prompt
-                String slideText = slideNode.getProperty(TGEO.hasText).getString();
-                // Get the slide's decisions
-                ArrayList<Decision> decisions = getDecisionsOfSlide(slideNode);
-                Slide slide = new Slide(slideText, decisions);
+        for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
+            Resource slideNode = entry.getKey();
+            Slide slide = entry.getValue();
 
-                // Add the slide as the target after the fact
-                for (Decision d : decisions) {
-                    d.setTarget(slide);
-                }
-
-                // Add as first slide if there aren't slides yet
-                if (game.firstSlide == null) {
-                    game.firstSlide = slide;
-                }
-                game.addSlide(slide);
+            // Check if the slide is the first slide
+            Resource categorizedAsObject = slideNode.getPropertyResourceValue(TGEO.categorizedAs);
+            if (categorizedAsObject != null) {
+                game.firstSlide = slide;
             }
-        } else {
-            System.out.println("No slides were found in the database");
+
+            game.addSlide(slide);
         }
 
         sendGame(game);
