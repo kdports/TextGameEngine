@@ -16,6 +16,8 @@ public class SlideHandler implements EventHandler {
 
     @Override
     public void handle(Event event) {
+        // javafx calls handle methods in classes that are created and passed into a button's setOnAction method
+        // See GUIBoxScene for implementation examples
         idControl++;
         GUIScene GuiScene = new GUIScene("Scene", idControl, root);
         GuiScene.setLayoutX(90);
