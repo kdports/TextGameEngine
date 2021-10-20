@@ -1,0 +1,14 @@
+Class name: GUIBoxScene
+Parent class: Application
+Subclasses:
+Architecture Section: Framework and Drivers
+
+Responsibilities:
+* The main function for the GUI
+* Creates the window, splash screen, buttons initially seen
+* Gives buttons tasks to do when clicked such as add a slide to screen
+
+Collaborators:
+* GUIDecision
+* GUIScene
+* Decision Alert Box
