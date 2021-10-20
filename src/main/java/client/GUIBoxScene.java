@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class GUIBoxScene extends Application
 {
+    // Creates the class's variables. Notable is idControl, used to create an easy way for created objects to be called
     int idControl = 0;
     Pane root = new Pane();
     private double mouseAnchorX;
