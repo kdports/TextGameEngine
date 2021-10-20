@@ -1,4 +1,3 @@
-/*
 package rdf;
 
 import org.apache.jena.rdf.model.*;
@@ -14,7 +13,7 @@ public class Ontology {
     public static HashMap<String, String> fillPrefixes() {
         HashMap<String, String> map = new HashMap<>();
         map.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-        map.put("tgeo","https://github.com/kdports/TextGameEngine/ontology/");
+        map.put("tgeo", "https://github.com/kdports/TextGameEngine/ontology/");
         map.put("tged", "https://github.com/kdports/TextGameEngine/data/");
         return map;
     }
@@ -32,4 +31,3 @@ public class Ontology {
         return m.createProperty(prefix + localName);
     }
 }
-*/

@@ -16,6 +16,11 @@ public class Slide {
         this.decisions = decisions;
     }
 
+    public boolean setDecisions(ArrayList<Decision> decisions) {
+        this.decisions = decisions;
+        return true;
+    }
+
     public boolean addDecision(Decision decision) {
         return this.decisions.add(decision);
     }
