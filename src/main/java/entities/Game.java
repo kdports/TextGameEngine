@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Game {
     public Slide firstSlide;
-    public ArrayList<Slide> slides;
+    private ArrayList<Slide> slides;
 
     public Game(Slide firstSlide){
         this.firstSlide = firstSlide;
@@ -24,6 +24,10 @@ public class Game {
     public boolean addSlide(Slide slide) {
         return this.slides.add(slide);
 
+    }
+
+    public ArrayList<Slide> getSlides() {
+        return this.slides;
     }
 
     public boolean deleteSlide(Slide slide) {
