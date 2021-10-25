@@ -19,10 +19,12 @@ import javafx.scene.shape.Rectangle;
 
 public class GUIScene extends StackPane {
     int decisionIdControl;
+    int idControl;
     private double mouseAnchorX;
     private double mouseAnchorY;
 
     public GUIScene(String s, int idControl, Pane root) {
+        this.idControl = idControl;
         this.setMaxSize(300, 100);
         this.setStyle("-fx-background-color: #510a32;-fx-border-color: #801336;");
         this.setId(s + idControl);
@@ -46,7 +48,7 @@ public class GUIScene extends StackPane {
         //text box code
         TextArea dialogue = new TextArea();
         dialogue.setWrapText(true);
-//        TextField dialogue = new TextField();
+        // TextField dialogue = new TextField();
         dialogue.setStyle("-fx-background-color: #801336;" + "-fx-blend-mode: overlay");
         dialogue.setMaxWidth(130);
         dialogue.setPromptText("Enter Dialogue...");
@@ -62,7 +64,7 @@ public class GUIScene extends StackPane {
         StackPane.setAlignment(b1, Pos.CENTER_RIGHT);
         StackPane.setAlignment(b2, Pos.TOP_LEFT);
 
-        b1.setOnMousePressed(mouseEvent -> {
+        b1.setOnMousePressed(mouseEvent -> { //Turn this into a controller class because it CLEARLY violates CLEAN
             decisionIdControl++;
             GUIDecision decision = new GUIDecision(this, root, decisionIdControl);
             root.getChildren().add(decision);
@@ -98,7 +100,7 @@ public class GUIScene extends StackPane {
                     initialDecision.initialScene = this;
                 } else {
                     GUIDecision initialDecision = (GUIDecision) root.lookup("#" + outputDecision);
-                    initialDecision.secondScene = this;
+                    initialDecision.findSecondScene(this.idControl);
                 }
                 event.setDropCompleted(true);
             } else {
@@ -106,8 +108,9 @@ public class GUIScene extends StackPane {
             }
             event.consume();
         });
+    }
 
-
-
+    public int findId() {
+        return this.idControl;
     }
 }

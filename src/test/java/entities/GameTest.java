@@ -16,7 +16,7 @@ class GameTest {
         Game g = new Game();
         Slide s = new Slide("test");
         assert g.addSlide(s);
-        assert g.slides.contains(s);
+        assert g.getSlides().contains(s);
     }
 
     @Test
