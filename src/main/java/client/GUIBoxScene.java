@@ -1,8 +1,6 @@
 package client;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -12,6 +10,7 @@ import javafx.scene.layout.Pane;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUIBoxScene extends Application
 {
