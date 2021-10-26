@@ -83,7 +83,6 @@ public class DecisionAlertBox {
         btnDelete.setLayoutX(4);
         messageInput.setLayoutY(60);
 
-
         Scene window = new Scene(alert);
         decisionWindow.setScene(window);
         decisionWindow.show();
@@ -92,10 +91,13 @@ public class DecisionAlertBox {
 
     public static ComboBox targetButton(GUIDecision decision) {
         Studio studio = new Studio();
-        ObservableList<String> options =
-                FXCollections.observableArrayList(
-                        studio.getSlides()
-                );
+        ArrayList<Slide> slides = studio.getSlides();
+        ArrayList<String> slidePrompts = new ArrayList<>();
+        for (Slide s : slides) {
+            slidePrompts.add(s.getPrompt());
+        }
+
+        ObservableList<String> options = FXCollections.observableArrayList(slidePrompts);
         final ComboBox comboBox = new ComboBox(options);
         comboBox.setPromptText("Target Slide");
         comboBox.setEditable(true);

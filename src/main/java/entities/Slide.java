@@ -8,7 +8,7 @@ public class Slide {
 
     public Slide(String prompt) {
         this.prompt = prompt;
-        this.decisions = new ArrayList<Decision>();
+        this.decisions = new ArrayList<>();
     }
 
     public Slide(String prompt, ArrayList<Decision> decisions) {
@@ -16,9 +16,12 @@ public class Slide {
         this.decisions = decisions;
     }
 
-    public boolean setDecisions(ArrayList<Decision> decisions) {
+    public String getPrompt() {
+        return this.prompt;
+    }
+
+    public void setDecisions(ArrayList<Decision> decisions) {
         this.decisions = decisions;
-        return true;
     }
 
     public boolean addDecision(Decision decision) {

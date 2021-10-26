@@ -1,13 +1,13 @@
 package client;
 
 import entities.*;
-import interfaces.Displayer;
+import interfaces.PlayDisplayer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameRenderer implements Displayer {
+public class GameRenderer implements PlayDisplayer {
     JFrame frame; // Creates JFrame that the gamerenderer will use to display the window
     Player player;
 
