@@ -10,7 +10,7 @@ public class Main {
     {
         Studio studio = new Studio();
 
-        DisplayerBoxScene gui = new DisplayerBoxScene();
+        RootDisplayer gui = new RootDisplayer();
         gui.setStudio(studio);
 
         gui.start(args);

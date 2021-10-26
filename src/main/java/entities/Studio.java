@@ -1,8 +1,6 @@
 package entities;
 
-import client.DisplayerBoxScene;
 import client.GameRenderer;
-import interfaces.EditDisplayer;
 
 import java.util.ArrayList;
 

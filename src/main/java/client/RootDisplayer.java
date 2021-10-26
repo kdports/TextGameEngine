@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class DisplayerBoxScene extends Application implements EditDisplayer {
+public class RootDisplayer extends Application implements EditDisplayer {
     int idControl = 0;
     Pane root = new Pane();
     private double mouseAnchorX;
