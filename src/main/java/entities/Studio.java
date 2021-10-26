@@ -17,13 +17,13 @@ public class Studio {
         p.playGame();
     }
 
-    public void createSlide(String text) {
-        this.game.createSlide(text);
+    public Slide createSlide(int slideId, String text) {
+        return this.game.createSlide(slideId, text);
     }
 
     public ArrayList<Slide> getSlides() { return this.game.getSlides(); }
 
-    public void addDecision(Slide parentSlide, Decision newDecision) {
-        game.addDecision(parentSlide, newDecision);
-    }
+//    public void createDecision(Slide parentSlide, Decision newDecision) {
+//        this.game.createDecision("text");
+//    }
 }

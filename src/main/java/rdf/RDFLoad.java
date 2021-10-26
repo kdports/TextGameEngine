@@ -36,7 +36,7 @@ public abstract class RDFLoad {
                 Resource slideNode = slideIter.nextResource();
 
                 String slideText = slideNode.getProperty(TGEO.hasText).getString();
-                Slide slide = new Slide(slideText);
+                Slide slide = new Slide((int) (Math.random() * 100000), slideText);
 
                 this.slideNodeMap.put(slideNode, slide);
             }

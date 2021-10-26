@@ -21,9 +21,11 @@ public class Game {
         return true;
     }
 
-    public void createSlide(String text) {
-        Slide newSlide = new Slide(text);
+    public Slide createSlide(int slideId, String text) {
+        Slide newSlide = new Slide(slideId, text);
         this.addSlide(newSlide);
+
+        return newSlide;
     }
 
     public boolean addSlide(Slide slide) {
@@ -39,6 +41,15 @@ public class Game {
         return this.slides.remove(slide);
     }
 
+//    public void createDecision(String text) {
+//        Decision d = new Decision(text);
+////        this.addDecision(d);
+//    }
+
+    /**
+     * Parent ---- d ---- <>
+     * <> ---- d ---- Parent
+     * */
     public boolean addDecision(Slide parentSlide, Decision decision) {
         return parentSlide.addDecision(decision);
     }

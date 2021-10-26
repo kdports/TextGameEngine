@@ -1,9 +1,10 @@
 package entities;
 
 public class Decision {
+    // public final int id;
     public String text;
     public Slide target;
-    
+
     public Decision(String text) {
         this.text = text;
     }

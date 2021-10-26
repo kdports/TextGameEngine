@@ -15,7 +15,7 @@ class SlideTest {
     @Test
     void addDecision() {
         Decision d = new Decision("test");
-        Slide s = new Slide("", new ArrayList<>());
+        Slide s = new Slide("", new ArrayList<>(), a2);
         assert s.addDecision(d);
         ArrayList<Decision> ar = new ArrayList<>();
         ar.add(d);
