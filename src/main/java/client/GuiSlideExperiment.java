@@ -14,7 +14,11 @@ import java.awt.event.MouseEvent;
 import java.util.Map;
 
 public class GuiSlideExperiment extends VBox {
-   public GuiSlideExperiment(Map.Entry<Slide, RenderableSlide> entry) {
+
+    private double mouseAnchorX;
+    private double mouseAnchorY;
+
+    public GuiSlideExperiment(Map.Entry<Slide, RenderableSlide> entry) {
         RenderableSlide renderableSlide = entry.getValue();
 
         this.setLayoutX(renderableSlide.getX());
@@ -25,7 +29,14 @@ public class GuiSlideExperiment extends VBox {
 
         // Drag event handling
         this.setOnMousePressed(event -> Handlers.dragSlideHandler.beginDrag(entry, event));
-        this.setOnMouseDragged(event -> Handlers.dragSlideHandler.drag(entry, event));
+        this.setOnMouseDragged(event -> {
+             Handlers.dragSlideHandler.drag(entry, event);
+             this.setLayoutX(entry.getValue().getX());
+             this.setLayoutY(entry.getValue().getY());
+         });
+
+
+
 
         Text prompt = this.addPromptText(entry.getKey().getPrompt());
         this.getChildren().add(prompt);
