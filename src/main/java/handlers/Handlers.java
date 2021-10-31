@@ -1,16 +1,21 @@
 package handlers;
 
+import client.SaveHandler;
 import entities.EditorGame;
 import entities.Studio;
 
 public class Handlers {
     public static CreateNewSlideHandler createNewSlideHandler;
-    public static DragSlideHandler dragSlideHandler;
+    public static SlideHandler slideHandler;
+    public static CreateNewDecisionHandler createNewDecisionHandler;
+    public static DragDecisionHandler dragDecisionHandler;
 
     public Handlers(EditorGame editorGame) {
         Studio studio = new Studio();
 
         createNewSlideHandler = new CreateNewSlideHandler(studio, editorGame);
-        dragSlideHandler = new DragSlideHandler(studio, editorGame);
+        slideHandler = new SlideHandler(studio, editorGame);
+        createNewDecisionHandler = new CreateNewDecisionHandler(studio, editorGame);
+        dragDecisionHandler = new DragDecisionHandler(studio, editorGame);
     }
 }

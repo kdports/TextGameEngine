@@ -4,14 +4,25 @@ public class Decision {
     // public final int id;
     public String text;
     public Slide target;
+    public Slide origin;
+    public int id;
 
     public Decision(String text) {
         this.text = text;
     }
 
-    public Decision(String text, Slide target) {
+    public Decision(String text, Slide origin, int id, Slide target) {
         this.text = text;
+        this.origin = origin;
+        this.id = id;
         this.target = target;
+    }
+
+    public Decision(String text, Slide origin, int id) {
+        this.text = text;
+        this.origin = origin;
+        this.id = id;
+        this.target = null;
     }
 
     public void setTarget(Slide target) {
@@ -21,4 +32,6 @@ public class Decision {
     public void setText(String text) {
         this.text = text;
     }
+
+    public String getText() {return this.text; }
 }

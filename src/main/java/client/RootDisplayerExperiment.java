@@ -35,12 +35,23 @@ public class RootDisplayerExperiment extends Application {
                 .slideMapProperty()
                 .addListener((InvalidationListener) nothing -> this.root.getChildren().addAll(
                     this.editorGame
-                        .getAllEntries()
+                        .getAllEntriesSlide()
                         .stream()
                         .map(GuiSlideExperiment::new)
                         .collect(Collectors.toCollection(ArrayList::new))
+
                 )
         );
+        this.editorGame
+                .decisionMapProperty()
+                .addListener((InvalidationListener) nothing -> this.root.getChildren().addAll(
+                                this.editorGame
+                                        .getAllEntriesDecision()
+                                        .stream()
+                                        .map(GuiDecisionExperiment::new)
+                                        .collect(Collectors.toCollection(ArrayList::new))
+                        )
+                );
 
         // Add the three sidebar buttons
         SidebarButtons sidebarButtons = new SidebarButtons();

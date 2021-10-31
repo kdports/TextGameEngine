@@ -5,14 +5,18 @@ import entities.Slide;
 import entities.Studio;
 import interfaces.RenderableSlide;
 import javafx.scene.input.MouseEvent;
-import utils.IdControl;
 
 import java.util.Map;
 
-public class DragSlideHandler extends BaseHandler {
-    public DragSlideHandler(Studio studio, EditorGame editorGame) {
+public class SlideHandler extends BaseHandler {
+    public SlideHandler(Studio studio, EditorGame editorGame) {
         super(studio, editorGame);
     }
+
+    public void delete(Map.Entry<Slide, RenderableSlide> entry){
+        editorGame.deleteSlide(entry);
+    };
+
 
     public void beginDrag(Map.Entry<Slide, RenderableSlide> entry, MouseEvent event) {
         entry.getValue().setAnchorX(event.getX());
@@ -24,9 +28,12 @@ public class DragSlideHandler extends BaseHandler {
         entry.getValue().setY(event.getSceneY() - entry.getValue().getAnchorY());
     }
 
+    public void editMessage(Map.Entry<Slide, RenderableSlide> entry, String message){
+        entry.getKey().setPrompt(message);
+    }
+
     public void endDrag() {
         //
     }
-
 
 }

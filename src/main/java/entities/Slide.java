@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Slide {
     private final int id;
-    private final String prompt;
+    private String prompt;
     public ArrayList<Decision> decisions;
 
     public Slide(int id, String prompt, ArrayList<Decision> decisions) {
@@ -26,6 +26,8 @@ public class Slide {
     public String getPrompt() {
         return this.prompt;
     }
+
+    public void setPrompt(String prompt) {this.prompt = prompt; }
 
     public void setDecisions(ArrayList<Decision> decisions) {
         this.decisions = decisions;

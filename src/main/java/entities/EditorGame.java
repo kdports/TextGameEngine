@@ -23,8 +23,12 @@ public class EditorGame {
         return this.slideMap;
     }
 
+    public MapProperty<Decision, RenderableDecision> decisionMapProperty() {return this.decisionMap; }
+
+
     public void connectSlideAndRenderableSlide(Slide s, RenderableSlide rs) {
         this.slideMap.put(s, rs);
+        System.out.println(slideMap.values().toString());
     }
 
     // public static void connectSlideToRenderableSlide(Slide s, RenderableSlide r) {
@@ -38,13 +42,20 @@ public class EditorGame {
     public ArrayList<RenderableSlide> getAllRenderableSlides() {
         return new ArrayList<>(this.slideMap.values());
     }
-    public ArrayList<Map.Entry<Slide, RenderableSlide>> getAllEntries() {
+    public ArrayList<Map.Entry<Slide, RenderableSlide>> getAllEntriesSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
+    public ArrayList<Map.Entry<Slide, RenderableSlide>> getAllEntriesDeletedSlide() {
+        return new ArrayList<>(this.slideMap.entrySet());
+    }
+    public ArrayList<Map.Entry<Decision, RenderableDecision>>getAllEntriesDecision(){
+        return new ArrayList<>(this.decisionMap.entrySet());
+    }
+
     //
-    // public static ArrayList<RenderableDecision> getAllRenderableDecisions() {
-    //     return (ArrayList<RenderableDecision>) decisionMap.values();
-    // }
+    public ArrayList<RenderableDecision> getAllRenderableDecisions() {
+        return (ArrayList<RenderableDecision>) decisionMap.values();
+    }
     //
     // public static RenderableSlide getRenderableSlide(Slide s) {
     //     return slideMap.get(s);
@@ -53,4 +64,14 @@ public class EditorGame {
     // public static RenderableDecision getRenderableDecision(Decision d) {
     //     return decisionMap.get(d);
     // }
+
+    public void deleteSlide(Map.Entry<Slide, RenderableSlide> entry){
+        this.slideMap.remove(entry.getKey(), entry.getValue());
+    }
+    public void connectDecisionAndRenderableDecision(Decision d, RenderableDecision r){
+        this.decisionMap.put(d, r);
+    }
+
+
+
 }
