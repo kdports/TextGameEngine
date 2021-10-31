@@ -11,8 +11,8 @@ import javafx.scene.input.MouseEvent;
 import java.util.Map;
 
 
-    public class DragDecisionHandler extends BaseHandler {
-        public DragDecisionHandler(Studio studio, EditorGame editorGame) {
+    public class DecisionHandler extends BaseHandler {
+        public DecisionHandler(Studio studio, EditorGame editorGame) {
             super(studio, editorGame);
         }
 
@@ -28,6 +28,14 @@ import java.util.Map;
 
         public void endDrag() {
             //
+        }
+
+        public void editMessage(Map.Entry<Decision, RenderableDecision> entry, String message){
+            entry.getKey().setText(message);
+        }
+
+        public int getId(Map.Entry<Decision, RenderableDecision> entry){
+            return entry.getKey().id;
         }
 
 

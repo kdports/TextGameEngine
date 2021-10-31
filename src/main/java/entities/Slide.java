@@ -1,5 +1,8 @@
 package entities;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.*;
 
 public class Slide {
@@ -27,11 +30,18 @@ public class Slide {
         return this.prompt;
     }
 
-    public void setPrompt(String prompt) {this.prompt = prompt; }
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
+        observablePrompt.setValue(prompt);
+    }
 
     public void setDecisions(ArrayList<Decision> decisions) {
         this.decisions = decisions;
     }
+
+    private final StringProperty observablePrompt = new SimpleStringProperty();
+
+    public StringProperty returnObservable(){return this.observablePrompt;}
 
     public boolean addDecision(Decision decision) {
         return this.decisions.add(decision);

@@ -1,8 +1,10 @@
 package client;
 
+import entities.Decision;
 import entities.Slide;
 import handlers.CreateNewDecisionHandler;
 import handlers.Handlers;
+import interfaces.RenderableDecision;
 import interfaces.RenderableSlide;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -51,6 +55,16 @@ public class GuiSlideExperiment extends StackPane {
         this.getChildren().add(deleteBtn);
         this.getChildren().add(prompt);
         this.getChildren().add(editBtn);
+
+        entry.getKey().returnObservable().addListener(
+                (observable, oldvalue, newvalue) ->
+                        prompt.setText(newvalue)
+        );
+
+        this.setOnDragDropped((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
+            Handlers.slideHandler.dropEvent(entry, db.toString());
+        });
 
 
     }

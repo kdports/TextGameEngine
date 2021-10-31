@@ -34,4 +34,8 @@ public class Decision {
     }
 
     public String getText() {return this.text; }
+
+    public int getId() {return this.id; }
+
+    public void setOrigin(Slide origin) {this.origin = origin; }
 }

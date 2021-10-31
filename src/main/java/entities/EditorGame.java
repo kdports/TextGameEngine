@@ -65,6 +65,15 @@ public class EditorGame {
     //     return decisionMap.get(d);
     // }
 
+    public Decision getDecisionById(int id) {
+        for (Map.Entry<Decision, RenderableDecision> decision: decisionMap.entrySet()){
+            if (id == decision.getKey().getId()){
+                return decision.getKey();
+            }
+        }
+        return null;
+    }
+
     public void deleteSlide(Map.Entry<Slide, RenderableSlide> entry){
         this.slideMap.remove(entry.getKey(), entry.getValue());
     }
