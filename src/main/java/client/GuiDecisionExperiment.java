@@ -26,6 +26,8 @@ public class GuiDecisionExperiment extends StackPane {
     public GuiDecisionExperiment(Map.Entry<Decision, RenderableDecision> entry) {
         RenderableDecision renderableDecision = entry.getValue();
 
+
+
         this.setLayoutX(renderableDecision.getX());
         this.setLayoutY(renderableDecision.getY());
         this.setMinWidth(renderableDecision.getWidth());

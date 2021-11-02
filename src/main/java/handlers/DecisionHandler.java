@@ -22,8 +22,8 @@ import java.util.Map;
         }
 
         public void drag(Map.Entry<Decision, RenderableDecision> entry, MouseEvent event) {
-            entry.getValue().setX(event.getSceneX() - entry.getValue().getAnchorX());
-            entry.getValue().setY(event.getSceneY() - entry.getValue().getAnchorY());
+            entry.getValue().changeX(event.getSceneX() - entry.getValue().getAnchorX());
+            entry.getValue().changeY(event.getSceneY() - entry.getValue().getAnchorY());
         }
 
         public void endDrag() {

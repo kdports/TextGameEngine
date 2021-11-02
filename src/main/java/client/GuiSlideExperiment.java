@@ -6,6 +6,8 @@ import handlers.CreateNewDecisionHandler;
 import handlers.Handlers;
 import interfaces.RenderableDecision;
 import interfaces.RenderableSlide;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,8 +27,19 @@ import java.util.Map;
 
 public class GuiSlideExperiment extends StackPane {
     public GuiSlideExperiment(Map.Entry<Slide, RenderableSlide> entry) {
+        Slide slide = entry.getKey();
         RenderableSlide renderableSlide = entry.getValue();
-        String id = String.valueOf(entry.getKey().getId());
+
+        renderableSlide.getXProperty().addListener((observable, oldValue, newValue) -> {
+                        setLayoutX(newValue.doubleValue());
+                    }
+        );
+        renderableSlide.getYProperty().addListener((observable, oldValue, newValue) -> {
+                    setLayoutY(newValue.doubleValue());
+                }
+        );
+
+        String id = String.valueOf(slide.getId());
         this.setId(id);
         this.setLayoutX(renderableSlide.getX());
         this.setLayoutY(renderableSlide.getY());
@@ -40,14 +53,11 @@ public class GuiSlideExperiment extends StackPane {
         });
         this.setOnMouseDragged(event -> {
              Handlers.slideHandler.drag(entry, event);
-             this.setLayoutX(entry.getValue().getX());
-             this.setLayoutY(entry.getValue().getY());
-         });
+             // this.setLayoutX(entry.getValue().getX());
+             // this.setLayoutY(entry.getValue().getY());
+        });
 
-
-
-
-        Text prompt = this.addPromptText(entry.getKey().getPrompt());
+        Text prompt = this.addPromptText(slide.getPrompt());
         Button deleteBtn = this.deleteSlide(entry);
         Button addDecision = this.addDecision(entry);
         Button editBtn = this.editDecision(entry);
@@ -57,16 +67,13 @@ public class GuiSlideExperiment extends StackPane {
         this.getChildren().add(editBtn);
 
         entry.getKey().returnObservable().addListener(
-                (observable, oldvalue, newvalue) ->
-                        prompt.setText(newvalue)
+                (observable, oldvalue, newvalue) -> prompt.setText(newvalue)
         );
 
-        this.setOnDragDropped((DragEvent event) -> {
-            Dragboard db = event.getDragboard();
-            Handlers.slideHandler.dropEvent(entry, db.toString());
-        });
-
-
+        // this.setOnDragDropped((DragEvent event) -> {
+        //     Dragboard db = event.getDragboard();
+        //     Handlers.slideHandler.dropEvent(entry, db.toString());
+        // });
     }
 
     private Text addPromptText(String text) {

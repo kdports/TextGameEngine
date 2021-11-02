@@ -1,28 +1,29 @@
 package interfaces;
 
 import entities.Slide;
+import javafx.beans.property.SimpleDoubleProperty;
 
 public class RenderableSlide extends RenderableObject<Slide> {
-    private double width = 200;
-    private double height = 100;
+    private final SimpleDoubleProperty width = new SimpleDoubleProperty(200);
+    private final SimpleDoubleProperty height = new SimpleDoubleProperty(100);
+
     public RenderableSlide(double windowWidth, double windowHeight) {
         super(Math.random() * (windowWidth - 400) + 200, Math.random() * (windowHeight - 200) + 100, "box");
-
     }
 
     public double getWidth() {
-        return width;
+        return this.width.doubleValue();
     }
 
     public double getHeight() {
-        return height;
+        return this.height.doubleValue();
     }
 
     public void setHeight(double height) {
-        this.height = height;
+        this.height.set(height);
     }
 
     public void setWidth(double width) {
-        this.width = width;
+        this.width.set(width);
     }
 }

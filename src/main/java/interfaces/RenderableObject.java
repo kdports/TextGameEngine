@@ -1,18 +1,29 @@
 package interfaces;
 
+import javafx.beans.property.SimpleDoubleProperty;
+
 abstract public class RenderableObject<T> {
-    private double x;
-    private double y;
+    private final SimpleDoubleProperty x;
+    private final SimpleDoubleProperty y;
     private double anchorX;
     private double anchorY;
     String type;
 
     public RenderableObject(double x, double y, String type) {
-        this.x = x;
-        this.y = y;
+        this.x = new SimpleDoubleProperty(x);
+        this.y = new SimpleDoubleProperty(y);
+
         this.anchorX = x;
         this.anchorY = y;
         this.type = type;
+    }
+
+    public SimpleDoubleProperty getXProperty() {
+        return this.x;
+    }
+
+    public SimpleDoubleProperty getYProperty() {
+        return this.y;
     }
 
     public double getAnchorX() {
@@ -32,18 +43,18 @@ abstract public class RenderableObject<T> {
     }
 
     public double getX() {
-        return x;
+        return this.x.doubleValue();
     }
 
     public double getY() {
-        return y;
+        return this.y.doubleValue();
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public void changeX(double x) {
+        this.x.set(x);
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public void changeY(double y) {
+        this.y.set(y);
     }
 }

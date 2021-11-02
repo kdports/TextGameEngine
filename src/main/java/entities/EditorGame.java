@@ -28,27 +28,22 @@ public class EditorGame {
 
     public void connectSlideAndRenderableSlide(Slide s, RenderableSlide rs) {
         this.slideMap.put(s, rs);
+
         System.out.println(slideMap.values().toString());
     }
-
-    // public static void connectSlideToRenderableSlide(Slide s, RenderableSlide r) {
-    //     slideMap.put(s, r);
-    // }
-    //
-    // public static void connectDecisionToRenderableDecision(Decision d, RenderableDecision r) {
-    //     decisionMap.put(d, r);
-    // }
-    //
     public ArrayList<RenderableSlide> getAllRenderableSlides() {
         return new ArrayList<>(this.slideMap.values());
     }
+
     public ArrayList<Map.Entry<Slide, RenderableSlide>> getAllEntriesSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
+
     public ArrayList<Map.Entry<Slide, RenderableSlide>> getAllEntriesDeletedSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
-    public ArrayList<Map.Entry<Decision, RenderableDecision>>getAllEntriesDecision(){
+
+    public ArrayList<Map.Entry<Decision, RenderableDecision>> getAllEntriesDecision(){
         return new ArrayList<>(this.decisionMap.entrySet());
     }
 
@@ -56,14 +51,6 @@ public class EditorGame {
     public ArrayList<RenderableDecision> getAllRenderableDecisions() {
         return (ArrayList<RenderableDecision>) decisionMap.values();
     }
-    //
-    // public static RenderableSlide getRenderableSlide(Slide s) {
-    //     return slideMap.get(s);
-    // }
-    //
-    // public static RenderableDecision getRenderableDecision(Decision d) {
-    //     return decisionMap.get(d);
-    // }
 
     public Decision getDecisionById(int id) {
         for (Map.Entry<Decision, RenderableDecision> decision: decisionMap.entrySet()){
@@ -79,6 +66,8 @@ public class EditorGame {
     }
     public void connectDecisionAndRenderableDecision(Decision d, RenderableDecision r){
         this.decisionMap.put(d, r);
+
+
     }
 
 
