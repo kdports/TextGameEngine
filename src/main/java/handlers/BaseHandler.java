@@ -1,11 +1,7 @@
 package handlers;
 
 import entities.EditorGame;
-import entities.Slide;
 import entities.Studio;
-import interfaces.RenderableSlide;
-import javafx.scene.input.MouseEvent;
-import utils.IdControl;
 
 public class BaseHandler {
     protected final Studio studio;

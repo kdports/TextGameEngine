@@ -59,7 +59,7 @@ public abstract class RDFLoad {
 
         // Set slide decisions
         for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
-            entry.getValue().setDecisions(this.getDecisionsOfSlide(entry.getKey()));
+            entry.getValue().setOutgoingDecisions(this.getDecisionsOfSlide(entry.getKey()));
         }
 
         // Set decision targets

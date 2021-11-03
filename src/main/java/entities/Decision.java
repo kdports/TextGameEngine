@@ -38,4 +38,8 @@ public class Decision {
     public int getId() {return this.id; }
 
     public void setOrigin(Slide origin) {this.origin = origin; }
+
+    public Slide getOrigin() {return this.origin; }
+
+    public Slide getTarget() {return this.target ;}
 }

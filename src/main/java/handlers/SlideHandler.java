@@ -1,5 +1,6 @@
 package handlers;
 
+import client.GuiSlideExperiment;
 import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
@@ -14,23 +15,13 @@ public class SlideHandler extends BaseHandler {
         super(studio, editorGame);
     }
 
-    public void delete(Map.Entry<Slide, RenderableSlide> entry){
-        editorGame.deleteSlide(entry);
+    public void delete(Slide slide){
+        editorGame.deleteSlide(slide, editorGame.getSlideMap().get(slide));
     };
 
 
-    public void beginDrag(Map.Entry<Slide, RenderableSlide> entry, MouseEvent event) {
-        entry.getValue().setAnchorX(event.getX());
-        entry.getValue().setAnchorY(event.getY());
-    }
-
-    public void drag(Map.Entry<Slide, RenderableSlide> entry, MouseEvent event) {
-        entry.getValue().changeX(event.getSceneX() - entry.getValue().getAnchorX());
-        entry.getValue().changeY(event.getSceneY() - entry.getValue().getAnchorY());
-    }
-
-    public void editMessage(Map.Entry<Slide, RenderableSlide> entry, String message){
-        entry.getKey().setPrompt(message);
+    public void editMessage(Slide slide, String message){
+        slide.setPrompt(message);
     }
 
 
@@ -39,16 +30,18 @@ public class SlideHandler extends BaseHandler {
         //
     }
 
-    // public void dropEvent(Map.Entry<Slide, RenderableSlide> entry, String db) {
-    //     StringBuilder desiredDecision = new StringBuilder(db);
-    //     desiredDecision.deleteCharAt(0);
-    //     if (Character.toString(db.charAt(0)).equals("0")){
-    //         Decision decisionToChange = EditorGame.getDecisionById(Integer.parseInt(desiredDecision.toString()));
-    //         decisionToChange.setOrigin(entry.getKey());
-    //     }
-    //     if (Character.toString(db.charAt(0)).equals("1")){
-    //         Decision decisionToChange = EditorGame.getDecisionById(Integer.parseInt(desiredDecision.toString()));
-    //         decisionToChange.setTarget(entry.getKey());
-    //     }
-    // }
+
+    public void dropEvent(Slide slide, GuiSlideExperiment GuiSlide, String db) {
+         StringBuilder desiredDecision = new StringBuilder(db);
+         System.out.println(desiredDecision);
+         desiredDecision.deleteCharAt(0);
+
+         if (Character.toString(db.charAt(0)).equals("0")){
+             editorGame.changeDecisionOrigin(slide, GuiSlide, Integer.parseInt(desiredDecision.toString()));
+
+         }
+         if (Character.toString(db.charAt(0)).equals("1")){
+             editorGame.changeDecisionOutput(slide, GuiSlide, Integer.parseInt(desiredDecision.toString()));
+         }
+     }
 }

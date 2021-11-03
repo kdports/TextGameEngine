@@ -19,6 +19,6 @@ class SlideTest {
         assert s.addDecision(d);
         ArrayList<Decision> ar = new ArrayList<>();
         ar.add(d);
-        assertEquals(s.decisions, ar);
+        assertEquals(s.outgoingDecisions, ar);
     }
 }

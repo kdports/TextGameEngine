@@ -45,7 +45,7 @@ public class GameRenderer implements PlayDisplayer {
         t1 = new JTextArea(slide.getPrompt(), 20, 10);
         t1.setLineWrap(true);
         t1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        ArrayList<Decision> validDecisions = Player.checkValidChoices(slide.decisions);
+        ArrayList<Decision> validDecisions = Player.checkValidChoices(slide.outgoingDecisions);
         panel.add(t1);
         /*
         Creates the buttons for each decision on the slide

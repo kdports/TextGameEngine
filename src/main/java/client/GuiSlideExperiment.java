@@ -1,21 +1,16 @@
 package client;
 
-import entities.Decision;
 import entities.Slide;
-import handlers.CreateNewDecisionHandler;
 import handlers.Handlers;
-import interfaces.RenderableDecision;
 import interfaces.RenderableSlide;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,106 +21,94 @@ import javafx.stage.Stage;
 import java.util.Map;
 
 public class GuiSlideExperiment extends StackPane {
-    public GuiSlideExperiment(Map.Entry<Slide, RenderableSlide> entry) {
-        Slide slide = entry.getKey();
-        RenderableSlide renderableSlide = entry.getValue();
+    private double mouseAnchorX;
+    private double mouseAnchorY;
+    public Text prompt;
 
-        renderableSlide.getXProperty().addListener((observable, oldValue, newValue) -> {
-                        setLayoutX(newValue.doubleValue());
-                    }
-        );
-        renderableSlide.getYProperty().addListener((observable, oldValue, newValue) -> {
-                    setLayoutY(newValue.doubleValue());
-                }
-        );
-
+    public GuiSlideExperiment(Slide slide, double x_location, double y_location) {
         String id = String.valueOf(slide.getId());
         this.setId(id);
-        this.setLayoutX(renderableSlide.getX());
-        this.setLayoutY(renderableSlide.getY());
-        this.setMinWidth(renderableSlide.getWidth());
-        this.setMinHeight(renderableSlide.getHeight());
+        this.setLayoutX(x_location);
+        this.setLayoutY(y_location);
+        this.setMaxWidth(200);
+        this.setMinWidth(200);
+        this.setMaxHeight(100);
+        this.setMinHeight(100);
         this.setStyle("-fx-background-color: lightgray;");
+
 
         // Drag event handling
         this.setOnMousePressed(event -> {
-            Handlers.slideHandler.beginDrag(entry, event);
+             mouseAnchorX = event.getX();
+             mouseAnchorY = event.getY();
         });
         this.setOnMouseDragged(event -> {
-             Handlers.slideHandler.drag(entry, event);
-             // this.setLayoutX(entry.getValue().getX());
-             // this.setLayoutY(entry.getValue().getY());
+             this.setLayoutX(event.getSceneX() - mouseAnchorX);
+             this.setLayoutY(event.getSceneY() - mouseAnchorY);
         });
 
-        Text prompt = this.addPromptText(slide.getPrompt());
-        Button deleteBtn = this.deleteSlide(entry);
-        Button addDecision = this.addDecision(entry);
-        Button editBtn = this.editDecision(entry);
+        prompt = new Text();
+        prompt.setText(slide.getPrompt());
+        prompt.setStyle("-fx-blend-mode: overlay");
+        prompt.setFill(Color.BLACK);
+        StackPane.setAlignment(prompt, Pos.CENTER);
+        Button addDecision = this.addDecision(slide);
+        Button editBtn = this.editSlide(slide);
         this.getChildren().add(addDecision);
-        this.getChildren().add(deleteBtn);
         this.getChildren().add(prompt);
         this.getChildren().add(editBtn);
 
-        entry.getKey().returnObservable().addListener(
+        slide.returnObservable().addListener(
                 (observable, oldvalue, newvalue) -> prompt.setText(newvalue)
         );
 
-        // this.setOnDragDropped((DragEvent event) -> {
-        //     Dragboard db = event.getDragboard();
-        //     Handlers.slideHandler.dropEvent(entry, db.toString());
-        // });
-    }
+        this.setOnDragOver(new EventHandler<DragEvent>() {
+             public void handle(DragEvent event) {
+                 if (event.getGestureSource() != this && event.getDragboard().hasString()) {
+                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                 }
 
-    private Text addPromptText(String text) {
-        Text dialogue = new Text();
-        dialogue.setStyle("-fx-blend-mode: overlay");
-        dialogue.setText(text);
-        dialogue.setFill(Color.BLACK);
-        StackPane.setAlignment(dialogue, Pos.CENTER);
+                 event.consume();
+             }
+         });
 
-        return dialogue;
-    }
-
-    private void updateText() {
-
+        this.setOnDragDropped((DragEvent event) -> {
+             Dragboard db = event.getDragboard();
+             Handlers.slideHandler.dropEvent(slide, this, db.getString());
+             System.out.println(slide.outgoingDecisions);
+        });
     }
 
     // Button to delete Slide
 
-    private Button deleteSlide(Map.Entry<Slide, RenderableSlide> entry) {
-        Button deleteButton = new Button("Delete Slide");
-        deleteButton.setOnMousePressed(event -> Handlers.slideHandler.delete(entry));
-        StackPane.setAlignment(deleteButton, Pos.TOP_RIGHT);
-        return deleteButton;
-
-    }
 
     // Button to add Decision
 
-    private Button addDecision(Map.Entry<Slide, RenderableSlide> entry){
+    private Button addDecision(Slide slide){
         Button addDecisionButton = new Button("Add Decision");
-        addDecisionButton.setOnMousePressed(event -> Handlers.createNewDecisionHandler.create(entry));
-        StackPane.setAlignment(addDecisionButton, Pos.CENTER_RIGHT);
-        return addDecisionButton;
-
-    }
-
-    private Button editDecision(Map.Entry<Slide, RenderableSlide> entry){
-        Button addDecisionButton = new Button("Edit Decision");
-        addDecisionButton.setOnMousePressed(event -> GuiSlideExperiment.showEdit(entry));
+        addDecisionButton.setOnMousePressed(
+                event -> Handlers.createNewDecisionHandler.create(slide, this, this.getLayoutX(), this.getLayoutY()));
         StackPane.setAlignment(addDecisionButton, Pos.BOTTOM_RIGHT);
         return addDecisionButton;
 
     }
 
-    private static void showEdit(Map.Entry<Slide, RenderableSlide> entry){
+    private Button editSlide(Slide slide){
+        Button addDecisionButton = new Button("Edit Slide");
+        addDecisionButton.setOnMousePressed(event -> client.GuiSlideExperiment.showEdit(slide));
+        StackPane.setAlignment(addDecisionButton, Pos.TOP_LEFT);
+        return addDecisionButton;
+
+    }
+
+    private static void showEdit(Slide slide){
         // Create an Alert Box to edit the Slide
 
         Stage slideWindow = new Stage();
         slideWindow.initModality(Modality.APPLICATION_MODAL);
         slideWindow.setTitle("Slide Editor");
         slideWindow.setMinWidth(300);
-        TextField input = new TextField(entry.getKey().getPrompt());
+        TextField input = new TextField(slide.getPrompt());
         Button btnClose = new Button("Close this window");
         btnClose.setOnAction(mouseEvent -> {
             slideWindow.close();
@@ -134,7 +117,13 @@ public class GuiSlideExperiment extends StackPane {
         // Edit the value on entry according to the value on the text field
         Button btnEdit = new Button("Edit the slide message");
         btnEdit.setOnAction(mouseEvent -> {
-            Handlers.slideHandler.editMessage(entry, input.getText());
+            Handlers.slideHandler.editMessage(slide, input.getText());
+        });
+
+        Button dltButton = new Button("Delete Decision");
+        dltButton.setOnAction(mouseEvent -> {
+            Handlers.slideHandler.delete(slide);
+            slideWindow.close();
         });
 
         // Make the Slide Edit Window Show

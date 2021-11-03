@@ -1,20 +1,22 @@
 package client;
 
+import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
 import handlers.Handlers;
+import handlers.SlideHandler;
 import interfaces.RenderableSlide;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.MapChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class RootDisplayerExperiment extends Application {
     private final Pane root = new Pane();
@@ -29,25 +31,6 @@ public class RootDisplayerExperiment extends Application {
 
     public void rebuildFromRoot(Object o) {
         System.out.println("Re-rendering!!!");
-        // Build all slides
-        ArrayList<StackPane> stuffToRender = (
-            this.editorGame
-                .getAllEntriesSlide()
-                .stream()
-                .map(GuiSlideExperiment::new)
-                .collect(Collectors.toCollection(ArrayList::new))
-        );
-
-        // Build all decisions
-        stuffToRender.addAll(
-                this.editorGame
-                    .getAllEntriesDecision()
-                    .stream()
-                    .map(GuiDecisionExperiment::new)
-                    .collect(Collectors.toCollection(ArrayList::new))
-        );
-
-        this.root.getChildren().setAll(stuffToRender);
     }
 
     @Override
@@ -58,17 +41,48 @@ public class RootDisplayerExperiment extends Application {
         this.root.getChildren().add(holder);
 
         // Set root to observe the this.editorGame hashmaps and update accordingly
-        this.editorGame.slideMapProperty().addListener((MapChangeListener<? super Slide, ? super RenderableSlide>) listener -> {
+        this.editorGame.slideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlideExperiment>) listener -> {
             if (listener.wasAdded()) {
-                this.root.getChildren().add(/*   */);
-            }
-
-            if (listener.wasRemoved()) {
-                // this.root.getChildren().remove()
-                // remove child
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().add(listener.getValueAdded());
+                listener.getKey().returnObservable().addListener(
+                        (observable, oldvalue, newvalue) -> listener.getValueAdded().prompt.setText(newvalue)
+                );
             }
         });
-        this.editorGame.decisionMapProperty().addListener((InvalidationListener) this::rebuildFromRoot);
+
+
+        // Set root to observe and delete slides properly
+        this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlideExperiment>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().remove(listener.getValueAdded());
+            }
+        });
+
+
+        // Set root to initialize connecting lines and decisions
+        this.editorGame.decisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecisionExperiment>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().add(listener.getValueAdded());
+               listener.getValueAdded().originSlide.layoutXProperty().addListener(
+                       (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineX());
+               listener.getValueAdded().originSlide.layoutYProperty().addListener(
+                       (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineY());
+               root.getChildren().add(listener.getValueAdded().leftLine);
+               root.getChildren().add(listener.getValueAdded().rightLine);
+
+            }
+
+        });
+
+        this.editorGame.deletedDecisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecisionExperiment>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().remove(listener.getValueAdded());
+            }
+        });
 
         // Add the three sidebar buttons
         SidebarButtons sidebarButtons = new SidebarButtons();
