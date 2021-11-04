@@ -1,18 +1,20 @@
 package entities;
+import client.GameRenderer;
 import interfaces.Displayer;
-
 import java.util.ArrayList;
 
 public class Player {
     public Slide currentSlide;
     public Displayer dp;
     public Game game;
+    public ArrayList<Decision> currentValidDecisions;
 
     public Player(Displayer dp, Game game){
         this.dp = dp;
         this.game = game;
         dp.setPlayer(this);
     }
+
     public void playGame() {
         currentSlide = game.firstSlide;
         playScene();
@@ -24,23 +26,21 @@ public class Player {
      * implemented later
      */
     public void playScene(){
-        dp.display(currentSlide);
+        dp.display();
     }
 
     /**
      * CURRENTLY JUST A PLACEHOLDER
      * takes in a list of decisions and return a subset of the list of valid decisions
-     * @param decisions a list of decisions to check
-     * @return ArrayList<Decision> a list of valid decision
      */
-    public static ArrayList<Decision> checkValidChoices(ArrayList<Decision> decisions) {
+    public void checkValidChoices() {
         ArrayList<Decision> ar = new ArrayList<>();
-        for (Decision d: decisions){
+        for (Decision d: this.currentSlide.decisions){
             if(checkChoice(d)){
                 ar.add(d);
             }
         }
-        return ar;
+        this.currentValidDecisions = ar;
     }
 
     /**
@@ -52,5 +52,6 @@ public class Player {
     public static boolean checkChoice(Decision d){
         return d != null;
     }
+
 
 }
