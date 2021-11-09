@@ -1,13 +1,13 @@
 package client;
 
 import entities.*;
-import interfaces.Displayer;
+import interfaces.PlayDisplayer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class GameRenderer implements Displayer {
+public class GameRenderer implements PlayDisplayer {
     JFrame frame; // Creates JFrame that the gamerenderer will use to display the window
     Player player;
 
@@ -42,10 +42,10 @@ public class GameRenderer implements Displayer {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         JTextArea t1;
-        t1 = new JTextArea(slide.prompt, 20, 10);
+        t1 = new JTextArea(slide.getPrompt(), 20, 10);
         t1.setLineWrap(true);
         t1.setAlignmentX(Component.LEFT_ALIGNMENT);
-        ArrayList<Decision> validDecisions = Player.checkValidChoices(slide.decisions);
+        ArrayList<Decision> validDecisions = Player.checkValidChoices(slide.outgoingDecisions);
         panel.add(t1);
         /*
         Creates the buttons for each decision on the slide
@@ -76,10 +76,10 @@ public class GameRenderer implements Displayer {
         a2.add(d13);
         Decision d14 = new Decision("choice 4 takes you to end2");
         a2.add(d14);
-        Slide s1 = new Slide("Beginning scene", a1);
-        Slide s2 = new Slide("this is the second scene, make a choice", a2);
-        Slide s3 = new Slide("ending 1");
-        Slide s4 = new Slide("ending 2");
+        Slide s1 = new Slide(1,"Beginning scene", a1);
+        Slide s2 = new Slide(2,"this is the second scene, make a choice", a2);
+        Slide s3 = new Slide(3,"ending 1", a2);
+        Slide s4 = new Slide(4,"ending 2", a2);
         d1.setTarget(s2);
         d12.setTarget(s1);
         d13.setTarget(s3);

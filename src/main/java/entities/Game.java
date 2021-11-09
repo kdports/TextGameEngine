@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Game {
     public Slide firstSlide;
-    private ArrayList<Slide> slides;
+    private final ArrayList<Slide> slides;
 
     public Game(Slide firstSlide){
         this.firstSlide = firstSlide;
@@ -21,9 +21,16 @@ public class Game {
         return true;
     }
 
-    public boolean addSlide(Slide slide) {
-        return this.slides.add(slide);
+    public Slide createSlide(int slideId, String text) {
+        Slide newSlide = new Slide(slideId, text);
+        this.addSlide(newSlide);
 
+        return newSlide;
+    }
+
+    public boolean addSlide(Slide slide) {
+        this.slides.add(slide);
+        return true;
     }
 
     public ArrayList<Slide> getSlides() {
@@ -34,6 +41,15 @@ public class Game {
         return this.slides.remove(slide);
     }
 
+//    public void createDecision(String text) {
+//        Decision d = new Decision(text);
+////        this.addDecision(d);
+//    }
+
+    /**
+     * Parent ---- d ---- <>
+     * <> ---- d ---- Parent
+     * */
     public boolean addDecision(Slide parentSlide, Decision decision) {
         return parentSlide.addDecision(decision);
     }

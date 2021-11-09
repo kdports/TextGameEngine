@@ -1,14 +1,14 @@
 package entities;
-import interfaces.Displayer;
+import interfaces.PlayDisplayer;
 
 import java.util.ArrayList;
 
 public class Player {
     public Slide currentSlide;
-    public Displayer dp;
+    public PlayDisplayer dp;
     public Game game;
 
-    public Player(Displayer dp, Game game){
+    public Player(PlayDisplayer dp, Game game){
         this.dp = dp;
         this.game = game;
         dp.setPlayer(this);
