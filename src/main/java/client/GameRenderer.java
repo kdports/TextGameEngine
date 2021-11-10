@@ -13,12 +13,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 
 public class GameRenderer implements Displayer {
     JFrame frame; // Creates JFrame that the gamerenderer will use to display the window
     Player player;
+    Theme theme;
 
     public GameRenderer() {
         frame = new JFrame("Game");
@@ -31,6 +34,7 @@ public class GameRenderer implements Displayer {
         ImageIcon image = new ImageIcon();
         frame.setIconImage(image.getImage());
 
+        theme = new Theme();
     } //Initializes JFrame
 
     public void setPlayer(Player player){
@@ -52,6 +56,7 @@ public class GameRenderer implements Displayer {
         frame.add(textScroll);
         frame.add(buttonScroll, BorderLayout.SOUTH);
         frame.add(titleScroll, BorderLayout.NORTH);
+        frame.setJMenuBar(createMenu());
         frame.setVisible(true);
 
     }
@@ -78,7 +83,7 @@ public class GameRenderer implements Displayer {
     public JPanel createButtonPanel() {
 
         JPanel panel = new JPanel();
-        panel.setBackground(Color.black);
+        panel.setBackground(theme.backgroundColor);
 
         int num = createButtons(panel);
         panel.setLayout(new GridLayout(num, 1));
@@ -87,6 +92,20 @@ public class GameRenderer implements Displayer {
         return panel;
     }
 
+    public JMenuBar createMenu(){
+        JMenuBar mb = new JMenuBar();
+        JMenu themes = new JMenu("Themes");
+        for(String t : theme.themeList){
+            JMenuItem th = new JMenuItem(t);
+            th.addActionListener(e -> {
+                theme.setTheme(t);
+                display();
+            });
+            themes.add(th);
+        }
+        mb.add(themes);
+        return mb;
+    }
     // This does the animation of the text showing one letter at a time
     public void addAnimation(JTextArea ta) {
         String text = player.currentSlide.prompt;
@@ -131,10 +150,11 @@ public class GameRenderer implements Displayer {
         JTextArea t1;
         t1 = new JTextArea("", 20, 10);
         t1.setLineWrap(true);
-        t1.setForeground(Color.white);
-        t1.setBackground(Color.black);
+        t1.setForeground(theme.textColor);
+        t1.setBackground(theme.backgroundColor);
+        t1.setEditable(false);
         t1.setBounds(0, 0, panel.getWidth(), panel.getHeight());
-        Border border = BorderFactory.createLineBorder(Color.black, 10);
+        Border border = BorderFactory.createLineBorder(theme.backgroundColor, 10);
         t1.setBorder(border);
         // Temporary font
         try{
@@ -150,11 +170,13 @@ public class GameRenderer implements Displayer {
     }
 
     // This gets the red and white arrows before each button saved as arrow.png and redArrow.png
-    public ImageIcon createIcon(String filename){
+    public ImageIcon createIcon(String filename, Color color){
         ImageIcon white = new ImageIcon("src/main/java/client/" + filename);
         Image image = white.getImage();
         Image newImg = image.getScaledInstance(25, 20,  java.awt.Image.SCALE_SMOOTH);
-        return new ImageIcon(newImg);
+        ImageIcon white1 = new ImageIcon(newImg);
+        BufferedImage img = intoBuffer(white1);
+        return colorImage(img, color);
     }
 
     // This adds the listeners to the buttons so that the buttons change to red when hovered over and goes to the
@@ -166,11 +188,11 @@ public class GameRenderer implements Displayer {
         });
         b.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                b.setForeground(Color.RED);
+                b.setForeground(theme.textHoverColor);
                 b.setIcon(redArrow);
             }
             public void mouseExited(MouseEvent e) {
-                b.setForeground(Color.white);
+                b.setForeground(theme.textColor);
                 b.setIcon(arrow);
             }});
     }
@@ -182,8 +204,8 @@ public class GameRenderer implements Displayer {
             count++;
             JButton b = new JButton();
 
-            final ImageIcon arrow = createIcon("arrow.png");
-            final ImageIcon redArrow = createIcon("redArrow.png");
+            final ImageIcon arrow = createIcon("redArrow.png", theme.textColor);
+            final ImageIcon redArrow = createIcon("redArrow.png", theme.textHoverColor);
 
             b.setIcon(arrow);
             b.setText(decision.text);
@@ -191,14 +213,42 @@ public class GameRenderer implements Displayer {
             b.setFocusable(false);
             b.setAlignmentX(Component.LEFT_ALIGNMENT);
             b.setFont(new Font("Rockwell", Font.PLAIN, 25));
-            b.setBackground(Color.black);
-            b.setForeground(Color.white);
+            b.setBackground(theme.backgroundColor);
+            b.setForeground(theme.textColor);
             b.setBorder(null);
             b.setHorizontalAlignment(SwingConstants.LEFT);
             b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             panel.add(b);
         }
         return count;
+    }
+    public BufferedImage intoBuffer(ImageIcon icon){
+        BufferedImage bi = new BufferedImage(
+                icon.getIconWidth(),
+                icon.getIconHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics g = bi.createGraphics();
+// paint the Icon to the BufferedImage.
+        icon.paintIcon(null, g, 0,0);
+        g.dispose();
+        return bi;
+    }
+
+    private static ImageIcon colorImage(BufferedImage image, Color color) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        WritableRaster raster = image.getRaster();
+
+        for (int xx = 0; xx < width; xx++) {
+            for (int yy = 0; yy < height; yy++) {
+                int[] pixels = raster.getPixel(xx, yy, (int[]) null);
+                pixels[0] = color.getRed();
+                pixels[1] = color.getGreen();
+                pixels[2] = color.getBlue();
+                raster.setPixel(xx, yy, pixels);
+            }
+        }
+        return new ImageIcon(image);
     }
 
     public static void main(String[] args){
