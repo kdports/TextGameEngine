@@ -1,4 +1,5 @@
 package rdf;
+import client.GuiDecisionExperiment;
 import entities.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
@@ -9,10 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import client.GuiSlideExperiment;
+
 public abstract class RDFLoad {
     private final Model model;
     private final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
     private final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
+    private final HashMap<Slide, GuiSlideExperiment> renderableSlideMap = new HashMap<>();
+    private final HashMap<Decision, GuiDecisionExperiment> renderableDecisionMap = new HashMap<>();
 
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
@@ -22,13 +27,14 @@ public abstract class RDFLoad {
         FileInputStream in = new FileInputStream(filepath);
         this.model.read(in,null,"TTL");
 
-        this.populateResourceMaps();
+        this.populateGameResourceMaps();
+        this.populateRenderableResourceMaps();
     }
 
     /**
      * Populate the slideNodeMap and decisionNodeMap from the loaded model
      */
-    private void populateResourceMaps() {
+    private void populateGameResourceMaps() {
         // Populate slideNodeMap
         ResIterator slideIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
         if (slideIter.hasNext()) {
@@ -51,7 +57,11 @@ public abstract class RDFLoad {
                 Resource decisionNode = decisionIter.nextResource();
 
                 String decisionText = decisionNode.getProperty(TGEO.hasText).getString();
-                Decision decision = new Decision(decisionText);
+                Resource originSlideNode = this.model.listResourcesWithProperty(TGEO.hasDecision, decisionNode).nextResource();
+                Slide originSlide = slideNodeMap.get(originSlideNode);
+                Resource targetSlideNode = decisionNode.getPropertyResourceValue(TGEO.directsTo);
+                Slide targetSlide = slideNodeMap.get(targetSlideNode);
+                Decision decision = new Decision(decisionText, originSlide, (int) (Math.random() * 100000), targetSlide);
 
                 this.decisionNodeMap.put(decisionNode, decision);
             }
@@ -70,6 +80,44 @@ public abstract class RDFLoad {
             Resource targetSlideNode = decisionNode.getPropertyResourceValue(TGEO.directsTo);
             decision.setTarget(this.slideNodeMap.get(targetSlideNode));
         }
+    }
+
+    private void populateRenderableResourceMaps(){
+
+        ResIterator slideIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
+        if (slideIter.hasNext()) {
+            while (slideIter.hasNext()) {
+                Resource slideNode = slideIter.nextResource();
+
+                double locationX = slideNode.getProperty(TGEO.hasXLocation).getDouble();
+                double locationY = slideNode.getProperty(TGEO.hasYLocation).getDouble();
+
+                Slide slide = slideNodeMap.get(slideNode);
+
+                GuiSlideExperiment guiSlide = new GuiSlideExperiment(slide, locationX, locationY);
+                this.renderableSlideMap.put(slide, guiSlide);
+            }
+        }
+
+        // Populate decisionNodeMap
+        ResIterator decisionIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Decision);
+
+        // For each decision, build a Decision instance
+        if (decisionIter.hasNext()) {
+            while(decisionIter.hasNext()) {
+                Resource decisionNode = decisionIter.nextResource();
+
+                double locationX = decisionNode.getProperty(TGEO.hasXLocation).getDouble();
+                double locationY = decisionNode.getProperty(TGEO.hasYLocation).getDouble();
+                Decision decision = decisionNodeMap.get(decisionNode);
+                Slide originSlide = decision.origin;
+                GuiSlideExperiment renderableOrigin = renderableSlideMap.get(originSlide);
+
+                GuiDecisionExperiment guiDecision = new GuiDecisionExperiment(decision, renderableOrigin, locationX, locationY);
+                this.renderableDecisionMap.put(decision, guiDecision);
+            }
+        }
+
     }
 
     private ArrayList<Decision> getDecisionsOfSlide(Resource slideNode) {
@@ -92,6 +140,7 @@ public abstract class RDFLoad {
     public void loadFromFile() {
         Game game = new Game();
 
+
         for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
             Resource slideNode = entry.getKey();
             Slide slide = entry.getValue();
@@ -106,6 +155,19 @@ public abstract class RDFLoad {
         }
 
         sendGame(game);
+    }
+
+    public EditorGame loadEditorGameFromFile() {
+        EditorGame editorGame = new EditorGame();
+
+        for (Map.Entry<Slide, GuiSlideExperiment> entry : this.renderableSlideMap.entrySet()) {
+            editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
+        }
+
+        for (Map.Entry<Decision, GuiDecisionExperiment> entry : this.renderableDecisionMap.entrySet()) {
+            editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
+        }
+        return editorGame;
     }
 
     public abstract void sendGame(Game game);

@@ -28,6 +28,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     implementation 'org.apache.jena:jena-core:4.2.0'
+    implementation 'org.apache.jena:jena-arq:4.2.0'
 }
 
 test {

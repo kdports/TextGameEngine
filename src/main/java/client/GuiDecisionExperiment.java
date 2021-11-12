@@ -94,6 +94,8 @@ public class GuiDecisionExperiment extends StackPane {
         recalculateLeftLineX();
         recalculateLeftLineY();
 
+//        recalculateRightLineX();
+//        recalculateRightLineY();
 
     }
 
