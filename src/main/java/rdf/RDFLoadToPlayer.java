@@ -3,7 +3,7 @@ package rdf;
 import client.GameRenderer;
 import entities.Game;
 import entities.Player;
-import interfaces.Displayer;
+import interfaces.PlayDisplayer;
 
 import java.io.FileNotFoundException;
 
@@ -14,7 +14,7 @@ public class RDFLoadToPlayer extends RDFLoad {
 
     @Override
     public void sendGame(Game game) {
-        Displayer dp = new GameRenderer();
+        PlayDisplayer dp = new GameRenderer();
         Player p = new Player(dp, game);
         p.playGame();
     }

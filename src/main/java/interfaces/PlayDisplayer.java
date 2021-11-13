@@ -1,7 +1,7 @@
 package interfaces;
 import entities.Player;
 
-public interface Displayer {
+public interface PlayDisplayer {
     void display();
     void setPlayer(Player player);
 }
