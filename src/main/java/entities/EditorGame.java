@@ -7,6 +7,7 @@ import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 
 import java.util.ArrayList;
@@ -75,6 +76,12 @@ public class EditorGame {
                         (observable, oldvalue, newvalue) -> decision.getValue().recalculateLeftLineX());
                 decision.getValue().originSlide.layoutYProperty().addListener(
                         (observable, oldvalue, newvalue) -> decision.getValue().recalculateLeftLineY());
+                deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlideExperiment>) slideRemoved -> {
+                    if (slideRemoved.getValueAdded() == decision.getValue().originSlide) {
+                        decision.getValue().originSlide = null;
+                        decision.getValue().recalculateLeftLineX();
+                    }}
+                );
                 decision.getValue().recalculateLeftLineX();
                 decision.getValue().recalculateLeftLineY();
             }
@@ -91,6 +98,12 @@ public class EditorGame {
                         (observable, oldvalue, newvalue) -> decision.getValue().recalculateRightLineX());
                 decision.getValue().targetSlide.layoutYProperty().addListener(
                         (observable, oldvalue, newvalue) -> decision.getValue().recalculateRightLineY());
+                deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlideExperiment>) slideRemoved -> {
+                    if (slideRemoved.getValueAdded() == decision.getValue().targetSlide) {
+                        decision.getValue().targetSlide = null;
+                        decision.getValue().recalculateRightLineX();
+                    }}
+                );
                 decision.getValue().recalculateRightLineX();
                 decision.getValue().recalculateRightLineY();
             }
@@ -104,6 +117,8 @@ public class EditorGame {
 
     public void deleteDecision(Decision decision, GuiDecisionExperiment GuiDecisionExperiment){
         this.deletedDecisionMap.put(decision, GuiDecisionExperiment);
+        GuiDecisionExperiment.rightLine.setVisible(false);
+        GuiDecisionExperiment.leftLine.setVisible(false);
         this.decisionMap.remove(decision, GuiDecisionExperiment);
         for (Map.Entry<Slide, GuiSlideExperiment> slide: slideMap.entrySet()){
             if (slide.getKey().outgoingDecisions.contains(decision)){

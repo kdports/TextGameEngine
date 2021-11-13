@@ -55,7 +55,6 @@ public class RootDisplayerExperiment extends Application {
         // Set root to observe and delete slides properly
         this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlideExperiment>) listener -> {
             if (listener.wasAdded()) {
-                System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().remove(listener.getValueAdded());
             }
         });
@@ -66,10 +65,16 @@ public class RootDisplayerExperiment extends Application {
             if (listener.wasAdded()) {
                 System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().add(listener.getValueAdded());
-               listener.getValueAdded().originSlide.layoutXProperty().addListener(
+                listener.getValueAdded().originSlide.layoutXProperty().addListener(
                        (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineX());
-               listener.getValueAdded().originSlide.layoutYProperty().addListener(
+                listener.getValueAdded().originSlide.layoutYProperty().addListener(
                        (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineY());
+                this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlideExperiment>) slideRemoved -> {
+                    if (slideRemoved.getValueAdded() == listener.getValueAdded().originSlide) {
+                        listener.getValueAdded().originSlide = null;
+                        listener.getValueAdded().recalculateLeftLineX();
+                    }}
+                );
                root.getChildren().add(listener.getValueAdded().leftLine);
                root.getChildren().add(listener.getValueAdded().rightLine);
 

@@ -54,9 +54,11 @@ public class GuiSlideExperiment extends StackPane {
         StackPane.setAlignment(prompt, Pos.CENTER);
         Button addDecision = this.addDecision(slide);
         Button editBtn = this.editSlide(slide);
+        Button dltBtn = this.deleteSlideButton(slide);
         this.getChildren().add(addDecision);
         this.getChildren().add(prompt);
         this.getChildren().add(editBtn);
+        this.getChildren().add(dltBtn);
 
         slide.returnObservable().addListener(
                 (observable, oldvalue, newvalue) -> prompt.setText(newvalue)
@@ -81,7 +83,13 @@ public class GuiSlideExperiment extends StackPane {
 
     // Button to delete Slide
 
-
+    private Button deleteSlideButton(Slide slide){
+        Button deleteSlideButton =new Button("Delete Slide");
+        deleteSlideButton.setOnMousePressed(
+                event -> Handlers.slideHandler.delete(slide));
+        StackPane.setAlignment(deleteSlideButton, Pos.TOP_RIGHT);
+        return deleteSlideButton;
+    }
     // Button to add Decision
 
     private Button addDecision(Slide slide){
@@ -120,7 +128,7 @@ public class GuiSlideExperiment extends StackPane {
             Handlers.slideHandler.editMessage(slide, input.getText());
         });
 
-        Button dltButton = new Button("Delete Decision");
+        Button dltButton = new Button("Delete Slide");
         dltButton.setOnAction(mouseEvent -> {
             Handlers.slideHandler.delete(slide);
             slideWindow.close();
