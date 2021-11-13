@@ -2,7 +2,6 @@ package client;
 
 import entities.Decision;
 import handlers.Handlers;
-import interfaces.RenderableDecision;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,17 +18,15 @@ import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Map;
-
-public class GuiDecisionExperiment extends StackPane {
+public class GuiDecision extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
     public Line leftLine;
     public Line rightLine;
-    public GuiSlideExperiment originSlide;
-    public GuiSlideExperiment targetSlide;
+    public GuiSlide originSlide;
+    public GuiSlide targetSlide;
 
-    public GuiDecisionExperiment(Decision decision, GuiSlideExperiment GuiSlide, double x, double y) {
+    public GuiDecision(Decision decision, GuiSlide GuiSlide, double x, double y) {
 
 
         this.originSlide = GuiSlide;
@@ -104,7 +101,7 @@ public class GuiDecisionExperiment extends StackPane {
         Button edtButton = new Button("Edit");
         edtButton.maxHeight(25);
         edtButton.maxWidth(50);
-        edtButton.setOnMousePressed(event -> GuiDecisionExperiment.showEdit(decision));
+        edtButton.setOnMousePressed(event -> GuiDecision.showEdit(decision));
         StackPane.setAlignment(edtButton, Pos.CENTER);
         return edtButton;
     }
@@ -137,15 +134,11 @@ public class GuiDecisionExperiment extends StackPane {
         slideWindow.setMinWidth(300);
         TextField input = new TextField(decision.getText());
         Button btnClose = new Button("Close this window");
-        btnClose.setOnAction(mouseEvent -> {
-            slideWindow.close();
-        });
+        btnClose.setOnAction(mouseEvent -> slideWindow.close());
 
         // Edit the value on entry according to the value on the text field
         Button btnEdit = new Button("Edit the Decision message");
-        btnEdit.setOnAction(mouseEvent -> {
-            Handlers.decisionHandler.editMessage(decision, input.getText());
-        });
+        btnEdit.setOnAction(mouseEvent -> Handlers.decisionHandler.editMessage(decision, input.getText()));
 
         Button dltButton = new Button("Delete Decision");
         dltButton.setOnAction(mouseEvent -> {

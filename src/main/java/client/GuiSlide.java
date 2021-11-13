@@ -2,7 +2,6 @@ package client;
 
 import entities.Slide;
 import handlers.Handlers;
-import interfaces.RenderableSlide;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,14 +17,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Map;
-
-public class GuiSlideExperiment extends StackPane {
+public class GuiSlide extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
     public Text prompt;
 
-    public GuiSlideExperiment(Slide slide, double x_location, double y_location) {
+    public GuiSlide(Slide slide, double x_location, double y_location) {
         String id = String.valueOf(slide.getId());
         this.setId(id);
         this.setLayoutX(x_location);
@@ -62,7 +59,7 @@ public class GuiSlideExperiment extends StackPane {
                 (observable, oldvalue, newvalue) -> prompt.setText(newvalue)
         );
 
-        this.setOnDragOver(new EventHandler<DragEvent>() {
+        this.setOnDragOver(new EventHandler<>() {
              public void handle(DragEvent event) {
                  if (event.getGestureSource() != this && event.getDragboard().hasString()) {
                      event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
@@ -95,7 +92,7 @@ public class GuiSlideExperiment extends StackPane {
 
     private Button editSlide(Slide slide){
         Button addDecisionButton = new Button("Edit Slide");
-        addDecisionButton.setOnMousePressed(event -> client.GuiSlideExperiment.showEdit(slide));
+        addDecisionButton.setOnMousePressed(event -> GuiSlide.showEdit(slide));
         StackPane.setAlignment(addDecisionButton, Pos.TOP_LEFT);
         return addDecisionButton;
 
@@ -110,15 +107,11 @@ public class GuiSlideExperiment extends StackPane {
         slideWindow.setMinWidth(300);
         TextField input = new TextField(slide.getPrompt());
         Button btnClose = new Button("Close this window");
-        btnClose.setOnAction(mouseEvent -> {
-            slideWindow.close();
-        });
+        btnClose.setOnAction(mouseEvent -> slideWindow.close());
 
         // Edit the value on entry according to the value on the text field
         Button btnEdit = new Button("Edit the slide message");
-        btnEdit.setOnAction(mouseEvent -> {
-            Handlers.slideHandler.editMessage(slide, input.getText());
-        });
+        btnEdit.setOnAction(mouseEvent -> Handlers.slideHandler.editMessage(slide, input.getText()));
 
         Button dltButton = new Button("Delete Decision");
         dltButton.setOnAction(mouseEvent -> {

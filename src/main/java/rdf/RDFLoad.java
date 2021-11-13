@@ -1,5 +1,5 @@
 package rdf;
-import client.GuiDecisionExperiment;
+import client.GuiDecision;
 import entities.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import client.GuiSlideExperiment;
+import client.GuiSlide;
 
 public abstract class RDFLoad {
     private final Model model;
     private final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
     private final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
-    private final HashMap<Slide, GuiSlideExperiment> renderableSlideMap = new HashMap<>();
-    private final HashMap<Decision, GuiDecisionExperiment> renderableDecisionMap = new HashMap<>();
+    private final HashMap<Slide, GuiSlide> renderableSlideMap = new HashMap<>();
+    private final HashMap<Decision, GuiDecision> renderableDecisionMap = new HashMap<>();
 
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
@@ -94,7 +94,7 @@ public abstract class RDFLoad {
 
                 Slide slide = slideNodeMap.get(slideNode);
 
-                GuiSlideExperiment guiSlide = new GuiSlideExperiment(slide, locationX, locationY);
+                GuiSlide guiSlide = new GuiSlide(slide, locationX, locationY);
                 this.renderableSlideMap.put(slide, guiSlide);
             }
         }
@@ -111,9 +111,9 @@ public abstract class RDFLoad {
                 double locationY = decisionNode.getProperty(TGEO.hasYLocation).getDouble();
                 Decision decision = decisionNodeMap.get(decisionNode);
                 Slide originSlide = decision.origin;
-                GuiSlideExperiment renderableOrigin = renderableSlideMap.get(originSlide);
+                GuiSlide renderableOrigin = renderableSlideMap.get(originSlide);
 
-                GuiDecisionExperiment guiDecision = new GuiDecisionExperiment(decision, renderableOrigin, locationX, locationY);
+                GuiDecision guiDecision = new GuiDecision(decision, renderableOrigin, locationX, locationY);
                 this.renderableDecisionMap.put(decision, guiDecision);
             }
         }
@@ -160,11 +160,11 @@ public abstract class RDFLoad {
     public EditorGame loadEditorGameFromFile() {
         EditorGame editorGame = new EditorGame();
 
-        for (Map.Entry<Slide, GuiSlideExperiment> entry : this.renderableSlideMap.entrySet()) {
+        for (Map.Entry<Slide, GuiSlide> entry : this.renderableSlideMap.entrySet()) {
             editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
         }
 
-        for (Map.Entry<Decision, GuiDecisionExperiment> entry : this.renderableDecisionMap.entrySet()) {
+        for (Map.Entry<Decision, GuiDecision> entry : this.renderableDecisionMap.entrySet()) {
             editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
         }
         return editorGame;

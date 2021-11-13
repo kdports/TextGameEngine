@@ -4,20 +4,14 @@ import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
 import handlers.Handlers;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import rdf.RDFLoad;
 import rdf.RDFLoadToStudio;
 import rdf.RDFSave;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -114,11 +108,11 @@ public class SidebarButtons extends ArrayList<Button> {
                 EditorGame loadedEditorGame = loader.loadEditorGameFromFile();
                 editorGame.clearAll();
 
-                for (Map.Entry<Slide, GuiSlideExperiment> entry : loadedEditorGame.getAllEntriesSlide()) {
+                for (Map.Entry<Slide, GuiSlide> entry : loadedEditorGame.getAllEntriesSlide()) {
                     editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
                 }
 
-                for (Map.Entry<Decision, GuiDecisionExperiment> entry : loadedEditorGame.getAllEntriesDecision()) {
+                for (Map.Entry<Decision, GuiDecision> entry : loadedEditorGame.getAllEntriesDecision()) {
                     editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
                 }}
                 catch (FileNotFoundException e) {

@@ -1,8 +1,7 @@
 package rdf;
 
-import client.GuiDecisionExperiment;
-import client.GuiSlideExperiment;
-import client.RootDisplayerExperiment;
+import client.GuiDecision;
+import client.GuiSlide;
 import entities.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -23,23 +22,23 @@ public class RDFSave {
         model.setNsPrefixes(Ontology.prefixes);
 
         // Add all slides with their ID to the model
-        for (Map.Entry<Slide, GuiSlideExperiment> entry : editorGame.getAllEntriesSlide()){
+        for (Map.Entry<Slide, GuiSlide> entry : editorGame.getAllEntriesSlide()){
             Slide currSlide = entry.getKey();
             Resource currSlideNode = model.createResource(((Integer) currSlide.getId()).toString());
             currSlideNode.addProperty(RDF.type, TGEO.Slide);
         }
 
         // ^^ with decisions
-        for (Map.Entry<Decision, GuiDecisionExperiment> entry : editorGame.getAllEntriesDecision()){
+        for (Map.Entry<Decision, GuiDecision> entry : editorGame.getAllEntriesDecision()){
             Decision currDecision = entry.getKey();
             Resource currDecisionNode = model.createResource(((Integer) currDecision.getId()).toString());
             currDecisionNode.addProperty(RDF.type, TGEO.Decision);
         }
 
         // Add attributes to slides
-        for (Map.Entry<Slide, GuiSlideExperiment> entry : editorGame.getAllEntriesSlide()){
+        for (Map.Entry<Slide, GuiSlide> entry : editorGame.getAllEntriesSlide()){
             Slide currSlide = entry.getKey();
-            GuiSlideExperiment guiSlide = entry.getValue();
+            GuiSlide guiSlide = entry.getValue();
             Resource currSlideNode = model.getResource(((Integer) currSlide.getId()).toString());
 
             currSlideNode.addProperty(TGEO.hasXLocation, String.valueOf(guiSlide.getLayoutX()));
@@ -51,9 +50,9 @@ public class RDFSave {
         }
 
         // Add attributes to decisions
-        for (Map.Entry<Decision, GuiDecisionExperiment> entry : editorGame.getAllEntriesDecision()){
+        for (Map.Entry<Decision, GuiDecision> entry : editorGame.getAllEntriesDecision()){
             Decision currDecision = entry.getKey();
-            GuiDecisionExperiment guiDecision = entry.getValue();
+            GuiDecision guiDecision = entry.getValue();
             Resource currDecisionNode = model.getResource(((Integer) currDecision.getId()).toString());
 
             currDecisionNode.addProperty(TGEO.hasXLocation, String.valueOf(guiDecision.getLayoutX()));
