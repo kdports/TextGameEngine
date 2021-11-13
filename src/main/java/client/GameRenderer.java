@@ -1,8 +1,6 @@
 package client;
 
-import entities.Player;
-import entities.Decision;
-import entities.RDFLoadTest;
+import entities.*;
 import interfaces.Displayer;
 
 import javax.swing.*;
