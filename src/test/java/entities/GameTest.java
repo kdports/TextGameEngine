@@ -14,7 +14,7 @@ class GameTest {
     @Test
     void testAddSlide() {
         Game g = new Game();
-        Slide s = new Slide("test");
+        Slide s = new Slide(1, "test");
         assert g.addSlide(s);
         assert g.getSlides().contains(s);
     }
@@ -22,7 +22,7 @@ class GameTest {
     @Test
     void testSetFirstSlide() {
         Game g = new Game();
-        Slide s = new Slide("test");
+        Slide s = new Slide(1, "test");
         assert g.setFirstSlide(s);
         assertEquals(s, g.firstSlide);
     }
