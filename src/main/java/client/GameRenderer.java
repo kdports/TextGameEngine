@@ -1,6 +1,8 @@
 package client;
 
-import entities.*;
+
+import entities.Player;
+import entities.CreateSampleGame;
 import interfaces.PlayDisplayer;
 
 import javax.swing.*;
@@ -234,11 +236,11 @@ public class GameRenderer implements PlayDisplayer {
     /**
      * Adds which slide to go to when the button is clicked
      * @param b the button that will be clicked
-     * @param decision the decision linked to the button
+     * @param i the index of the decision linked to the button
      */
-    private void addDestinationAction(JButton b, Decision decision) {
+    private void addDestinationAction(JButton b, int i) {
         b.addActionListener(e -> {
-            player.currentSlide = decision.target;
+            player.currentSlide = player.currentValidDecisions.get(i).target;
             player.playScene();
         });
     }
@@ -263,12 +265,12 @@ public class GameRenderer implements PlayDisplayer {
             panel.add(b);
             return 1;
         }
-        for (Decision decision : player.currentValidDecisions) {
+        for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
 
             JButton b = createButton(arrow);
-            b.setText(decision.text);
-            addDestinationAction(b, decision);
+            b.setText(player.currentValidDecisions.get(i).text);
+            addDestinationAction(b, i);
             addListeners(b, redArrow, arrow);
             panel.add(b);
         }
@@ -337,7 +339,7 @@ public class GameRenderer implements PlayDisplayer {
 
     public static void main(String[] args) {
         GameRenderer gr = new GameRenderer();
-        Player p = new Player(gr, RDFLoadTest.returnGame());
+        Player p = new Player(gr, CreateSampleGame.returnGame());
         p.playGame();
     }
 
