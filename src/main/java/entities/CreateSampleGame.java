@@ -1,10 +1,8 @@
 package entities;
 
-import client.GameRenderer;
-
 import java.util.ArrayList;
 
-public class RDFLoadTest {
+public class CreateSampleGame {
 
     public static Game returnGame() {
         /*
@@ -45,7 +43,6 @@ public class RDFLoadTest {
         Slide end2 = new Slide(7, "The candy is poisoned and kills you.");
         Slide end3 = new Slide(8, "The man is angered by your refusal and kills you.");
         Slide end11 = new Slide(9, "You obtained a candy! But then you died.");
-
 
 
         d1.setTarget(s2);
