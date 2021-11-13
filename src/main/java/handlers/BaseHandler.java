@@ -3,7 +3,7 @@ package handlers;
 import entities.EditorGame;
 import entities.Studio;
 
-public class BaseHandler {
+public class  BaseHandler {
     protected final Studio studio;
     protected final EditorGame editorGame;
 

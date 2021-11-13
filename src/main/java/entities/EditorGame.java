@@ -1,11 +1,10 @@
 package entities;
 
 
-import client.GuiSlideExperiment;
-import client.GuiDecisionExperiment;
+import client.GuiSlide;
+import client.GuiDecision;
 import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleMapProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
@@ -14,59 +13,59 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditorGame {
-    private final MapProperty<Slide, GuiSlideExperiment> slideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
-    private final MapProperty<Decision, GuiDecisionExperiment> decisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
-    private final MapProperty<Slide, GuiSlideExperiment> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
-    private final MapProperty<Decision, GuiDecisionExperiment> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
+    private final MapProperty<Slide, GuiSlide> slideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
+    private final MapProperty<Decision, GuiDecision> decisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
+    private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
+    private final MapProperty<Decision, GuiDecision> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
 
-    public ObservableMap<Slide, GuiSlideExperiment> getSlideMap() {
+    public ObservableMap<Slide, GuiSlide> getSlideMap() {
         return this.slideMap.get();
     }
 
-    public ObservableMap<Decision, GuiDecisionExperiment> getDecisionMap() {
+    public ObservableMap<Decision, GuiDecision> getDecisionMap() {
         return this.decisionMap.get();
     }
 
-    public MapProperty<Slide, GuiSlideExperiment> slideMapProperty() {
+    public MapProperty<Slide, GuiSlide> slideMapProperty() {
         return this.slideMap;
     }
 
-    public MapProperty<Decision, GuiDecisionExperiment> decisionMapProperty() {return this.decisionMap; }
+    public MapProperty<Decision, GuiDecision> decisionMapProperty() {return this.decisionMap; }
 
-    public MapProperty<Slide, GuiSlideExperiment> deletedSlideMapProperty() {return this.deletedSlideMap; }
+    public MapProperty<Slide, GuiSlide> deletedSlideMapProperty() {return this.deletedSlideMap; }
 
-    public MapProperty<Decision, GuiDecisionExperiment> deletedDecisionMapProperty() {return this.deletedDecisionMap; }
+    public MapProperty<Decision, GuiDecision> deletedDecisionMapProperty() {return this.deletedDecisionMap; }
 
 
-    public void connectSlideAndRenderableSlide(Slide s, GuiSlideExperiment rs) {
+    public void connectSlideAndRenderableSlide(Slide s, GuiSlide rs) {
         this.slideMap.put(s, rs);
 
         System.out.println(slideMap.values().toString());
     }
-    public ArrayList<GuiSlideExperiment> getAllRenderableSlides() {
+    public ArrayList<GuiSlide> getAllRenderableSlides() {
         return new ArrayList<>(this.slideMap.values());
     }
 
-    public ArrayList<Map.Entry<Slide, GuiSlideExperiment>> getAllEntriesSlide() {
+    public ArrayList<Map.Entry<Slide, GuiSlide>> getAllEntriesSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
 
-    public ArrayList<Map.Entry<Slide, GuiSlideExperiment>> getAllEntriesDeletedSlide() {
+    public ArrayList<Map.Entry<Slide, GuiSlide>> getAllEntriesDeletedSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
 
-    public ArrayList<Map.Entry<Decision, GuiDecisionExperiment>> getAllEntriesDecision(){
+    public ArrayList<Map.Entry<Decision, GuiDecision>> getAllEntriesDecision(){
         return new ArrayList<>(this.decisionMap.entrySet());
     }
 
     //
-    public ArrayList<GuiDecisionExperiment> getAllRenderableDecisions() {
-        return (ArrayList<GuiDecisionExperiment>) decisionMap.values();
+    public ArrayList<GuiDecision> getAllRenderableDecisions() {
+        return (ArrayList<GuiDecision>) decisionMap.values();
     }
 
 
-    public void changeDecisionOrigin(Slide slide, GuiSlideExperiment GuiSlide, int DecisionID){
-        for (Map.Entry<Decision, GuiDecisionExperiment> decision: decisionMap.entrySet()){
+    public void changeDecisionOrigin(Slide slide, GuiSlide GuiSlide, int DecisionID){
+        for (Map.Entry<Decision, GuiDecision> decision: decisionMap.entrySet()){
             if (DecisionID == decision.getKey().getId()){
 
                 decision.getKey().setOrigin(slide);
@@ -81,8 +80,8 @@ public class EditorGame {
         }
     }
 
-    public void changeDecisionOutput(Slide slide, GuiSlideExperiment GuiSlide, int DecisionID){
-        for (Map.Entry<Decision, GuiDecisionExperiment> decision: decisionMap.entrySet()){
+    public void changeDecisionOutput(Slide slide, GuiSlide GuiSlide, int DecisionID){
+        for (Map.Entry<Decision, GuiDecision> decision: decisionMap.entrySet()){
             if (DecisionID == decision.getKey().getId()){
 
                 decision.getKey().setTarget(slide);
@@ -97,15 +96,15 @@ public class EditorGame {
         }
     }
 
-    public void deleteSlide(Slide slide, GuiSlideExperiment GuiSlide){
+    public void deleteSlide(Slide slide, GuiSlide GuiSlide){
         this.deletedSlideMap.put(slide, GuiSlide);
         this.slideMap.remove(slide, GuiSlide);
     }
 
-    public void deleteDecision(Decision decision, GuiDecisionExperiment GuiDecisionExperiment){
-        this.deletedDecisionMap.put(decision, GuiDecisionExperiment);
-        this.decisionMap.remove(decision, GuiDecisionExperiment);
-        for (Map.Entry<Slide, GuiSlideExperiment> slide: slideMap.entrySet()){
+    public void deleteDecision(Decision decision, GuiDecision GuiDecision){
+        this.deletedDecisionMap.put(decision, GuiDecision);
+        this.decisionMap.remove(decision, GuiDecision);
+        for (Map.Entry<Slide, GuiSlide> slide: slideMap.entrySet()){
             if (slide.getKey().outgoingDecisions.contains(decision)){
                 slide.getKey().outgoingDecisions.remove(decision);
             }
@@ -113,12 +112,20 @@ public class EditorGame {
 
     }
 
-    public void connectDecisionAndRenderableDecision(Decision d, GuiDecisionExperiment r){
+    public void connectDecisionAndRenderableDecision(Decision d, GuiDecision r){
         this.decisionMap.put(d, r);
 
 
     }
 
+    public void clearAll(){
+        for (Map.Entry<Decision, GuiDecision> entry : this.getAllEntriesDecision()){
+            this.deleteDecision(entry.getKey(), entry.getValue());
+        }
+        for (Map.Entry<Slide, GuiSlide> entry : this.getAllEntriesSlide()){
+            this.deleteSlide(entry.getKey(), entry.getValue());
+        }
+    }
 
 
 }
