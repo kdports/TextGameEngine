@@ -14,9 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import rdf.RDFLoadToStudio;
-import rdf.RDFSave;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class RootDisplayerExperiment extends Application {
     // This needs to be instantiated here because there is no way to pass editorGame back out until it is too late,
     // But we require the methods that Handlers provides before start() is finished. So here works.
     private final Handlers handlers = new Handlers(editorGame);
-    private String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
+    private String rdfFilepath = null;
 
     public void begin(String[] args) {
         launch(args);
@@ -94,16 +94,16 @@ public class RootDisplayerExperiment extends Application {
             }
         });
 
+
+        Scene window = new Scene(this.root, 1920, 1080);
         // Add the three sidebar buttons
-        SidebarButtons sidebarButtons = new SidebarButtons();
+        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame);
         this.root.getChildren().addAll(sidebarButtons);
 
         // Add loaded slides and decisions
         if (this.rdfFilepath != null) {
             RDFLoadToStudio loader = new RDFLoadToStudio(rdfFilepath);
             EditorGame loadedEditorGame = loader.loadEditorGameFromFile();
-            RDFSave saver = new RDFSave();
-            saver.saveToTrig(loadedEditorGame);
 
             for (Map.Entry<Slide, GuiSlideExperiment> entry : loadedEditorGame.getAllEntriesSlide()) {
                 this.editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
@@ -113,7 +113,7 @@ public class RootDisplayerExperiment extends Application {
                 this.editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
             }
         }
-        Scene window = new Scene(this.root, 1920, 1080);
+
         holder.setStyle("-fx-background-color: #FFFFFF");
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);

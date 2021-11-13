@@ -15,7 +15,7 @@ import java.io.OutputStream;
 import java.util.Map;
 
 public class RDFSave {
-    public void saveToTrig(EditorGame editorGame) throws FileNotFoundException {
+    public void saveToTrig(EditorGame editorGame, String filepath) throws FileNotFoundException {
         // Use Jena Apache to save to Trig.
 
         // Create model
@@ -64,16 +64,8 @@ public class RDFSave {
         }
 
         // Save to file
-        OutputStream out = new FileOutputStream("output.ttl");
+        OutputStream out = new FileOutputStream(filepath);
         model.write(out, "Turtle");
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
-        RDFLoadToStudio loader = new RDFLoadToStudio(rdfFilepath);
-        EditorGame loadedEditorGame = loader.loadEditorGameFromFile();
-        RDFSave saver = new RDFSave();
-        saver.saveToTrig(loadedEditorGame);
     }
 }
 
