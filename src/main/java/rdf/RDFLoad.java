@@ -13,11 +13,9 @@ import java.util.Map;
 import client.GuiSlide;
 
 public abstract class RDFLoad {
-    private final Model model;
-    private final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
-    private final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
-    private final HashMap<Slide, GuiSlide> renderableSlideMap = new HashMap<>();
-    private final HashMap<Decision, GuiDecision> renderableDecisionMap = new HashMap<>();
+    protected final Model model;
+    protected final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
+    protected final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
 
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
@@ -25,10 +23,9 @@ public abstract class RDFLoad {
 
         // Read the TTL file into model
         FileInputStream in = new FileInputStream(filepath);
-        this.model.read(in,null,"TTL");
+        this.model.read(in, null, "TTL");
 
         this.populateGameResourceMaps();
-        this.populateRenderableResourceMaps();
     }
 
     /**
@@ -53,7 +50,7 @@ public abstract class RDFLoad {
 
         // For each decision, build a Decision instance
         if (decisionIter.hasNext()) {
-            while(decisionIter.hasNext()) {
+            while (decisionIter.hasNext()) {
                 Resource decisionNode = decisionIter.nextResource();
 
                 String decisionText = decisionNode.getProperty(TGEO.hasText).getString();
@@ -82,44 +79,6 @@ public abstract class RDFLoad {
         }
     }
 
-    private void populateRenderableResourceMaps(){
-
-        ResIterator slideIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
-        if (slideIter.hasNext()) {
-            while (slideIter.hasNext()) {
-                Resource slideNode = slideIter.nextResource();
-
-                double locationX = slideNode.getProperty(TGEO.hasXLocation).getDouble();
-                double locationY = slideNode.getProperty(TGEO.hasYLocation).getDouble();
-
-                Slide slide = slideNodeMap.get(slideNode);
-
-                GuiSlide guiSlide = new GuiSlide(slide, locationX, locationY);
-                this.renderableSlideMap.put(slide, guiSlide);
-            }
-        }
-
-        // Populate decisionNodeMap
-        ResIterator decisionIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Decision);
-
-        // For each decision, build a Decision instance
-        if (decisionIter.hasNext()) {
-            while(decisionIter.hasNext()) {
-                Resource decisionNode = decisionIter.nextResource();
-
-                double locationX = decisionNode.getProperty(TGEO.hasXLocation).getDouble();
-                double locationY = decisionNode.getProperty(TGEO.hasYLocation).getDouble();
-                Decision decision = decisionNodeMap.get(decisionNode);
-                Slide originSlide = decision.origin;
-                GuiSlide renderableOrigin = renderableSlideMap.get(originSlide);
-
-                GuiDecision guiDecision = new GuiDecision(decision, renderableOrigin, locationX, locationY);
-                this.renderableDecisionMap.put(decision, guiDecision);
-            }
-        }
-
-    }
-
     private ArrayList<Decision> getDecisionsOfSlide(Resource slideNode) {
         // Get the decisions hanging off of param slideNode
         NodeIterator iter = this.model.listObjectsOfProperty(slideNode, TGEO.hasDecision);
@@ -136,39 +95,4 @@ public abstract class RDFLoad {
 
         return decisions;
     }
-
-    public void loadFromFile() {
-        Game game = new Game();
-
-
-        for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
-            Resource slideNode = entry.getKey();
-            Slide slide = entry.getValue();
-
-            // Check if the slide is the first slide
-            Resource categorizedAsObject = slideNode.getPropertyResourceValue(TGEO.categorizedAs);
-            if (categorizedAsObject != null) {
-                game.firstSlide = slide;
-            }
-
-            game.addSlide(slide);
-        }
-
-        sendGame(game);
-    }
-
-    public EditorGame loadEditorGameFromFile() {
-        EditorGame editorGame = new EditorGame();
-
-        for (Map.Entry<Slide, GuiSlide> entry : this.renderableSlideMap.entrySet()) {
-            editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
-        }
-
-        for (Map.Entry<Decision, GuiDecision> entry : this.renderableDecisionMap.entrySet()) {
-            editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
-        }
-        return editorGame;
-    }
-
-    public abstract void sendGame(Game game);
 }
