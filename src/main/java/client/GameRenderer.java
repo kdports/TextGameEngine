@@ -144,7 +144,7 @@ public class GameRenderer implements PlayDisplayer {
      * @param ta text area to animate
      */
     public void addAnimation(JTextArea ta) {
-        String text = player.currentSlide.prompt;
+        String text = player.currentSlide.getPrompt();
         Timer timer = new Timer(animationSpeed, new ActionListener() {
             int i = 0;
 

@@ -36,7 +36,7 @@ public abstract class RDFLoad {
                 Resource slideNode = slideIter.nextResource();
 
                 String slideText = slideNode.getProperty(TGEO.hasText).getString();
-                Slide slide = new Slide(slideText);
+                Slide slide = new Slide((int) (Math.random() * 100000), slideText);
 
                 this.slideNodeMap.put(slideNode, slide);
             }
@@ -59,7 +59,7 @@ public abstract class RDFLoad {
 
         // Set slide decisions
         for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
-            entry.getValue().setDecisions(this.getDecisionsOfSlide(entry.getKey()));
+            entry.getValue().setOutgoingDecisions(this.getDecisionsOfSlide(entry.getKey()));
         }
 
         // Set decision targets

@@ -5,4 +5,5 @@ module TextGameEngine.main {
     requires org.apache.jena.core;
 
     opens client;
+    opens handlers;
 }

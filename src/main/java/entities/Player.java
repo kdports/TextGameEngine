@@ -34,7 +34,7 @@ public class Player {
      */
     public void checkValidChoices() {
         ArrayList<Decision> ar = new ArrayList<>();
-        for (Decision d: this.currentSlide.decisions){
+        for (Decision d: this.currentSlide.outgoingDecisions){
             if(checkChoice(d)){
                 ar.add(d);
             }

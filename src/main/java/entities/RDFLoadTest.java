@@ -36,15 +36,15 @@ public class RDFLoadTest {
         a4.add(d42);
         a4.add(d41);
 
-        Slide end = new Slide("Wrong choice, the bear kills you.");
-        Slide end0 = new Slide("You fall and hit your head on a rock and die.");
-        Slide s1 = new Slide("You are traveling along a path when it splits into two paths. Which do you choose?", a1);
-        Slide s2 = new Slide("You walk along the bright path when you come across a man with an axe, he offers you candy, do you take it?", a2);
-        Slide s3 = new Slide("A monster lunges at you, do you dodge to the left or to the right?", a3);
-        Slide s4 = new Slide("You take the candy, do you eat it or save it for later?", a4);
-        Slide end2 = new Slide("The candy is poisoned and kills you.");
-        Slide end3 = new Slide("The man is angered by your refusal and kills you.");
-        Slide end11 = new Slide("You obtained a candy! But then you died.");
+        Slide end = new Slide(1, "Wrong choice, the bear kills you.");
+        Slide end0 = new Slide(2, "You fall and hit your head on a rock and die.");
+        Slide s1 = new Slide(3, "You are traveling along a path when it splits into two paths. Which do you choose?", a1);
+        Slide s2 = new Slide(4, "You walk along the bright path when you come across a man with an axe, he offers you candy, do you take it?", a2);
+        Slide s3 = new Slide(5, "A monster lunges at you, do you dodge to the left or to the right?", a3);
+        Slide s4 = new Slide(6, "You take the candy, do you eat it or save it for later?", a4);
+        Slide end2 = new Slide(7, "The candy is poisoned and kills you.");
+        Slide end3 = new Slide(8, "The man is angered by your refusal and kills you.");
+        Slide end11 = new Slide(9, "You obtained a candy! But then you died.");
 
 
 
