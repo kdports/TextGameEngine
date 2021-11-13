@@ -1,17 +1,25 @@
 package client;
 
+import entities.Decision;
 import entities.EditorGame;
+import entities.Slide;
 import handlers.Handlers;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import rdf.RDFLoad;
+import rdf.RDFLoadToStudio;
 import rdf.RDFSave;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class SidebarButtons extends ArrayList<Button> {
     private final int buttonWidth = 120;
@@ -21,7 +29,7 @@ public class SidebarButtons extends ArrayList<Button> {
         Button createNewSlideButton = this.createAddNewSlideButton();
         Button playTestButton = this.createPlayTestButton();
         Button saveButton = this.createSaveButton(window, editorGame);
-        Button loadButton = this.createLoadButton();
+        Button loadButton = this.createLoadButton(window, editorGame);
 
         this.add(createNewSlideButton);
         this.add(playTestButton);
@@ -83,7 +91,7 @@ public class SidebarButtons extends ArrayList<Button> {
         return btnSave;
     }
 
-    public Button createLoadButton() {
+    public Button createLoadButton(Scene window, EditorGame editorGame) {
         Button btnLoad = new Button("Load");
 
         btnLoad.setStyle("-fx-background-color: #c72c41;");
@@ -91,6 +99,34 @@ public class SidebarButtons extends ArrayList<Button> {
         btnLoad.setLayoutY(320);
         btnLoad.setPrefWidth(buttonWidth);
         btnLoad.setPrefHeight(buttonHeight);
+
+        btnLoad.setOnMouseClicked(event -> {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter exFilter = new FileChooser.ExtensionFilter("description", "*.ttl");
+            fileChooser.getExtensionFilters().add(exFilter);
+            File location = fileChooser.showOpenDialog(window.getWindow());
+
+            if (location != null){
+                String path = location.getAbsolutePath();
+                try {
+                    RDFLoadToStudio loader = new RDFLoadToStudio(path);
+
+                EditorGame loadedEditorGame = loader.loadEditorGameFromFile();
+                editorGame.clearAll();
+
+                for (Map.Entry<Slide, GuiSlideExperiment> entry : loadedEditorGame.getAllEntriesSlide()) {
+                    editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
+                }
+
+                for (Map.Entry<Decision, GuiDecisionExperiment> entry : loadedEditorGame.getAllEntriesDecision()) {
+                    editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
+                }}
+                catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+            }
+        });
 
         return btnLoad;
     }

@@ -119,6 +119,14 @@ public class EditorGame {
 
     }
 
+    public void clearAll(){
+        for (Map.Entry<Decision, GuiDecisionExperiment> entry : this.getAllEntriesDecision()){
+            this.deleteDecision(entry.getKey(), entry.getValue());
+        }
+        for (Map.Entry<Slide, GuiSlideExperiment> entry : this.getAllEntriesSlide()){
+            this.deleteSlide(entry.getKey(), entry.getValue());
+        }
+    }
 
 
 }

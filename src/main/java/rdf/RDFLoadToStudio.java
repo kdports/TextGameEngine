@@ -15,13 +15,6 @@ public class RDFLoadToStudio extends RDFLoad {
     public void sendGame(Game game) {
 
     }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
-        RootDisplayerExperiment gui = new RootDisplayerExperiment();
-        gui.begin(args, rdfFilepath);
-
-    }
 }
 
 
