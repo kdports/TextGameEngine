@@ -19,6 +19,8 @@ public class EditorGame {
     private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Decision, GuiDecision> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
 
+    public  Slide firstSlide = null;
+
     public ObservableMap<Slide, GuiSlide> getSlideMap() {
         return this.slideMap.get();
     }
@@ -62,6 +64,14 @@ public class EditorGame {
     //
     public ArrayList<GuiDecision> getAllRenderableDecisions() {
         return (ArrayList<GuiDecision>) decisionMap.values();
+    }
+
+    public void setFirstSlide(Slide slide){
+        if (firstSlide != null) {
+            firstSlide.setAsFirstSlide(false);
+        }
+        firstSlide = slide;
+        slide.setAsFirstSlide(true);
     }
 
 
@@ -116,6 +126,9 @@ public class EditorGame {
     }
 
     public void deleteSlide(Slide slide, GuiSlide GuiSlide){
+        if (firstSlide == slide){
+            firstSlide = null;
+        }
         this.deletedSlideMap.put(slide, GuiSlide);
         this.slideMap.remove(slide, GuiSlide);
     }
