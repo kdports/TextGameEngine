@@ -60,7 +60,6 @@ public class GuiSlide extends StackPane {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
-            System.out.println(this);
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(event.getSceneX() - mouseAnchorX);

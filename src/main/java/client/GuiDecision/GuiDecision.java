@@ -80,7 +80,6 @@ public class GuiDecision extends StackPane {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
-            System.out.println(rightLine.getEndX());
 
         });
         this.setOnMouseDragged(event -> {
