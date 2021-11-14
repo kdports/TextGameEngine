@@ -68,9 +68,9 @@ public class GuiDecision extends StackPane {
                 targetSlide
         );
 
-        // targetSlide.addListener(event -> {
-        //     rightLine.setSlide(this.targetSlide.getValue());
-        // });
+//         targetSlide.addListener(event -> {
+//             rightLine.setSlide(this.targetSlide.getValue());
+//         });
     }
 
     /**
