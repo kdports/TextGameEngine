@@ -1,5 +1,5 @@
 package rdf;
-import client.GuiDecision;
+
 import entities.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
@@ -79,15 +79,19 @@ public abstract class RDFLoad {
         }
     }
 
+    /**
+     * Gets all decisions belonging to a particular slide and returns it in a list
+     *
+     * @param slideNode - The URI of the slide containing decisions from the model
+     * @return - A list of the decisions belonging to the above slide
+     */
     private ArrayList<Decision> getDecisionsOfSlide(Resource slideNode) {
-        // Get the decisions hanging off of param slideNode
         NodeIterator iter = this.model.listObjectsOfProperty(slideNode, TGEO.hasDecision);
         ArrayList<RDFNode> results = (ArrayList<RDFNode>) iter.toList();
 
-        // For each decision, build a Decision instance
         ArrayList<Decision> decisions = new ArrayList<>();
         for (RDFNode decisionNode : results) {
-            // Get decision text
+
             if (decisionNode instanceof Resource) {
                 decisions.add(this.decisionNodeMap.get(decisionNode));
             }

@@ -3,8 +3,6 @@ package handlers;
 import entities.EditorGame;
 import entities.Studio;
 
-import java.io.FileNotFoundException;
-
 public class Handlers {
     public static CreateNewSlideHandler createNewSlideHandler;
     public static SlideHandler slideHandler;

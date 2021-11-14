@@ -1,6 +1,4 @@
-package client;
-
-import buttons.*;
+package buttons;
 
 import entities.EditorGame;
 import javafx.scene.Scene;

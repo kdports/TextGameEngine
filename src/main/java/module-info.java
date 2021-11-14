@@ -6,4 +6,5 @@ module TextGameEngine.main {
 
     opens client;
     opens handlers;
+    opens buttons;
 }

@@ -1,5 +1,6 @@
 package client;
 
+import buttons.SidebarButtons;
 import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;

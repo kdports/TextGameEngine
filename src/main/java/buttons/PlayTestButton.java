@@ -1,13 +1,9 @@
 package buttons;
 
 import client.GameRenderer;
-import client.GuiDecision;
 import client.GuiSlide;
 import entities.*;
 import interfaces.PlayDisplayer;
-import javafx.scene.control.Button;
-import org.apache.jena.rdf.model.Resource;
-import rdf.TGEO;
 
 import java.util.Map;
 
@@ -26,6 +22,8 @@ public class PlayTestButton extends MenuButton {
             boolean first = true;
             for (Map.Entry<Slide, GuiSlide> entry : editorGame.getAllEntriesSlide()) {
                 Slide slide = entry.getKey();
+
+                // Check for a slide with no incoming decisions, set it as first slide.
                 if (first) {
                     game.firstSlide = slide;
                     first = false;
