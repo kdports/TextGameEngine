@@ -12,7 +12,7 @@ public class SidebarButtons extends ArrayList<Button> {
 
     public SidebarButtons(Scene window, EditorGame editorGame) {
         Button createNewSlideButton = new NewSlideButton();
-        Button playTestButton = new PlayTestButton();
+        Button playTestButton = new PlayTestButton(editorGame);
         Button saveButton = new SaveButton(window, editorGame);
         Button loadButton = new LoadButton(window, editorGame);
 
