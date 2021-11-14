@@ -50,7 +50,7 @@ public class RDFSave {
             }
 
             if (currSlide == editorGame.firstSlide) {
-                currSlideNode.addProperty(TGEO.isFirst, String.valueOf(true));
+                currSlideNode.addProperty(TGEO.categorizedAs, TGEO.isFirst);
             }
         }
 

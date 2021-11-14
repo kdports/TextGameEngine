@@ -7,7 +7,7 @@ public class TGEO {
     public static Resource Slide =  makeTgeoNode("Slide");
     public static Resource Decision = makeTgeoNode("Decision");
     public static Property categorizedAs = makeTgeoProperty("categorizedAs");
-    public static Property isFirst = makeTgeoProperty("isFirst");
+    public static Resource isFirst = makeTgeoNode("isFirst");
     public static Property hasDecision = makeTgeoProperty("hasDecision");
     public static Property hasOrder = makeTgeoProperty("hasOrder");
     public static Property hasText = makeTgeoProperty("hasText");
