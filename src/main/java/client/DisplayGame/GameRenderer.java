@@ -1,4 +1,4 @@
-package client.GameRenderer;
+package client.DisplayGame;
 
 
 import client.Theme;

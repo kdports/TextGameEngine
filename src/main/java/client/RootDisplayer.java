@@ -1,5 +1,6 @@
 package client;
 
+import buttons.SidebarButtons;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import entities.Decision;

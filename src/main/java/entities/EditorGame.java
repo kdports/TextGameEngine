@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditorGame {
-    private Slide firstSlide;
+    public Slide firstSlide;
     private final MapProperty<Slide, GuiSlide> slideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Decision, GuiDecision> decisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));

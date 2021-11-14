@@ -7,6 +7,10 @@ import handlers.Handlers;
  */
 public class NewSlideButton extends MenuButton {
 
+    /**
+     * Creates a Button instance of the new slide button that is displayed in the game.
+     * Calls the respective handler when the button is clicked
+     */
     public NewSlideButton() {
         this.setText("Add Slide");
         this.setId("button-add-slide");

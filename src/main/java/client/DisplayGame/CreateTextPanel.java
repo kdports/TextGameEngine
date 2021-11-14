@@ -1,4 +1,4 @@
-package client.GameRenderer;
+package client.DisplayGame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,9 +18,9 @@ public class CreateTextPanel extends JPanel{
     int animationSpeed;
     /**
      * This method creates a panel that contains the text and buttons of the slide of the game.
+     *
      * @param player - The player instance that is currently being used by GameRenderer
      * @param theme - The theme that the GameRenderer is currently using
-     *
      */
     CreateTextPanel(Theme theme, Player player, int animationSpeed) {
         // Sets the theme, animation speed and player that is being used by the GameRenderer
