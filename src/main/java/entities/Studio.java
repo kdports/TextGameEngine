@@ -1,6 +1,6 @@
 package entities;
 
-import client.GameRenderer;
+import client.GameRenderer.GameRenderer;
 
 import java.util.ArrayList;
 
