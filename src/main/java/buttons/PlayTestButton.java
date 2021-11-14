@@ -9,6 +9,14 @@ import java.util.Map;
 
 public class PlayTestButton extends MenuButton {
 
+    /**
+     * Creates a Button instance of the playtest button that is displayed in the game.
+     * Also handles what happens when the button is clicked (running the game
+     * in the gameplayer)
+     *
+     * @param editorGame - The existing EditorGame instance that will be used to
+     *                   populate a game instance with existing data
+     */
     public PlayTestButton(EditorGame editorGame) {
         this.setText("Play Test");
         this.setLayoutY(112.5);

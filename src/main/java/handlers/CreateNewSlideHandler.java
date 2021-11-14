@@ -14,7 +14,7 @@ public class CreateNewSlideHandler extends BaseHandler {
 
     public void execute(MouseEvent mouseEvent) {
         IdControl.addOne();
-        Slide slide = this.studio.createSlide(IdControl.getId(), "this is a new slide!!!!!");
+        Slide slide = this.studio.createSlide(IdControl.getId(), "I am a Slide!");
         GuiSlide GuiSlide = new GuiSlide(slide, 500, 500);
         this.editorGame.connectSlideAndRenderableSlide(slide, GuiSlide);
     }

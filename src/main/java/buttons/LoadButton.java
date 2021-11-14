@@ -6,9 +6,7 @@ import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import rdf.RDFLoadToStudio;
 
 import java.io.File;
@@ -17,12 +15,22 @@ import java.util.Map;
 
 public class LoadButton extends MenuButton {
 
+    /**
+     * Creates a Button instance of the load button that is displayed in the game.
+     * Also handles what happens when the button is clicked (loading up an
+     * editor from file)
+     *
+     * @param window - The window in which the file explorer resides when clicking load
+     * @param editorGame - The existing EditorGame instance that will be filled with
+     *                   data from the incoming file
+     */
     public LoadButton(Scene window, EditorGame editorGame){
         super();
 
         this.setText("Load");
         this.setLayoutY(320);
 
+        // When button is clicked, open a file explorer and load in data from a file
         this.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter exFilter = new FileChooser.ExtensionFilter("Turtle File (.ttl)", "*.ttl");

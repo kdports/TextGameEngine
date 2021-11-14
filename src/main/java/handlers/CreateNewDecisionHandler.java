@@ -14,7 +14,7 @@ public class CreateNewDecisionHandler extends BaseHandler {
     }
     public void create(Slide slide, GuiSlide GuiSlide, double x, double y){
         IdControl.addOne();
-        Decision decision = new Decision("I am a new decision", slide, IdControl.getId());
+        Decision decision = new Decision("I am a Decision!", slide, IdControl.getId());
         GuiDecision GuiDecision = new GuiDecision(decision, GuiSlide, x + 400, y);
         slide.addDecision(decision);
         this.editorGame.connectDecisionAndRenderableDecision(decision, GuiDecision);

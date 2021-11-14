@@ -15,6 +15,13 @@ import java.io.OutputStream;
 import java.util.Map;
 
 public class RDFSave {
+
+    /**
+     * Saves the data from the editor to a file in a file path chosen by the user.
+     *
+     * @param editorGame - The EditorGame instance containing all slide and decisions data
+     * @param filepath - The path in which the ttl file will be saved to
+     */
     public void saveToTrig(EditorGame editorGame, String filepath) throws FileNotFoundException {
         // Use Jena Apache to save to Trig.
 

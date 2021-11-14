@@ -17,6 +17,12 @@ public abstract class RDFLoad {
     protected final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
     protected final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
 
+    /**
+     * Takes data from a file and converts it into accessible HashMaps to be used
+     * in the editor.
+     *
+     * @param filepath - The path of the ttl file that loads into the editor
+     */
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
         this.model.setNsPrefixes(Ontology.prefixes);
