@@ -59,9 +59,22 @@ public class RDFLoadToStudio extends RDFLoad {
                 double locationY = decisionNode.getProperty(TGEO.hasYLocation).getDouble();
                 Decision decision = decisionNodeMap.get(decisionNode);
                 Slide originSlide = decision.origin;
+                Slide targetSlide = decision.target;
                 GuiSlide renderableOrigin = renderableSlideMap.get(originSlide);
+                GuiSlide renderableTarget = renderableSlideMap.get(targetSlide);
 
                 GuiDecision guiDecision = new GuiDecision(decision, renderableOrigin, locationX, locationY);
+
+                guiDecision.targetSlide = renderableTarget;
+                guiDecision.rightLine.setSlide(guiDecision.targetSlide);
+
+                guiDecision.targetSlide.layoutXProperty().addListener(
+                        (observable, oldvalue, newvalue) -> guiDecision.rightLine.recalculateX());
+                guiDecision.targetSlide.layoutYProperty().addListener(
+                        (observable, oldvalue, newvalue) -> guiDecision.rightLine.recalculateY());
+                guiDecision.rightLine.recalculateY();
+                guiDecision.rightLine.recalculateX();
+
                 this.renderableDecisionMap.put(decision, guiDecision);
             }
         }
