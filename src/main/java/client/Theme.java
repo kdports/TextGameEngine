@@ -3,9 +3,8 @@ package client;
 import java.awt.*;
 
 /**
- * The Theme class contains multiple color variables that
- * store what color certain things in the GUI should be
- * and can be changed based on the theme
+ * The Theme class contains multiple color variables that store what color certain things in the GUI should be and can
+ * be changed based on the theme.
  */
 public class Theme {
     public final String[] themeList = {"Light", "Dark", "Pastel", "Blue Sky"};
@@ -23,9 +22,9 @@ public class Theme {
     }
 
     /**
-     * Sets the theme in accordance with the string provided
+     * Sets the theme in accordance with the string provided.
      *
-     * @param theme the theme to set
+     * @param theme - The theme to set.
      */
     public void setTheme(String theme) {
         switch (theme) {

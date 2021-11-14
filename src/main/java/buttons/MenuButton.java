@@ -2,6 +2,10 @@ package buttons;
 
 import javafx.scene.control.Button;
 
+/**
+ * A base class with the properties that we want all menu buttons to have, such as common width, height, color, and
+ * X coordinate.
+ */
 public class MenuButton extends Button {
 
     public MenuButton(){

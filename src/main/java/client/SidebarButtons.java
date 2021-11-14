@@ -6,8 +6,12 @@ import entities.EditorGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A wrapper for all the buttons drawn on the sidebar of the app.
+ */
 public class SidebarButtons extends ArrayList<Button> {
 
     public SidebarButtons(Scene window, EditorGame editorGame) {
@@ -16,7 +20,6 @@ public class SidebarButtons extends ArrayList<Button> {
         Button saveButton = new SaveButton(window, editorGame);
         Button loadButton = new LoadButton(window, editorGame);
 
-        Button[] buttons = new Button[]{createNewSlideButton, playTestButton, saveButton, loadButton};
-        this.addAll(List.of(buttons));
+        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton));
     }
 }
