@@ -40,6 +40,7 @@ public class LoadButton extends MenuButton {
                     for (Map.Entry<Slide, GuiSlide> entry : loadedEditorGame.getAllEntriesSlide()) {
                         editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
 
+                        // SETTING FIRST SLIDE ----------------------
                         if (entry.getKey().returnFirstSlide().get()){
                             editorGame.firstSlide = entry.getKey();
                         }

@@ -41,6 +41,7 @@ public abstract class RDFLoad {
                 String slideText = slideNode.getProperty(TGEO.hasText).getString();
                 Slide slide = new Slide((int) (Math.random() * 100000), slideText);
 
+                // SETTING FIRST SLIDE ----------------------
                 if (slideNode.getProperty(TGEO.categorizedAs) != null){
                     slide.setAsFirstSlide(true);
                 }
