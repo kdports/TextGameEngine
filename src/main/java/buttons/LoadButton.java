@@ -54,7 +54,7 @@ public class LoadButton extends MenuButton {
                         editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
 
                         // SETTING FIRST SLIDE ----------------------
-                        if (entry.getKey().returnFirstSlide().get()){
+                        if (entry.getKey().getObservableFirstSlide().get()){
                             editorGame.firstSlide = entry.getKey();
                         }
                     }

@@ -1,7 +1,7 @@
 package buttons;
 
 import client.GameRenderer;
-import client.GuiSlide;
+import client.GuiSlide.GuiSlide;
 import entities.*;
 import interfaces.PlayDisplayer;
 

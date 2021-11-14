@@ -1,7 +1,5 @@
 package rdf;
 
-import client.GuiDecision;
-import client.GuiSlide;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import entities.*;
