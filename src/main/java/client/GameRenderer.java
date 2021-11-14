@@ -36,7 +36,7 @@ public class GameRenderer implements PlayDisplayer {
         // Place holder name for now
         frame.setTitle("Temp Title");
         frame.setSize(1200, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Sets the image in the top left, currently no image
         ImageIcon image = new ImageIcon();
