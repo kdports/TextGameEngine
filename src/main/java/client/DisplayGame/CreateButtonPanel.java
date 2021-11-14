@@ -1,4 +1,4 @@
-package client.GameRenderer;
+package client.DisplayGame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -16,6 +16,7 @@ public class CreateButtonPanel extends JPanel{
 
     /**
      * Creates the panel with all the buttons to add to the screen.
+     *
      * @param player - The player instance that is currently being used by GameRenderer
      * @param theme - The theme that the GameRenderer is currently using
      */
@@ -34,6 +35,7 @@ public class CreateButtonPanel extends JPanel{
 
     /**
      * Creates buttons for all the decisions in a slide.
+     *
      * @param panel - The panel to add the buttons to
      * @return - The number of buttons.
      */
@@ -63,6 +65,7 @@ public class CreateButtonPanel extends JPanel{
 
     /**
      * Creates the restart button when the last slide is reached
+     *
      * @param arrow - The image for the white arrow in the button
      * @param redArrow - The image for the red arrow in the button
      * @param panel - The panel to add the buttons to

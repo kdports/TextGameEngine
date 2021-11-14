@@ -1,6 +1,6 @@
 package rdf;
 
-import client.GameRenderer.GameRenderer;
+import client.DisplayGame.GameRenderer;
 import entities.Game;
 import entities.Player;
 import entities.Slide;
