@@ -39,6 +39,10 @@ public class LoadButton extends MenuButton {
 
                     for (Map.Entry<Slide, GuiSlide> entry : loadedEditorGame.getAllEntriesSlide()) {
                         editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
+
+                        if (entry.getKey().returnFirstSlide().get()){
+                            editorGame.firstSlide = entry.getKey();
+                        }
                     }
 
                     for (Map.Entry<Decision, GuiDecision> entry : loadedEditorGame.getAllEntriesDecision()) {

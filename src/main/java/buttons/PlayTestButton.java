@@ -19,14 +19,12 @@ public class PlayTestButton extends MenuButton {
             Player player = new Player(playDisplayer, game);
 
             // ADD ALL SLIDES TO GAME
-            boolean first = true;
             for (Map.Entry<Slide, GuiSlide> entry : editorGame.getAllEntriesSlide()) {
                 Slide slide = entry.getKey();
 
                 // Check for a slide with no incoming decisions, set it as first slide.
-                if (first) {
+                if (slide == editorGame.firstSlide) {
                     game.firstSlide = slide;
-                    first = false;
                 }
                 game.addSlide(slide);
             }

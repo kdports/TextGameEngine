@@ -2,6 +2,8 @@ package rdf;
 import client.GuiDecision;
 import client.GuiSlide;
 import entities.*;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
@@ -58,6 +60,7 @@ public class RDFLoadToStudio extends RDFLoad {
 
     public EditorGame loadEditorGameFromFile() {
         EditorGame editorGame = new EditorGame();
+
 
         for (Map.Entry<Slide, GuiSlide> entry : this.renderableSlideMap.entrySet()) {
             editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());

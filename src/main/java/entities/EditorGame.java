@@ -19,7 +19,7 @@ public class EditorGame {
     private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Decision, GuiDecision> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
 
-    public  Slide firstSlide = null;
+    public Slide firstSlide = null;
 
     public ObservableMap<Slide, GuiSlide> getSlideMap() {
         return this.slideMap.get();

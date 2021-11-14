@@ -5,6 +5,7 @@ import client.GuiSlide;
 import entities.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 
@@ -46,6 +47,10 @@ public class RDFSave {
             currSlideNode.addProperty(TGEO.hasText, currSlide.getPrompt());
             for (Decision decision : currSlide.outgoingDecisions){
                 currSlideNode.addProperty(TGEO.hasDecision, model.getResource(String.valueOf(decision.id)));
+            }
+
+            if (currSlide == editorGame.firstSlide) {
+                currSlideNode.addProperty(TGEO.isFirst, String.valueOf(true));
             }
         }
 
