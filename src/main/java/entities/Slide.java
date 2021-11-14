@@ -1,5 +1,7 @@
 package entities;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -39,9 +41,17 @@ public class Slide {
         this.outgoingDecisions = outgoingDecisions;
     }
 
+    public void setAsFirstSlide(boolean yes){
+        firstSlide.set(yes);
+    }
+
+    private final BooleanProperty firstSlide = new SimpleBooleanProperty(false);
+
     private final StringProperty observablePrompt = new SimpleStringProperty();
 
     public StringProperty returnObservable(){return this.observablePrompt;}
+
+    public BooleanProperty returnFirstSlide(){return this.firstSlide;}
 
     public boolean addDecision(Decision decision) {
         return this.outgoingDecisions.add(decision);

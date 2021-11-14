@@ -13,9 +13,12 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 public class GuiSlide extends StackPane {
     private double mouseAnchorX;
@@ -59,6 +62,21 @@ public class GuiSlide extends StackPane {
 
         slide.returnObservable().addListener(
                 (observable, oldvalue, newvalue) -> prompt.setText(newvalue)
+        );
+
+        Circle firstSlideIndicator = new Circle();
+        firstSlideIndicator.setFill(Color.RED);
+        firstSlideIndicator.setRadius(5);
+        StackPane.setAlignment(firstSlideIndicator, Pos.TOP_CENTER);
+
+        slide.returnFirstSlide().addListener(
+                (observable, oldvalue, newvalue) -> {
+                    if (newvalue){
+                        this.getChildren().add(firstSlideIndicator);
+                    } else{
+                        this.getChildren().remove(firstSlideIndicator);
+                    }
+                }
         );
 
         this.setOnDragOver(new EventHandler<>() {
@@ -122,15 +140,15 @@ public class GuiSlide extends StackPane {
         Button btnEdit = new Button("Edit the slide message");
         btnEdit.setOnAction(mouseEvent -> Handlers.slideHandler.editMessage(slide, input.getText()));
 
-        Button dltButton = new Button("Delete Decision");
-        dltButton.setOnAction(mouseEvent -> {
-            Handlers.slideHandler.delete(slide);
+        Button setMainSlide = new Button("Set as First Slide");
+        setMainSlide.setOnAction(mouseEvent ->{
+            Handlers.slideHandler.setMain(slide);
             slideWindow.close();
         });
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose);
+        alert.getChildren().addAll(input, btnEdit, btnClose, setMainSlide);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);

@@ -25,6 +25,9 @@ public class SlideHandler extends BaseHandler {
         //
     }
 
+    public void setMain(Slide slide){
+        editorGame.setFirstSlide(slide);
+    }
 
     public void dropEvent(Slide slide, GuiSlide GuiSlide, String db) {
          StringBuilder desiredDecision = new StringBuilder(db);
