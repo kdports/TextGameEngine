@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class RDFLoad {
-    private final Model model;
-    private final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
-    private final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
+    protected final Model model;
+    protected final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
+    protected final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
 
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
@@ -20,15 +20,15 @@ public abstract class RDFLoad {
 
         // Read the TTL file into model
         FileInputStream in = new FileInputStream(filepath);
-        this.model.read(in,null,"TTL");
+        this.model.read(in, null, "TTL");
 
-        this.populateResourceMaps();
+        this.populateGameResourceMaps();
     }
 
     /**
      * Populate the slideNodeMap and decisionNodeMap from the loaded model
      */
-    private void populateResourceMaps() {
+    private void populateGameResourceMaps() {
         // Populate slideNodeMap
         ResIterator slideIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
         if (slideIter.hasNext()) {
@@ -47,11 +47,15 @@ public abstract class RDFLoad {
 
         // For each decision, build a Decision instance
         if (decisionIter.hasNext()) {
-            while(decisionIter.hasNext()) {
+            while (decisionIter.hasNext()) {
                 Resource decisionNode = decisionIter.nextResource();
 
                 String decisionText = decisionNode.getProperty(TGEO.hasText).getString();
-                Decision decision = new Decision(decisionText);
+                Resource originSlideNode = this.model.listResourcesWithProperty(TGEO.hasDecision, decisionNode).nextResource();
+                Slide originSlide = slideNodeMap.get(originSlideNode);
+                Resource targetSlideNode = decisionNode.getPropertyResourceValue(TGEO.directsTo);
+                Slide targetSlide = slideNodeMap.get(targetSlideNode);
+                Decision decision = new Decision(decisionText, originSlide, (int) (Math.random() * 100000), targetSlide);
 
                 this.decisionNodeMap.put(decisionNode, decision);
             }
@@ -88,25 +92,4 @@ public abstract class RDFLoad {
 
         return decisions;
     }
-
-    public void loadFromFile() {
-        Game game = new Game();
-
-        for (Map.Entry<Resource, Slide> entry : this.slideNodeMap.entrySet()) {
-            Resource slideNode = entry.getKey();
-            Slide slide = entry.getValue();
-
-            // Check if the slide is the first slide
-            Resource categorizedAsObject = slideNode.getPropertyResourceValue(TGEO.categorizedAs);
-            if (categorizedAsObject != null) {
-                game.firstSlide = slide;
-            }
-
-            game.addSlide(slide);
-        }
-
-        sendGame(game);
-    }
-
-    public abstract void sendGame(Game game);
 }

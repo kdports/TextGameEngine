@@ -1,5 +1,7 @@
 package entities;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -10,6 +12,8 @@ public class Slide {
     private final int id;
     private String prompt;
     public ArrayList<Decision> outgoingDecisions;
+    private final BooleanProperty firstSlide = new SimpleBooleanProperty(false);
+    private final StringProperty observablePrompt = new SimpleStringProperty();
 
     public Slide(int id, String prompt, ArrayList<Decision> decisions) {
         this.id = id;
@@ -40,14 +44,15 @@ public class Slide {
         this.outgoingDecisions = outgoingDecisions;
     }
 
-    private final StringProperty observablePrompt = new SimpleStringProperty();
+    public void setAsFirstSlide(boolean toSet){
+        firstSlide.set(toSet);
+    }
 
-    public StringProperty returnObservable(){return this.observablePrompt;}
-
+    public StringProperty getObservablePrompt(){return this.observablePrompt;}
+    public BooleanProperty getObservableFirstSlide(){return this.firstSlide;}
     public boolean addDecision(Decision decision) {
         return this.outgoingDecisions.add(decision);
     }
-
     public boolean removeDecision(Decision decision) {
         return this.outgoingDecisions.remove(decision);
     }

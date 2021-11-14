@@ -1,27 +1,38 @@
 package handlers;
 
-import client.GuiDecisionExperiment;
-import client.GuiSlideExperiment;
+import client.GuiDecision.GuiDecision;
+import client.GuiSlide.GuiSlide;
 import entities.EditorGame;
 import entities.Slide;
 import entities.Studio;
-import interfaces.RenderableDecision;
-import interfaces.RenderableSlide;
 import entities.Decision;
 import utils.IdControl;
 
-
-import java.util.Map;
-
+/**
+ * The handler that allows the user to create new decisions on a slide.
+ */
 public class CreateNewDecisionHandler extends BaseHandler {
     public CreateNewDecisionHandler(Studio studio, EditorGame editorGame) {
         super(studio, editorGame);
     }
-    public void create(Slide slide, GuiSlideExperiment GuiSlide, double x, double y){
+
+    /**
+     * Allows the user to create a new decision hanging off a slide.
+     *
+     * @param slide - The slide that will be the origin of the decision.
+     * @param x - The X coordinate of where to create the decision.
+     * @param y - The Y coordinate of where to create the decision.
+     */
+    public void create(Slide slide, double x, double y){
         IdControl.addOne();
+        GuiSlide guiSlide = this.editorGame.getSlideMap().get(slide);
+
+        // Create the decision
         Decision decision = new Decision("I am a new decision", slide, IdControl.getId());
-        GuiDecisionExperiment GuiDecision = new GuiDecisionExperiment(decision, GuiSlide, x + 400, y);
+        GuiDecision guiDecision = new GuiDecision(decision, guiSlide,x + 400, y);
+
+        // Add the decision
         slide.addDecision(decision);
-        this.editorGame.connectDecisionAndRenderableDecision(decision, GuiDecision);
-    };
+        this.editorGame.connectDecisionAndRenderableDecision(decision, guiDecision);
+    }
 }

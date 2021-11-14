@@ -1,77 +1,107 @@
-// package client;
-//
-// import handlers.CreateNewDecisionHandler;
-// import handlers.CreateNewSlideHandler;
-// import handlers.DragDropOnSourceHandler;
-// import handlers.DragDropOnTargetHandler;
-// import interfaces.EditDisplayer;
-// import entities.Studio;
-// import javafx.application.Application;
-// import javafx.scene.Scene;
-// import javafx.scene.canvas.Canvas;
-// import javafx.scene.control.Button;
-// import javafx.stage.Stage;
-// import javafx.scene.layout.StackPane;
-// import javafx.scene.layout.Pane;
-//
-//
-// import java.io.IOException;
-//
-// public class RootDisplayer extends Application implements EditDisplayer {
-//     int idControl = 0;
-//     Pane root = new Pane();
-//     private double mouseAnchorX;
-//     private double mouseAnchorY;
-//     private Studio studio;
-//     private SaveHandler saveHandler;
-//     private final CreateNewSlideHandler createNewSlideHandler = new CreateNewSlideHandler(this, this.studio, 1920, 1080);
-//     private final CreateNewDecisionHandler createNewDecisionHandler = new CreateNewDecisionHandler(this, this.studio, idControl);
-//     private final DragDropOnSourceHandler dragDropOnSourceHandler = new DragDropOnSourceHandler(this, this.studio, idControl);
-//     private final DragDropOnTargetHandler dragDropOnTargetHandler = new DragDropOnTargetHandler(this, this.studio, idControl);
-//
-//     public void setStudio(Studio studio) {
-//         this.studio = studio;
-//     }
-//
-//     public void start(String[] args) {
-//         launch(args);
-//     }
-//
-//     @Override
-//     public void start(Stage primaryStage) throws IOException {
-//         StackPane holder = new StackPane();
-//         Canvas canvas = new Canvas(5000,  5000);
-//         holder.getChildren().add(canvas);
-//         root.getChildren().add(holder);
-//
-//         //min dimensions of the window
-//         primaryStage.setMinHeight(400);
-//         primaryStage.setMinWidth(500);
-//
-//         this.addButtons(root);
-//
-//         Scene window = new Scene(root, 1920, 1080);
-//         //DECIDES BACKGROUND COLOUR
-//         holder.setStyle("-fx-background-color: #2d142c");
-//         primaryStage.setTitle("Text Studio");
-//         primaryStage.setScene(window);
-//         primaryStage.show();
-//     }
-//
-//
-//
-//     @Override
-//     public void createSlide() {
-//
-//     }
-//
-//     @Override
-//     public void createDecision() {
-//         idControl++;
-//         GUIDecision GuiDecision = new GUIDecision(root, idControl);
-//         GuiDecision.setLayoutX(root.getWidth() / 2);
-//         GuiDecision.setLayoutY(root.getHeight() / 2);
-//
-//         root.getChildren().add(GuiDecision);
-//     }
-// }
+package client;
+
+import client.GuiDecision.GuiDecision;
+import client.GuiSlide.GuiSlide;
+import entities.Decision;
+import entities.EditorGame;
+import entities.Slide;
+import handlers.Handlers;
+import javafx.application.Application;
+import javafx.collections.MapChangeListener;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import rdf.RDFLoadToStudio;
+
+import java.util.Map;
+
+public class RootDisplayer extends Application {
+    private final Pane root = new Pane();
+    private final EditorGame editorGame = new EditorGame();
+    // This needs to be instantiated here because there is no way to pass editorGame back out until it is too late,
+    // But we require the methods that Handlers provides before start() is finished. So here works.
+    private final Handlers handlers = new Handlers(editorGame);
+
+    public void begin(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        StackPane holder = new StackPane();
+        Canvas canvas = new Canvas(5000,  5000);
+        holder.getChildren().add(canvas);
+        this.root.getChildren().add(holder);
+
+        // Add the listeners onto editorGame maps
+        this.configureListeners();
+
+        Scene window = new Scene(this.root, 1920, 1080);
+        // Add the three sidebar buttons
+        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame);
+        this.root.getChildren().addAll(sidebarButtons);
+
+        holder.setStyle("-fx-background-color: #FFFFFF");
+        primaryStage.setTitle("Text Studio");
+        primaryStage.setScene(window);
+        primaryStage.show();
+    }
+
+    /**
+     * Add listeners onto slideMap, decisionMap, deletedSlideMap, and deletedDecisionMap properties.
+     */
+    private void configureListeners() {
+        // Set root to observe the this.editorGame hashmaps and update accordingly
+        this.editorGame.slideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().add(listener.getValueAdded());
+                listener.getKey().getObservablePrompt().addListener(
+                        (observable, oldvalue, newvalue) -> listener.getValueAdded().prompt.setText(newvalue)
+                );
+            }
+        });
+
+
+        // Set root to observe and delete slides properly
+        this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().remove(listener.getValueAdded());
+            }
+        });
+
+
+        // Set root to initialize connecting lines and decisions
+        this.editorGame.decisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecision>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().add(listener.getValueAdded());
+                listener.getValueAdded().originSlide.layoutXProperty().addListener(
+                        (observable, oldvalue, newvalue) -> listener.getValueAdded().leftLine.recalculateX()
+                );
+                listener.getValueAdded().originSlide.layoutYProperty().addListener(
+                        (observable, oldvalue, newvalue) -> listener.getValueAdded().leftLine.recalculateY()
+                );
+                this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) slideRemoved -> {
+                    if (slideRemoved.getValueAdded() == listener.getValueAdded().originSlide) {
+                        listener.getValueAdded().originSlide = null;
+                        listener.getValueAdded().leftLine.recalculateX();
+                    }}
+                );
+                root.getChildren().add(listener.getValueAdded().leftLine);
+                root.getChildren().add(listener.getValueAdded().rightLine);
+
+            }
+
+        });
+
+        this.editorGame.deletedDecisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecision>) listener -> {
+            if (listener.wasAdded()) {
+                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().remove(listener.getValueAdded());
+            }
+        });
+    }
+}

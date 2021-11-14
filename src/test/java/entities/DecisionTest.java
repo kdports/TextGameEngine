@@ -15,7 +15,7 @@ class DecisionTest {
     @Test
     void testSetTarget() {
         Decision d = new Decision("");
-        Slide s = new Slide("test");
+        Slide s = new Slide(1, "test");
         d.setTarget(s);
         assertEquals(s, d.target);
     }

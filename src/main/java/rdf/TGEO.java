@@ -13,6 +13,10 @@ public class TGEO {
     public static Property hasText = makeTgeoProperty("hasText");
     public static Property directsTo = makeTgeoProperty("directsTo");
 
+    // EditorGame Terms
+    public static Property hasXLocation = makeTgeoProperty("hasXLocation"); // x location of any slide, decision line...
+    public static Property hasYLocation = makeTgeoProperty("hasYLocation"); // ^^
+
     public static Resource makeTgeoNode(String localName) {
         return Ontology.makeNode(Ontology.prefixes.get("tgeo"), localName);
     }

@@ -3,6 +3,12 @@ package handlers;
 import entities.EditorGame;
 import entities.Studio;
 
+import java.io.FileNotFoundException;
+
+/**
+ * A wrapper for all the handlers, so that we can access them all in a single object. Holds references to all the
+ * handlers that are defined in this project.
+ */
 public class Handlers {
     public static CreateNewSlideHandler createNewSlideHandler;
     public static SlideHandler slideHandler;
