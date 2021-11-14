@@ -1,0 +1,8 @@
+# Ignore build specifications
+.gradle/
+
+# Ignore developer-specific settings
+.idea/
+
+# Ignore binaries
+build/

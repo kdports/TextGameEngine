@@ -1,13 +1,14 @@
 Class name: GUIBoxScene
-Parent class: GUIObject
-Subclasses: 
+Parent class: Application
+Subclasses:
+Architecture Section: Framework and Drivers
 
 Responsibilities:
-* Contains the details of a Scene instance
-* Used to show and take input for those details
-* Takes arrows from GUIBoxDecision
-* Does not directly interact with Scene!
+* The main function for the GUI
+* Creates the window, splash screen, buttons initially seen
+* Gives buttons tasks to do when clicked such as add a slide to screen
 
 Collaborators:
-* GUIObject
-* GUIArrow
+* GUIDecision
+* GUIScene
+* Decision Alert Box

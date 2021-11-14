@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+    }
+}
+
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls','javafx.fxml']
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/org.apache.jena/jena-core
+    implementation ('org.apache.jena:jena-core:4.2.0') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+    implementation('org.apache.jena:jena-arq:4.2.0') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

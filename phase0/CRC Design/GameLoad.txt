@@ -1,0 +1,11 @@
+Class name: PlayerLoad
+Parent class: Load
+Subclasses:
+Architecture Section: Use Case
+
+Responsibilities:
+* Takes an RDF file of Scenes and Decisions and sends them to the Player
+
+Collaborators:
+* Scene
+* Decision
