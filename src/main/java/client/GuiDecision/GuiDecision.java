@@ -80,6 +80,7 @@ public class GuiDecision extends StackPane {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
+
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(event.getSceneX() - mouseAnchorX);
@@ -115,7 +116,6 @@ public class GuiDecision extends StackPane {
             Handlers.decisionHandler.deleteDecision(decision);
             slideWindow.close();
         });
-        System.out.println(decision.getOrigin().getId());
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
