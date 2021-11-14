@@ -19,17 +19,17 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The class that is in charge of rendering the game
+ * The class that is in charge of rendering the game.
  */
 public class GameRenderer implements PlayDisplayer {
-    JFrame frame; // Creates JFrame that the gamerenderer will use to display the window
+    JFrame frame; // Creates JFrame that the GameRenderer will use to display the window
     Player player;// The player that plays the game to render
     Theme theme;
 
     int animationSpeed;
 
     /**
-     * Creates the gamerenderer
+     * Creates the GameRenderer.
      */
     public GameRenderer() {
         frame = new JFrame("Game");
@@ -48,15 +48,16 @@ public class GameRenderer implements PlayDisplayer {
     } //Initializes JFrame
 
     /**
-     * Sets the player for the game
-     * @param player player to set
+     * Sets the player for the game.
+     *
+     * @param player - Player to set.
      */
     public void setPlayer(Player player) {
         this.player = player;
     }
 
     /**
-     * This method displays the slide onto the Jframe
+     * This method displays the slide onto the JFrame.
      */
     public void display() {
         frame.getContentPane().removeAll(); // Clears the content currently on the jframe
@@ -70,13 +71,12 @@ public class GameRenderer implements PlayDisplayer {
         frame.add(buttonScroll, BorderLayout.SOUTH);
         frame.setJMenuBar(createMenu());
         frame.setVisible(true);
-
     }
 
     /**
-     * This method creates a panel that contains the text and buttons of the slide of the game
+     * This method creates a panel that contains the text and buttons of the slide of the game.
      *
-     * @return JPanel This is the panel that is to be added and displayed on the jframe
+     * @return - This is the panel that is to be added and displayed on the JFrame.
      */
     public JPanel createTextPanel() {
 
@@ -92,8 +92,9 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Creates the panel with all the buttons to add to the screen
-     * @return the panel with the buttons
+     * Creates the panel with all the buttons to add to the screen.
+     *
+     * @return - The panel with the buttons.
      */
     public JPanel createButtonPanel() {
 
@@ -108,8 +109,9 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * creates the menu bar at the top of the window
-     * @return The menu bar
+     * Creates the menu bar at the top of the window.
+     *
+     * @return - The menu bar.
      */
     public JMenuBar createMenu() {
         JMenuBar mb = new JMenuBar();
@@ -142,39 +144,41 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Animates the text by displaying the slide text as if someone was typing it
-     * @param ta text area to animate
+     * Animates the text by displaying the slide text as if someone were typing it.
+     *
+     * @param textArea - The text area to animate.
      */
-    public void addAnimation(JTextArea ta) {
+    public void addAnimation(JTextArea textArea) {
         String text = player.currentSlide.getPrompt();
         Timer timer = new Timer(animationSpeed, new ActionListener() {
             int i = 0;
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                i = ta.getText().length();
+                i = textArea.getText().length();
                 if (i >= text.length()) {
                     ((Timer) e.getSource()).stop();
                 } else {
-                    String textAreaText = ta.getText();
+                    String textAreaText = textArea.getText();
                     textAreaText += text.charAt(i);
-                    ta.setText(textAreaText);
+                    textArea.setText(textAreaText);
                 }
             }
         });
 
-        ta.addMouseListener(new MouseAdapter() {
+        textArea.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                ta.setText(text);
+                textArea.setText(text);
             }
         });
         timer.start();
     }
 
     /**
-     * The method creates a main text area for the game screen
-     * @param panel the panel to create the text area in
-     * @return the text area
+     * The method creates a main text area for the game screen.
+     *
+     * @param panel - The panel to create the text area in.
+     * @return - The text area.
      */
     public JTextArea createTextArea(JPanel panel) {
         JTextArea t1;
@@ -199,10 +203,11 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Creates and imageicon from the filename and recolors the image to a certain color
-     * @param filename filename to load the icon image from
-     * @param color color to color the image
-     * @return the image
+     * Creates ImageIcon from the filename and recolors the image to a certain color.
+     *
+     * @param filename - Filename to load the icon image from.
+     * @param color - Color to color the image.
+     * @return - The image.
      */
     public ImageIcon createIcon(String filename, Color color) {
         ImageIcon white = new ImageIcon("src/main/resources/player/" + filename);
@@ -214,10 +219,11 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Adds listeners to the button choices so that they change color when hovered
-     * @param b button to add listeners to
-     * @param hoverArrow the image of the hovered arrow
-     * @param arrow the imagicon of the normal arrow
+     * Adds listeners to the button choices so that they change color when hovered.
+     *
+     * @param b - Button to add listeners to.
+     * @param hoverArrow - The image of the hovered arrow.
+     * @param arrow - The ImageIcon of the normal arrow.
      */
     public void addListeners(JButton b, ImageIcon hoverArrow, ImageIcon arrow) {
         b.addMouseListener(new MouseAdapter() {
@@ -234,21 +240,22 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Adds which slide to go to when the button is clicked
-     * @param b the button that will be clicked
-     * @param i the index of the decision linked to the button
+     * Adds which slide to go to when the button is clicked.
+     *
+     * @param button - The button that will be clicked.
+     * @param index - The index of the decision linked to the button.
      */
-    private void addDestinationAction(JButton b, int i) {
-        b.addActionListener(e -> {
-            player.currentSlide = player.currentValidDecisions.get(i).target;
+    private void addDestinationAction(JButton button, int index) {
+        button.addActionListener(e -> {
+            player.currentSlide = player.currentValidDecisions.get(index).target;
             player.playScene();
         });
     }
 
     /**
-     * Creates buttons for all of the decisions in a slide
-     * @param panel the panel to add the buttons to
-     * @return the number of buttons
+     * Creates buttons for all the decisions in a slide.
+     * @param panel - The panel to add the buttons to
+     * @return - The number of buttons.
      */
     public int createButtons(JPanel panel) {
         int count = 0;
@@ -278,9 +285,10 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Creates 1 button that is styled as one of the decisions for a slide
-     * @param arrow the image to appear at the start of the button
-     * @return the button
+     * Creates 1 button that is styled as one of the decisions for a slide.
+     *
+     * @param arrow - The image to appear at the start of the button
+     * @return - The button.
      */
     private JButton createButton(ImageIcon arrow) {
         JButton b = new JButton();
@@ -298,9 +306,10 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Turns an image icon into a buffered image
-     * @param icon the image icon to transform
-     * @return the image icone as a bufferedImage
+     * Turns an image icon into a buffered image.
+     *
+     * @param icon - The image icon to transform.
+     * @return - The image icon as a bufferedImage.
      */
     public BufferedImage intoBuffer(ImageIcon icon) {
         BufferedImage bi = new BufferedImage(
@@ -315,23 +324,24 @@ public class GameRenderer implements PlayDisplayer {
     }
 
     /**
-     * Changes all of the colored pixels in an BufferedImage to another color
-     * @param image The image to recolor
-     * @param color The color to recolor
-     * @return The recolored image
+     * Changes all the colored pixels in an BufferedImage to another color.
+     *
+     * @param image - The image to recolor.
+     * @param color - The color to recolor.
+     * @return - The recolored image.
      */
     private static ImageIcon colorImage(BufferedImage image, Color color) {
         int width = image.getWidth();
         int height = image.getHeight();
         WritableRaster raster = image.getRaster();
 
-        for (int xx = 0; xx < width; xx++) {
-            for (int yy = 0; yy < height; yy++) {
-                int[] pixels = raster.getPixel(xx, yy, (int[]) null);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                int[] pixels = raster.getPixel(x, y, (int[]) null);
                 pixels[0] = color.getRed();
                 pixels[1] = color.getGreen();
                 pixels[2] = color.getBlue();
-                raster.setPixel(xx, yy, pixels);
+                raster.setPixel(x, y, pixels);
             }
         }
         return new ImageIcon(image);

@@ -2,6 +2,8 @@ package rdf;
 
 import client.GuiDecision;
 import client.GuiSlide;
+import client.GuiDecision.GuiDecision;
+import client.GuiSlide.GuiSlide;
 import entities.*;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;

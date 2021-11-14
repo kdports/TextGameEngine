@@ -6,5 +6,7 @@ module TextGameEngine.main {
 
     opens client;
     opens handlers;
-    opens buttons;
+    opens client.GuiSlide;
+    opens client.GuiDecision;
+    opens client.GuiDecision.DecisionConnectionPoint;
 }

@@ -1,6 +1,7 @@
 package client;
 
-import buttons.SidebarButtons;
+import client.GuiDecision.GuiDecision;
+import client.GuiSlide.GuiSlide;
 import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
@@ -21,19 +22,9 @@ public class RootDisplayer extends Application {
     // This needs to be instantiated here because there is no way to pass editorGame back out until it is too late,
     // But we require the methods that Handlers provides before start() is finished. So here works.
     private final Handlers handlers = new Handlers(editorGame);
-    private String rdfFilepath = null;
 
     public void begin(String[] args) {
         launch(args);
-    }
-
-    public void begin(String[] args, String filepath) {
-        this.rdfFilepath = filepath;
-        launch(args);
-    }
-
-    public void rebuildFromRoot(Object o) {
-        System.out.println("Re-rendering!!!");
     }
 
     @Override
@@ -43,12 +34,30 @@ public class RootDisplayer extends Application {
         holder.getChildren().add(canvas);
         this.root.getChildren().add(holder);
 
+        // Add the listeners onto editorGame maps
+        this.configureListeners();
+
+        Scene window = new Scene(this.root, 1920, 1080);
+        // Add the three sidebar buttons
+        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame);
+        this.root.getChildren().addAll(sidebarButtons);
+
+        holder.setStyle("-fx-background-color: #FFFFFF");
+        primaryStage.setTitle("Text Studio");
+        primaryStage.setScene(window);
+        primaryStage.show();
+    }
+
+    /**
+     * Add listeners onto slideMap, decisionMap, deletedSlideMap, and deletedDecisionMap properties.
+     */
+    private void configureListeners() {
         // Set root to observe the this.editorGame hashmaps and update accordingly
         this.editorGame.slideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) listener -> {
             if (listener.wasAdded()) {
                 System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().add(listener.getValueAdded());
-                listener.getKey().returnObservable().addListener(
+                listener.getKey().getObservablePrompt().addListener(
                         (observable, oldvalue, newvalue) -> listener.getValueAdded().prompt.setText(newvalue)
                 );
             }
@@ -69,18 +78,20 @@ public class RootDisplayer extends Application {
             if (listener.wasAdded()) {
                 System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().add(listener.getValueAdded());
-               listener.getValueAdded().originSlide.layoutXProperty().addListener(
-                       (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineX());
-               listener.getValueAdded().originSlide.layoutYProperty().addListener(
-                       (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineY());
+                listener.getValueAdded().originSlide.layoutXProperty().addListener(
+                        (observable, oldvalue, newvalue) -> listener.getValueAdded().leftLine.recalculateX()
+                );
+                listener.getValueAdded().originSlide.layoutYProperty().addListener(
+                        (observable, oldvalue, newvalue) -> listener.getValueAdded().leftLine.recalculateY()
+                );
                 this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) slideRemoved -> {
                     if (slideRemoved.getValueAdded() == listener.getValueAdded().originSlide) {
                         listener.getValueAdded().originSlide = null;
-                        listener.getValueAdded().recalculateLeftLineX();
+                        listener.getValueAdded().leftLine.recalculateX();
                     }}
                 );
-               root.getChildren().add(listener.getValueAdded().leftLine);
-               root.getChildren().add(listener.getValueAdded().rightLine);
+                root.getChildren().add(listener.getValueAdded().leftLine);
+                root.getChildren().add(listener.getValueAdded().rightLine);
 
             }
 
@@ -92,30 +103,5 @@ public class RootDisplayer extends Application {
                 this.root.getChildren().remove(listener.getValueAdded());
             }
         });
-
-
-        Scene window = new Scene(this.root, 1920, 1080);
-        // Add the three sidebar buttons
-        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame);
-        this.root.getChildren().addAll(sidebarButtons);
-
-        // Add loaded slides and decisions
-        if (this.rdfFilepath != null) {
-            RDFLoadToStudio loader = new RDFLoadToStudio(rdfFilepath);
-            EditorGame loadedEditorGame = loader.loadEditorGameFromFile();
-
-            for (Map.Entry<Slide, GuiSlide> entry : loadedEditorGame.getAllEntriesSlide()) {
-                this.editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
-            }
-
-            for (Map.Entry<Decision, GuiDecision> entry : loadedEditorGame.getAllEntriesDecision()) {
-                this.editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
-            }
-        }
-
-        holder.setStyle("-fx-background-color: #FFFFFF");
-        primaryStage.setTitle("Text Studio");
-        primaryStage.setScene(window);
-        primaryStage.show();
     }
 }

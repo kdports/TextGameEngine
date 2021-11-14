@@ -1,4 +1,4 @@
-package client;
+package client.GuiSlide;
 
 import entities.Slide;
 import handlers.Handlers;
@@ -18,58 +18,65 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
-
 public class GuiSlide extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
     public Text prompt;
 
-    public GuiSlide(Slide slide, double x_location, double y_location) {
+    public GuiSlide(Slide slide, double xLocation, double yLocation) {
         String id = String.valueOf(slide.getId());
         this.setId(id);
-        this.setLayoutX(x_location);
-        this.setLayoutY(y_location);
+        this.setLayoutX(xLocation);
+        this.setLayoutY(yLocation);
         this.setMaxWidth(200);
         this.setMinWidth(200);
         this.setMaxHeight(100);
         this.setMinHeight(100);
         this.setStyle("-fx-background-color: lightgray;");
 
-
         // Drag event handling
-        this.setOnMousePressed(event -> {
-             mouseAnchorX = event.getX();
-             mouseAnchorY = event.getY();
-        });
-        this.setOnMouseDragged(event -> {
-             this.setLayoutX(event.getSceneX() - mouseAnchorX);
-             this.setLayoutY(event.getSceneY() - mouseAnchorY);
-        });
+        this.initializeDragHandling();
 
         prompt = new Text();
         prompt.setText(slide.getPrompt());
         prompt.setStyle("-fx-blend-mode: overlay");
         prompt.setFill(Color.BLACK);
         StackPane.setAlignment(prompt, Pos.CENTER);
-        Button addDecision = this.addDecision(slide);
-        Button editBtn = this.editSlide(slide);
-        Button dltSlide = this.dltSlide(slide);
-        this.getChildren().add(addDecision);
-        this.getChildren().add(prompt);
-        this.getChildren().add(editBtn);
-        this.getChildren().add(dltSlide);
 
-        slide.returnObservable().addListener(
+        Button addDecisionButton = new AddDecisionButton(slide, this.getLayoutX(), this.getLayoutY());
+        Button editButton = new EditSlideButton(slide);
+        Button deleteSlideButton = new DeleteSlideButton(slide);
+        this.getChildren().addAll(addDecisionButton, editButton, deleteSlideButton, prompt);
+
+        Circle firstSlideIndicator = new FirstSlideIndicator();
+
+        this.initializeListeners(slide, firstSlideIndicator);
+    }
+
+    /**
+     * Create the event handlers to listen to drag and mouse events.
+     */
+    private void initializeDragHandling() {
+        this.setOnMousePressed(event -> {
+            mouseAnchorX = event.getX();
+            mouseAnchorY = event.getY();
+        });
+        this.setOnMouseDragged(event -> {
+            this.setLayoutX(event.getSceneX() - mouseAnchorX);
+            this.setLayoutY(event.getSceneY() - mouseAnchorY);
+        });
+    }
+
+    /**
+     * Set up the listeners for each of the properties that need it.
+     * @param slide - The slide that owns which properties need to be listened to.
+     */
+    private void initializeListeners(Slide slide, Circle firstSlideIndicator) {
+        slide.getObservablePrompt().addListener(
                 (observable, oldvalue, newvalue) -> prompt.setText(newvalue)
         );
 
-        Circle firstSlideIndicator = new Circle();
-        firstSlideIndicator.setFill(Color.RED);
-        firstSlideIndicator.setRadius(5);
-        StackPane.setAlignment(firstSlideIndicator, Pos.TOP_CENTER);
-
-        slide.returnFirstSlide().addListener(
+        slide.getObservableFirstSlide().addListener(
                 (observable, oldvalue, newvalue) -> {
                     if (newvalue){
                         this.getChildren().add(firstSlideIndicator);
@@ -80,54 +87,27 @@ public class GuiSlide extends StackPane {
         );
 
         this.setOnDragOver(new EventHandler<>() {
-             public void handle(DragEvent event) {
-                 if (event.getGestureSource() != this && event.getDragboard().hasString()) {
-                     event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                 }
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != this && event.getDragboard().hasString()) {
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
 
-                 event.consume();
-             }
-         });
+                event.consume();
+            }
+        });
 
         this.setOnDragDropped((DragEvent event) -> {
-             Dragboard db = event.getDragboard();
-             Handlers.slideHandler.dropEvent(slide, this, db.getString());
-             System.out.println(slide.outgoingDecisions);
+            Dragboard db = event.getDragboard();
+            Handlers.slideHandler.dropEvent(slide, this, db.getString());
+            System.out.println(slide.outgoingDecisions);
         });
     }
 
-    // Button to delete Slide
-
-    private Button dltSlide(Slide slide){
-        Button addDecisionButton = new Button("Delete Slide");
-        addDecisionButton.setOnMousePressed(
-                event -> Handlers.slideHandler.delete(slide));
-        StackPane.setAlignment(addDecisionButton, Pos.TOP_RIGHT);
-        return addDecisionButton;
-
-    }
-    // Button to add Decision
-
-    private Button addDecision(Slide slide){
-        Button addDecisionButton = new Button("Add Decision");
-        addDecisionButton.setOnMousePressed(
-                event -> Handlers.createNewDecisionHandler.create(slide, this, this.getLayoutX(), this.getLayoutY()));
-        StackPane.setAlignment(addDecisionButton, Pos.BOTTOM_RIGHT);
-        return addDecisionButton;
-
-    }
-
-    private Button editSlide(Slide slide){
-        Button addDecisionButton = new Button("Edit Slide");
-        addDecisionButton.setOnMousePressed(event -> GuiSlide.showEdit(slide));
-        StackPane.setAlignment(addDecisionButton, Pos.TOP_LEFT);
-        return addDecisionButton;
-
-    }
-
-    private static void showEdit(Slide slide){
-        // Create an Alert Box to edit the Slide
-
+    /**
+     * Create a dialog box that allows the user to type in new text for their slide.
+     * @param slide - The slide on which to change the text.
+     */
+    static void showEdit(Slide slide){
         Stage slideWindow = new Stage();
         slideWindow.initModality(Modality.APPLICATION_MODAL);
         slideWindow.setTitle("Slide Editor");

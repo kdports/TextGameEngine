@@ -1,7 +1,7 @@
 package rdf;
 
-import client.GuiDecision;
-import client.GuiSlide;
+import client.GuiDecision.GuiDecision;
+import client.GuiSlide.GuiSlide;
 import entities.*;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;

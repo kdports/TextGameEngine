@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import client.GuiSlide;
-
 public abstract class RDFLoad {
     protected final Model model;
     protected final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
