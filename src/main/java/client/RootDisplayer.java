@@ -72,6 +72,12 @@ public class RootDisplayer extends Application {
                        (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineX());
                listener.getValueAdded().originSlide.layoutYProperty().addListener(
                        (observable, oldvalue, newvalue) -> listener.getValueAdded().recalculateLeftLineY());
+                this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) slideRemoved -> {
+                    if (slideRemoved.getValueAdded() == listener.getValueAdded().originSlide) {
+                        listener.getValueAdded().originSlide = null;
+                        listener.getValueAdded().recalculateLeftLineX();
+                    }}
+                );
                root.getChildren().add(listener.getValueAdded().leftLine);
                root.getChildren().add(listener.getValueAdded().rightLine);
 
