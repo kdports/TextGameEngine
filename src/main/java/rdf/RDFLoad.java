@@ -1,4 +1,5 @@
 package rdf;
+
 import entities.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
@@ -14,6 +15,12 @@ public abstract class RDFLoad {
     protected final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();
     protected final HashMap<Resource, Decision> decisionNodeMap = new HashMap<>();
 
+    /**
+     * Takes data from a file and converts it into accessible HashMaps to be used
+     * in the editor.
+     *
+     * @param filepath - The path of the ttl file that loads into the editor
+     */
     public RDFLoad(String filepath) throws FileNotFoundException {
         this.model = ModelFactory.createDefaultModel();
         this.model.setNsPrefixes(Ontology.prefixes);
@@ -37,6 +44,11 @@ public abstract class RDFLoad {
 
                 String slideText = slideNode.getProperty(TGEO.hasText).getString();
                 Slide slide = new Slide((int) (Math.random() * 100000), slideText);
+
+                // SETTING FIRST SLIDE ----------------------
+                if (slideNode.getProperty(TGEO.categorizedAs) != null){
+                    slide.setAsFirstSlide(true);
+                }
 
                 this.slideNodeMap.put(slideNode, slide);
             }
@@ -76,15 +88,19 @@ public abstract class RDFLoad {
         }
     }
 
+    /**
+     * Gets all decisions belonging to a particular slide and returns it in a list
+     *
+     * @param slideNode - The URI of the slide containing decisions from the model
+     * @return - A list of the decisions belonging to the above slide
+     */
     private ArrayList<Decision> getDecisionsOfSlide(Resource slideNode) {
-        // Get the decisions hanging off of param slideNode
         NodeIterator iter = this.model.listObjectsOfProperty(slideNode, TGEO.hasDecision);
         ArrayList<RDFNode> results = (ArrayList<RDFNode>) iter.toList();
 
-        // For each decision, build a Decision instance
         ArrayList<Decision> decisions = new ArrayList<>();
         for (RDFNode decisionNode : results) {
-            // Get decision text
+
             if (decisionNode instanceof Resource) {
                 decisions.add(this.decisionNodeMap.get(decisionNode));
             }

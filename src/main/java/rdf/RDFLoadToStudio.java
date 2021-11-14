@@ -1,4 +1,5 @@
 package rdf;
+
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import entities.*;
@@ -14,13 +15,24 @@ public class RDFLoadToStudio extends RDFLoad {
     private final HashMap<Slide, GuiSlide> renderableSlideMap = new HashMap<>();
     private final HashMap<Decision, GuiDecision> renderableDecisionMap = new HashMap<>();
 
+    /**
+     * Takes a filepath and populates the resource maps with the data from the file
+     *
+     * @param filepath - The path of the file used to load data into the editor
+     */
     public RDFLoadToStudio(String filepath) throws FileNotFoundException {
         super(filepath);
         this.populateRenderableResourceMaps();
     }
 
+    /**
+     * Populate the resource maps related to the Studio editor with data and locations of
+     * slides and decisions.
+     */
     private void populateRenderableResourceMaps(){
         ResIterator slideIter = this.model.listResourcesWithProperty(RDF.type, TGEO.Slide);
+
+        // Add each slide and its editor counterpart to a hashmap
         if (slideIter.hasNext()) {
             while (slideIter.hasNext()) {
                 Resource slideNode = slideIter.nextResource();
@@ -69,8 +81,15 @@ public class RDFLoadToStudio extends RDFLoad {
 
     }
 
+    /**
+     * Creates a new EditorGame instance and populates it with data from our
+     * HashMaps
+     *
+     * @return - The EditorGame instance that will be displayed in the studio
+     */
     public EditorGame loadEditorGameFromFile() {
         EditorGame editorGame = new EditorGame();
+
 
         for (Map.Entry<Slide, GuiSlide> entry : this.renderableSlideMap.entrySet()) {
             editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
