@@ -1,5 +1,4 @@
 package rdf;
-import client.GuiDecision;
 import entities.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.*;
@@ -9,8 +8,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import client.GuiSlide;
 
 public abstract class RDFLoad {
     protected final Model model;

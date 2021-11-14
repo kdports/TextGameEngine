@@ -2,6 +2,9 @@ package buttons;
 
 import handlers.Handlers;
 
+/**
+ * The button that allows the user to create a new slide.
+ */
 public class NewSlideButton extends MenuButton {
 
     public NewSlideButton() {
