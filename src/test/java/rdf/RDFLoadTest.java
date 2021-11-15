@@ -36,6 +36,9 @@ class RDFLoadTest {
 
     @Test
     void testRDFLoadToStudio() {
+        /*
+        * Should be called individually from CreateNewSlideHandlerTest!
+        */
         String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
         try {
             String[] args = new String[] {} ;
