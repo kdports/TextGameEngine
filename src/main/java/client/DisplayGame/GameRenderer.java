@@ -27,7 +27,7 @@ public class GameRenderer implements PlayDisplayer {
         // Place holder name for now
         frame.setTitle("Temp Title");
         frame.setSize(1200, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Sets the image in the top left, currently no image
         ImageIcon image = new ImageIcon();
@@ -39,15 +39,6 @@ public class GameRenderer implements PlayDisplayer {
     } //Initializes JFrame
 
     /**
-     * Sets the player for the game.
-     *
-     * @param player - Player to set.
-     */
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    /**
      * This method displays each of the slides onto the JFrame.
      */
     public void display() {
@@ -56,67 +47,27 @@ public class GameRenderer implements PlayDisplayer {
         frame.repaint();
 
         /* creates a scrolling display that contains the text and buttons for the game */
+        CreateMenu menu = new CreateMenu(theme, player, animationSpeed, frame, this);
+        frame.setJMenuBar(menu.createMenu());
         CreateTextPanel textPanel = new CreateTextPanel(theme, player, animationSpeed);
+        textPanel.createTPanel();
         JScrollPane textScroll = new JScrollPane(textPanel);
         CreateButtonPanel panel = new CreateButtonPanel(player, theme);
+        panel.createBPanel();
         JScrollPane buttonScroll = new JScrollPane(panel);
         frame.add(textScroll);
         frame.add(buttonScroll, BorderLayout.SOUTH);
-        frame.setJMenuBar(createMenu());
+
         frame.setVisible(true);
     }
 
     /**
-     * Creates the menu bar at the top of the window.
+     * Sets the player for the game.
      *
-     * @return - The menu bar.
+     * @param player - Player to set.
      */
-    public JMenuBar createMenu() {
-        JMenuBar mb = new JMenuBar();
-        // Creates the theme dropdown
-        JMenu themes = new JMenu("Themes");
-        // Adds the themes from the themeList as a button to allow the user to switch between themes
-        for (String t : theme.themeList) {
-            JMenuItem th = new JMenuItem(t);
-            th.addActionListener(e -> {
-                theme.setTheme(t);
-                display();
-            });
-            themes.add(th);
-        }
-        // Creates the animation dropdown
-        JMenu animation = createAnimationMenu();
-
-        // Adds the themes dropdown and the animation dropdown to the menu bar
-        mb.add(themes);
-        mb.add(animation);
-        return mb;
-    }
-
-    /**
-     * Creates the animation menu for the menu bar.
-     *
-     * @return - The animation menu;
-     */
-    public JMenu createAnimationMenu() {
-        // Crates an animation speed dropdown to allow users to switch the animation speed
-        // Speed contains the 4 options for the animation speed
-        String[] speed = {"off", "fast", "medium", "slow"};
-        JMenu animation = new JMenu("Animation");
-        int speed_num = 0;
-        for (String s : speed) {
-            JMenuItem sp = new JMenuItem(s);
-            int finalSpeed_num = speed_num;
-            sp.addActionListener(e -> {
-                animationSpeed = finalSpeed_num;
-                display();
-            });
-            // Increases the speed with each option
-            speed_num += 5;
-            speed_num *= 2;
-            animation.add(sp);
-        }
-        return animation;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     /**

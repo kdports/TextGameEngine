@@ -17,7 +17,7 @@ public class CreateTextPanel extends JPanel{
     Theme theme;
     int animationSpeed;
     /**
-     * This method creates a panel that contains the text and buttons of the slide of the game.
+     * This method is the constructor that initiates the instance variables.
      *
      * @param player - The player instance that is currently being used by GameRenderer
      * @param theme - The theme that the GameRenderer is currently using
@@ -27,6 +27,13 @@ public class CreateTextPanel extends JPanel{
         this.theme = theme;
         this.player = player;
         this.animationSpeed = animationSpeed;
+    }
+
+    /**
+     * This method creates a panel that contains the text and buttons of the slide of the game.
+     *
+     */
+    public void createTPanel(){
         this.setLayout(new BorderLayout());
         // Checks the choices and updates the currentValidDecisions property of player
         player.checkValidChoices();
@@ -35,7 +42,6 @@ public class CreateTextPanel extends JPanel{
         this.add(textArea);
     }
 
-
     /**
      * The method creates a main text area for the game screen.
      *
@@ -43,31 +49,39 @@ public class CreateTextPanel extends JPanel{
      * @return - The text area.
      */
     public JTextArea createTextArea(JPanel panel) {
-        JTextArea t1;
+        JTextArea textArea;
         // Creates a text area with no text and with 20 rows and 10 columns
-        t1 = new JTextArea("", 20, 10);
+        textArea = new JTextArea("", 20, 10);
         // Sets the theme, border and other properties of the text area
-        t1.setLineWrap(true);
-        t1.setForeground(theme.textColor);
-        t1.setBackground(theme.backgroundColor);
-        t1.setEditable(false);
-        t1.setBounds(0, 0, panel.getWidth(), panel.getHeight());
+        textArea.setLineWrap(true);
+        textArea.setForeground(theme.textColor);
+        textArea.setBackground(theme.backgroundColor);
+        textArea.setEditable(false);
+        textArea.setBounds(0, 0, panel.getWidth(), panel.getHeight());
         Border border = BorderFactory.createLineBorder(theme.backgroundColor, 10);
-        t1.setBorder(border);
+        textArea.setBorder(border);
+        getFont(textArea);
+        addAnimation(textArea);
+        return textArea;
+    }
+
+    /**
+     * The method sets the font for a given JTextArea.
+     *
+     * @param textArea - The panel to create the text area in.
+     */
+    public void getFont(JTextArea textArea){
         // Gets the font from the resources folder
         try {
             File font_file = new File("src/main/resources/player/OpenSans-Regular.ttf");
             Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
             Font sizedFont = font.deriveFont(25f);
-            t1.setFont(sizedFont);
+            textArea.setFont(sizedFont);
         } catch (FontFormatException | IOException e) {
             // If the font is missing, set it to roboto instead
-            t1.setFont(new Font("roboto", Font.PLAIN, 25));
+            textArea.setFont(new Font("roboto", Font.PLAIN, 25));
         }
-        addAnimation(t1);
-        return t1;
     }
-
     /**
      * Animates the text by displaying the slide text as if someone were typing it.
      *
@@ -92,7 +106,6 @@ public class CreateTextPanel extends JPanel{
                 }
             }
         });
-
         // If the user clicks the text, it will skip the animation
         textArea.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -101,5 +114,4 @@ public class CreateTextPanel extends JPanel{
         });
         timer.start();
     }
-
 }
