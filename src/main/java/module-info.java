@@ -9,4 +9,5 @@ module TextGameEngine.main {
     opens client.GuiSlide;
     opens client.GuiDecision;
     opens client.GuiDecision.DecisionConnectionPoint;
+    opens client.DisplayGame;
 }
