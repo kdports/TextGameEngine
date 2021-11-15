@@ -73,6 +73,12 @@ public class GuiDecision extends StackPane {
         // });
     }
 
+    public GuiDecision(String s) {
+        // This is for testing/debug purposes only
+        // Do not use outside of Test classes!
+
+    }
+
     /**
      * Create the event handlers to deal with drag events.
      */
