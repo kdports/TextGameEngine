@@ -29,8 +29,7 @@ public class Player {
     }
 
     /**
-     * CURRENTLY JUST A PLACEHOLDER
-     * takes in a list of decisions and return a subset of the list of valid decisions
+     * Takes in a list of decisions and return a subset of the list of valid decisions
      */
     public void checkValidChoices() {
         ArrayList<Decision> ar = new ArrayList<>();
@@ -43,7 +42,6 @@ public class Player {
     }
 
     /**
-     * CURRENTLY JUST A PLACEHOLDER
      * takes in a decision and checks if its valid
      * @param d a decision
      * @return boolean returns whether the decision is valid

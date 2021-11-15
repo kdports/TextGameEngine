@@ -53,6 +53,11 @@ public class GuiSlide extends StackPane {
         this.initializeListeners(slide, firstSlideIndicator);
     }
 
+    public GuiSlide(String s) {
+        // This is for testing purposes only
+        // Do not use outside of Test classes!
+    }
+
     /**
      * Create the event handlers to listen to drag and mouse events.
      */
