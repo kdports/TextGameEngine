@@ -5,20 +5,34 @@ import entities.Player;
 
 import javax.swing.*;
 
+/**
+ * This class is in charge of creating the top menu bar of the game player that is in charge
+ * of things like changing themes and animation speed
+ */
 public class CreateMenu extends GameRenderer {
     GameRenderer gameRenderer;
+
     /**
-     * Creates the menu bar at the top of the window.
-     *
+     * Constructor that creates a createmenu object
+     * @param theme A theme object with colors of various elements
+     * @param player The player object that gamerenderer uses
+     * @param animationSpeed The speed of the text loading animation
+     * @param frame The JFrame that Gamerenderer uses to display the game
+     * @param gameRenderer The Gamerenderer that displays the game
      */
     CreateMenu(Theme theme, Player player, int animationSpeed, JFrame frame, GameRenderer gameRenderer) {
-        this.theme =theme;
+        this.theme = theme;
         this.animationSpeed  = animationSpeed;
         this.player = player;
         this.frame = frame;
         this.gameRenderer = gameRenderer;
     }
 
+    /**
+     * Creates a JMenuBar that resides at the top of the game renderer which gives you various options
+     * to customize the game
+     * @return JMenuBar Returns the JMenuBar created
+     */
     public JMenuBar createMenu() {
         JMenuBar mb = new JMenuBar();
         // Creates the theme dropdown
@@ -42,9 +56,10 @@ public class CreateMenu extends GameRenderer {
     }
 
     /**
-     * Creates the animation menu for the menu bar.
+     * Creates the animation menu for the menu bar that alters the speed of
+     * the text displaying
      *
-     * @return - The animation menu;
+     * @return - The animation menu
      */
     public JMenu createAnimationMenu() {
         // Crates an animation speed dropdown to allow users to switch the animation speed

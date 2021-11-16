@@ -2,18 +2,29 @@ package entities;
 import interfaces.PlayDisplayer;
 import java.util.ArrayList;
 
+/**
+ * The class that is in charge of playing the game
+ */
 public class Player {
     public Slide currentSlide;
     public PlayDisplayer dp;
     public Game game;
     public ArrayList<Decision> currentValidDecisions;
 
+    /**
+     * Constructs a player
+     * @param dp - The displayer of the game
+     * @param game - The game to play
+     */
     public Player(PlayDisplayer dp, Game game){
         this.dp = dp;
         this.game = game;
         dp.setPlayer(this);
     }
 
+    /**
+     * Plays the game from the first slide
+     */
     public void playGame() {
         currentSlide = game.firstSlide;
         playScene();
@@ -42,7 +53,8 @@ public class Player {
     }
 
     /**
-     * takes in a decision and checks if its valid
+     * Rakes in a decision and checks if its valid
+     *
      * @param d a decision
      * @return boolean returns whether the decision is valid
      */

@@ -6,6 +6,9 @@ import entities.Player;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Creates the buttons for the create button panel
+ */
 public class CreateButtons extends CreateButtonPanel{
 
     /**
@@ -25,7 +28,7 @@ public class CreateButtons extends CreateButtonPanel{
      * @return - The button.
      */
     private JButton createButton(ImageIcon arrow) {
-        // Creates a button and sets the theme, font, image, etc of the button.
+        // Creates a button and sets the theme, font, image, etc. of the button.
         JButton b = new JButton();
         b.setIcon(arrow);
         b.setFocusable(false);
@@ -57,10 +60,11 @@ public class CreateButtons extends CreateButtonPanel{
         if (createRestartButton(arrow, redArrow, panel)){
             return 1;
         }
-        // Creates the other buttons if it is not the last slide
+        // Creates the other buttons if it is not the last slide by looping through the slide
+        //decisions
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
-
+            // creates the button
             JButton b = createButton(arrow);
             b.setText(player.currentValidDecisions.get(i).text);
             addDestinationAction(b, i);
@@ -76,7 +80,7 @@ public class CreateButtons extends CreateButtonPanel{
      * @param arrow - The image for the white arrow in the button
      * @param redArrow - The image for the red arrow in the button
      * @param panel - The panel to add the buttons to
-     * @return - The number of buttons.
+     * @return boolean - Returns true if button is created
      */
     public boolean createRestartButton(ImageIcon arrow, ImageIcon redArrow, JPanel panel){
         // Checks if there are any more decisions, if not then it creates the replay buttons
@@ -85,6 +89,7 @@ public class CreateButtons extends CreateButtonPanel{
             JButton b = createButton(arrow);
             b.setText("Replay the game?");
             addListeners(b, redArrow, arrow);
+            //Handles the action of when the button gets pressed
             b.addActionListener(e -> {
                 player.currentSlide = player.game.firstSlide;
                 player.playScene();
