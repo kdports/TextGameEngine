@@ -2,7 +2,7 @@ package entities;
 
 /**
  * The decision entity that represents the decision components in the game
- * and GUI
+ * and GUI.
  */
 public class Decision {
     public String text;
