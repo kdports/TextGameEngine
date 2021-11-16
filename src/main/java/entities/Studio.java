@@ -1,28 +1,44 @@
 package entities;
 
-import client.GUIScene;
-import client.GameRenderer;
+import client.DisplayGame.GameRenderer;
 
 import java.util.ArrayList;
 
+/**
+ * Holds the game instance that the GUI communicates with
+ */
 public class Studio {
-    public static Game game = new Game();
+    public Game game = new Game();
 
-    public static void loadGame(Game loadedGame) {
-        game = loadedGame;
+//    public void loadGame(Game loadedGame) {
+//        this.game = loadedGame;
+//    }
+//
+//    public void playGame() {
+//        GameRenderer gr = new GameRenderer();
+//        Player p = new Player(gr, this.game);
+//        p.playGame();
+//    }
+
+    /**
+     * Creates a slide instance with the given ID and dialogue
+     *
+     * @param slideId - The ID of a slide
+     * @param text - The dialogue of a slide
+     * @return - A newly created slide
+     */
+    public Slide createSlide(int slideId, String text) {
+        return this.game.createSlide(slideId, text);
     }
 
-    public static void playGame() {
-        GameRenderer gr = new GameRenderer();
-        Player p = new Player(gr, game);
-        p.playGame();
-    }
+    /**
+     * Gets the slides that are currently in the game instance
+     *
+     * @return - An arraylist of slides from the game.
+     */
+    public ArrayList<Slide> getSlides() { return this.game.getSlides(); }
 
-    public static void addSlide(Slide newSlide) { game.addSlide(newSlide); }
-
-    public static ArrayList getSlides() { return game.getSlides(); }
-
-    public static void addDecision(Slide parentSlide, Decision newDecision) {
-        game.addDecision(parentSlide, newDecision);
-    }
+//    public void createDecision(Slide parentSlide, Decision newDecision) {
+//        this.game.createDecision("text");
+//    }
 }

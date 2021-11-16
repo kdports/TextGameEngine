@@ -5,4 +5,9 @@ module TextGameEngine.main {
     requires org.apache.jena.core;
 
     opens client;
+    opens handlers;
+    opens client.GuiSlide;
+    opens client.GuiDecision;
+    opens client.GuiDecision.DecisionConnectionPoint;
+    opens client.DisplayGame;
 }
