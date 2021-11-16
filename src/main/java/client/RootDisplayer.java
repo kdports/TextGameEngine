@@ -17,6 +17,9 @@ import rdf.RDFLoadToStudio;
 
 import java.util.Map;
 
+/**
+ * Creates a window, adds our necessary data to it, then launches the GUI.
+ */
 public class RootDisplayer extends Application {
     private final Pane root = new Pane();
     private final EditorGame editorGame = new EditorGame();
@@ -29,7 +32,7 @@ public class RootDisplayer extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         StackPane holder = new StackPane();
         Canvas canvas = new Canvas(5000,  5000);
         holder.getChildren().add(canvas);

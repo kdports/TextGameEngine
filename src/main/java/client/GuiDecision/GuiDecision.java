@@ -23,6 +23,9 @@ import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * The object representing the decisions displayed inside the editor.
+ */
 public class GuiDecision extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
@@ -31,6 +34,15 @@ public class GuiDecision extends StackPane {
     public GuiSlide originSlide;
     public GuiSlide targetSlide;
 
+    /**
+     * Constructs an instance by setting the initial position, colour, and size of
+     * the decision
+     *
+     * @param decision - The decision entity used for data.
+     * @param guiSlide - The slide that this decision comes from.
+     * @param x - The x location of the decision in the editor
+     * @param y - The x location of the decision in the editor
+     */
     public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y) {
         this.originSlide = guiSlide;
         this.setLayoutX(x);
@@ -73,10 +85,10 @@ public class GuiDecision extends StackPane {
 //         });
     }
 
+    /**
+     * Constructor for testing/debugging purposes only
+     */
     public GuiDecision(String s) {
-        // This is for testing/debug purposes only
-        // Do not use outside of Test classes!
-
     }
 
     /**

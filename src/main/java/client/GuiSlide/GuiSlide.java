@@ -18,11 +18,22 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * The object representing the slides displayed inside the editor.
+ */
 public class GuiSlide extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
     public Text prompt;
 
+    /**
+     * Constructs an instance by setting the initial position, colour, and size of
+     * the slide
+     *
+     * @param slide - The slide entity used for data.
+     * @param xLocation - The x location of the slide in the editor
+     * @param yLocation - The x location of the slide in the editor
+     */
     public GuiSlide(Slide slide, double xLocation, double yLocation) {
         String id = String.valueOf(slide.getId());
         this.setId(id);
@@ -53,9 +64,10 @@ public class GuiSlide extends StackPane {
         this.initializeListeners(slide, firstSlideIndicator);
     }
 
+    /**
+     * Constructor for testing purposes only
+     */
     public GuiSlide(String s) {
-        // This is for testing purposes only
-        // Do not use outside of Test classes!
     }
 
     /**
