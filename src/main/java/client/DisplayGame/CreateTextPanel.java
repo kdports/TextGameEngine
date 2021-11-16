@@ -9,18 +9,24 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+
 import entities.Player;
 import client.Theme;
 
-public class CreateTextPanel extends JPanel{
+/**
+ * A class that manages creating a text panel for the Game player that contains all of the button decisions
+ * and the slide text
+ */
+public class CreateTextPanel extends JPanel {
     Player player;
     Theme theme;
     int animationSpeed;
+
     /**
      * This method is the constructor that initiates the instance variables.
      *
      * @param player - The player instance that is currently being used by GameRenderer
-     * @param theme - The theme that the GameRenderer is currently using
+     * @param theme  - The theme that the GameRenderer is currently using
      */
     CreateTextPanel(Theme theme, Player player, int animationSpeed) {
         // Sets the theme, animation speed and player that is being used by the GameRenderer
@@ -31,9 +37,8 @@ public class CreateTextPanel extends JPanel{
 
     /**
      * This method creates a panel that contains the text and buttons of the slide of the game.
-     *
      */
-    public void createTPanel(){
+    public void createTPanel() {
         this.setLayout(new BorderLayout());
         // Checks the choices and updates the currentValidDecisions property of player
         player.checkValidChoices();
@@ -70,7 +75,7 @@ public class CreateTextPanel extends JPanel{
      *
      * @param textArea - The panel to create the text area in.
      */
-    public void getFont(JTextArea textArea){
+    public void getFont(JTextArea textArea) {
         // Gets the font from the resources folder
         try {
             File font_file = new File("src/main/resources/player/OpenSans-Regular.ttf");
@@ -82,6 +87,7 @@ public class CreateTextPanel extends JPanel{
             textArea.setFont(new Font("roboto", Font.PLAIN, 25));
         }
     }
+
     /**
      * Animates the text by displaying the slide text as if someone were typing it.
      *

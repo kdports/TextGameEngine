@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 
+/**
+ * Contains methods to change an image (mainly recoloring an image) and scaling them
+ */
 public class ChangeImage {
     /**
      * Turns an image icon into a buffered image.
