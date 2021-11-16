@@ -3,7 +3,7 @@ package handlers;
 import entities.Decision;
 import entities.EditorGame;
 import entities.Studio;
-import interfaces.RenderableDecision;
+//import interfaces.RenderableDecision;
 import javafx.scene.input.MouseEvent;
 
 import java.util.Map;

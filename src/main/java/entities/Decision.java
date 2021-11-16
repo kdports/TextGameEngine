@@ -1,7 +1,10 @@
 package entities;
 
+/**
+ * The decision entity that represents the decision components in the game
+ * and GUI
+ */
 public class Decision {
-    // public final int id;
     public String text;
     public Slide target;
     public Slide origin;
@@ -25,6 +28,10 @@ public class Decision {
         this.target = null;
     }
 
+    /**
+     * Set attributes of the decision instance. Method names are
+     * self-explanatory
+     */
     public void setTarget(Slide target) {
         this.target = target;
     }
@@ -33,13 +40,13 @@ public class Decision {
         this.text = text;
     }
 
-    public String getText() {return this.text; }
+    public String getText() { return this.text; }
 
-    public int getId() {return this.id; }
+    public int getId() { return this.id; }
 
-    public void setOrigin(Slide origin) {this.origin = origin; }
+    public void setOrigin(Slide origin) { this.origin = origin; }
 
-    public Slide getOrigin() {return this.origin; }
+    public Slide getOrigin() { return this.origin; }
 
-    public Slide getTarget() {return this.target ;}
+    public Slide getTarget() { return this.target; }
 }
