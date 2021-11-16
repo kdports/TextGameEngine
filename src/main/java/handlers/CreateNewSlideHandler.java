@@ -15,6 +15,11 @@ public class CreateNewSlideHandler extends BaseHandler {
         super(studio, editorGame);
     }
 
+    /**
+     * Creates a slide to be displayed inside the GUI
+     *
+     * @param mouseEvent - The necessary parameter to allow this method to be called
+     */
     public void execute(MouseEvent mouseEvent) {
         // Make sure there are no ID collisions.
         IdControl.addOne();

@@ -15,6 +15,11 @@ public class Handlers {
     public static CreateNewDecisionHandler createNewDecisionHandler;
     public static DecisionHandler decisionHandler;
 
+    /**
+     * Creates an instance of each handler.
+     *
+     * @param editorGame - The EditorGame instance that the handlers influence
+     */
     public Handlers(EditorGame editorGame) {
         Studio studio = new Studio();
 

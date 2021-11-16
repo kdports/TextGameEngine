@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Parent class to RDFLoadToStudio and RDFLoadToPlayer. Gathers data from
+ * a file and parses the data into hashmaps of Resources to Slides/Decisions
+ */
 public abstract class RDFLoad {
     protected final Model model;
     protected final HashMap<Resource, Slide> slideNodeMap = new HashMap<>();

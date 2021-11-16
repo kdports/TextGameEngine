@@ -3,6 +3,9 @@ package handlers;
 import entities.EditorGame;
 import entities.Studio;
 
+/**
+ * The parent class of all handlers.
+ */
 public class  BaseHandler {
     protected final Studio studio;
     protected final EditorGame editorGame;

@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
  */
 public class MenuButton extends Button {
 
+    /**
+     * Sets the common attributes of every button
+     */
     public MenuButton(){
         this.setPrefHeight(90);
         this.setPrefWidth(120);
