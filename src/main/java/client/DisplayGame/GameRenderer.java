@@ -20,7 +20,7 @@ public class GameRenderer implements PlayDisplayer {
     int animationSpeed;
 
     /**
-     * Creates the GameRenderer.
+     * The simple constructor for the GameRenderer that creates a JFrame to display the game
      */
     public GameRenderer() {
         frame = new JFrame("Game");
@@ -36,7 +36,7 @@ public class GameRenderer implements PlayDisplayer {
         animationSpeed = 30;
 
         theme = new Theme();
-    } //Initializes JFrame
+    }
 
     /**
      * This method displays each of the slides onto the JFrame.
