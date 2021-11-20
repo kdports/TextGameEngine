@@ -15,13 +15,13 @@ public class CreateNewSlideHandler extends BaseHandler {
         super(studio, editorGame);
     }
 
-    public void execute(MouseEvent mouseEvent) {
+    public void execute(Double sceneX, double sceneY) {
         // Make sure there are no ID collisions.
         IdControl.addOne();
 
         // Create a slide with some default text
         Slide slide = this.studio.createSlide(IdControl.getId(), "this is a new slide!!!!!");
-        GuiSlide GuiSlide = new GuiSlide(slide, 500, 500);
+        GuiSlide GuiSlide = new GuiSlide(slide, sceneX + 500, sceneY + 500);
 
         // Add those two created objects into the data structure editorGame.
         this.editorGame.connectSlideAndRenderableSlide(slide, GuiSlide);

@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 public class GuiSlide extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
+    public double sceneX;
+    public double sceneY;
     public Text prompt;
 
     public GuiSlide(Slide slide, double xLocation, double yLocation) {
@@ -43,7 +45,7 @@ public class GuiSlide extends StackPane {
         prompt.setFill(Color.BLACK);
         StackPane.setAlignment(prompt, Pos.CENTER);
 
-        Button addDecisionButton = new AddDecisionButton(slide, this.getLayoutX(), this.getLayoutY());
+        Button addDecisionButton = new AddDecisionButton(slide, this);
         Button editButton = new EditSlideButton(slide);
         Button deleteSlideButton = new DeleteSlideButton(slide);
         this.getChildren().addAll(addDecisionButton, editButton, deleteSlideButton, prompt);
@@ -60,10 +62,11 @@ public class GuiSlide extends StackPane {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
+            System.out.println(this.getLayoutY());
         });
         this.setOnMouseDragged(event -> {
-            this.setLayoutX(event.getSceneX() - mouseAnchorX);
-            this.setLayoutY(event.getSceneY() - mouseAnchorY);
+            this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
         });
     }
 

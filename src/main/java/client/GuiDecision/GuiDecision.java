@@ -30,6 +30,8 @@ public class GuiDecision extends StackPane {
     public DecisionLine rightLine;
     public GuiSlide originSlide;
     public GuiSlide targetSlide;
+    public double sceneX;
+    public double sceneY;
 
     public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y) {
         this.originSlide = guiSlide;
@@ -83,12 +85,12 @@ public class GuiDecision extends StackPane {
 
         });
         this.setOnMouseDragged(event -> {
-            this.setLayoutX(event.getSceneX() - mouseAnchorX);
-            this.setLayoutY(event.getSceneY() - mouseAnchorY);
-            leftLine.setEndX(event.getSceneX() - mouseAnchorX);
-            leftLine.setEndY(event.getSceneY() - mouseAnchorY + 25);
-            rightLine.setStartX(event.getSceneX() - mouseAnchorX + 100);
-            rightLine.setStartY(event.getSceneY() - mouseAnchorY + 25);
+            this.setLayoutX(sceneX + event.getSceneX() - mouseAnchorX);
+            this.setLayoutY(sceneY + event.getSceneY() - mouseAnchorY);
+            leftLine.setEndX(sceneX + event.getSceneX() - mouseAnchorX);
+            leftLine.setEndY(sceneY + event.getSceneY() - mouseAnchorY + 25);
+            rightLine.setStartX(sceneX + event.getSceneX() - mouseAnchorX + 100);
+            rightLine.setStartY(sceneY + event.getSceneY() - mouseAnchorY + 25);
         });
     }
 

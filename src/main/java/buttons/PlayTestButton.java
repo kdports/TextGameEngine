@@ -4,8 +4,11 @@ import client.GameRenderer;
 import client.GuiSlide.GuiSlide;
 import entities.*;
 import interfaces.PlayDisplayer;
+import javafx.scene.control.ScrollPane;
 
 import java.util.Map;
+
+import static java.lang.Math.abs;
 
 /**
  * The button that allows the user to play-test the game they are currently creating.
@@ -20,9 +23,12 @@ public class PlayTestButton extends MenuButton {
      * @param editorGame - The existing EditorGame instance that will be used to
      *                   populate a game instance with existing data
      */
-    public PlayTestButton(EditorGame editorGame) {
+    public PlayTestButton(EditorGame editorGame, ScrollPane scrollPane) {
+        super(scrollPane);
         this.setText("Play Test");
         this.setLayoutY(112.5);
+        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 112.5)
+        );
 
         this.setOnMouseClicked(event -> {
             PlayDisplayer playDisplayer = new GameRenderer();

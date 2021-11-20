@@ -63,4 +63,8 @@ public class DecisionLine extends Line {
             }
         }
     }
+
+    public void deleteLine() {
+        this.setVisible(false);
+    }
 }

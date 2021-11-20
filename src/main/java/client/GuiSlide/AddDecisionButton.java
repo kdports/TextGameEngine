@@ -18,4 +18,11 @@ public class AddDecisionButton extends Button {
         StackPane.setAlignment(this, Pos.BOTTOM_RIGHT);
     }
 
+    public AddDecisionButton(Slide slide, GuiSlide guiSlide) {
+        this.setText("Add Decision");
+        this.setOnMousePressed(
+                event -> Handlers.createNewDecisionHandler.create(slide, guiSlide.getLayoutX(), guiSlide.getLayoutY())
+        );
+        StackPane.setAlignment(this, Pos.BOTTOM_RIGHT);
+    }
 }

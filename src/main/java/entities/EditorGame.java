@@ -188,12 +188,16 @@ public class EditorGame {
      * Clear all the data out of the editorGame instance.
      */
     public void clearAll(){
-        for (Map.Entry<Decision, GuiDecision> entry : this.getAllEntriesDecision()){
-            this.deleteDecision(entry.getKey());
-        }
 
         for (Map.Entry<Slide, GuiSlide> entry : this.getAllEntriesSlide()){
             this.deleteSlide(entry.getKey());
+        }
+
+        for (Map.Entry<Decision, GuiDecision> entry : this.getAllEntriesDecision()){
+            entry.getValue().rightLine.deleteLine();
+            entry.getValue().leftLine.deleteLine();
+            this.deleteDecision(entry.getKey());
+
         }
     }
 }
