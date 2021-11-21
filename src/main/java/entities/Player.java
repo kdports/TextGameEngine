@@ -61,8 +61,11 @@ public class Player {
      * @param d a decision
      * @return boolean returns whether the decision is valid
      */
-    public static boolean checkChoice(Decision d){
-        return d != null;
+    public boolean checkChoice(Decision d){
+        if (d != null) {
+            return d.checkConditionals(this.pastChosenDecisions);
+        }
+        return false;
     }
 
     /**
@@ -83,4 +86,9 @@ public class Player {
      * @return pastChosenDecisions
      */
     public HashSet GetPastChosenDecisions() { return this.pastChosenDecisions; }
+
+    /**
+     * Empties pastChosenDecisions
+     */
+    public void clearPastChosenDecisions() { this.pastChosenDecisions.clear(); }
 }

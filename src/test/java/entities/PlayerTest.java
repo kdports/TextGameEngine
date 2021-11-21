@@ -20,7 +20,10 @@ class PlayerTest {
     @Test
     void testCheckChoiceTrue() {
         Decision d = new Decision("test");
-        assertTrue(Player.checkChoice(d));
+        Game sampleGame = CreateSampleGame.returnGame();
+        GameRenderer renderer = new GameRenderer();
+        Player p = new Player(renderer, sampleGame);
+        assertTrue(p.checkChoice(d));
     }
 
     @Test

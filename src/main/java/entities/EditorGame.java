@@ -201,6 +201,10 @@ public class EditorGame {
         }
     }
 
+    public void addDecisionConditional(Decision decision, Decision toAdd) {
+
+    }
+
     /**
      * Clear all the data out of the editorGame instance.
      */

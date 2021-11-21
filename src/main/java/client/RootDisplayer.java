@@ -46,6 +46,9 @@ public class RootDisplayer extends Application {
         SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame);
         this.root.getChildren().addAll(sidebarButtons);
 
+        // Used for setting conditionals
+        GuiDecision.editorGame = editorGame;
+
         holder.setStyle("-fx-background-color: #FFFFFF");
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);

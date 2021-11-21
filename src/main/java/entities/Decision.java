@@ -57,6 +57,15 @@ public class Decision {
 
     public Slide getTarget() { return this.target; }
 
+    public HashSet<Decision> getConditionals() {
+        return conditionals;
+    }
+
+    /**
+     * Certifies that every decision in the conditionals HashSet is also in the inputted set
+     * @param checkAgainst A given set, normally player.pastChosenDecisions
+     * @return Whether conditionals is empty or all in the given HashSet
+     */
     public boolean checkConditionals(HashSet<Decision> checkAgainst) {
         if (!this.conditionals.isEmpty()) {
             Iterator conditionalsIterator = this.conditionals.iterator();
@@ -71,5 +80,14 @@ public class Decision {
 
     public void addToConditionals(Decision d) {
         this.conditionals.add(d);
+    }
+
+    public void switchConditional(Decision d) {
+        if (this.conditionals.contains(d)) {
+            this.conditionals.remove(d);
+        }
+        else {
+            addToConditionals(d);
+        }
     }
 }
