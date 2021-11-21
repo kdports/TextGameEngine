@@ -109,6 +109,7 @@ public class CreateButtons extends CreateButtonPanel{
     private void addDestinationAction(JButton button, int index) {
         button.addActionListener(e -> {
             player.currentSlide = player.currentValidDecisions.get(index).target;
+            player.AddToPastChosenDecisions(player.currentValidDecisions.get(index));
             player.playScene();
         });
     }
