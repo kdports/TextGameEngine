@@ -40,6 +40,7 @@ public class GuiSlide extends StackPane {
         this.initializeDragHandling();
 
         prompt = new Text();
+        prompt.setWrappingWidth(150);
         prompt.setText(slide.getPrompt());
         prompt.setStyle("-fx-blend-mode: overlay");
         prompt.setFill(Color.BLACK);
