@@ -1,6 +1,7 @@
 package entities;
 import interfaces.PlayDisplayer;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * The class that is in charge of playing the game
@@ -10,6 +11,7 @@ public class Player {
     public PlayDisplayer dp;
     public Game game;
     public ArrayList<Decision> currentValidDecisions;
+    private HashSet<Decision> pastChosenDecisions;
 
     /**
      * Constructs a player
@@ -20,6 +22,7 @@ public class Player {
         this.dp = dp;
         this.game = game;
         dp.setPlayer(this);
+        this.pastChosenDecisions = new HashSet();
     }
 
     /**
@@ -58,9 +61,34 @@ public class Player {
      * @param d a decision
      * @return boolean returns whether the decision is valid
      */
-    public static boolean checkChoice(Decision d){
-        return d != null;
+    public boolean checkChoice(Decision d){
+        if (d != null) {
+            return d.checkConditionals(this.pastChosenDecisions);
+        }
+        return false;
     }
 
+    /**
+     * Checks if the given decision is in the list of previously chosen decisions
+     * @param d a decision
+     * @return boolean whether the decision is included
+     */
+    public boolean IsInPastChosenDecisions(Decision d) { return this.pastChosenDecisions.contains(d); }
 
+    /**
+     * Adds the inputted decision to the set of previously chosen decisions
+     * @param d A decision that has been chosen
+     */
+    public void AddToPastChosenDecisions(Decision d) { this.pastChosenDecisions.add(d); }
+
+    /**
+     * Returns the entire set of past chosen decisions. Probably just for testing
+     * @return pastChosenDecisions
+     */
+    public HashSet GetPastChosenDecisions() { return this.pastChosenDecisions; }
+
+    /**
+     * Empties pastChosenDecisions
+     */
+    public void clearPastChosenDecisions() { this.pastChosenDecisions.clear(); }
 }

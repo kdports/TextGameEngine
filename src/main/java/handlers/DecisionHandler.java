@@ -34,4 +34,6 @@ public class DecisionHandler extends BaseHandler {
     public void deleteDecision(Decision decision){
         editorGame.deleteDecision(decision);
     }
+
+    public void changeDecisionConditional(Decision decision, Decision target) { decision.switchConditional(target); }
 }

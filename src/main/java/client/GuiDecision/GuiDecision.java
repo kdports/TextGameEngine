@@ -4,29 +4,28 @@ import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
 import entities.Decision;
+import entities.EditorGame;
 import handlers.Handlers;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * The object representing the decisions displayed inside the editor.
  */
 public class GuiDecision extends StackPane {
+    public static EditorGame editorGame;
     private double mouseAnchorX;
     private double mouseAnchorY;
     public DecisionLine leftLine;
@@ -135,9 +134,23 @@ public class GuiDecision extends StackPane {
             slideWindow.close();
         });
 
+        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getAllEntriesDecision();
+        ArrayList<Decision> possibleConditionals = new ArrayList<Decision>();
+        for (Map.Entry<Decision, GuiDecision> e : allDecisions) {
+            Decision d = e.getKey();
+            if (d != decision) {
+                possibleConditionals.add(d);
+            }
+        }
+        ComboBox<Decision> decisionComboBox = new ComboBox<Decision>(FXCollections.observableArrayList(possibleConditionals));
+        decisionComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
+            System.out.println(decision.getConditionals());
+        });
+
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton);
+        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton, decisionComboBox);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);

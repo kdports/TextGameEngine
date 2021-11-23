@@ -6,7 +6,6 @@ import entities.Game;
 import entities.Studio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import rdf.RDFLoadToPlayer;
 import rdf.RDFLoadToStudio;
 import utils.IdControl;
 
