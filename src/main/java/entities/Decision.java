@@ -12,11 +12,14 @@ public class Decision {
     public Slide target;
     public Slide origin;
     public int id;
-    private HashSet<Decision> conditionals;
+    private HashSet<Decision> decisionConditionals;
+    private HashSet<String> itemConditionals;
+    private String itemToGive;
 
     public Decision(String text) {
         this.text = text;
-        this.conditionals = new HashSet();
+        this.decisionConditionals = new HashSet();
+        this.itemConditionals = new HashSet<String>();
     }
 
     public Decision(String text, Slide origin, int id, Slide target) {
@@ -24,7 +27,8 @@ public class Decision {
         this.origin = origin;
         this.id = id;
         this.target = target;
-        this.conditionals = new HashSet();
+        this.decisionConditionals = new HashSet();
+        this.itemConditionals = new HashSet<String>();
     }
 
     public Decision(String text, Slide origin, int id) {
@@ -32,7 +36,8 @@ public class Decision {
         this.origin = origin;
         this.id = id;
         this.target = null;
-        this.conditionals = new HashSet();
+        this.decisionConditionals = new HashSet();
+        this.itemConditionals = new HashSet<String>();
     }
 
     /**
@@ -57,20 +62,28 @@ public class Decision {
 
     public Slide getTarget() { return this.target; }
 
-    public HashSet<Decision> getConditionals() {
-        return conditionals;
+    public HashSet<Decision> getDecisionConditionals() {
+        return decisionConditionals;
     }
 
     /**
-     * Certifies that every decision in the conditionals HashSet is also in the inputted set
+     * Certifies that every decision in the decisionConditionals HashSet is also in the inputted set
      * @param checkAgainst A given set, normally player.pastChosenDecisions
-     * @return Whether conditionals is empty or all in the given HashSet
+     * @return Whether decisionConditionals is empty or all in the given HashSet
      */
-    public boolean checkConditionals(HashSet<Decision> checkAgainst) {
-        if (!this.conditionals.isEmpty()) {
-            Iterator conditionalsIterator = this.conditionals.iterator();
+    public boolean checkConditionals(HashSet<Decision> checkAgainst, HashSet<String> itemsHeld) {
+        if (!this.decisionConditionals.isEmpty()) {
+            Iterator conditionalsIterator = this.decisionConditionals.iterator();
             while (conditionalsIterator.hasNext()) {
                 if (!checkAgainst.contains(conditionalsIterator.next())) {
+                    return false;
+                }
+            }
+        }
+        if (!this.itemConditionals.isEmpty()) {
+            Iterator conditionalsIterator = this.decisionConditionals.iterator();
+            while (conditionalsIterator.hasNext()) {
+                if (!itemsHeld.contains(conditionalsIterator.next())) {
                     return false;
                 }
             }
@@ -78,16 +91,33 @@ public class Decision {
         return true;
     }
 
-    public void addToConditionals(Decision d) {
-        this.conditionals.add(d);
+    public void addToDecisionConditionals(Decision d) {
+        this.decisionConditionals.add(d);
     }
 
-    public void switchConditional(Decision d) {
-        if (this.conditionals.contains(d)) {
-            this.conditionals.remove(d);
+    public void switchDecisionConditional(Decision d) {
+        if (this.decisionConditionals.contains(d)) {
+            this.decisionConditionals.remove(d);
         }
         else {
-            addToConditionals(d);
+            addToDecisionConditionals(d);
         }
     }
+
+    public void addToItemConditionals(String s) {
+        this.itemConditionals.add(s);
+    }
+
+    public void switchItemConditional(String s) {
+        if (this.itemConditionals.contains(s)) {
+            this.itemConditionals.remove(s);
+        }
+        else {
+            addToItemConditionals(s);
+        }
+    }
+
+    public void setItemToGive(String s) { this.itemToGive = s; }
+
+    public String getItemToGive() { return this.itemToGive; }
 }

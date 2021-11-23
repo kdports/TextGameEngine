@@ -15,10 +15,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -134,6 +136,7 @@ public class GuiDecision extends StackPane {
             slideWindow.close();
         });
 
+        // Decision conditionals - a list of all decisions that aren't the one being edited
         ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getAllEntriesDecision();
         ArrayList<Decision> possibleConditionals = new ArrayList<Decision>();
         for (Map.Entry<Decision, GuiDecision> e : allDecisions) {
@@ -142,15 +145,36 @@ public class GuiDecision extends StackPane {
                 possibleConditionals.add(d);
             }
         }
+        Text decisionCondition = new Text("Choose decision conditionals below");
+        // A dropdown list of all decisions to select from
         ComboBox<Decision> decisionComboBox = new ComboBox<Decision>(FXCollections.observableArrayList(possibleConditionals));
         decisionComboBox.setOnAction(mouseEvent -> {
             Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
-            System.out.println(decision.getConditionals());
+        });
+
+        TextField itemInput = new TextField(decision.getItemToGive());
+        // Edit the value on entry according to the value on the text field
+        Button btnItemEdit = new Button("Save the above text as an item to give");
+        btnItemEdit.setOnAction(mouseEvent -> Handlers.decisionHandler.changeGivenItem(decision, itemInput.getText()));
+
+        // A hashset of all items given by other decisions
+        HashSet<String> allItems = new HashSet<String>();
+        for (Decision d : possibleConditionals) {
+            if (d.getItemToGive() != null) {
+                allItems.add(d.getItemToGive());
+            }
+        }
+        Text itemCondition = new Text("Choose item conditionals below");
+        // A dropdown list of all decisions to select from
+        ComboBox<String> itemComboBox = new ComboBox<String>(FXCollections.observableArrayList(allItems));
+        itemComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue());
         });
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton, decisionComboBox);
+        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton, decisionCondition, decisionComboBox,
+                itemInput, btnItemEdit, itemCondition, itemComboBox);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);
