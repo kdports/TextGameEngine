@@ -1,1 +1,0 @@
-This is where the code for the display and GUI will go. I'm sure there will be subdirectories like /components and /containers or something like that.
