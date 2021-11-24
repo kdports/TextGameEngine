@@ -109,4 +109,11 @@ public class Player {
             addToItems(d.getItemToGive());
         }
     }
+
+    /**
+     * Empties the inventory
+     */
+    public void clearInventory() {
+        this.inventory = new Inventory();
+    }
 }

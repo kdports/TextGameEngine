@@ -81,7 +81,7 @@ public class Decision {
             }
         }
         if (!this.itemConditionals.isEmpty()) {
-            Iterator conditionalsIterator = this.decisionConditionals.iterator();
+            Iterator conditionalsIterator = this.itemConditionals.iterator();
             while (conditionalsIterator.hasNext()) {
                 if (!itemsHeld.contains(conditionalsIterator.next())) {
                     return false;
@@ -120,4 +120,6 @@ public class Decision {
     public void setItemToGive(String s) { this.itemToGive = s; }
 
     public String getItemToGive() { return this.itemToGive; }
+
+    public boolean hasItemToGive() { return this.itemToGive != null; }
 }
