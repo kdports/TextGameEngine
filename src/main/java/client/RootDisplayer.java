@@ -49,7 +49,7 @@ public class RootDisplayer extends Application {
         // Used for setting conditionals
         GuiDecision.editorGame = editorGame;
 
-        holder.setStyle("-fx-background-color: #FFFFFF");
+        holder.setStyle("-fx-background-color: #ff847c");
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);
         primaryStage.show();

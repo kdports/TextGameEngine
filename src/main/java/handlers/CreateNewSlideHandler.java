@@ -25,7 +25,7 @@ public class CreateNewSlideHandler extends BaseHandler {
         IdControl.addOne();
 
         // Create a slide with some default text
-        Slide slide = this.studio.createSlide(IdControl.getId(), "this is a new slide!!!!!");
+        Slide slide = this.studio.createSlide(IdControl.getId(), "A New Slide");
         GuiSlide GuiSlide = new GuiSlide(slide, 500, 500);
 
         // Add those two created objects into the data structure editorGame.
