@@ -92,6 +92,7 @@ public class CreateButtons extends CreateButtonPanel{
             //Handles the action of when the button gets pressed
             b.addActionListener(e -> {
                 player.clearPastChosenDecisions();
+                player.clearInventory();
                 player.currentSlide = player.game.firstSlide;
                 player.playScene();
             });
@@ -110,6 +111,9 @@ public class CreateButtons extends CreateButtonPanel{
     private void addDestinationAction(JButton button, int index) {
         button.addActionListener(e -> {
             player.currentSlide = player.currentValidDecisions.get(index).target;
+            if (player.currentValidDecisions.get(index).hasItemToGive()) {
+                player.receiveItem(player.currentValidDecisions.get(index));
+            }
             player.AddToPastChosenDecisions(player.currentValidDecisions.get(index));
             player.playScene();
         });
