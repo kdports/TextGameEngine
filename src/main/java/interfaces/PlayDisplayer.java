@@ -1,10 +1,13 @@
 package interfaces;
 import entities.Player;
+import javafx.stage.Stage;
 
 /**
  * The displayer that is used to display the game
  */
 public interface PlayDisplayer {
+
+    void setStage(Stage stage);
     /**
      * Displays the game
      */

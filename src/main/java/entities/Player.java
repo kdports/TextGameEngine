@@ -1,5 +1,7 @@
 package entities;
 import interfaces.PlayDisplayer;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -15,6 +17,13 @@ public class Player {
     }
 
     public void playGame() {
+        currentSlide = game.firstSlide;
+        checkValidChoices();
+        playScene();
+    }
+
+    public void playGame(Stage stage) {
+        dp.setStage(stage);
         currentSlide = game.firstSlide;
         checkValidChoices();
         playScene();

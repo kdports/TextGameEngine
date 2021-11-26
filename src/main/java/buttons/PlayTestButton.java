@@ -4,6 +4,7 @@ import client.DisplayGame.GameRenderer;
 import client.GuiSlide.GuiSlide;
 import entities.*;
 import interfaces.PlayDisplayer;
+import javafx.stage.Stage;
 
 import java.util.Map;
 
@@ -39,7 +40,8 @@ public class PlayTestButton extends MenuButton {
                 }
                 game.addSlide(slide);
             }
-            player.playGame();
+            Stage stage = new Stage();
+            player.playGame(stage);
         });
     }
 

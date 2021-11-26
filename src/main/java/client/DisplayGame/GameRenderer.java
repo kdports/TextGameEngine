@@ -79,6 +79,10 @@ public class GameRenderer extends Application implements PlayDisplayer {
         stage.show();
     }
 
+    public void setStage(Stage stage){
+        GameRenderer.stage = stage;
+    }
+
     /**
      * Sets the game player
      * @param player The player to be used as the game player
@@ -91,7 +95,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * Main method
      */
     public static void main(String[] args) {
-        ggame gr = new ggame();
+        GameRenderer gr = new  GameRenderer();
         new Player(gr, CreateSampleGame.returnGame());
         gr.begin(args);
     }
