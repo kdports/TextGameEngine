@@ -12,6 +12,7 @@ public class Player {
     public Game game;
     public ArrayList<Decision> currentValidDecisions;
     private HashSet<Decision> pastChosenDecisions;
+    private Inventory inventory;
 
     /**
      * Constructs a player
@@ -23,6 +24,7 @@ public class Player {
         this.game = game;
         dp.setPlayer(this);
         this.pastChosenDecisions = new HashSet();
+        this.inventory = new Inventory();
     }
 
     /**
@@ -63,7 +65,7 @@ public class Player {
      */
     public boolean checkChoice(Decision d){
         if (d != null) {
-            return d.checkConditionals(this.pastChosenDecisions);
+            return d.checkConditionals(this.pastChosenDecisions, this.inventory.getItems());
         }
         return false;
     }
@@ -91,4 +93,27 @@ public class Player {
      * Empties pastChosenDecisions
      */
     public void clearPastChosenDecisions() { this.pastChosenDecisions.clear(); }
+
+    /**
+     * Adds an item to the inventory
+     * @param s string representing an item to add
+     */
+    public void addToItems(String s) { this.inventory.addItem(s); }
+
+    /**
+     * Gets the decision's item
+     * @param d The decision to get an item from
+     */
+    public void receiveItem(Decision d) {
+        if (d.getItemToGive() != null) {
+            addToItems(d.getItemToGive());
+        }
+    }
+
+    /**
+     * Empties the inventory
+     */
+    public void clearInventory() {
+        this.inventory = new Inventory();
+    }
 }

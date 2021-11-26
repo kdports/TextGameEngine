@@ -4,9 +4,7 @@ import entities.Decision;
 import entities.EditorGame;
 import entities.Studio;
 //import interfaces.RenderableDecision;
-import javafx.scene.input.MouseEvent;
 
-import java.util.Map;
 
 /**
  * A Handler to deal with the actions a user can do to a Decision.
@@ -35,5 +33,11 @@ public class DecisionHandler extends BaseHandler {
         editorGame.deleteDecision(decision);
     }
 
-    public void changeDecisionConditional(Decision decision, Decision target) { decision.switchConditional(target); }
+    public void changeDecisionConditional(Decision decision, Decision target) { decision.switchDecisionConditional(target); }
+
+    public void changeItemConditional(Decision decision, String item) { decision.addToItemConditionals(item); }
+
+    public void changeGivenItem(Decision decision, String item) {
+        decision.setItemToGive(item);
+    }
 }

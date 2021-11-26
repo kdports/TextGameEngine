@@ -60,18 +60,41 @@ class DecisionTest {
         Decision d2 = new Decision("");
         Decision d3 = new Decision("");
         HashSet<Decision> checker = new HashSet<>();
+        HashSet<String> itemCheck = new HashSet<>();
 
-        d.addToConditionals(d2);
+        d.addToDecisionConditionals(d2);
 
-        assertFalse(d.checkConditionals(checker));
+        assertFalse(d.checkConditionals(checker, itemCheck));
 
         checker.add(d2);
 
-        assertTrue(d.checkConditionals(checker));
+        assertTrue(d.checkConditionals(checker, itemCheck));
 
-        d.addToConditionals(d3);
+        d.addToDecisionConditionals(d3);
         checker.add(d3);
 
-        assertTrue(d.checkConditionals(checker));
+        assertTrue(d.checkConditionals(checker, itemCheck));
+    }
+
+    @Test
+    void testItemConditionals() {
+        Decision d = new Decision("");
+        String a = "a";
+        String b = "b";
+        HashSet<Decision> checker = new HashSet<>();
+        HashSet<String> itemCheck = new HashSet<>();
+
+        d.addToItemConditionals(a);
+
+        assertFalse(d.checkConditionals(checker, itemCheck));
+
+        itemCheck.add(a);
+
+        assertTrue(d.checkConditionals(checker, itemCheck));
+
+        d.addToItemConditionals(b);
+        itemCheck.add(b);
+
+        assertTrue(d.checkConditionals(checker, itemCheck));
     }
 }
