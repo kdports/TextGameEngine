@@ -1,5 +1,6 @@
 package buttons;
 
+import client.ThemeColours;
 import entities.EditorGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,14 +19,13 @@ public class SaveButton extends MenuButton {
      * Creates a Button instance of the save button that is displayed in the game.
      * Also handles what happens when the button is clicked (saving an editor
      * to a file)
-     *
      * @param window - The window in which the file explorer resides when clicking save
      * @param editorGame - The existing EditorGame instance that will have its data
-     *                   saved to a file
+     * @param theme
      */
-    public SaveButton(Scene window, EditorGame editorGame) {
+    public SaveButton(Scene window, EditorGame editorGame, ThemeColours theme) {
         super();
-
+        this.setStyle(theme.active.sidebarColour);
         this.setText("Save");
         this.setLayoutY(215);
 

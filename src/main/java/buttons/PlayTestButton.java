@@ -2,6 +2,7 @@ package buttons;
 
 import client.DisplayGame.GameRenderer;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.*;
 import interfaces.PlayDisplayer;
 
@@ -16,11 +17,13 @@ public class PlayTestButton extends MenuButton {
      * Creates a Button instance of the playtest button that is displayed in the game.
      * Also handles what happens when the button is clicked (running the game
      * in the gameplayer)
-     *
-     * @param editorGame - The existing EditorGame instance that will be used to
+     *  @param editorGame - The existing EditorGame instance that will be used to
      *                   populate a game instance with existing data
+     * @param theme
      */
-    public PlayTestButton(EditorGame editorGame) {
+    public PlayTestButton(EditorGame editorGame, ThemeColours theme) {
+        super();
+        this.setStyle(theme.active.sidebarColour);
         this.setText("Play Test");
         this.setLayoutY(112.5);
 

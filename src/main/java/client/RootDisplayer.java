@@ -35,6 +35,10 @@ public class RootDisplayer extends Application {
     public void start(Stage primaryStage) {
         StackPane holder = new StackPane();
         Canvas canvas = new Canvas(5000,  5000);
+
+        // The theme is instantiated as default
+        ThemeColours theme = new ThemeColours();
+
         holder.getChildren().add(canvas);
         this.root.getChildren().add(holder);
 
@@ -43,13 +47,13 @@ public class RootDisplayer extends Application {
 
         Scene window = new Scene(this.root, 1920, 1080);
         // Add the three sidebar buttons
-        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame);
+        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame, theme);
         this.root.getChildren().addAll(sidebarButtons);
 
         // Used for setting conditionals
         GuiDecision.editorGame = editorGame;
 
-        holder.setStyle("-fx-background-color: #ff847c");
+        holder.setStyle(theme.active.backgroundColour);
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);
         primaryStage.show();

@@ -1,5 +1,6 @@
 package buttons;
 
+import client.ThemeColours;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -9,7 +10,6 @@ import javafx.scene.shape.Rectangle;
  * X coordinate.
  */
 public class MenuButton extends Button {
-
     /**
      * Sets the common attributes of every button
      */
@@ -23,7 +23,7 @@ public class MenuButton extends Button {
         this.setShape(rounded);
         this.setPrefHeight(90);
         this.setPrefWidth(120);
-        this.setStyle("-fx-background-color: #99b898; " + "-fx-background-insets: 0;");
+        this.setStyle("-fx-background-insets: 0;");
         this.setLayoutX(10);
     }
 }

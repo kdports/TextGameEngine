@@ -1,8 +1,11 @@
 package buttons;
 
+import client.ThemeColours;
 import entities.EditorGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,12 +21,13 @@ public class SidebarButtons extends ArrayList<Button> {
      * @param window - The window in which the file explorer resides
      * @param editorGame - The existing EditorGame instance
      */
-    public SidebarButtons(Scene window, EditorGame editorGame) {
-        Button createNewSlideButton = new NewSlideButton();
-        Button playTestButton = new PlayTestButton(editorGame);
-        Button saveButton = new SaveButton(window, editorGame);
-        Button loadButton = new LoadButton(window, editorGame);
+    public SidebarButtons(Scene window, EditorGame editorGame, ThemeColours theme) {
+        Button createNewSlideButton = new NewSlideButton(theme);
+        Button playTestButton = new PlayTestButton(editorGame, theme);
+        Button saveButton = new SaveButton(window, editorGame, theme);
+        Button loadButton = new LoadButton(window, editorGame, theme);
+        Button themeButton = new ThemeButton(theme);
 
-        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton));
+        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton, themeButton));
     }
 }
