@@ -16,6 +16,7 @@ public class Player {
 
     public void playGame() {
         currentSlide = game.firstSlide;
+        checkValidChoices();
         playScene();
     }
 
@@ -25,6 +26,7 @@ public class Player {
      * implemented later
      */
     public void playScene(){
+        checkValidChoices();
         dp.display();
     }
 

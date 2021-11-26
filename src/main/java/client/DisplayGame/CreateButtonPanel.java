@@ -28,20 +28,20 @@ public class CreateButtonPanel extends JPanel{
 
     }
 
-    /**
-     * Creates the panel with all the buttons to add to the screen.
-     *
-     */
-    public void createBPanel(){
-
-        this.setBackground(theme.backgroundColor);
-        CreateButtons buttons = new CreateButtons(player, theme);
-        int num = buttons.createButtons(this);
-        // Sets the size of the window and the layout
-        this.setLayout(new GridLayout(num, 1));
-        this.setPreferredSize(new Dimension(100, num * 50));
-        this.setBorder(new EmptyBorder(10, 10, 10, 10));
-    }
+//    /**
+//     * Creates the panel with all the buttons to add to the screen.
+//     *
+//     */
+//    public void createBPanel(){
+//
+//        this.setBackground(theme.backgroundColor);
+//        CreateButtons buttons = new CreateButtons(player, theme);
+//        int num = buttons.createButtons(this);
+//        // Sets the size of the window and the layout
+//        this.setLayout(new GridLayout(num, 1));
+//        this.setPreferredSize(new Dimension(100, num * 50));
+//        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+//    }
 
     /**
      * Adds listeners to the button choices so that they change color when hovered.
