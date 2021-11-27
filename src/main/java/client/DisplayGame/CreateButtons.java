@@ -8,10 +8,15 @@ import javafx.event.EventHandler;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
@@ -19,9 +24,8 @@ import javafx.stage.Stage;
 
 import static java.lang.Long.MAX_VALUE;
 
-public class CreateButtons{
-    Player player;
-    Theme theme;
+public class CreateButtons extends CreateButtonPane{
+
 
     /**
      * Creates the panel with all the buttons to add to the screen.
@@ -30,8 +34,7 @@ public class CreateButtons{
      * @param theme  - The theme that the GameRenderer is currently using
      */
     CreateButtons(Player player, Theme theme) {
-        this.theme = theme;
-        this.player = player;
+        super(player, theme);
     }
 
     /**
@@ -39,13 +42,22 @@ public class CreateButtons{
      *
      * @return - The button.
      */
-    private static Button createButton() {
+    private Button createButton(ImageView arrow) {
         // Creates a button and sets the theme, font, image, etc of the button.
         Button b = new Button();
         b.setMaxWidth(MAX_VALUE);
         b.setBorder(null);
         b.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 15));
 
+
+        b.setGraphic(arrow);
+        b.setAlignment(Pos.CENTER_LEFT);
+        b.setFont(Font.font ("Rockwell", 20));
+        b.setWrapText(true);
+        b.setStyle("-fx-background-color: #FFFFFF; -fx-border-width: 0px;");
+        b.setTextFill(theme.textColor);
+
+        b.setCursor(Cursor.HAND);
         return b;
     }
 
@@ -54,25 +66,25 @@ public class CreateButtons{
      *
      * @return - The number of buttons.
      */
-    public static int createButtons(Player player, VBox root) {
+    public int createButtons(Pane root) {
         // Keeps count of how many buttons are in each Slide
         int count = 0;
         // Gets the two images that are used in the buttons
-//        final ImageIcon arrow = createIcon("redArrow.png", theme.textColor);
-//        final ImageIcon redArrow = createIcon("redArrow.png", theme.textHoverColor);
+        final ImageView arrow = createIcon("redArrow.png", theme.textColor);
+        final ImageView redArrow = createIcon("redArrow.png", theme.textHoverColor);
 
         // If this is the last slide then create the restart button
-        if (createRestartButton(player, root)){
+        if (createRestartButton(root, redArrow, arrow)){
             return 1;
         }
         // Creates the other buttons if it is not the last slide
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
-
-            Button b = createButton();
+            // Creates the button
+            Button b = createButton(arrow);
             b.setText(player.currentValidDecisions.get(i).text);
             addDestinationAction(player, b, i);
-//            addListeners(b, redArrow, arrow);
+            addListeners(b, redArrow, arrow);
             root.getChildren().add(b);
         }
         return count;
@@ -83,13 +95,14 @@ public class CreateButtons{
      *
      * @return - The number of buttons.
      */
-    public static boolean createRestartButton(Player player, VBox root){
+    public boolean createRestartButton(Pane root, ImageView redArrow, ImageView arrow){
         // Checks if there are any more decisions, if not then it creates the replay buttons
         // and returns true
         if (player.currentValidDecisions.size() == 0) {
-            Button b = createButton();
+            Button b = createButton(arrow);
             b.setText("Replay the game?");
-//            addListeners(b, redArrow, arrow);
+            addListeners(b, redArrow, arrow);
+            // Handles the action of when the button is pressed
             b.setOnAction(arg0 -> {
                 player.currentSlide = player.game.firstSlide;
                 player.playScene();

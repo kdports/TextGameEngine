@@ -7,14 +7,8 @@ import entities.CreateSampleGame;
 import interfaces.PlayDisplayer;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
@@ -23,7 +17,7 @@ import static javafx.application.Application.launch;
  * The class that is in charge of rendering the game.
  */
 public class GameRenderer extends Application implements PlayDisplayer {
-    VBox root; // Creates JFrame that the GameRenderer will use to display the window
+    BorderPane root; // Creates JFrame that the GameRenderer will use to display the window
     Theme theme;
     private static Player player;
     private static Stage stage;
@@ -35,8 +29,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * Creates the GameRenderer.
      */
     public GameRenderer() {
-        root = new VBox();
-
+        root = new BorderPane();
         animationSpeed = 30;
 
         theme = new Theme();
@@ -46,9 +39,13 @@ public class GameRenderer extends Application implements PlayDisplayer {
         launch(args);
     }
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage)  {
         stage = primaryStage;
         stage.setTitle("First JavaFX Application");
+        // Sets the image in the top left, currently no image
+        // Image image = new Image("");
+        // stage.getIcons().add(image);
+
         player.playGame();
     }
 
@@ -56,8 +53,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * This method displays each of the slides onto the JFrame.
      */
     public void display() {
-        root = new VBox();
-
+        root = new BorderPane();
 
         /* creates a scrolling display that contains the text and buttons for the game */
 //        CreateMenu menu = new CreateMenu(theme, player, animationSpeed, frame, this);
@@ -72,9 +68,15 @@ public class GameRenderer extends Application implements PlayDisplayer {
 //        frame.add(buttonScroll, BorderLayout.SOUTH);
 //
 //        frame.setVisible(true);
-        root.getChildren().add(CreateTextPanel.createTextArea(player));
-        CreateButtons.createButtons(player, root);
+
+        // TODO: add the menu part
+        CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
+        root.setCenter(TPane.createTPane());
+        root.setStyle("-fx-border-width: 5px; -fx-border-color: #FFFFFF");
+        CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
+        root.setBottom(buttonPane.createBPane());
         Scene scene=new Scene(root,1200,800);
+        scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
         stage.show();
     }

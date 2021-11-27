@@ -1,7 +1,7 @@
 package client;
 
 import java.awt.*;
-
+import javafx.scene.paint.Color;
 /**
  * The Theme class contains multiple color variables that store what color certain things in the GUI should be and can
  * be changed based on the theme.
@@ -39,14 +39,14 @@ public class Theme {
                 textHoverColor = Color.RED;
                 break;
             case "Pastel":
-                textColor = Color.DARK_GRAY;
+                textColor = Color.DARKGRAY;
                 backgroundColor = Color.PINK;
-                textHoverColor = Color.orange;
+                textHoverColor = Color.ORANGE;
                 break;
             case "Blue Sky":
-                textColor = new Color(255, 255, 255);
-                backgroundColor = new Color(159, 208, 255);
-                textHoverColor = new Color(22, 158, 40);
+                textColor = Color.WHITE;
+                backgroundColor = Color.LIGHTSKYBLUE;
+                textHoverColor = Color.GREEN;
                 break;
         }
     }
