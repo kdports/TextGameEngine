@@ -47,12 +47,11 @@ public class CreateButtons extends CreateButtonPane{
         Button b = new Button();
         b.setMaxWidth(MAX_VALUE);
         b.setBorder(null);
-        b.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 15));
+        b.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 25));
 
 
         b.setGraphic(arrow);
         b.setAlignment(Pos.CENTER_LEFT);
-        b.setFont(Font.font ("Rockwell", 20));
         b.setWrapText(true);
         b.setStyle("-fx-background-color: #FFFFFF; -fx-border-width: 0px;");
         b.setTextFill(theme.textColor);

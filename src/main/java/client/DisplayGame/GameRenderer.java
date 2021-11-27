@@ -19,8 +19,8 @@ import static javafx.application.Application.launch;
 public class GameRenderer extends Application implements PlayDisplayer {
     BorderPane root; // Creates JFrame that the GameRenderer will use to display the window
     Theme theme;
-    private static Player player;
-    private static Stage stage;
+    protected static Player player;
+    protected static Stage stage;
 
 
     int animationSpeed;
@@ -45,8 +45,8 @@ public class GameRenderer extends Application implements PlayDisplayer {
         // Sets the image in the top left, currently no image
         // Image image = new Image("");
         // stage.getIcons().add(image);
-
-        player.playGame();
+        TitleScreen titleScreen = new TitleScreen();
+        titleScreen.displayFirstSlide();
     }
 
     /**
