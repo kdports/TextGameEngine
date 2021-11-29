@@ -116,4 +116,20 @@ public class Player {
     public void clearInventory() {
         this.inventory = new Inventory();
     }
+
+    /**
+     * Returns true if this game will throw an error during runtime
+     */
+    public boolean isMalformedGame() {
+        if (currentSlide == null) {
+            return true;
+        }
+        if (currentSlide.outgoingDecisions.isEmpty()) {
+            return true;
+        }
+        if (game.firstSlide == null) {
+            return true;
+        }
+        return false;
+    }
 }
