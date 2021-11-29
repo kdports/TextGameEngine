@@ -103,8 +103,8 @@ public class CreateButtons extends CreateButtonPane{
             addListeners(b, redArrow, arrow);
             // Handles the action of when the button is pressed
             b.setOnAction(arg0 -> {
-                player.currentSlide = player.game.firstSlide;
-                player.playScene();
+                TitleScreen titleScreen = new TitleScreen();
+                titleScreen.displayFirstSlide();
             });
             root.getChildren().add(b);
             return true;
