@@ -1,6 +1,7 @@
 package rdf;
 
 import client.DisplayGame.GameRenderer;
+import entities.CreateSampleGame;
 import entities.Game;
 import entities.Player;
 import entities.Slide;
@@ -15,10 +16,10 @@ public class RDFLoadToPlayer extends RDFLoad {
         super(filepath);
     }
 
-    public void sendGame(Game game) {
+    public void sendGame(Game game, String[] args) {
         PlayDisplayer dp = new GameRenderer();
-        Player p = new Player(dp, game);
-        p.playGame();
+        new Player(dp, game);
+        dp.begin(args);
     }
 
     public Game loadGameFromFile() {
@@ -45,7 +46,7 @@ public class RDFLoadToPlayer extends RDFLoad {
         String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
         RDFLoadToPlayer loader = new RDFLoadToPlayer(rdfFilepath);
         Game game = loader.loadGameFromFile();
-        loader.sendGame(game);
+        loader.sendGame(game, args);
     }
 
 

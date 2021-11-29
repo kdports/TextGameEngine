@@ -7,6 +7,9 @@ import javafx.stage.Stage;
  */
 public interface PlayDisplayer {
 
+    void begin(String[] args);
+
+
     void setStage(Stage stage);
     /**
      * Displays the game
