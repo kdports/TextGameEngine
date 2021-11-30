@@ -4,7 +4,7 @@ package client.DisplayGame;
 import client.Theme;
 import entities.Player;
 import entities.CreateSampleGame;
-import interfaces.PlayDisplayer;
+import client.PlayDisplayer;
 
 import javax.swing.*;
 import java.awt.*;

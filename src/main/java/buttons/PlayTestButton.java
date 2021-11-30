@@ -3,7 +3,7 @@ package buttons;
 import client.DisplayGame.GameRenderer;
 import client.GuiSlide.GuiSlide;
 import entities.*;
-import interfaces.PlayDisplayer;
+import client.PlayDisplayer;
 import javafx.scene.control.Alert;
 
 import java.util.Map;

@@ -1,5 +1,5 @@
 package entities;
-import interfaces.PlayDisplayer;
+import client.PlayDisplayer;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -121,15 +121,11 @@ public class Player {
      * Returns true if this game will throw an error during runtime
      */
     public boolean isMalformedGame() {
-        if (currentSlide == null) {
-            return true;
-        }
-        if (currentSlide.outgoingDecisions.isEmpty()) {
-            return true;
-        }
-        if (game.firstSlide == null) {
-            return true;
-        }
+        try {
+            currentSlide.getId();
+            game.firstSlide.getId();
+            currentSlide.outgoingDecisions.isEmpty();
+        } catch (NullPointerException e) { return true; }
         return false;
     }
 }
