@@ -2,6 +2,7 @@ package buttons;
 
 import entities.EditorGame;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import rdf.RDFSave;
@@ -41,10 +42,16 @@ public class SaveButton extends MenuButton {
             if (location != null){
                 String path = location.getAbsolutePath();
                 RDFSave rdfSave = new RDFSave();
-                try {
-                    rdfSave.saveToTrig(editorGame, path);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                if (rdfSave.isMalformedGame(editorGame, path)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Your game is malformed! Make sure you have a firstslide set and all decisions going to a slide!");
+                    alert.showAndWait();
+                }
+                else {
+                    try {
+                        rdfSave.saveToTrig(editorGame, path);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
