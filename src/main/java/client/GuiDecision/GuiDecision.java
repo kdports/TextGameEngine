@@ -57,7 +57,6 @@ public class GuiDecision extends StackPane {
         this.setMaxWidth(120);
         this.setMinHeight(26);
         this.setMaxHeight(26);
-        //this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
@@ -82,7 +81,7 @@ public class GuiDecision extends StackPane {
                 this.getLayoutX(),
                 this.getLayoutY(),
                 this.getLayoutX(),
-                this.getLayoutY() + 25,
+                this.getLayoutY() + 13,
                 ConnectionDirection.ORIGIN,
                 originSlide
         );
@@ -119,9 +118,9 @@ public class GuiDecision extends StackPane {
             this.setLayoutX(sceneX + event.getSceneX() - mouseAnchorX);
             this.setLayoutY(sceneY + event.getSceneY() - mouseAnchorY);
             leftLine.setEndX(sceneX + event.getSceneX() - mouseAnchorX);
-            leftLine.setEndY(sceneY + event.getSceneY() - mouseAnchorY + 25);
-            rightLine.setStartX(sceneX + event.getSceneX() - mouseAnchorX + 100);
-            rightLine.setStartY(sceneY + event.getSceneY() - mouseAnchorY + 25);
+            leftLine.setEndY(sceneY + event.getSceneY() - mouseAnchorY  + 13);
+            rightLine.setStartX(sceneX + event.getSceneX() - mouseAnchorX + 120);
+            rightLine.setStartY(sceneY + event.getSceneY() - mouseAnchorY + 13);
         });
     }
 

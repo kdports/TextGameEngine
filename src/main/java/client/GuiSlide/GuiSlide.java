@@ -56,8 +56,6 @@ public class GuiSlide extends StackPane {
         this.initializeDragHandling();
 
         TextArea temp_prompt = new TextArea(slide.getPrompt());
-        temp_prompt.setLayoutX(50);
-        temp_prompt.setLayoutY(50);
         temp_prompt.setMaxHeight(50);
         temp_prompt.setWrapText(true);
         if (!Objects.equals(theme.active.slideColour, "#ffffff")) {
@@ -96,7 +94,7 @@ public class GuiSlide extends StackPane {
 
         this.getChildren().addAll(rounded, addDecisionButton, editButton, deleteSlideButton, setFirstButton, temp_prompt);
 
-        Circle firstSlideIndicator = new FirstSlideIndicator();
+        Circle firstSlideIndicator = new FirstSlideIndicator(theme);
 
         this.initializeListeners(slide, firstSlideIndicator);
     }
@@ -118,7 +116,7 @@ public class GuiSlide extends StackPane {
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY - 68);
         });
     }
 
