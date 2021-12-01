@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,6 +25,8 @@ import javafx.stage.Stage;
 public class GuiSlide extends StackPane {
     private double mouseAnchorX;
     private double mouseAnchorY;
+    public double sceneX;
+    public double sceneY;
     public Text prompt;
 
     /**
@@ -43,21 +46,43 @@ public class GuiSlide extends StackPane {
         this.setMinWidth(200);
         this.setMaxHeight(100);
         this.setMinHeight(100);
-        this.setStyle("-fx-background-color: lightgray;");
+        this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
 
         prompt = new Text();
+        prompt.setWrappingWidth(150);
         prompt.setText(slide.getPrompt());
-        prompt.setStyle("-fx-blend-mode: overlay");
+//        prompt.setStyle("-fx-blend-mode: overlay");
         prompt.setFill(Color.BLACK);
         StackPane.setAlignment(prompt, Pos.CENTER);
 
-        Button addDecisionButton = new AddDecisionButton(slide, this.getLayoutX(), this.getLayoutY());
+        Button addDecisionButton = new AddDecisionButton(slide, this);
         Button editButton = new EditSlideButton(slide);
         Button deleteSlideButton = new DeleteSlideButton(slide);
-        this.getChildren().addAll(addDecisionButton, editButton, deleteSlideButton, prompt);
+        Button setFirstButton = new SetFirstButton(slide);
+
+        // main slide
+        Rectangle rounded = new Rectangle();
+        rounded.setWidth(210);
+        rounded.setHeight(110);
+        rounded.setArcHeight(30);
+        rounded.setArcWidth(30);
+        rounded.setStroke(Color.BLACK);
+        rounded.setFill(Color.valueOf("#fecea8"));
+
+//        //shadow
+//        Rectangle shadow = new Rectangle();
+//        shadow.setLayoutX(50);
+//        shadow.setWidth(240);
+//        shadow.setHeight(140);
+//        shadow.setArcHeight(30);
+//        shadow.setArcWidth(30);
+//        shadow.setFill(Color.BLACK);
+//        shadow.opacityProperty().set(0.3);
+
+        this.getChildren().addAll(rounded, addDecisionButton, editButton, deleteSlideButton, setFirstButton, prompt);
 
         Circle firstSlideIndicator = new FirstSlideIndicator();
 
@@ -77,10 +102,11 @@ public class GuiSlide extends StackPane {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
+            System.out.println(this.getLayoutY());
         });
         this.setOnMouseDragged(event -> {
-            this.setLayoutX(event.getSceneX() - mouseAnchorX);
-            this.setLayoutY(event.getSceneY() - mouseAnchorY);
+            this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
         });
     }
 
@@ -137,15 +163,9 @@ public class GuiSlide extends StackPane {
         Button btnEdit = new Button("Edit the slide message");
         btnEdit.setOnAction(mouseEvent -> Handlers.slideHandler.editMessage(slide, input.getText()));
 
-        Button setMainSlide = new Button("Set as First Slide");
-        setMainSlide.setOnAction(mouseEvent ->{
-            Handlers.slideHandler.setMain(slide);
-            slideWindow.close();
-        });
-
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose, setMainSlide);
+        alert.getChildren().addAll(input, btnEdit, btnClose);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);

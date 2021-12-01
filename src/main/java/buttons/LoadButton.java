@@ -6,12 +6,15 @@ import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.FileChooser;
 import rdf.RDFLoadToStudio;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Map;
+
+import static java.lang.Math.abs;
 
 /**
  * A button that allows the user to load a project they had previously been working on.
@@ -27,11 +30,20 @@ public class LoadButton extends MenuButton {
      * @param editorGame - The existing EditorGame instance that will be filled with
      *                   data from the incoming file
      */
-    public LoadButton(Scene window, EditorGame editorGame){
-        super();
+    public LoadButton(Scene window, EditorGame editorGame, ScrollPane scrollPane){
+        super(scrollPane);
 
         this.setText("Load");
         this.setLayoutY(320);
+        scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {
+                    this.setLayoutY(newvalue.doubleValue() + 320);
+                }
+        );
+
+        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 320)
+        );
+
+
 
         // When button is clicked, open a file explorer and load in data from a file
         this.setOnMouseClicked(event -> {

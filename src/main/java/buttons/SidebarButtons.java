@@ -3,6 +3,8 @@ package buttons;
 import entities.EditorGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,11 +20,11 @@ public class SidebarButtons extends ArrayList<Button> {
      * @param window - The window in which the file explorer resides
      * @param editorGame - The existing EditorGame instance
      */
-    public SidebarButtons(Scene window, EditorGame editorGame) {
-        Button createNewSlideButton = new NewSlideButton();
-        Button playTestButton = new PlayTestButton(editorGame);
-        Button saveButton = new SaveButton(window, editorGame);
-        Button loadButton = new LoadButton(window, editorGame);
+    public SidebarButtons(Scene window, EditorGame editorGame, ScrollPane scrollPane) {
+        Button createNewSlideButton = new NewSlideButton(scrollPane);
+        Button playTestButton = new PlayTestButton(editorGame, scrollPane);
+        Button saveButton = new SaveButton(window, editorGame, scrollPane);
+        Button loadButton = new LoadButton(window, editorGame, scrollPane);
 
         this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton));
     }

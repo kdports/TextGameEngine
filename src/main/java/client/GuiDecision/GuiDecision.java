@@ -14,7 +14,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -34,6 +36,8 @@ public class GuiDecision extends StackPane {
     public DecisionLine rightLine;
     public GuiSlide originSlide;
     public GuiSlide targetSlide;
+    public double sceneX;
+    public double sceneY;
 
     /**
      * Constructs an instance by setting the initial position, colour, and size of
@@ -48,11 +52,11 @@ public class GuiDecision extends StackPane {
         this.originSlide = guiSlide;
         this.setLayoutX(x);
         this.setLayoutY(y);
-        this.setMinWidth(100);
-        this.setMaxWidth(100);
-        this.setMinHeight(50);
-        this.setMaxHeight(50);
-        this.setStyle("-fx-background-color: lightblue;");
+        this.setMinWidth(120);
+        this.setMaxWidth(120);
+        this.setMinHeight(26);
+        this.setMaxHeight(26);
+        this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
@@ -61,7 +65,16 @@ public class GuiDecision extends StackPane {
         Circle leftConnection = new LeftDecisionConnectionPoint(decision);
         Circle rightConnection = new RightDecisionConnectionPoint(decision);
 
-        this.getChildren().addAll(editButton,rightConnection,leftConnection);
+        // main slide
+        Rectangle rounded = new Rectangle();
+        rounded.setWidth(105);
+        rounded.setHeight(30);
+        rounded.setArcHeight(15);
+        rounded.setArcWidth(15);
+        rounded.setStroke(Color.BLACK);
+        rounded.setFill(Color.valueOf("#fecea8"));
+
+        this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 
         // Initializing the two DecisionLine's
         leftLine = new DecisionLine(
@@ -102,12 +115,12 @@ public class GuiDecision extends StackPane {
 
         });
         this.setOnMouseDragged(event -> {
-            this.setLayoutX(event.getSceneX() - mouseAnchorX);
-            this.setLayoutY(event.getSceneY() - mouseAnchorY);
-            leftLine.setEndX(event.getSceneX() - mouseAnchorX);
-            leftLine.setEndY(event.getSceneY() - mouseAnchorY + 25);
-            rightLine.setStartX(event.getSceneX() - mouseAnchorX + 100);
-            rightLine.setStartY(event.getSceneY() - mouseAnchorY + 25);
+            this.setLayoutX(sceneX + event.getSceneX() - mouseAnchorX);
+            this.setLayoutY(sceneY + event.getSceneY() - mouseAnchorY);
+            leftLine.setEndX(sceneX + event.getSceneX() - mouseAnchorX);
+            leftLine.setEndY(sceneY + event.getSceneY() - mouseAnchorY + 25);
+            rightLine.setStartX(sceneX + event.getSceneX() - mouseAnchorX + 100);
+            rightLine.setStartY(sceneY + event.getSceneY() - mouseAnchorY + 25);
         });
     }
 

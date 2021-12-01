@@ -31,7 +31,7 @@ class CreateNewSlideHandlerTest {
         // Please close the window that appears in order for the unit tests to complete!
 
         CreateNewSlideHandler slideHandler = new CreateNewSlideHandler(s, e);
-        slideHandler.execute(null);
+        slideHandler.execute(0.0,0);
         assertTrue(IdControl.getId() == 1);
         assertTrue(e.getSlideMap().size() == 1);
     }
