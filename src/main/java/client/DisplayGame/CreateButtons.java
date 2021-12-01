@@ -24,8 +24,10 @@ import javafx.stage.Stage;
 
 import static java.lang.Long.MAX_VALUE;
 
-public class CreateButtons extends CreateButtonPane{
-
+/**
+ * Creates the buttons for the create button panel
+ */
+public class CreateButtons extends CreateButtonPanel{
 
     /**
      * Creates the panel with all the buttons to add to the screen.
@@ -40,6 +42,7 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Creates 1 button that is styled as one of the decisions for a slide.
      *
+     * @param arrow - The image to appear at the start of the button
      * @return - The button.
      */
     private Button createButton(ImageView arrow) {
@@ -63,6 +66,7 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Creates buttons for all the decisions in a slide.
      *
+     * @param panel - The panel to add the buttons to
      * @return - The number of buttons.
      */
     public int createButtons(Pane root) {
@@ -103,6 +107,8 @@ public class CreateButtons extends CreateButtonPane{
             addListeners(b, redArrow, arrow);
             // Handles the action of when the button is pressed
             b.setOnAction(arg0 -> {
+                player.clearPastChosenDecisions();
+                player.clearInventory();
                 TitleScreen titleScreen = new TitleScreen();
                 titleScreen.displayFirstSlide();
             });
@@ -121,6 +127,10 @@ public class CreateButtons extends CreateButtonPane{
     private static void addDestinationAction(Player player, Button button, int index) {
         button.setOnAction(arg0 -> {
             player.currentSlide = player.currentValidDecisions.get(index).target;
+            if (player.currentValidDecisions.get(index).hasItemToGive()) {
+                player.receiveItem(player.currentValidDecisions.get(index));
+            }
+            player.AddToPastChosenDecisions(player.currentValidDecisions.get(index));
             player.playScene();
         });
     }

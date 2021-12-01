@@ -4,7 +4,7 @@ package client.DisplayGame;
 import client.Theme;
 import entities.Player;
 import entities.CreateSampleGame;
-import interfaces.PlayDisplayer;
+import client.PlayDisplayer;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -28,14 +28,14 @@ public class GameRenderer extends Application implements PlayDisplayer {
     int animationSpeed;
 
     /**
-     * Creates the GameRenderer.
+     * The simple constructor for the GameRenderer that creates a JFrame to display the game
      */
     public GameRenderer() {
         root = new BorderPane();
         animationSpeed = 30;
 
         theme = new Theme();
-    } //Initializes JFrame
+    }
 
     public void begin(String[] args){
         launch(args);

@@ -20,8 +20,6 @@ class EditorGameTest {
     void testSetDecisionMap() {
         EditorGame e = new EditorGame();
         Decision d = new Decision("");
-        Slide s = new Slide(1, "");
-        GuiSlide gs = new GuiSlide("");
         GuiDecision g = new GuiDecision("");
 
         assertTrue(e.getDecisionMap().isEmpty());

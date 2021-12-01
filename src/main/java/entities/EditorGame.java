@@ -1,6 +1,5 @@
 package entities;
 
-
 import client.GuiSlide.GuiSlide;
 import client.GuiDecision.GuiDecision;
 import javafx.beans.property.MapProperty;
@@ -13,6 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The object in which all data about the Editor is stored. All slides,
+ * decisions, and attributes of slides and decisions are stored here in
+ * hashmaps
+ */
 public class EditorGame {
     public Slide firstSlide;
     private final MapProperty<Slide, GuiSlide> slideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
@@ -20,6 +24,10 @@ public class EditorGame {
     private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Decision, GuiDecision> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
 
+    private static ArrayList<Map.Entry<Decision, GuiDecision>> totalDecisions = new ArrayList<>();
+    /**
+     * For each method below, gets and returns the map as named in the method name.
+     */
     public ObservableMap<Slide, GuiSlide> getSlideMap() {
         return this.slideMap.get();
     }
@@ -55,12 +63,30 @@ public class EditorGame {
         this.decisionMap.put(decision, guiDecision);
     }
 
+    /**
+     * Gets every slide entity from the EditorGame as an arraylist
+     *
+     * @return - An arraylist of slides
+     */
     public ArrayList<Map.Entry<Slide, GuiSlide>> getAllEntriesSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
 
-    public ArrayList<Map.Entry<Decision, GuiDecision>> getAllEntriesDecision(){
+    /**
+     * Gets every decision entity from the EditorGame as an arraylist
+     *
+     * @return - An arraylist of decisions
+     */
+    public ArrayList<Map.Entry<Decision, GuiDecision>> getAllEntriesDecision() {
         return new ArrayList<>(this.decisionMap.entrySet());
+    }
+
+    /**
+     * The static arraylist of decision, guidecision pairs
+     * @return An arraylist of a map entry key:value set of pairs
+     */
+    public static ArrayList<Map.Entry<Decision, GuiDecision>> getTotalDecisions() {
+        return totalDecisions;
     }
 
     /**
@@ -114,6 +140,8 @@ public class EditorGame {
                 guiDecision.leftLine.recalculateX();
                 guiDecision.leftLine.recalculateY();
             }
+
+            totalDecisions = new ArrayList<>(this.decisionMap.entrySet());
         }
     }
 
@@ -184,16 +212,24 @@ public class EditorGame {
         }
     }
 
+    public void addDecisionConditional(Decision decision, Decision toAdd) {
+
+    }
+
     /**
      * Clear all the data out of the editorGame instance.
      */
     public void clearAll(){
-        for (Map.Entry<Decision, GuiDecision> entry : this.getAllEntriesDecision()){
-            this.deleteDecision(entry.getKey());
-        }
 
         for (Map.Entry<Slide, GuiSlide> entry : this.getAllEntriesSlide()){
             this.deleteSlide(entry.getKey());
+        }
+
+        for (Map.Entry<Decision, GuiDecision> entry : this.getAllEntriesDecision()){
+            entry.getValue().rightLine.deleteLine();
+            entry.getValue().leftLine.deleteLine();
+            this.deleteDecision(entry.getKey());
+
         }
     }
 }

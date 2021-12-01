@@ -14,6 +14,10 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
+/**
+ * Saves the data from an instance of EditorGame to a file that can be loaded in
+ * later.
+ */
 public class RDFSave {
 
     /**
@@ -77,6 +81,19 @@ public class RDFSave {
         // Save to file
         OutputStream out = new FileOutputStream(filepath);
         model.write(out, "Turtle");
+    }
+
+    public boolean isMalformedGame(EditorGame editorGame, String filepath) {
+        if (editorGame.getAllEntriesDecision().isEmpty()) {
+            return true;
+        }
+        if (editorGame.getAllEntriesSlide().isEmpty()) {
+            return true;
+        }
+        if (filepath.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }
 

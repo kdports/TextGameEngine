@@ -20,7 +20,10 @@ class PlayerTest {
     @Test
     void testCheckChoiceTrue() {
         Decision d = new Decision("test");
-        assertTrue(Player.checkChoice(d));
+        Game sampleGame = CreateSampleGame.returnGame();
+        GameRenderer renderer = new GameRenderer();
+        Player p = new Player(renderer, sampleGame);
+        assertTrue(p.checkChoice(d));
     }
 
     @Test
@@ -40,5 +43,20 @@ class PlayerTest {
         p.playGame();
         p.checkValidChoices();
         assertTrue(p.currentValidDecisions.size() == 2);
+    }
+
+    @Test
+    void testGetPastChosenDecisions() {
+        Game sampleGame = CreateSampleGame.returnGame();
+        GameRenderer renderer = new GameRenderer();
+        Decision d = new Decision("test");
+        Player p = new Player(renderer, sampleGame);
+        p.playGame();
+
+        assertTrue(p.GetPastChosenDecisions().isEmpty());
+
+        p.AddToPastChosenDecisions(d);
+        assertTrue(p.IsInPastChosenDecisions(d));
+        assertTrue(!p.GetPastChosenDecisions().isEmpty());
     }
 }
