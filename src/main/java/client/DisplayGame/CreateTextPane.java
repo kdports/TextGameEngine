@@ -55,11 +55,11 @@ public class CreateTextPane {
         Label label = createText();
         box.setPrefSize(100, 100);
         box.getChildren().add(label);
-        box.setBackground(new Background(
+        /* box.setBackground(new Background(
                 new BackgroundFill(theme.backgroundColor,
-                CornerRadii.EMPTY, Insets.EMPTY)));
+                CornerRadii.EMPTY, Insets.EMPTY))); */
+        box.setStyle("-fx-background-color: " + theme.backgroundColor);
         addAnimation(label, box);
-
 
         return box;
     }
@@ -70,7 +70,7 @@ public class CreateTextPane {
         Label label = new Label();
         label.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD,FontPosture.REGULAR,20));
         label.setText(player.currentSlide.getPrompt());
-        label.setTextFill(theme.textColor);
+        label.setTextFill(Color.web(theme.textColor));
         VBox.setVgrow(label, Priority.ALWAYS);
         getFont(label);
         label.setWrapText(true);

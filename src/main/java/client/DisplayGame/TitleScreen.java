@@ -74,9 +74,8 @@ public class TitleScreen extends GameRenderer{
         button.setMaxWidth(MAX_VALUE);
         button.setPrefSize(180, 80);
         button.setCursor(Cursor.HAND);
-        button.setTextFill(theme.textColor);
         button.setWrapText(true);
-        button.setStyle("-fx-background-color: #ADD8E6; -fx-border-width: 2px;");
+        button.setStyle("-fx-background-color: #ADD8E6; -fx-border-width: 2px;" + "-fx-text-fill: " + theme.textColor);
         return button;
     }
 

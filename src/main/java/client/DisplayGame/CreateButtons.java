@@ -53,8 +53,8 @@ public class CreateButtons extends CreateButtonPane{
         b.setGraphic(arrow);
         b.setAlignment(Pos.CENTER_LEFT);
         b.setWrapText(true);
-        b.setStyle("-fx-background-color: #FFFFFF; -fx-border-width: 0px;");
-        b.setTextFill(theme.textColor);
+        b.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
+                "-fx-text-fill: " + theme.textColor);
 
         b.setCursor(Cursor.HAND);
         return b;

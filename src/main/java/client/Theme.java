@@ -8,17 +8,17 @@ import javafx.scene.paint.Color;
  */
 public class Theme {
     public final String[] themeList = {"Light", "Dark", "Pastel", "Blue Sky"};
-    public Color textColor;
-    public Color backgroundColor;
-    public Color textHoverColor;
+    public String textColor;
+    public String backgroundColor;
+    public String textHoverColor;
 
     /**
      * Constructs the theme object with light as the default theme
      */
     public Theme() {
-        textColor = Color.BLACK;
-        backgroundColor = Color.WHITE;
-        textHoverColor = Color.RED;
+        textColor = "#000000";
+        backgroundColor =  "#FFFFFF";
+        textHoverColor = "#FF0000";
     }
 
     /**
@@ -29,24 +29,24 @@ public class Theme {
     public void setTheme(String theme) {
         switch (theme) {
             case "Light":
-                textColor = Color.BLACK;
-                backgroundColor = Color.WHITE;
-                textHoverColor = Color.RED;
+                textColor = "#000000";
+                backgroundColor =  "#FFFFFF";
+                textHoverColor = "#FF0000";
                 break;
             case "Dark":
-                textColor = Color.WHITE;
-                backgroundColor = Color.BLACK;
-                textHoverColor = Color.RED;
+                textColor =  "#FFFFFF";
+                backgroundColor = "#000000";
+                textHoverColor = "#FF0000";
                 break;
             case "Pastel":
-                textColor = Color.DARKGRAY;
-                backgroundColor = Color.PINK;
-                textHoverColor = Color.ORANGE;
+                textColor ="#A9A9A9";
+                backgroundColor =" #FFC0CB";
+                textHoverColor = "#FFA500";
                 break;
             case "Blue Sky":
-                textColor = Color.WHITE;
-                backgroundColor = Color.LIGHTSKYBLUE;
-                textHoverColor = Color.GREEN;
+                textColor = "#FFFFFF";
+                backgroundColor = "#87CEFA";
+                textHoverColor = "#008000";
                 break;
         }
     }

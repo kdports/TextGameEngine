@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -45,7 +46,7 @@ public class CreateButtonPane {
      */
     public Pane createBPane(){
         VBox bPane = new VBox();
-        bPane.setStyle("-fx-background-color: black;"); // TODO: Use the theme colors somehow
+        bPane.setStyle("-fx-background-color: " + theme.backgroundColor);
         bPane.setStyle("-fx-border-width: 0px;");
         CreateButtons buttons = new CreateButtons(player, theme);
         int num = buttons.createButtons(bPane);
@@ -68,13 +69,15 @@ public class CreateButtonPane {
     public void addListeners(Button button, ImageView hoverArrow, ImageView arrow) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
-                    button.setTextFill(theme.textHoverColor);
+                    button.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
+                            "-fx-text-fill: " + theme.textHoverColor);
                     button.setGraphic(hoverArrow);
                 });
 
         button.addEventHandler(MouseEvent.MOUSE_EXITED,
                 e -> {
-                    button.setTextFill(theme.textColor);
+                    button.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
+                            "-fx-text-fill: " + theme.textColor);
                     button.setGraphic(arrow);
                 });
     }
@@ -97,9 +100,15 @@ public class CreateButtonPane {
 //    }
 
     // Temp function
-    public ImageView createIcon(String filename, Color color) {
+    public ImageView createIcon(String filename, String string) {
         Image image  = new Image("file:src/main/resources/player/" + filename, 25, 20, false, true);
-        return new ImageView(image);
+        Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.web(string)));
+        ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
+        lighting.setContentInput(bright);
+        lighting.setSurfaceScale(0.0);
+        ImageView imageView = new ImageView(image);
+        imageView.setEffect(lighting);
+        return imageView;
     }
 
 

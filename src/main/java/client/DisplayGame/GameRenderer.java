@@ -8,6 +8,8 @@ import interfaces.PlayDisplayer;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -53,26 +55,15 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * This method displays each of the slides onto the JFrame.
      */
     public void display() {
+        CreateMenu menu = new CreateMenu(theme, player, animationSpeed, root, this);
+        MenuBar mbar = menu.createMenu();
+
         root = new BorderPane();
+        root.setTop(mbar);
 
-        /* creates a scrolling display that contains the text and buttons for the game */
-//        CreateMenu menu = new CreateMenu(theme, player, animationSpeed, frame, this);
-//        frame.setJMenuBar(menu.createMenu());
-//        CreateTextPanel textPanel = new CreateTextPanel(theme, player, animationSpeed);
-//        textPanel.createTPanel();
-//        JScrollPane textScroll = new JScrollPane(textPanel);
-//        CreateButtonPanel panel = new CreateButtonPanel(player, theme);
-//        panel.createBPanel();
-//        JScrollPane buttonScroll = new JScrollPane(panel);
-//        frame.add(textScroll);
-//        frame.add(buttonScroll, BorderLayout.SOUTH);
-//
-//        frame.setVisible(true);
-
-        // TODO: add the menu part
         CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
         root.setCenter(TPane.createTPane());
-        root.setStyle("-fx-border-width: 5px; -fx-border-color: #FFFFFF");
+        root.setStyle("-fx-border-width: 5px; -fx-border-color: "+ "#FFFFFF");
         CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
         root.setBottom(buttonPane.createBPane());
         Scene scene=new Scene(root,1200,800);
