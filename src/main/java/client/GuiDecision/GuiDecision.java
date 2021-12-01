@@ -4,26 +4,32 @@ import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
 import entities.Decision;
+import entities.EditorGame;
 import handlers.Handlers;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+
+/**
+ * The object representing the decisions displayed inside the editor.
+ */
 public class GuiDecision extends StackPane {
+    public static EditorGame editorGame;
     private double mouseAnchorX;
     private double mouseAnchorY;
     public DecisionLine leftLine;
@@ -33,15 +39,24 @@ public class GuiDecision extends StackPane {
     public double sceneX;
     public double sceneY;
 
+    /**
+     * Constructs an instance by setting the initial position, colour, and size of
+     * the decision
+     *
+     * @param decision - The decision entity used for data.
+     * @param guiSlide - The slide that this decision comes from.
+     * @param x - The x location of the decision in the editor
+     * @param y - The x location of the decision in the editor
+     */
     public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y) {
         this.originSlide = guiSlide;
         this.setLayoutX(x);
         this.setLayoutY(y);
-        this.setMinWidth(100);
-        this.setMaxWidth(100);
-        this.setMinHeight(50);
-        this.setMaxHeight(50);
-        this.setStyle("-fx-background-color: lightblue;");
+        this.setMinWidth(120);
+        this.setMaxWidth(120);
+        this.setMinHeight(26);
+        this.setMaxHeight(26);
+        this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
@@ -50,7 +65,16 @@ public class GuiDecision extends StackPane {
         Circle leftConnection = new LeftDecisionConnectionPoint(decision);
         Circle rightConnection = new RightDecisionConnectionPoint(decision);
 
-        this.getChildren().addAll(editButton,rightConnection,leftConnection);
+        // main slide
+        Rectangle rounded = new Rectangle();
+        rounded.setWidth(105);
+        rounded.setHeight(30);
+        rounded.setArcHeight(15);
+        rounded.setArcWidth(15);
+        rounded.setStroke(Color.BLACK);
+        rounded.setFill(Color.valueOf("#fecea8"));
+
+        this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 
         // Initializing the two DecisionLine's
         leftLine = new DecisionLine(
@@ -70,9 +94,15 @@ public class GuiDecision extends StackPane {
                 targetSlide
         );
 
-        // targetSlide.addListener(event -> {
-        //     rightLine.setSlide(this.targetSlide.getValue());
-        // });
+//         targetSlide.addListener(event -> {
+//             rightLine.setSlide(this.targetSlide.getValue());
+//         });
+    }
+
+    /**
+     * Constructor for testing/debugging purposes only
+     */
+    public GuiDecision(String s) {
     }
 
     /**
@@ -119,9 +149,45 @@ public class GuiDecision extends StackPane {
             slideWindow.close();
         });
 
+        // Decision conditionals - a list of all decisions that aren't the one being edited
+        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getAllEntriesDecision();
+        ArrayList<Decision> possibleConditionals = new ArrayList<Decision>();
+        for (Map.Entry<Decision, GuiDecision> e : allDecisions) {
+            Decision d = e.getKey();
+            if (d != decision) {
+                possibleConditionals.add(d);
+            }
+        }
+        Text decisionCondition = new Text("Choose decision conditionals below");
+        // A dropdown list of all decisions to select from
+        ComboBox<Decision> decisionComboBox = new ComboBox<Decision>(FXCollections.observableArrayList(possibleConditionals));
+        decisionComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
+        });
+
+        TextField itemInput = new TextField(decision.getItemToGive());
+        // Edit the value on entry according to the value on the text field
+        Button btnItemEdit = new Button("Save the above text as an item to give");
+        btnItemEdit.setOnAction(mouseEvent -> Handlers.decisionHandler.changeGivenItem(decision, itemInput.getText()));
+
+        // A hashset of all items given by other decisions
+        HashSet<String> allItems = new HashSet<String>();
+        for (Decision d : possibleConditionals) {
+            if (d.getItemToGive() != null) {
+                allItems.add(d.getItemToGive());
+            }
+        }
+        Text itemCondition = new Text("Choose item conditionals below");
+        // A dropdown list of all decisions to select from
+        ComboBox<String> itemComboBox = new ComboBox<String>(FXCollections.observableArrayList(allItems));
+        itemComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue());
+        });
+
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton);
+        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton, decisionCondition, decisionComboBox,
+                itemInput, btnItemEdit, itemCondition, itemComboBox);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);

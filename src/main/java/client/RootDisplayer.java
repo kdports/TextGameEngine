@@ -26,6 +26,7 @@ import java.util.Map;
 import static java.lang.Math.abs;
 
 public class RootDisplayer extends Application {
+    public Scene mainScene; // For testing since I can't figure out how to access the stage otherwise
     private final Pane root = new Pane();
     private final EditorGame editorGame = new EditorGame();
     // This needs to be instantiated here because there is no way to pass editorGame back out until it is too late,
@@ -67,6 +68,7 @@ public class RootDisplayer extends Application {
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);
         primaryStage.show();
+        mainScene = window;
     }
 
     /**

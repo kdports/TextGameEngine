@@ -9,6 +9,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 sourceSets {
     main {
@@ -24,8 +25,11 @@ javafx {
 }
 
 dependencies {
+    testImplementation "org.testfx:testfx-core:4.0.16-alpha+"
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
     // https://mvnrepository.com/artifact/org.apache.jena/jena-core
     implementation ('org.apache.jena:jena-core:4.2.0') {
         exclude group: 'commons-logging', module: 'commons-logging'

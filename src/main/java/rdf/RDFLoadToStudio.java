@@ -11,6 +11,10 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Populates hashmaps of slides that can be displayed in the editor. Uses the data
+ * from the parent class' hashmaps as well in order to load a file back into the editor.
+ */
 public class RDFLoadToStudio extends RDFLoad {
     private final HashMap<Slide, GuiSlide> renderableSlideMap = new HashMap<>();
     private final HashMap<Decision, GuiDecision> renderableDecisionMap = new HashMap<>();

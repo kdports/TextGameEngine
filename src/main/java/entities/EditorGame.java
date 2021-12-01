@@ -1,6 +1,5 @@
 package entities;
 
-
 import client.GuiSlide.GuiSlide;
 import client.GuiDecision.GuiDecision;
 import javafx.beans.property.MapProperty;
@@ -13,6 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The object in which all data about the Editor is stored. All slides,
+ * decisions, and attributes of slides and decisions are stored here in
+ * hashmaps
+ */
 public class EditorGame {
     public Slide firstSlide;
     private final MapProperty<Slide, GuiSlide> slideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
@@ -20,6 +24,9 @@ public class EditorGame {
     private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Decision, GuiDecision> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
 
+    /**
+     * For each method below, gets and returns the map as named in the method name.
+     */
     public ObservableMap<Slide, GuiSlide> getSlideMap() {
         return this.slideMap.get();
     }
@@ -55,10 +62,20 @@ public class EditorGame {
         this.decisionMap.put(decision, guiDecision);
     }
 
+    /**
+     * Gets every slide entity from the EditorGame as an arraylist
+     *
+     * @return - An arraylist of slides
+     */
     public ArrayList<Map.Entry<Slide, GuiSlide>> getAllEntriesSlide() {
         return new ArrayList<>(this.slideMap.entrySet());
     }
 
+    /**
+     * Gets every decision entity from the EditorGame as an arraylist
+     *
+     * @return - An arraylist of decisions
+     */
     public ArrayList<Map.Entry<Decision, GuiDecision>> getAllEntriesDecision(){
         return new ArrayList<>(this.decisionMap.entrySet());
     }
@@ -182,6 +199,10 @@ public class EditorGame {
             // No need to check for contains() because remove() exits if it doesn't exist.
             slide.getKey().outgoingDecisions.remove(decision);
         }
+    }
+
+    public void addDecisionConditional(Decision decision, Decision toAdd) {
+
     }
 
     /**
