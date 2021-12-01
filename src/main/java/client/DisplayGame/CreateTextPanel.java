@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
+import client.ThemeColours;
 import entities.Player;
 import client.Theme;
 
@@ -19,16 +20,16 @@ import client.Theme;
  */
 public class CreateTextPanel extends JPanel {
     Player player;
-    Theme theme;
+    ThemeColours theme;
     int animationSpeed;
 
     /**
      * This method is the constructor that initiates the instance variables.
      *
-     * @param player - The player instance that is currently being used by GameRenderer
      * @param theme  - The theme that the GameRenderer is currently using
+     * @param player - The player instance that is currently being used by GameRenderer
      */
-    CreateTextPanel(Theme theme, Player player, int animationSpeed) {
+    CreateTextPanel(ThemeColours theme, Player player, int animationSpeed) {
         // Sets the theme, animation speed and player that is being used by the GameRenderer
         this.theme = theme;
         this.player = player;
@@ -59,11 +60,11 @@ public class CreateTextPanel extends JPanel {
         textArea = new JTextArea("", 20, 10);
         // Sets the theme, border and other properties of the text area
         textArea.setLineWrap(true);
-        textArea.setForeground(theme.textColor);
-        textArea.setBackground(theme.backgroundColor);
+        textArea.setForeground(Color.decode(theme.active.textColour));
+        textArea.setBackground(Color.decode(theme.active.backgroundColour));
         textArea.setEditable(false);
         textArea.setBounds(0, 0, panel.getWidth(), panel.getHeight());
-        Border border = BorderFactory.createLineBorder(theme.backgroundColor, 10);
+        Border border = BorderFactory.createLineBorder(Color.decode(theme.active.backgroundColour), 10);
         textArea.setBorder(border);
         getFont(textArea);
         addAnimation(textArea);

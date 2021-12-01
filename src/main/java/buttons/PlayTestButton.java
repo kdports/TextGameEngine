@@ -37,7 +37,7 @@ public class PlayTestButton extends MenuButton {
         );
 
         this.setOnMouseClicked(event -> {
-            PlayDisplayer playDisplayer = new GameRenderer();
+            PlayDisplayer playDisplayer = new GameRenderer(theme);
             Game game = new Game();
             Player player = new Player(playDisplayer, game);
 

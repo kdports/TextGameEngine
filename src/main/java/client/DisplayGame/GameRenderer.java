@@ -2,6 +2,7 @@ package client.DisplayGame;
 
 
 import client.Theme;
+import client.ThemeColours;
 import entities.Player;
 import entities.CreateSampleGame;
 import client.PlayDisplayer;
@@ -15,14 +16,14 @@ import java.awt.*;
 public class GameRenderer implements PlayDisplayer {
     JFrame frame; // Creates JFrame that the GameRenderer will use to display the window
     Player player;// The player that plays the game to render
-    Theme theme;
+    ThemeColours theme;
 
     int animationSpeed;
 
     /**
      * The simple constructor for the GameRenderer that creates a JFrame to display the game
      */
-    public GameRenderer() {
+    public GameRenderer(ThemeColours theme_colour) {
         frame = new JFrame("Game");
         // Place holder name for now
         frame.setTitle("Temp Title");
@@ -35,7 +36,7 @@ public class GameRenderer implements PlayDisplayer {
 
         animationSpeed = 30;
 
-        theme = new Theme();
+        theme = theme_colour;
     }
 
     /**
@@ -74,7 +75,7 @@ public class GameRenderer implements PlayDisplayer {
      * Main method
      */
     public static void main(String[] args) {
-        GameRenderer gr = new GameRenderer();
+        GameRenderer gr = new GameRenderer(new ThemeColours());
         Player p = new Player(gr, CreateSampleGame.returnGame());
         p.playGame();
     }

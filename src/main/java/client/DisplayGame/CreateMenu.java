@@ -1,6 +1,8 @@
 package client.DisplayGame;
 
+import client.EditorTheme;
 import client.Theme;
+import client.ThemeColours;
 import entities.Player;
 
 import javax.swing.*;
@@ -20,7 +22,8 @@ public class CreateMenu extends GameRenderer {
      * @param frame The JFrame that Gamerenderer uses to display the game
      * @param gameRenderer The Gamerenderer that displays the game
      */
-    CreateMenu(Theme theme, Player player, int animationSpeed, JFrame frame, GameRenderer gameRenderer) {
+    CreateMenu(ThemeColours theme, Player player, int animationSpeed, JFrame frame, GameRenderer gameRenderer) {
+        super(theme);
         this.theme = theme;
         this.animationSpeed  = animationSpeed;
         this.player = player;
@@ -38,10 +41,10 @@ public class CreateMenu extends GameRenderer {
         // Creates the theme dropdown
         JMenu themes = new JMenu("Themes");
         // Adds the themes from the themeList as a button to allow the user to switch between themes
-        for (String t : theme.themeList) {
-            JMenuItem th = new JMenuItem(t);
+        for (EditorTheme t : theme.themes) {
+            JMenuItem th = new JMenuItem(t.name);
             th.addActionListener(e -> {
-                theme.setTheme(t);
+                theme.active = t;
                 gameRenderer.display();
             });
             themes.add(th);

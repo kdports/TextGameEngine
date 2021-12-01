@@ -38,8 +38,10 @@ public class ThemeButton extends MenuButton {
             themeWindow.setMinWidth(300);
 
             ChoiceBox<String> choiceBox = new ChoiceBox<>();
-            choiceBox.setValue("Choose Theme...");
-            choiceBox.getItems().addAll("Default", "All White", "All Black");
+            choiceBox.setValue(theme.active.name);
+            for (EditorTheme themes : theme.themes){
+                choiceBox.getItems().add(themes.name);
+            }
 
             // When u click a theme name, change the active theme to that theme
             choiceBox.setOnAction(event1 -> {

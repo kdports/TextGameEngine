@@ -1,6 +1,7 @@
 package client.DisplayGame;
 
 import client.Theme;
+import client.ThemeColours;
 import entities.Player;
 
 import javax.swing.*;
@@ -13,11 +14,10 @@ public class CreateButtons extends CreateButtonPanel{
 
     /**
      * Creates the panel with all the buttons to add to the screen.
-     *
-     * @param player - The player instance that is currently being used by GameRenderer
+     *  @param player - The player instance that is currently being used by GameRenderer
      * @param theme  - The theme that the GameRenderer is currently using
      */
-    CreateButtons(Player player, Theme theme) {
+    CreateButtons(Player player, ThemeColours theme) {
         super(player, theme);
     }
 
@@ -34,8 +34,8 @@ public class CreateButtons extends CreateButtonPanel{
         b.setFocusable(false);
         b.setAlignmentX(Component.LEFT_ALIGNMENT);
         b.setFont(new Font("Rockwell", Font.PLAIN, 25));
-        b.setBackground(theme.backgroundColor);
-        b.setForeground(theme.textColor);
+        b.setBackground(Color.decode(theme.active.backgroundColour));
+        b.setForeground(Color.decode(theme.active.textColour));
         b.setBorder(null);
         b.setHorizontalAlignment(SwingConstants.LEFT);
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -53,8 +53,8 @@ public class CreateButtons extends CreateButtonPanel{
         // Keeps count of how many buttons are in each Slide
         int count = 0;
         // Gets the two images that are used in the buttons
-        final ImageIcon arrow = createIcon("redArrow.png", theme.textColor);
-        final ImageIcon redArrow = createIcon("redArrow.png", theme.textHoverColor);
+        final ImageIcon arrow = createIcon("redArrow.png", Color.decode(theme.active.textColour));
+        final ImageIcon redArrow = createIcon("redArrow.png", Color.decode(theme.active.sidebarColour));
 
         // If this is the last slide then create the restart button
         if (createRestartButton(arrow, redArrow, panel)){

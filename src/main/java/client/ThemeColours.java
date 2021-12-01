@@ -15,7 +15,7 @@ public class ThemeColours {
         EditorTheme allBlack = new EditorTheme("#000000", "#ffffff", "#000000",
                 "#000000", "All Black");
 
-        EditorTheme defaultTheme = new EditorTheme("", "#000000", "#ffffff",
+        EditorTheme defaultTheme = new EditorTheme("#ffffff", "#000000", "#ffffff",
                 "#e1e1e1", "Default");
 
         EditorTheme theme1 = new EditorTheme("#ff847c", "#000000", "#fecea8",

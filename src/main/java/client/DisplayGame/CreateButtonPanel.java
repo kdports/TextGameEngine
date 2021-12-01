@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import client.ThemeColours;
 import entities.Player;
 import client.Theme;
 
@@ -15,15 +16,14 @@ import client.Theme;
  */
 public class CreateButtonPanel extends JPanel {
     Player player;
-    Theme theme;
+    ThemeColours theme;
 
     /**
      * This is the constructor method that initiates the instance variables
-     *
-     * @param player - The player instance that is currently being used by GameRenderer
+     *  @param player - The player instance that is currently being used by GameRenderer
      * @param theme  - The theme that the GameRenderer is currently using
      */
-    CreateButtonPanel(Player player, Theme theme) {
+    CreateButtonPanel(Player player, ThemeColours theme) {
         // Sets the theme and the player classes
         this.theme = theme;
         this.player = player;
@@ -34,7 +34,7 @@ public class CreateButtonPanel extends JPanel {
      * Creates the panel with all the buttons to add to the screen.
      */
     public void createBPanel() {
-        this.setBackground(theme.backgroundColor);
+        this.setBackground(Color.decode(theme.active.backgroundColour));
         CreateButtons buttons = new CreateButtons(player, theme);
         int num = buttons.createButtons(this);
         // Sets the size of the window and the layout
@@ -54,12 +54,12 @@ public class CreateButtonPanel extends JPanel {
         b.addMouseListener(new MouseAdapter() {
             // Sets the listeners for when the mouse enters and exits the button
             public void mouseEntered(MouseEvent e) {
-                b.setForeground(theme.textHoverColor);
+                b.setForeground(Color.decode(theme.active.sidebarColour));
                 b.setIcon(hoverArrow);
             }
 
             public void mouseExited(MouseEvent e) {
-                b.setForeground(theme.textColor);
+                b.setForeground(Color.decode(theme.active.textColour));
                 b.setIcon(arrow);
             }
         });
