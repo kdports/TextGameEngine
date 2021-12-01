@@ -18,7 +18,7 @@ public class DeleteSlideButton extends Button {
         this.setMaxSize(20.0, 20.0);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
-                " -fx-background-color: #ff1f1f");
+                " -fx-background-color: #bb4646");
         this.setOnMousePressed(
                 event -> Handlers.slideHandler.delete(slide));
         StackPane.setAlignment(this, Pos.TOP_LEFT);

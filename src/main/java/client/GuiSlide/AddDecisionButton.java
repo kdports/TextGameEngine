@@ -18,7 +18,7 @@ public class AddDecisionButton extends Button {
         this.setMaxSize(20.0, 20.0);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
-                " -fx-background-color: #5cc400");
+                " -fx-background-color: #74b63a");
         this.setOnMousePressed(
                 event -> Handlers.createNewDecisionHandler.create(slide, parentX, parentY)
         );
