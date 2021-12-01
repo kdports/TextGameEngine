@@ -27,7 +27,7 @@ import static java.lang.Long.MAX_VALUE;
 /**
  * Creates the buttons for the create button panel
  */
-public class CreateButtons extends CreateButtonPanel{
+public class CreateButtons extends CreateButtonPane{
 
     /**
      * Creates the panel with all the buttons to add to the screen.
@@ -66,7 +66,6 @@ public class CreateButtons extends CreateButtonPanel{
     /**
      * Creates buttons for all the decisions in a slide.
      *
-     * @param panel - The panel to add the buttons to
      * @return - The number of buttons.
      */
     public int createButtons(Pane root) {

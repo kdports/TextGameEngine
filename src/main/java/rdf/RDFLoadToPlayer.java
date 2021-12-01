@@ -5,7 +5,7 @@ import entities.CreateSampleGame;
 import entities.Game;
 import entities.Player;
 import entities.Slide;
-import interfaces.PlayDisplayer;
+import client.PlayDisplayer;
 import org.apache.jena.rdf.model.Resource;
 
 import java.io.FileNotFoundException;

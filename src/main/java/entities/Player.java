@@ -131,9 +131,12 @@ public class Player {
      */
     public boolean isMalformedGame() {
         try {
-            currentSlide.getId();
+            System.out.println("a");
+            // currentSlide.getId();
+            System.out.println("b");
             game.firstSlide.getId();
-            currentSlide.outgoingDecisions.isEmpty();
+            System.out.println("c");
+            // currentSlide.outgoingDecisions.isEmpty();
         } catch (NullPointerException e) { return true; }
         return false;
     }
