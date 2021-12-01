@@ -6,6 +6,7 @@ import entities.*;
 
 import client.PlayDisplayer;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 
 import java.util.Map;
 
