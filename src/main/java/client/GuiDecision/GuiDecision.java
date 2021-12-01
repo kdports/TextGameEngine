@@ -94,6 +94,9 @@ public class GuiDecision extends StackPane {
                 targetSlide
         );
 
+        leftLine.setStroke(Color.valueOf(theme.active.textColour));
+        rightLine.setStroke(Color.valueOf(theme.active.textColour));
+
 //         targetSlide.addListener(event -> {
 //             rightLine.setSlide(this.targetSlide.getValue());
 //         });
