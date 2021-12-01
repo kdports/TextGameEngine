@@ -2,6 +2,7 @@ package buttons;
 
 import client.DisplayGame.GameRenderer;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.*;
 
 import client.PlayDisplayer;
@@ -24,10 +25,13 @@ public class PlayTestButton extends MenuButton {
      *
      * @param editorGame - The existing EditorGame instance that will be used to
      *                   populate a game instance with existing data
+     * @param theme
      */
-    public PlayTestButton(EditorGame editorGame, ScrollPane scrollPane) {
+    public PlayTestButton(EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme) {
         super(scrollPane);
         this.setText("Play Test");
+        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour);
         this.setLayoutY(112.5);
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 112.5)
         );

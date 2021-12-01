@@ -1,5 +1,6 @@
 package client.GuiSlide;
 
+import client.ThemeColours;
 import entities.Slide;
 import handlers.Handlers;
 import javafx.geometry.Pos;
@@ -11,7 +12,7 @@ import javafx.scene.shape.Rectangle;
  * A button to allow the user to change the text on a slide.
  */
 public class SetFirstButton extends Button{
-    SetFirstButton(Slide slide) {
+    SetFirstButton(Slide slide, ThemeColours theme) {
         Rectangle rounded = new Rectangle();
         rounded.setWidth(100);
         rounded.setHeight(20);
@@ -24,7 +25,8 @@ public class SetFirstButton extends Button{
         this.setMaxSize(100, 20);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
-                " -fx-background-color: #ff847c");
+                "-fx-background-color: " + theme.active.backgroundColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour +";");
         this.setOnMousePressed(event -> Handlers.slideHandler.setMain(slide));
         StackPane.setAlignment(this, Pos.BOTTOM_CENTER);
     }

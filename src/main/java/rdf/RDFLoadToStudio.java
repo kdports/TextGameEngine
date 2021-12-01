@@ -2,6 +2,7 @@ package rdf;
 
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.*;
 import org.apache.jena.rdf.model.ResIterator;
 import org.apache.jena.rdf.model.Resource;
@@ -46,7 +47,8 @@ public class RDFLoadToStudio extends RDFLoad {
 
                 Slide slide = slideNodeMap.get(slideNode);
 
-                GuiSlide guiSlide = new GuiSlide(slide, locationX, locationY);
+                // EDIT THE THEME ABILITY IN RDF HERE
+                GuiSlide guiSlide = new GuiSlide(slide, locationX, locationY, new ThemeColours());
                 this.renderableSlideMap.put(slide, guiSlide);
             }
         }
@@ -67,7 +69,7 @@ public class RDFLoadToStudio extends RDFLoad {
                 GuiSlide renderableOrigin = renderableSlideMap.get(originSlide);
                 GuiSlide renderableTarget = renderableSlideMap.get(targetSlide);
 
-                GuiDecision guiDecision = new GuiDecision(decision, renderableOrigin, locationX, locationY);
+                GuiDecision guiDecision = new GuiDecision(decision, renderableOrigin, locationX, locationY, new ThemeColours());
 
                 guiDecision.targetSlide = renderableTarget;
                 guiDecision.rightLine.setSlide(guiDecision.targetSlide);

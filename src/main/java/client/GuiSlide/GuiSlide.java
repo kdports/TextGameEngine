@@ -1,5 +1,6 @@
 package client.GuiSlide;
 
+import client.ThemeColours;
 import entities.Slide;
 import handlers.Handlers;
 import javafx.event.EventHandler;
@@ -20,6 +21,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * The object representing the slides displayed inside the editor.
  */
@@ -38,7 +41,7 @@ public class GuiSlide extends StackPane {
      * @param xLocation - The x location of the slide in the editor
      * @param yLocation - The x location of the slide in the editor
      */
-    public GuiSlide(Slide slide, double xLocation, double yLocation) {
+    public GuiSlide(Slide slide, double xLocation, double yLocation, ThemeColours theme) {
         String id = String.valueOf(slide.getId());
         this.setId(id);
         this.setLayoutX(xLocation);
@@ -57,19 +60,20 @@ public class GuiSlide extends StackPane {
         temp_prompt.setLayoutY(50);
         temp_prompt.setMaxHeight(50);
         temp_prompt.setWrapText(true);
-        temp_prompt.setStyle("-fx-background-color: TRANSPARENT;" + "-fx-blend-mode: SOFT_LIGHT");
+        if (!Objects.equals(theme.active.slideColour, "#ffffff")) {
+            temp_prompt.setStyle("-fx-background-color: TRANSPARENT;" + "-fx-blend-mode: SOFT_LIGHT;");
+        }
 
-        Button editButton = new EditSlideButton(slide);
+        Button editButton = new EditSlideButton(slide, theme);
         editButton.setOnMouseClicked(mouseEvent ->
             Handlers.slideHandler.editMessage(slide, temp_prompt.getText())
         );
 
 
+        Button addDecisionButton = new AddDecisionButton(slide, this, theme);
 
-        Button addDecisionButton = new AddDecisionButton(slide, this);
-
-        Button deleteSlideButton = new DeleteSlideButton(slide);
-        Button setFirstButton = new SetFirstButton(slide);
+        Button deleteSlideButton = new DeleteSlideButton(slide, theme);
+        Button setFirstButton = new SetFirstButton(slide, theme);
 
         // main slide
         Rectangle rounded = new Rectangle();
@@ -78,7 +82,7 @@ public class GuiSlide extends StackPane {
         rounded.setArcHeight(30);
         rounded.setArcWidth(30);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf("#fecea8"));
+        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
 //        //shadow
 //        Rectangle shadow = new Rectangle();

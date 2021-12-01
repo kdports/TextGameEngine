@@ -3,6 +3,7 @@ package client.GuiDecision;
 import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.Decision;
 import entities.EditorGame;
 import handlers.Handlers;
@@ -48,7 +49,7 @@ public class GuiDecision extends StackPane {
      * @param x - The x location of the decision in the editor
      * @param y - The x location of the decision in the editor
      */
-    public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y) {
+    public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y, ThemeColours theme) {
         this.originSlide = guiSlide;
         this.setLayoutX(x);
         this.setLayoutY(y);
@@ -61,9 +62,9 @@ public class GuiDecision extends StackPane {
         // Drag event handling
         this.initializeDragHandling();
 
-        Button editButton = new EditDecisionButton(decision);
-        Circle leftConnection = new LeftDecisionConnectionPoint(decision);
-        Circle rightConnection = new RightDecisionConnectionPoint(decision);
+        Button editButton = new EditDecisionButton(decision, theme);
+        Circle leftConnection = new LeftDecisionConnectionPoint(decision, theme);
+        Circle rightConnection = new RightDecisionConnectionPoint(decision, theme);
 
         // main slide
         Rectangle rounded = new Rectangle();
@@ -72,7 +73,7 @@ public class GuiDecision extends StackPane {
         rounded.setArcHeight(15);
         rounded.setArcWidth(15);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf("#fecea8"));
+        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
         this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 

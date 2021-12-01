@@ -21,13 +21,13 @@ public class SidebarButtons extends ArrayList<Button> {
      * @param window - The window in which the file explorer resides
      * @param editorGame - The existing EditorGame instance
      */
-    public SidebarButtons(Scene window, EditorGame editorGame, ScrollPane scrollPane) {
-        Button createNewSlideButton = new NewSlideButton(scrollPane);
-        Button playTestButton = new PlayTestButton(editorGame, scrollPane);
-        Button saveButton = new SaveButton(window, editorGame, scrollPane);
-        Button loadButton = new LoadButton(window, editorGame, scrollPane);
-        Button themButton = new ThemeButton(new ThemeColours(), scrollPane);
+    public SidebarButtons(Scene window, EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme) {
+        Button createNewSlideButton = new NewSlideButton(scrollPane, theme);
+        Button playTestButton = new PlayTestButton(editorGame, scrollPane, theme);
+        Button saveButton = new SaveButton(window, editorGame, scrollPane, theme);
+        Button loadButton = new LoadButton(window, editorGame, scrollPane, theme);
+        Button themeButton = new ThemeButton(theme, scrollPane);
 
-        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton, themButton));
+        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton, themeButton));
     }
 }

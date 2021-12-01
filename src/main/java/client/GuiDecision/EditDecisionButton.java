@@ -1,5 +1,6 @@
 package client.GuiDecision;
 
+import client.ThemeColours;
 import entities.Decision;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.shape.Rectangle;
  * A button on the decision that allows the user to edit the text of the decision.
  */
 public class EditDecisionButton extends Button {
-    EditDecisionButton(Decision decision) {
+    EditDecisionButton(Decision decision, ThemeColours theme) {
         Rectangle rounded = new Rectangle();
         rounded.setWidth(100);
         rounded.setHeight(20);
@@ -23,7 +24,8 @@ public class EditDecisionButton extends Button {
         this.setMaxSize(60, 20);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
-                " -fx-background-color: #ff847c");
+                "-fx-background-color: " + theme.active.backgroundColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour +";");
         this.setOnMousePressed(event -> GuiDecision.showEdit(decision));
         StackPane.setAlignment(this, Pos.CENTER);
     }
