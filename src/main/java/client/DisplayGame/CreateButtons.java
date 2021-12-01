@@ -80,10 +80,10 @@ public class CreateButtons extends CreateButtonPane{
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
             // Creates the button
-            Button b = createButton(arrow);
+            Button b = createButton(createIcon("redArrow.png", theme.textColor));
             b.setText(player.currentValidDecisions.get(i).text);
             addDestinationAction(player, b, i);
-            addListeners(b, redArrow, arrow);
+            addListeners(b, createIcon("redArrow.png", theme.textHoverColor), createIcon("redArrow.png", theme.textColor));
             root.getChildren().add(b);
         }
         return count;
