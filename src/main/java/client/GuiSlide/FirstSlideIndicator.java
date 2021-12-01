@@ -14,6 +14,6 @@ public class FirstSlideIndicator extends Circle {
 
         this.setFill(Color.RED);
         this.setRadius(5);
-        StackPane.setAlignment(this, Pos.TOP_CENTER);
+        StackPane.setAlignment(this, Pos.BOTTOM_LEFT);
     }
 }

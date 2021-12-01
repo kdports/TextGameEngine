@@ -1,5 +1,6 @@
 package buttons;
 
+import client.ThemeColours;
 import entities.EditorGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,7 +26,8 @@ public class SidebarButtons extends ArrayList<Button> {
         Button playTestButton = new PlayTestButton(editorGame, scrollPane);
         Button saveButton = new SaveButton(window, editorGame, scrollPane);
         Button loadButton = new LoadButton(window, editorGame, scrollPane);
+        Button themButton = new ThemeButton(new ThemeColours(), scrollPane);
 
-        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton));
+        this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton, themButton));
     }
 }

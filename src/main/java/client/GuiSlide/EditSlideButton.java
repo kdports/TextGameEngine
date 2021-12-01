@@ -17,14 +17,14 @@ public class EditSlideButton extends Button{
         rounded.setArcHeight(10);
         rounded.setArcWidth(10);
 
-        this.setText("EDIT");
+        this.setText("SAVE TEXT");
         this.setShape(rounded);
         this.setMinSize(100, 20);
         this.setMaxSize(100, 20);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
                 " -fx-background-color: #ff847c");
-        this.setOnMousePressed(event -> GuiSlide.showEdit(slide));
+        // this.setOnMousePressed(event -> GuiSlide.showEdit(slide));
         StackPane.setAlignment(this, Pos.TOP_CENTER);
     }
 }

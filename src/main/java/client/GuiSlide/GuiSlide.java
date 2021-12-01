@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -51,15 +52,22 @@ public class GuiSlide extends StackPane {
         // Drag event handling
         this.initializeDragHandling();
 
-        prompt = new Text();
-        prompt.setWrappingWidth(150);
-        prompt.setText(slide.getPrompt());
-//        prompt.setStyle("-fx-blend-mode: overlay");
-        prompt.setFill(Color.BLACK);
-        StackPane.setAlignment(prompt, Pos.CENTER);
+        TextArea temp_prompt = new TextArea(slide.getPrompt());
+        temp_prompt.setLayoutX(50);
+        temp_prompt.setLayoutY(50);
+        temp_prompt.setMaxHeight(50);
+        temp_prompt.setWrapText(true);
+        temp_prompt.setStyle("-fx-background-color: TRANSPARENT;" + "-fx-blend-mode: SOFT_LIGHT");
+
+        Button editButton = new EditSlideButton(slide);
+        editButton.setOnMouseClicked(mouseEvent ->
+            Handlers.slideHandler.editMessage(slide, temp_prompt.getText())
+        );
+
+
 
         Button addDecisionButton = new AddDecisionButton(slide, this);
-        Button editButton = new EditSlideButton(slide);
+
         Button deleteSlideButton = new DeleteSlideButton(slide);
         Button setFirstButton = new SetFirstButton(slide);
 
@@ -82,7 +90,7 @@ public class GuiSlide extends StackPane {
 //        shadow.setFill(Color.BLACK);
 //        shadow.opacityProperty().set(0.3);
 
-        this.getChildren().addAll(rounded, addDecisionButton, editButton, deleteSlideButton, setFirstButton, prompt);
+        this.getChildren().addAll(rounded, addDecisionButton, editButton, deleteSlideButton, setFirstButton, temp_prompt);
 
         Circle firstSlideIndicator = new FirstSlideIndicator();
 
@@ -155,17 +163,16 @@ public class GuiSlide extends StackPane {
         slideWindow.initModality(Modality.APPLICATION_MODAL);
         slideWindow.setTitle("Slide Editor");
         slideWindow.setMinWidth(300);
-        TextField input = new TextField(slide.getPrompt());
-        Button btnClose = new Button("Close this window");
-        btnClose.setOnAction(mouseEvent -> slideWindow.close());
+        TextArea input = new TextArea(slide.getPrompt());
+        input.setMinHeight(100);
 
         // Edit the value on entry according to the value on the text field
-        Button btnEdit = new Button("Edit the slide message");
+        Button btnEdit = new Button("Confirm Message Change");
         btnEdit.setOnAction(mouseEvent -> Handlers.slideHandler.editMessage(slide, input.getText()));
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose);
+        alert.getChildren().addAll(input, btnEdit);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);
