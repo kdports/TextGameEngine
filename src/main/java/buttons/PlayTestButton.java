@@ -3,8 +3,9 @@ package buttons;
 import client.DisplayGame.GameRenderer;
 import client.GuiSlide.GuiSlide;
 import entities.*;
-import interfaces.PlayDisplayer;
-import javafx.scene.control.ScrollPane;
+
+import client.PlayDisplayer;
+import javafx.scene.control.Alert;
 
 import java.util.Map;
 
@@ -45,7 +46,13 @@ public class PlayTestButton extends MenuButton {
                 }
                 game.addSlide(slide);
             }
-            player.playGame();
+            if (player.isMalformedGame()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Your game is malformed! Make sure you have a firstslide set and all decisions going to a slide!");
+                alert.showAndWait();
+            }
+            else {
+                player.playGame();
+            }
         });
     }
 

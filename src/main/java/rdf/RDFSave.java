@@ -82,5 +82,18 @@ public class RDFSave {
         OutputStream out = new FileOutputStream(filepath);
         model.write(out, "Turtle");
     }
+
+    public boolean isMalformedGame(EditorGame editorGame, String filepath) {
+        if (editorGame.getAllEntriesDecision().isEmpty()) {
+            return true;
+        }
+        if (editorGame.getAllEntriesSlide().isEmpty()) {
+            return true;
+        }
+        if (filepath.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }
 

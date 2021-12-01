@@ -1,5 +1,5 @@
 package entities;
-import interfaces.PlayDisplayer;
+import client.PlayDisplayer;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -115,5 +115,17 @@ public class Player {
      */
     public void clearInventory() {
         this.inventory = new Inventory();
+    }
+
+    /**
+     * Returns true if this game will throw an error during runtime
+     */
+    public boolean isMalformedGame() {
+        try {
+            currentSlide.getId();
+            game.firstSlide.getId();
+            currentSlide.outgoingDecisions.isEmpty();
+        } catch (NullPointerException e) { return true; }
+        return false;
     }
 }

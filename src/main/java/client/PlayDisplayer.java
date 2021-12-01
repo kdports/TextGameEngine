@@ -1,4 +1,4 @@
-package interfaces;
+package client;
 import entities.Player;
 
 /**
