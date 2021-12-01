@@ -50,7 +50,7 @@ public class GuiSlide extends StackPane {
         this.setMinWidth(200);
         this.setMaxHeight(100);
         this.setMinHeight(100);
-        this.setStyle("-fx-background-color: TRANSPARENT;");
+        //this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();

@@ -57,7 +57,7 @@ public class GuiDecision extends StackPane {
         this.setMaxWidth(120);
         this.setMinHeight(26);
         this.setMaxHeight(26);
-        this.setStyle("-fx-background-color: TRANSPARENT;");
+        //this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
