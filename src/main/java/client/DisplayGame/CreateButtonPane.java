@@ -1,21 +1,13 @@
 package client.DisplayGame;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import client.ThemeColours;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.*;
-import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 import entities.Player;
@@ -24,15 +16,14 @@ import client.Theme;
 
 public class CreateButtonPane {
     Player player;
-    Theme theme;
+    ThemeColours theme;
 
     /**
      * This is the constructor method that initiates the instance variables
-     *
-     * @param player - The player instance that is currently being used by GameRenderer
+     *  @param player - The player instance that is currently being used by GameRenderer
      * @param theme - The theme that the GameRenderer is currently using
      */
-    CreateButtonPane(Player player, Theme theme){
+    CreateButtonPane(Player player, ThemeColours theme){
         // Sets the theme and the player classes
         this.theme = theme;
         this.player = player;
@@ -46,7 +37,7 @@ public class CreateButtonPane {
      */
     public Pane createBPane(){
         VBox bPane = new VBox();
-        bPane.setStyle("-fx-background-color: " + theme.backgroundColor);
+        bPane.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         bPane.setStyle("-fx-border-width: 0px;");
         CreateButtons buttons = new CreateButtons(player, theme);
         int num = buttons.createButtons(bPane);
@@ -69,15 +60,15 @@ public class CreateButtonPane {
     public void addListeners(Button button, ImageView hoverArrow, ImageView arrow) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> {
-                    button.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
-                            "-fx-text-fill: " + theme.textHoverColor);
+                    button.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
+                            "-fx-text-fill: " + theme.active.slideColour);
                     button.setGraphic(hoverArrow);
                 });
 
         button.addEventHandler(MouseEvent.MOUSE_EXITED,
                 e -> {
-                    button.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
-                            "-fx-text-fill: " + theme.textColor);
+                    button.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
+                            "-fx-text-fill: " + theme.active.textColour);
                     button.setGraphic(arrow);
                 });
     }

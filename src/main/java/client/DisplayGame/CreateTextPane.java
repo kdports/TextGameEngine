@@ -1,6 +1,7 @@
 package client.DisplayGame;
 
 import client.Theme;
+import client.ThemeColours;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
@@ -31,14 +32,15 @@ import java.io.IOException;
 
 public class CreateTextPane {
     int animationSpeed;
-    Theme theme;
+    ThemeColours theme;
     Player player;
     /**
      * The method creates a main text area for the game screen.
      *
      * @param player - The player of the game
+     * @param theme
      */
-    CreateTextPane(Player player, Theme theme, int animationSpeed){
+    CreateTextPane(Player player, ThemeColours theme, int animationSpeed){
         this.player = player;
         this.theme = theme;
         this.animationSpeed = animationSpeed;
@@ -58,7 +60,7 @@ public class CreateTextPane {
         /* box.setBackground(new Background(
                 new BackgroundFill(theme.backgroundColor,
                 CornerRadii.EMPTY, Insets.EMPTY))); */
-        box.setStyle("-fx-background-color: " + theme.backgroundColor);
+        box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         addAnimation(label, box);
 
         return box;
@@ -70,7 +72,7 @@ public class CreateTextPane {
         Label label = new Label();
         label.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD,FontPosture.REGULAR,20));
         label.setText(player.currentSlide.getPrompt());
-        label.setTextFill(Color.web(theme.textColor));
+        label.setTextFill(Color.web(theme.active.textColour));
         VBox.setVgrow(label, Priority.ALWAYS);
         getFont(label);
         label.setWrapText(true);

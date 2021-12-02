@@ -25,6 +25,6 @@ public class ThemeColours {
         this.themes.add(Peachy);
         this.themes.add(Ocean);
         this.themes.add(Crimson);
-        this.active = Ocean;
+        this.active = Crimson;
     }
 }

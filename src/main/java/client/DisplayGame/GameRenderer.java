@@ -2,6 +2,7 @@ package client.DisplayGame;
 
 
 import client.Theme;
+import client.ThemeColours;
 import entities.Player;
 import entities.CreateSampleGame;
 import client.PlayDisplayer;
@@ -20,7 +21,7 @@ import static javafx.application.Application.launch;
  */
 public class GameRenderer extends Application implements PlayDisplayer {
     BorderPane root; // Creates JFrame that the GameRenderer will use to display the window
-    Theme theme;
+    ThemeColours theme;
     protected static Player player;
     protected static Stage stage;
 
@@ -34,7 +35,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
         root = new BorderPane();
         animationSpeed = 30;
 
-        theme = new Theme();
+        theme = new ThemeColours();
     }
 
     public void begin(String[] args){

@@ -32,11 +32,10 @@ public class CreateButtons extends CreateButtonPane{
 
     /**
      * Creates the panel with all the buttons to add to the screen.
-     *
-     * @param player - The player instance that is currently being used by GameRenderer
+     *  @param player - The player instance that is currently being used by GameRenderer
      * @param theme  - The theme that the GameRenderer is currently using
      */
-    CreateButtons(Player player, Theme theme) {
+    CreateButtons(Player player, ThemeColours theme) {
         super(player, theme);
     }
 
@@ -57,8 +56,8 @@ public class CreateButtons extends CreateButtonPane{
         b.setGraphic(arrow);
         b.setAlignment(Pos.CENTER_LEFT);
         b.setWrapText(true);
-        b.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
-                "-fx-text-fill: " + theme.textColor);
+        b.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
+                "-fx-text-fill: " + theme.active.textColour);
 
         b.setCursor(Cursor.HAND);
         return b;
@@ -67,15 +66,15 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Creates buttons for all the decisions in a slide.
      *
-     * @param panel - The panel to add the buttons to
+     * @param root - The panel to add the buttons to
      * @return - The number of buttons.
      */
     public int createButtons(Pane root) {
         // Keeps count of how many buttons are in each Slide
         int count = 0;
         // Gets the two images that are used in the buttons
-        final ImageView arrow = createIcon("redArrow.png", theme.textColor);
-        final ImageView redArrow = createIcon("redArrow.png", theme.textHoverColor);
+        final ImageView arrow = createIcon("redArrow.png", theme.active.textColour);
+        final ImageView redArrow = createIcon("redArrow.png", theme.active.slideColour);
 
         // If this is the last slide then create the restart button
         if (createRestartButton(root, redArrow, arrow)){
@@ -85,10 +84,10 @@ public class CreateButtons extends CreateButtonPane{
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
             // Creates the button
-            Button b = createButton(createIcon("redArrow.png", theme.textColor));
+            Button b = createButton(createIcon("redArrow.png", theme.active.textColour));
             b.setText(player.currentValidDecisions.get(i).text);
             addDestinationAction(player, b, i);
-            addListeners(b, createIcon("redArrow.png", theme.textHoverColor), createIcon("redArrow.png", theme.textColor));
+            addListeners(b, createIcon("redArrow.png", theme.active.slideColour), createIcon("redArrow.png", theme.active.textColour));
             root.getChildren().add(b);
         }
         return count;

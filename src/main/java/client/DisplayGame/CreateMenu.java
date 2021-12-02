@@ -1,6 +1,8 @@
 package client.DisplayGame;
 
+import client.EditorTheme;
 import client.Theme;
+import client.ThemeColours;
 import entities.Player;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -10,15 +12,15 @@ import javax.swing.*;
 public class CreateMenu {
     GameRenderer gameRenderer;
     Player player;
-    Theme theme;
+    ThemeColours theme;
     int animationSpeed;
     Pane pane;
     /**
      * Creates the menu bar at the top of the window.
      *
      */
-    CreateMenu(Theme theme, Player player, int animationSpeed, Pane pane, GameRenderer gameRenderer) {
-        this.theme =theme;
+    CreateMenu(ThemeColours theme, Player player, int animationSpeed, Pane pane, GameRenderer gameRenderer) {
+        this.theme = theme;
         this.animationSpeed  = animationSpeed;
         this.player = player;
         this.pane = pane;
@@ -30,10 +32,10 @@ public class CreateMenu {
         // Creates the theme dropdown
         Menu themes = new Menu("Themes");
         // Adds the themes from the themeList as a button to allow the user to switch between themes
-        for (String t : theme.themeList) {
-            MenuItem th = new MenuItem(t);
+        for (EditorTheme t : theme.themes) {
+            MenuItem th = new MenuItem(t.name);
             th.setOnAction(e -> {
-                theme.setTheme(t);
+                theme.active = t;
                 gameRenderer.display();
             });
             themes.getItems().add(th);
