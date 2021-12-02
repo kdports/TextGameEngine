@@ -19,12 +19,12 @@ public class ThemeColours {
                 "Ocean");
 
         EditorTheme Crimson = new EditorTheme("#132052", "#EDCEA8", "#4D2E5B", "#7F2639",
-                "Ocean");
+                "Crimson");
 
         this.themes.add(defaultTheme);
         this.themes.add(Peachy);
         this.themes.add(Ocean);
         this.themes.add(Crimson);
-        this.active = Crimson;
+        this.active = Ocean;
     }
 }
