@@ -3,21 +3,40 @@ package client.DisplayGame;
 import client.Theme;
 import client.ThemeColours;
 import entities.Player;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.*;
+import javafx.stage.Stage;
+
+import static java.lang.Long.MAX_VALUE;
 
 /**
  * Creates the buttons for the create button panel
  */
-public class CreateButtons extends CreateButtonPanel{
+public class CreateButtons extends CreateButtonPane{
 
     /**
      * Creates the panel with all the buttons to add to the screen.
-     *  @param player - The player instance that is currently being used by GameRenderer
+     *
+     * @param player - The player instance that is currently being used by GameRenderer
      * @param theme  - The theme that the GameRenderer is currently using
      */
-    CreateButtons(Player player, ThemeColours theme) {
+    CreateButtons(Player player, Theme theme) {
         super(player, theme);
     }
 
@@ -27,19 +46,21 @@ public class CreateButtons extends CreateButtonPanel{
      * @param arrow - The image to appear at the start of the button
      * @return - The button.
      */
-    private JButton createButton(ImageIcon arrow) {
-        // Creates a button and sets the theme, font, image, etc. of the button.
-        JButton b = new JButton();
-        b.setIcon(arrow);
-        b.setFocusable(false);
-        b.setAlignmentX(Component.LEFT_ALIGNMENT);
-        b.setFont(new Font("Rockwell", Font.PLAIN, 25));
-        b.setBackground(Color.decode(theme.active.backgroundColour));
-        b.setForeground(Color.decode(theme.active.textColour));
+    private Button createButton(ImageView arrow) {
+        // Creates a button and sets the theme, font, image, etc of the button.
+        Button b = new Button();
+        b.setMaxWidth(MAX_VALUE);
         b.setBorder(null);
-        b.setHorizontalAlignment(SwingConstants.LEFT);
-        b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        b.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 25));
 
+
+        b.setGraphic(arrow);
+        b.setAlignment(Pos.CENTER_LEFT);
+        b.setWrapText(true);
+        b.setStyle("-fx-background-color:" + theme.backgroundColor + "; -fx-border-width: 0px;" +
+                "-fx-text-fill: " + theme.textColor);
+
+        b.setCursor(Cursor.HAND);
         return b;
     }
 
@@ -49,27 +70,26 @@ public class CreateButtons extends CreateButtonPanel{
      * @param panel - The panel to add the buttons to
      * @return - The number of buttons.
      */
-    public int createButtons(JPanel panel) {
+    public int createButtons(Pane root) {
         // Keeps count of how many buttons are in each Slide
         int count = 0;
         // Gets the two images that are used in the buttons
-        final ImageIcon arrow = createIcon("redArrow.png", Color.decode(theme.active.textColour));
-        final ImageIcon redArrow = createIcon("redArrow.png", Color.decode(theme.active.sidebarColour));
+        final ImageView arrow = createIcon("redArrow.png", theme.textColor);
+        final ImageView redArrow = createIcon("redArrow.png", theme.textHoverColor);
 
         // If this is the last slide then create the restart button
-        if (createRestartButton(arrow, redArrow, panel)){
+        if (createRestartButton(root, redArrow, arrow)){
             return 1;
         }
-        // Creates the other buttons if it is not the last slide by looping through the slide
-        //decisions
+        // Creates the other buttons if it is not the last slide
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
-            // creates the button
-            JButton b = createButton(arrow);
+            // Creates the button
+            Button b = createButton(createIcon("redArrow.png", theme.textColor));
             b.setText(player.currentValidDecisions.get(i).text);
-            addDestinationAction(b, i);
-            addListeners(b, redArrow, arrow);
-            panel.add(b);
+            addDestinationAction(player, b, i);
+            addListeners(b, createIcon("redArrow.png", theme.textHoverColor), createIcon("redArrow.png", theme.textColor));
+            root.getChildren().add(b);
         }
         return count;
     }
@@ -77,26 +97,23 @@ public class CreateButtons extends CreateButtonPanel{
     /**
      * Creates the restart button when the last slide is reached
      *
-     * @param arrow - The image for the white arrow in the button
-     * @param redArrow - The image for the red arrow in the button
-     * @param panel - The panel to add the buttons to
-     * @return boolean - Returns true if button is created
+     * @return - The number of buttons.
      */
-    public boolean createRestartButton(ImageIcon arrow, ImageIcon redArrow, JPanel panel){
+    public boolean createRestartButton(Pane root, ImageView redArrow, ImageView arrow){
         // Checks if there are any more decisions, if not then it creates the replay buttons
         // and returns true
         if (player.currentValidDecisions.size() == 0) {
-            JButton b = createButton(arrow);
+            Button b = createButton(arrow);
             b.setText("Replay the game?");
             addListeners(b, redArrow, arrow);
-            //Handles the action of when the button gets pressed
-            b.addActionListener(e -> {
+            // Handles the action of when the button is pressed
+            b.setOnAction(arg0 -> {
                 player.clearPastChosenDecisions();
                 player.clearInventory();
-                player.currentSlide = player.game.firstSlide;
-                player.playScene();
+                TitleScreen titleScreen = new TitleScreen();
+                titleScreen.displayFirstSlide();
             });
-            panel.add(b);
+            root.getChildren().add(b);
             return true;
         }
         return false;
@@ -108,8 +125,8 @@ public class CreateButtons extends CreateButtonPanel{
      * @param button - The button that will be clicked.
      * @param index - The index of the decision linked to the button.
      */
-    private void addDestinationAction(JButton button, int index) {
-        button.addActionListener(e -> {
+    private static void addDestinationAction(Player player, Button button, int index) {
+        button.setOnAction(arg0 -> {
             player.currentSlide = player.currentValidDecisions.get(index).target;
             if (player.currentValidDecisions.get(index).hasItemToGive()) {
                 player.receiveItem(player.currentValidDecisions.get(index));

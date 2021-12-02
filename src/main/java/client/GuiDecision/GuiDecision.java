@@ -30,7 +30,7 @@ import java.util.Map;
  * The object representing the decisions displayed inside the editor.
  */
 public class GuiDecision extends StackPane {
-    public static EditorGame editorGame;
+    private static EditorGame editorGame;
     private double mouseAnchorX;
     private double mouseAnchorY;
     public DecisionLine leftLine;
@@ -153,7 +153,7 @@ public class GuiDecision extends StackPane {
         });
 
         // Decision conditionals - a list of all decisions that aren't the one being edited
-        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getAllEntriesDecision();
+        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getTotalDecisions();
         ArrayList<Decision> possibleConditionals = new ArrayList<Decision>();
         for (Map.Entry<Decision, GuiDecision> e : allDecisions) {
             Decision d = e.getKey();

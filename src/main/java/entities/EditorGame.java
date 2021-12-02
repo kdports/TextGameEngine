@@ -24,6 +24,7 @@ public class EditorGame {
     private final MapProperty<Slide, GuiSlide> deletedSlideMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
     private final MapProperty<Decision, GuiDecision> deletedDecisionMap = new SimpleMapProperty<>(FXCollections.observableMap(new HashMap<>()));
 
+    private static ArrayList<Map.Entry<Decision, GuiDecision>> totalDecisions = new ArrayList<>();
     /**
      * For each method below, gets and returns the map as named in the method name.
      */
@@ -76,8 +77,16 @@ public class EditorGame {
      *
      * @return - An arraylist of decisions
      */
-    public ArrayList<Map.Entry<Decision, GuiDecision>> getAllEntriesDecision(){
+    public ArrayList<Map.Entry<Decision, GuiDecision>> getAllEntriesDecision() {
         return new ArrayList<>(this.decisionMap.entrySet());
+    }
+
+    /**
+     * The static arraylist of decision, guidecision pairs
+     * @return An arraylist of a map entry key:value set of pairs
+     */
+    public static ArrayList<Map.Entry<Decision, GuiDecision>> getTotalDecisions() {
+        return totalDecisions;
     }
 
     /**
@@ -131,6 +140,8 @@ public class EditorGame {
                 guiDecision.leftLine.recalculateX();
                 guiDecision.leftLine.recalculateY();
             }
+
+            totalDecisions = new ArrayList<>(this.decisionMap.entrySet());
         }
     }
 

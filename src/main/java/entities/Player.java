@@ -1,7 +1,6 @@
 package entities;
 import client.PlayDisplayer;
-import client.ThemeColours;
-
+import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -34,6 +33,14 @@ public class Player {
      */
     public void playGame() {
         currentSlide = game.firstSlide;
+        checkValidChoices();
+        playScene();
+    }
+
+    public void playGame(Stage stage) {
+        dp.setStage(stage);
+        currentSlide = game.firstSlide;
+        checkValidChoices();
         playScene();
     }
 
@@ -43,6 +50,7 @@ public class Player {
      * implemented later
      */
     public void playScene(){
+        checkValidChoices();
         dp.display();
     }
 
@@ -60,8 +68,7 @@ public class Player {
     }
 
     /**
-     * Rakes in a decision and checks if its valid
-     *
+     * takes in a decision and checks if its valid
      * @param d a decision
      * @return boolean returns whether the decision is valid
      */
@@ -124,9 +131,12 @@ public class Player {
      */
     public boolean isMalformedGame() {
         try {
-            currentSlide.getId();
+            System.out.println("a");
+            // currentSlide.getId();
+            System.out.println("b");
             game.firstSlide.getId();
-            currentSlide.outgoingDecisions.isEmpty();
+            System.out.println("c");
+            // currentSlide.outgoingDecisions.isEmpty();
         } catch (NullPointerException e) { return true; }
         return false;
     }
