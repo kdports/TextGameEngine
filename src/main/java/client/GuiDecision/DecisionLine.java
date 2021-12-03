@@ -33,7 +33,7 @@ public class DecisionLine extends Line {
         if (decidedSlide != null) {
             if (parameter == ConnectionDirection.ORIGIN) {
                 // Change this from hardcoded width of box to actually the box's width, so that it changes.
-                this.setStartX(decidedSlide.getLayoutX() + 200);
+                this.setStartX(decidedSlide.getLayoutX() + 205);
             } else if (parameter == ConnectionDirection.TARGET) {
                 this.setEndX(decidedSlide.getLayoutX());
             }

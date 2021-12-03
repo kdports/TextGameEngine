@@ -1,6 +1,7 @@
 package handlers;
 
 import client.Main;
+import client.ThemeColours;
 import entities.EditorGame;
 import entities.Game;
 import entities.Studio;
@@ -31,7 +32,7 @@ class CreateNewSlideHandlerTest {
         // Please close the window that appears in order for the unit tests to complete!
 
         CreateNewSlideHandler slideHandler = new CreateNewSlideHandler(s, e);
-        slideHandler.execute(0.0,0);
+        slideHandler.execute(0.0,0, new ThemeColours());
         assertTrue(IdControl.getId() == 1);
         assertTrue(e.getSlideMap().size() == 1);
     }

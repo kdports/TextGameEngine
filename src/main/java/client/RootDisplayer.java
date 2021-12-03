@@ -41,7 +41,7 @@ public class RootDisplayer extends Application {
     public void start(Stage primaryStage) throws Exception {
         StackPane holder = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
-        Canvas canvas = new Canvas(5400,  9600);
+        Canvas canvas = new Canvas(1920,  1080);
         holder.getChildren().add(canvas);
         scrollPane.setContent(this.root);
         scrollPane.setMaxHeight(canvas.getHeight());
@@ -59,12 +59,13 @@ public class RootDisplayer extends Application {
         this.configureListeners(scrollPane);
 
         // Add the three sidebar buttons
-        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame, scrollPane);
+        ThemeColours theme = new ThemeColours();
+        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame, scrollPane, theme, this.root);
         this.root.getChildren().addAll(sidebarButtons);
 
 
 
-        holder.setStyle("-fx-background-color: #FFFFFF");
+        holder.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);
         primaryStage.show();

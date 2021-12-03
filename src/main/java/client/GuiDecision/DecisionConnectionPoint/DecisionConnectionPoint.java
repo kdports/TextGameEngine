@@ -17,8 +17,6 @@ abstract public class DecisionConnectionPoint extends Circle {
     DecisionConnectionPoint(Decision decision) {
         super(7);
 
-        this.setFill(Color.valueOf("99b898"));
-
         Pos position = decidePosition();
         StackPane.setAlignment(this, position);
 

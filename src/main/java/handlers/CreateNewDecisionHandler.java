@@ -2,6 +2,7 @@ package handlers;
 
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.EditorGame;
 import entities.Slide;
 import entities.Studio;
@@ -23,13 +24,13 @@ public class CreateNewDecisionHandler extends BaseHandler {
      * @param x - The X coordinate of where to create the decision.
      * @param y - The Y coordinate of where to create the decision.
      */
-    public void create(Slide slide, double x, double y){
+    public void create(Slide slide, double x, double y, ThemeColours theme){
         IdControl.addOne();
         GuiSlide guiSlide = this.editorGame.getSlideMap().get(slide);
 
         // Create the decision
         Decision decision = new Decision("I am a new decision", slide, IdControl.getId());
-        GuiDecision guiDecision = new GuiDecision(decision, guiSlide,x + 400, y);
+        GuiDecision guiDecision = new GuiDecision(decision, guiSlide,x + 400, y, theme);
 
         // Add the decision
         slide.addDecision(decision);
