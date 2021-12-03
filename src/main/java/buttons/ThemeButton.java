@@ -40,9 +40,11 @@ public class ThemeButton extends MenuButton {
 
         this.setOnMouseClicked(event -> {
             Stage themeWindow = new Stage();
+            themeWindow.setX(60);
+            themeWindow.setY(430);
             themeWindow.initModality(Modality.APPLICATION_MODAL);
             themeWindow.setTitle("Theme Editor");
-            themeWindow.setMinWidth(300);
+            themeWindow.setMinWidth(140);
 
             ChoiceBox<String> choiceBox = new ChoiceBox<>();
             choiceBox.setValue(theme.active.name);
@@ -59,6 +61,7 @@ public class ThemeButton extends MenuButton {
                         ChangeTheme(root, theme.active);
                     }
                 }
+                themeWindow.close();
             });
 
 

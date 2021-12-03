@@ -139,12 +139,9 @@ public class GuiDecision extends StackPane {
         slideWindow.setTitle("Decision Editor");
         slideWindow.setMinWidth(300);
         TextField input = new TextField(decision.getText());
-        Button btnClose = new Button("Close this window");
-        btnClose.setOnAction(mouseEvent -> slideWindow.close());
 
+        input.setOnKeyReleased(mouseEvent -> Handlers.decisionHandler.editMessage(decision, input.getText()));
         // Edit the value on entry according to the value on the text field
-        Button btnEdit = new Button("Edit the Decision message");
-        btnEdit.setOnAction(mouseEvent -> Handlers.decisionHandler.editMessage(decision, input.getText()));
 
         Button dltButton = new Button("Delete Decision");
         dltButton.setOnAction(mouseEvent -> {
@@ -169,9 +166,8 @@ public class GuiDecision extends StackPane {
         });
 
         TextField itemInput = new TextField(decision.getItemToGive());
+        itemInput.setOnKeyReleased(mouseEvent -> Handlers.decisionHandler.changeGivenItem(decision, itemInput.getText()));
         // Edit the value on entry according to the value on the text field
-        Button btnItemEdit = new Button("Save the above text as an item to give");
-        btnItemEdit.setOnAction(mouseEvent -> Handlers.decisionHandler.changeGivenItem(decision, itemInput.getText()));
 
         // A hashset of all items given by other decisions
         HashSet<String> allItems = new HashSet<String>();
@@ -189,8 +185,8 @@ public class GuiDecision extends StackPane {
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose, dltButton, decisionCondition, decisionComboBox,
-                itemInput, btnItemEdit, itemCondition, itemComboBox);
+        alert.getChildren().addAll(input, dltButton, decisionCondition, decisionComboBox,
+                itemInput, itemCondition, itemComboBox);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);
