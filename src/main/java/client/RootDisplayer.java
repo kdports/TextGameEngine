@@ -60,7 +60,7 @@ public class RootDisplayer extends Application {
 
         // Add the three sidebar buttons
         ThemeColours theme = new ThemeColours();
-        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame, scrollPane, theme);
+        SidebarButtons sidebarButtons = new SidebarButtons(window, this.editorGame, scrollPane, theme, this.root);
         this.root.getChildren().addAll(sidebarButtons);
 
 
