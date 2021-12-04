@@ -1,6 +1,7 @@
 package handlers;
 
 import client.Main;
+import client.ThemeColours;
 import entities.EditorGame;
 import entities.Game;
 import entities.Studio;
@@ -26,12 +27,10 @@ class CreateNewSlideHandlerTest {
          */
         Studio s = new Studio();
         EditorGame e = new EditorGame();
-        String[] args = new String[] {} ;
-        // Main.main(args);
         // Please close the window that appears in order for the unit tests to complete!
 
         CreateNewSlideHandler slideHandler = new CreateNewSlideHandler(s, e);
-        slideHandler.execute(0.0,0);
+        slideHandler.testExecute(0.0,0, new ThemeColours());
         assertTrue(e.getSlideMap().size() == 1);
     }
 }
