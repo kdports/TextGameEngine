@@ -34,6 +34,7 @@ public class GuiSlide extends StackPane {
     public double sceneX;
     public double sceneY;
     public Text prompt;
+    public Rectangle rounded;
 
     /**
      * Constructs an instance by setting the initial position, colour, and size of
@@ -74,7 +75,7 @@ public class GuiSlide extends StackPane {
         Button setFirstButton = new SetFirstButton(slide, theme);
 
         // main slide
-        Rectangle rounded = new Rectangle();
+        rounded = new Rectangle();
         rounded.setWidth(210);
         rounded.setHeight(110);
         rounded.setArcHeight(30);
@@ -99,6 +100,10 @@ public class GuiSlide extends StackPane {
         this.initializeListeners(slide, firstSlideIndicator);
     }
 
+    public void setTheme(ThemeColours theme){
+        rounded.setFill(Color.valueOf(theme.active.slideColour));
+    }
+
     /**
      * Constructor for testing purposes only
      */
@@ -108,7 +113,7 @@ public class GuiSlide extends StackPane {
     /**
      * Create the event handlers to listen to drag and mouse events.
      */
-    private void initializeDragHandling() {
+   private void initializeDragHandling() {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
@@ -116,7 +121,7 @@ public class GuiSlide extends StackPane {
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY - 68);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
         });
     }
 

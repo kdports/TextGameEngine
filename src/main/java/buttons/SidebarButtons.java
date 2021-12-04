@@ -27,7 +27,7 @@ public class SidebarButtons extends ArrayList<Button> {
         Button playTestButton = new PlayTestButton(editorGame, scrollPane, theme);
         Button saveButton = new SaveButton(window, editorGame, scrollPane, theme);
         Button loadButton = new LoadButton(window, editorGame, scrollPane, theme);
-        Button themeButton = new ThemeButton(theme, scrollPane, root, editorGame);
+        Button themeButton = new ThemeButton(theme, scrollPane, root);
 
         this.addAll(Arrays.asList(createNewSlideButton, playTestButton, saveButton, loadButton, themeButton));
     }

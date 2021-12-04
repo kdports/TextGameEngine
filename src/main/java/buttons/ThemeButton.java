@@ -1,6 +1,7 @@
 package buttons;
 
 import client.EditorTheme;
+import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import client.ThemeColours;
 import entities.EditorGame;
@@ -28,9 +29,13 @@ import java.util.Objects;
  */
 public class ThemeButton extends MenuButton {
 
-    public ThemeButton(ThemeColours theme, ScrollPane scrollPane, Pane root, EditorGame editorGame) {
+    public ThemeButton(ThemeColours theme, ScrollPane scrollPane, Pane root) {
         super(scrollPane);
         this.setLayoutY(425);
+        scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {
+                    this.setLayoutY(newvalue.doubleValue() + 425);
+                }
+        );
 
         this.setText("Change Theme");
 
@@ -58,7 +63,7 @@ public class ThemeButton extends MenuButton {
                 for(EditorTheme themeSet : theme.themes){
                     if (Objects.equals(themeSet.name, newTheme)){
                         theme.active = themeSet;
-                        ChangeTheme(root, theme.active);
+                        ChangeTheme(root, theme.active, theme);
                     }
                 }
                 themeWindow.close();
@@ -77,14 +82,22 @@ public class ThemeButton extends MenuButton {
         });
     }
 
-    public void ChangeTheme(Pane root, EditorTheme active){
+    public void ChangeTheme(Pane root, EditorTheme active, ThemeColours theme){
         for (Node element : root.getChildren()){
-            if (element instanceof StackPane){
+
+            if (element instanceof GuiSlide){
+                ((GuiSlide) element).setTheme(theme);
+            }
+            else if (element instanceof GuiDecision){
+                ((GuiDecision) element).setTheme(theme);
+            }
+            else if (element instanceof StackPane){
                 element.setStyle("-fx-background-color: " + active.backgroundColour);
             }
             else if (element instanceof Button){
                 element.setStyle("-fx-background-color: " + active.sidebarColour);
             }
+
         }
     }
 }
