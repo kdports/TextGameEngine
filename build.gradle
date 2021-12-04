@@ -25,7 +25,8 @@ javafx {
 }
 
 dependencies {
-    testImplementation "org.testfx:testfx-core:4.0.16-alpha+"
+    testImplementation "org.testfx:testfx-core:4.0.+"
+    testImplementation "org.testfx:testfx-junit:4.0.+"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
