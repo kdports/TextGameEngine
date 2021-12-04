@@ -1,48 +1,35 @@
 package client;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
-import org.testfx.matcher.control.LabeledMatchers;
-
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit.ApplicationTest;
 import javafx.stage.Stage;
+import org.testfx.api.FxToolkit;
 
-class RootDisplayerTest {
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.hasChildren;
 
-    private RootDisplayer rootDisplayer;
+public class RootDisplayerTest extends ApplicationTest {
+    @Before
+    public void setUpClass() throws Exception{
+        launch(RootDisplayer.class);
 
-    /**
-     * Will be called with {@code @Before} semantics, i. e. before each test method.
-     *
-     *
-     */
-    @Test
-    private void start(String[] args) {
-        rootDisplayer = new RootDisplayer();
-        rootDisplayer.begin(args);
+
     }
 
-    /**
-     * @param robot - Will be injected by the test runner.
-     */
-    @Test
-    void should_contain_button_with_text(FxRobot robot) {
-        // or (lookup by css id):
-        FxAssert.verifyThat("#myButton", LabeledMatchers.hasText("click me!"));
-        // or (lookup by css class):
-        FxAssert.verifyThat(".button", LabeledMatchers.hasText("click me!"));
+    @Override
+    public void start(Stage stage) throws Exception {
+        launch(RootDisplayer.class);
+        stage.show();
     }
 
-    /**
-     * @param robot - Will be injected by the test runner.
-     */
     @Test
-    void when_button_is_clicked_text_changes(FxRobot robot) {
-        // when:
+    public void should_contain_buttons() {
+        // rightClickOn("#button-add-slide");
+        // verifyThat("#button-add-slide", (Button add_slide) -> add_slide.getAccessibleText().contains("Add Slide"));
 
     }
 }

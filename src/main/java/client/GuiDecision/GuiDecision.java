@@ -39,6 +39,7 @@ public class GuiDecision extends StackPane {
     public GuiSlide targetSlide;
     public double sceneX;
     public double sceneY;
+    public Rectangle rounded;
 
     /**
      * Constructs an instance by setting the initial position, colour, and size of
@@ -66,7 +67,7 @@ public class GuiDecision extends StackPane {
         Circle rightConnection = new RightDecisionConnectionPoint(decision, theme);
 
         // main slide
-        Rectangle rounded = new Rectangle();
+        rounded = new Rectangle();
         rounded.setWidth(105);
         rounded.setHeight(30);
         rounded.setArcHeight(15);
@@ -100,6 +101,10 @@ public class GuiDecision extends StackPane {
 //         targetSlide.addListener(event -> {
 //             rightLine.setSlide(this.targetSlide.getValue());
 //         });
+    }
+
+    public void setTheme(ThemeColours theme){
+        rounded.setFill(Color.valueOf(theme.active.slideColour));
     }
 
     /**
