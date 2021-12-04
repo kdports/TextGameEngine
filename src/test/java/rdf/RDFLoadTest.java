@@ -43,7 +43,7 @@ class RDFLoadTest {
         String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
         try {
             String[] args = new String[] {} ;
-            Main.main(args);
+            // Main.main(args);
             RDFLoadToStudio loader = new RDFLoadToStudio(rdfFilepath);
             EditorGame e = loader.loadEditorGameFromFile();
             // This test opens the studio and gamerenderer over the course of its function
