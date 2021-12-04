@@ -98,7 +98,7 @@ public class GuiSlide extends StackPane {
     /**
      * Create the event handlers to listen to drag and mouse events.
      */
-    private void initializeDragHandling() {
+   private void initializeDragHandling() {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
