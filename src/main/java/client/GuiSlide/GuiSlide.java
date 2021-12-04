@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -145,7 +146,9 @@ public class GuiSlide extends StackPane {
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY + 68);
+            double screenSize = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+            System.out.println(screenSize);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY - (screenSize * 2) / 33);
         });
     }
 

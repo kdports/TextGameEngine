@@ -28,7 +28,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage)  {
         root = new Pane();
-        AnchorPane anchor = new AnchorPane();
 
         stage = primaryStage;
         stage.setTitle("Text Game Engine");
@@ -40,6 +39,7 @@ public class Main extends Application {
         // OTHERWISE LAUNCH STUDIO
 
         Scene scene = new Scene(root,1200,800);
+
         stage.setScene(scene);
         stage.show();
 
