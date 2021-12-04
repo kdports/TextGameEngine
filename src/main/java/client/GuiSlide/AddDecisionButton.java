@@ -26,4 +26,5 @@ public class AddDecisionButton extends Button {
         );
         StackPane.setAlignment(this, Pos.TOP_RIGHT);
     }
+
 }

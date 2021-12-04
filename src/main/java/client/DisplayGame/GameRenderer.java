@@ -1,7 +1,6 @@
 package client.DisplayGame;
 
 
-import client.Theme;
 import client.ThemeColours;
 import entities.Player;
 import entities.CreateSampleGame;
@@ -9,7 +8,6 @@ import client.PlayDisplayer;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -89,8 +87,8 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * Main method
      */
     public static void main(String[] args) {
-        GameRenderer gr = new  GameRenderer();
-        new Player(gr, CreateSampleGame.returnGame());
+        GameRenderer gr = new GameRenderer();
+        // new Player(gr, CreateSampleGame.returnGame());
         gr.begin(args);
     }
 

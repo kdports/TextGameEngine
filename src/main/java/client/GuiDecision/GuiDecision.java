@@ -1,5 +1,6 @@
 package client.GuiDecision;
 
+import buttons.MenuButton;
 import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
@@ -9,6 +10,7 @@ import entities.EditorGame;
 import handlers.Handlers;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -105,6 +107,20 @@ public class GuiDecision extends StackPane {
 
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
+        leftLine.setStroke(Color.valueOf(theme.active.textColour));
+        rightLine.setStroke(Color.valueOf(theme.active.textColour));
+
+        for (Node element : this.getChildren()){
+            if (element instanceof Button) {
+                element.setStyle("-fx-background-insets: 0;" +
+                        "-fx-font-size: 10;"+
+                        "-fx-background-color: " + theme.active.backgroundColour + ";" +
+                        "-fx-text-fill: " + theme.active.textColour +";");
+            }
+            else if (element instanceof Circle) {
+                ((Circle) element).setFill(Color.valueOf(theme.active.sidebarColour));
+            }
+        }
     }
 
     /**
@@ -163,14 +179,16 @@ public class GuiDecision extends StackPane {
                 possibleConditionals.add(d);
             }
         }
-        Text decisionCondition = new Text("Choose decision conditionals below");
+
         // A dropdown list of all decisions to select from
         ComboBox<Decision> decisionComboBox = new ComboBox<Decision>(FXCollections.observableArrayList(possibleConditionals));
+        decisionComboBox.setPromptText("Choose Decision Conditional");
         decisionComboBox.setOnAction(mouseEvent -> {
             Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
         });
 
         TextField itemInput = new TextField(decision.getItemToGive());
+        itemInput.setPromptText("Enter collected item...");
         itemInput.setOnKeyReleased(mouseEvent -> Handlers.decisionHandler.changeGivenItem(decision, itemInput.getText()));
         // Edit the value on entry according to the value on the text field
 
@@ -181,17 +199,18 @@ public class GuiDecision extends StackPane {
                 allItems.add(d.getItemToGive());
             }
         }
-        Text itemCondition = new Text("Choose item conditionals below");
+
         // A dropdown list of all decisions to select from
         ComboBox<String> itemComboBox = new ComboBox<String>(FXCollections.observableArrayList(allItems));
+        itemComboBox.setPromptText("Choose Item Conditional");
         itemComboBox.setOnAction(mouseEvent -> {
             Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue());
         });
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, dltButton, decisionCondition, decisionComboBox,
-                itemInput, itemCondition, itemComboBox);
+        alert.getChildren().addAll(input, dltButton, decisionComboBox,
+                itemInput, itemComboBox);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);

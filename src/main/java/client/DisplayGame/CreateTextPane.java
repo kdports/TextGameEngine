@@ -1,10 +1,6 @@
 package client.DisplayGame;
 
-import client.Theme;
 import client.ThemeColours;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -14,21 +10,11 @@ import javafx.scene.text.Font;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class CreateTextPane {
     int animationSpeed;

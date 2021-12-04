@@ -6,6 +6,7 @@ import handlers.Handlers;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -102,6 +103,29 @@ public class GuiSlide extends StackPane {
 
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
+
+        for (Node element : this.getChildren()){
+            if (element instanceof AddDecisionButton || element instanceof DeleteSlideButton){
+                element.setStyle("-fx-background-insets: 0;" +
+                        "-fx-font-size: 10;"+
+                        " -fx-background-color: TRANSPARENT;" +
+                        "-fx-text-fill: " + theme.active.textColour +";");
+            }
+            else if (element instanceof SetFirstButton){
+                element.setStyle("-fx-background-insets: 0;" +
+                        "-fx-font-size: 10;"+
+                        "-fx-background-color: " + theme.active.backgroundColour + ";" +
+                        "-fx-text-fill: " + theme.active.textColour +";");
+            }
+            else if (element instanceof TextArea){
+                if (!Objects.equals(theme.active.slideColour, "#ffffff")) {
+                    element.setStyle("-fx-background-color: TRANSPARENT;" + "-fx-blend-mode: SOFT_LIGHT;");
+                }
+                else {
+                    element.setStyle("-fx-background-color: WHITE;");
+                }
+            }
+        }
     }
 
     /**
@@ -121,7 +145,7 @@ public class GuiSlide extends StackPane {
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY + 68);
         });
     }
 
@@ -159,31 +183,5 @@ public class GuiSlide extends StackPane {
             Handlers.slideHandler.dropEvent(slide, this, db.getString());
             System.out.println(slide.outgoingDecisions);
         });
-    }
-
-    /**
-     * Create a dialog box that allows the user to type in new text for their slide.
-     * @param slide - The slide on which to change the text.
-     */
-    static void showEdit(Slide slide){
-        Stage slideWindow = new Stage();
-        slideWindow.initModality(Modality.APPLICATION_MODAL);
-        slideWindow.setTitle("Slide Editor");
-        slideWindow.setMinWidth(300);
-        TextArea input = new TextArea(slide.getPrompt());
-        input.setMinHeight(100);
-
-        // Edit the value on entry according to the value on the text field
-        Button btnEdit = new Button("Confirm Message Change");
-        btnEdit.setOnAction(mouseEvent -> Handlers.slideHandler.editMessage(slide, input.getText()));
-
-        // Make the Slide Edit Window Show
-        VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit);
-        alert.setAlignment(Pos.CENTER);
-
-        Scene window = new Scene(alert);
-        slideWindow.setScene(window);
-        slideWindow.show();
     }
 }

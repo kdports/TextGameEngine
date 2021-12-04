@@ -9,7 +9,7 @@ public class ThemeColours {
     public ArrayList<EditorTheme> themes = new ArrayList<>();
 
     public ThemeColours(){
-        EditorTheme defaultTheme = new EditorTheme("#ffffff", "#000000", "#ffffff",
+        EditorTheme defaultTheme = new EditorTheme("#ffffff", "#000000", "#e1e1e1",
                 "#e1e1e1", "Default");
 
         EditorTheme Peachy = new EditorTheme("#ff847c", "#2a363b", "#fecea8",
@@ -25,6 +25,6 @@ public class ThemeColours {
         this.themes.add(Peachy);
         this.themes.add(Ocean);
         this.themes.add(Crimson);
-        this.active = Crimson;
+        this.active = defaultTheme;
     }
 }

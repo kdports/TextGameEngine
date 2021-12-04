@@ -1,4 +1,8 @@
 package client.DisplayGame;
+import client.GuiDecision.GuiDecision;
+import client.GuiSlide.GuiSlide;
+import client.PlayDisplayer;
+import entities.*;
 import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -12,11 +16,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 import javafx.util.Duration;
+import rdf.RDFLoadToPlayer;
+import rdf.RDFLoadToStudio;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.Long.MAX_VALUE;
 
@@ -25,16 +36,19 @@ public class TitleScreen extends GameRenderer{
     public void displayFirstSlide(){
         VBox box = new VBox(400);
         box.setAlignment(Pos.TOP_CENTER);
-        Label title =  new Label("Title Screen");
+        Label title =  new Label("Welcome, Player!");
         title.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 55));
         title.setAlignment(Pos.TOP_CENTER);
-        Button start = createStartButton();
-        Button settings = createSettingsButton();
+
+        Button settings = createStartButton();
+        Button start = createSettingsButton();
         Button quit = createQuitButton();
+
         HBox hBox = new HBox(25);
         hBox.getChildren().addAll(start, settings, quit);
         hBox.setAlignment(Pos.BASELINE_CENTER);
-        List<Node> nodes = Arrays.asList(quit, start, settings, title);
+
+        List<Node> nodes = Arrays.asList(quit, settings,start, title);
         Duration duration = new Duration(2400);
         addFadeAnimation(nodes, duration);
         box.getChildren().addAll(title, hBox);
@@ -44,19 +58,54 @@ public class TitleScreen extends GameRenderer{
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
         stage.show();
+
+        box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
+        title.setStyle("-fx-text-fill: " + theme.active.textColour);
+        start.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour +";");
+        settings.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour +";");
+        quit.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour +";");
     }
 
     public Button createStartButton(){
         Button button = createButton();
-        button.setOnAction(arg0 -> player.playGame());
-        button.setText("Start Game");
+        //button.setOnAction(arg0 -> player.playGame());
+        button.setText("Settings");
         return button;
     }
 
     private Button createSettingsButton(){
         Button button = createButton();
-        button.setOnAction(arg0 -> System.out.println("menu")); // Temporary
-        button.setText("Settings");
+        button.setText("Load Game");
+        VBox box = new VBox(400);
+        Scene window = new Scene(box,1200,800);
+
+        button.setOnMouseClicked(event -> {
+            PlayDisplayer playDisplayer = new GameRenderer();
+
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter exFilter = new FileChooser.ExtensionFilter("Turtle File (.ttl)", "*.ttl");
+            fileChooser.getExtensionFilters().add(exFilter);
+            File location = fileChooser.showOpenDialog(window.getWindow());
+
+            // If the user chose a valid file to load from, load it in.
+            if (location != null){
+                String path = location.getAbsolutePath();
+                try {
+                    RDFLoadToPlayer loader = new RDFLoadToPlayer(path);
+                    Game loadedGame = loader.loadGameFromFile();
+                    Player player = new Player(playDisplayer, loadedGame);
+                    player.playGame();
+
+                }
+                catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return button;
     }
 
