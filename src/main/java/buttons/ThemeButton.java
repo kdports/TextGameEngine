@@ -80,8 +80,8 @@ public class ThemeButton extends MenuButton {
     }
 
     public void ChangeTheme(Pane root, EditorTheme active, ThemeColours theme){
-        System.out.println(root.getChildren());
         for (Node element : root.getChildren()){
+
             if (element instanceof GuiSlide){
                 ((GuiSlide) element).setTheme(theme);
             }
