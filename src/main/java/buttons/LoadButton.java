@@ -2,6 +2,7 @@ package buttons;
 
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.Decision;
 import entities.EditorGame;
 import entities.Slide;
@@ -25,14 +26,15 @@ public class LoadButton extends MenuButton {
      * Creates a Button instance of the load button that is displayed in the game.
      * Also handles what happens when the button is clicked (loading up an
      * editor from file)
-     *
-     * @param window - The window in which the file explorer resides when clicking load
+     *  @param window - The window in which the file explorer resides when clicking load
      * @param editorGame - The existing EditorGame instance that will be filled with
-     *                   data from the incoming file
+     * @param theme
      */
-    public LoadButton(Scene window, EditorGame editorGame, ScrollPane scrollPane){
+    public LoadButton(Scene window, EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme){
         super(scrollPane);
 
+        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour);
         this.setText("Load");
         this.setLayoutY(320);
         scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {

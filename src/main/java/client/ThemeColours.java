@@ -9,24 +9,22 @@ public class ThemeColours {
     public ArrayList<EditorTheme> themes = new ArrayList<>();
 
     public ThemeColours(){
-        EditorTheme allWhite = new EditorTheme("-fx-background-color: #ffffff; ",
-                "-fx-background-color: #ffffff; ",
-                "-fx-background-color: #ffffff; ",
-                "-fx-background-color: #ffffff; ",
-                "All White");
+        EditorTheme defaultTheme = new EditorTheme("#ffffff", "#000000", "#ffffff",
+                "#e1e1e1", "Default");
 
-        EditorTheme allBlack = new EditorTheme("-fx-background-color: #000000; ",
-                "-fx-background-color: #000000; ",
-                "-fx-background-color: #000000; ",
-                "-fx-background-color: #000000; ",
-                "All Black");
+        EditorTheme Peachy = new EditorTheme("#ff847c", "#2a363b", "#fecea8",
+                "#99b898", "Peachy");
 
-        EditorTheme defaultTheme = new EditorTheme("", "", "",
-                "", "Default");
+        EditorTheme Ocean = new EditorTheme("#78C5DC", "#0D9CBF", "#B7ECEA", "#C5F7EB",
+                "Ocean");
 
-        this.themes.add(allWhite);
-        this.themes.add(allBlack);
+        EditorTheme Crimson = new EditorTheme("#132052", "#EDCEA8", "#4D2E5B", "#7F2639",
+                "Crimson");
+
         this.themes.add(defaultTheme);
-        this.active = defaultTheme;
+        this.themes.add(Peachy);
+        this.themes.add(Ocean);
+        this.themes.add(Crimson);
+        this.active = Crimson;
     }
 }

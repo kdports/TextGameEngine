@@ -1,83 +1,77 @@
 package client.DisplayGame;
 
+import client.EditorTheme;
 import client.Theme;
+import client.ThemeColours;
 import entities.Player;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
 import javax.swing.*;
 
-/**
- * This class is in charge of creating the top menu bar of the game player that is in charge
- * of things like changing themes and animation speed
- */
-public class CreateMenu extends GameRenderer {
+public class CreateMenu {
     GameRenderer gameRenderer;
-
+    Player player;
+    ThemeColours theme;
+    int animationSpeed;
+    Pane pane;
     /**
-     * Constructor that creates a createmenu object
-     * @param theme A theme object with colors of various elements
-     * @param player The player object that gamerenderer uses
-     * @param animationSpeed The speed of the text loading animation
-     * @param frame The JFrame that Gamerenderer uses to display the game
-     * @param gameRenderer The Gamerenderer that displays the game
+     * Creates the menu bar at the top of the window.
+     *
      */
-    CreateMenu(Theme theme, Player player, int animationSpeed, JFrame frame, GameRenderer gameRenderer) {
+    CreateMenu(ThemeColours theme, Player player, int animationSpeed, Pane pane, GameRenderer gameRenderer) {
         this.theme = theme;
         this.animationSpeed  = animationSpeed;
         this.player = player;
-        this.frame = frame;
+        this.pane = pane;
         this.gameRenderer = gameRenderer;
     }
 
-    /**
-     * Creates a JMenuBar that resides at the top of the game renderer which gives you various options
-     * to customize the game
-     * @return JMenuBar Returns the JMenuBar created
-     */
-    public JMenuBar createMenu() {
-        JMenuBar mb = new JMenuBar();
+    public MenuBar createMenu() {
+        MenuBar mb = new MenuBar();
         // Creates the theme dropdown
-        JMenu themes = new JMenu("Themes");
+        Menu themes = new Menu("Themes");
         // Adds the themes from the themeList as a button to allow the user to switch between themes
-        for (String t : theme.themeList) {
-            JMenuItem th = new JMenuItem(t);
-            th.addActionListener(e -> {
-                theme.setTheme(t);
+        for (EditorTheme t : theme.themes) {
+            MenuItem th = new MenuItem(t.name);
+            th.setOnAction(e -> {
+                theme.active = t;
                 gameRenderer.display();
             });
-            themes.add(th);
+            themes.getItems().add(th);
         }
         // Creates the animation dropdown
-        JMenu animation = createAnimationMenu();
+        Menu animation = createAnimationMenu();
 
         // Adds the themes dropdown and the animation dropdown to the menu bar
-        mb.add(themes);
-        mb.add(animation);
+        mb.getMenus().add(themes);
+        mb.getMenus().add(animation);
+        mb.setStyle("-fx-background-color: #FFFFFF");
         return mb;
     }
 
     /**
-     * Creates the animation menu for the menu bar that alters the speed of
-     * the text displaying
+     * Creates the animation menu for the menu bar.
      *
-     * @return - The animation menu
+     * @return - The animation menu;
      */
-    public JMenu createAnimationMenu() {
+    public Menu createAnimationMenu() {
         // Crates an animation speed dropdown to allow users to switch the animation speed
         // Speed contains the 4 options for the animation speed
         String[] speed = {"off", "fast", "medium", "slow"};
-        JMenu animation = new JMenu("Animation");
+        Menu animation = new Menu("Animation");
         int speed_num = 0;
         for (String s : speed) {
-            JMenuItem sp = new JMenuItem(s);
+            MenuItem sp = new MenuItem(s);
             int finalSpeed_num = speed_num;
-            sp.addActionListener(e -> {
+            sp.setOnAction(e -> {
                 gameRenderer.animationSpeed = finalSpeed_num;
                 gameRenderer.display();
             });
             // Increases the speed with each option
             speed_num += 5;
             speed_num *= 2;
-            animation.add(sp);
+            animation.getItems().add(sp);
         }
         return animation;
     }

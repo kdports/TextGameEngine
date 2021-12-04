@@ -1,19 +1,23 @@
 package client.GuiSlide;
 
+import client.Theme;
+import client.ThemeColours;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 /**
  * The visual indicator that tells the user that this slide is marked as first.
  */
 public class FirstSlideIndicator extends Circle {
-    public FirstSlideIndicator() {
+    public FirstSlideIndicator(ThemeColours theme) {
         super();
 
-        this.setFill(Color.RED);
-        this.setRadius(5);
-        StackPane.setAlignment(this, Pos.TOP_CENTER);
+        this.setFill(Color.TRANSPARENT);
+        this.setStroke(Color.valueOf(theme.active.backgroundColour));
+        this.setRadius(7);
+        StackPane.setAlignment(this, Pos.BOTTOM_LEFT);
     }
 }

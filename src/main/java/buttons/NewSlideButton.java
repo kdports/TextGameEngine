@@ -1,5 +1,6 @@
 package buttons;
 
+import client.ThemeColours;
 import handlers.Handlers;
 import javafx.scene.control.ScrollPane;
 
@@ -14,13 +15,15 @@ public class NewSlideButton extends MenuButton {
      * Creates a Button instance of the new slide button that is displayed in the game.
      * Calls the respective handler when the button is clicked
      */
-    public NewSlideButton(ScrollPane scrollPane) {
+    public NewSlideButton(ScrollPane scrollPane, ThemeColours theme) {
         super(scrollPane);
         this.setText("Add Slide");
         this.setId("button-add-slide");
+        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour);
         this.setLayoutY(10);
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 10)
         );
-        this.setOnMouseClicked(event -> {Handlers.createNewSlideHandler.execute(this.getLayoutX(), this.getLayoutY());});
+        this.setOnMouseClicked(event -> {Handlers.createNewSlideHandler.execute(this.getLayoutX(), this.getLayoutY(), theme);});
     }
 }

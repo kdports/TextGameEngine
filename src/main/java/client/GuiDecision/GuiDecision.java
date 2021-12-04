@@ -3,6 +3,7 @@ package client.GuiDecision;
 import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
+import client.ThemeColours;
 import entities.Decision;
 import entities.EditorGame;
 import handlers.Handlers;
@@ -29,7 +30,7 @@ import java.util.Map;
  * The object representing the decisions displayed inside the editor.
  */
 public class GuiDecision extends StackPane {
-    public static EditorGame editorGame;
+    private static EditorGame editorGame;
     private double mouseAnchorX;
     private double mouseAnchorY;
     public DecisionLine leftLine;
@@ -48,7 +49,7 @@ public class GuiDecision extends StackPane {
      * @param x - The x location of the decision in the editor
      * @param y - The x location of the decision in the editor
      */
-    public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y) {
+    public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y, ThemeColours theme) {
         this.originSlide = guiSlide;
         this.setLayoutX(x);
         this.setLayoutY(y);
@@ -56,14 +57,13 @@ public class GuiDecision extends StackPane {
         this.setMaxWidth(120);
         this.setMinHeight(26);
         this.setMaxHeight(26);
-        this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
 
-        Button editButton = new EditDecisionButton(decision);
-        Circle leftConnection = new LeftDecisionConnectionPoint(decision);
-        Circle rightConnection = new RightDecisionConnectionPoint(decision);
+        Button editButton = new EditDecisionButton(decision, theme);
+        Circle leftConnection = new LeftDecisionConnectionPoint(decision, theme);
+        Circle rightConnection = new RightDecisionConnectionPoint(decision, theme);
 
         // main slide
         Rectangle rounded = new Rectangle();
@@ -72,7 +72,7 @@ public class GuiDecision extends StackPane {
         rounded.setArcHeight(15);
         rounded.setArcWidth(15);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf("#fecea8"));
+        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
         this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 
@@ -93,6 +93,9 @@ public class GuiDecision extends StackPane {
                 ConnectionDirection.TARGET,
                 targetSlide
         );
+
+        leftLine.setStroke(Color.valueOf(theme.active.textColour));
+        rightLine.setStroke(Color.valueOf(theme.active.textColour));
 
 //         targetSlide.addListener(event -> {
 //             rightLine.setSlide(this.targetSlide.getValue());
@@ -117,9 +120,9 @@ public class GuiDecision extends StackPane {
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getSceneX() - mouseAnchorX);
             this.setLayoutY(sceneY + event.getSceneY() - mouseAnchorY);
-            leftLine.setEndX(sceneX + event.getSceneX() - mouseAnchorX + 10);
-            leftLine.setEndY(sceneY + event.getSceneY() - mouseAnchorY + 13);
-            rightLine.setStartX(sceneX + event.getSceneX() - mouseAnchorX + 112);
+            leftLine.setEndX(sceneX + event.getSceneX() - mouseAnchorX);
+            leftLine.setEndY(sceneY + event.getSceneY() - mouseAnchorY  + 13);
+            rightLine.setStartX(sceneX + event.getSceneX() - mouseAnchorX + 120);
             rightLine.setStartY(sceneY + event.getSceneY() - mouseAnchorY + 13);
         });
     }
@@ -150,7 +153,7 @@ public class GuiDecision extends StackPane {
         });
 
         // Decision conditionals - a list of all decisions that aren't the one being edited
-        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getAllEntriesDecision();
+        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getTotalDecisions();
         ArrayList<Decision> possibleConditionals = new ArrayList<Decision>();
         for (Map.Entry<Decision, GuiDecision> e : allDecisions) {
             Decision d = e.getKey();

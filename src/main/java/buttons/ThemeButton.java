@@ -1,19 +1,26 @@
 package buttons;
 
 import client.EditorTheme;
+import client.GuiSlide.GuiSlide;
 import client.ThemeColours;
+import entities.EditorGame;
+import entities.Slide;
 import handlers.Handlers;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,14 +28,15 @@ import java.util.Objects;
  */
 public class ThemeButton extends MenuButton {
 
-    public ThemeButton(ThemeColours theme, ScrollPane scrollPane) {
+    public ThemeButton(ThemeColours theme, ScrollPane scrollPane, Pane root, EditorGame editorGame) {
         super(scrollPane);
         this.setLayoutY(425);
 
         this.setText("Change Theme");
 
         // set the theme to the current active theme
-        this.setStyle(theme.active.sidebarColour);
+        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour);
 
         this.setOnMouseClicked(event -> {
             Stage themeWindow = new Stage();
@@ -37,8 +45,10 @@ public class ThemeButton extends MenuButton {
             themeWindow.setMinWidth(300);
 
             ChoiceBox<String> choiceBox = new ChoiceBox<>();
-            choiceBox.setValue("Choose Theme...");
-            choiceBox.getItems().addAll("Default", "All White", "All Black");
+            choiceBox.setValue(theme.active.name);
+            for (EditorTheme themes : theme.themes){
+                choiceBox.getItems().add(themes.name);
+            }
 
             // When u click a theme name, change the active theme to that theme
             choiceBox.setOnAction(event1 -> {
@@ -46,6 +56,7 @@ public class ThemeButton extends MenuButton {
                 for(EditorTheme themeSet : theme.themes){
                     if (Objects.equals(themeSet.name, newTheme)){
                         theme.active = themeSet;
+                        ChangeTheme(root, theme.active);
                     }
                 }
             });
@@ -61,5 +72,16 @@ public class ThemeButton extends MenuButton {
             themeWindow.setScene(window);
             themeWindow.show();
         });
+    }
+
+    public void ChangeTheme(Pane root, EditorTheme active){
+        for (Node element : root.getChildren()){
+            if (element instanceof StackPane){
+                element.setStyle("-fx-background-color: " + active.backgroundColour);
+            }
+            else if (element instanceof Button){
+                element.setStyle("-fx-background-color: " + active.sidebarColour);
+            }
+        }
     }
 }

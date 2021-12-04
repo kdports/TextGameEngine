@@ -1,11 +1,13 @@
 package client.GuiSlide;
 
+import client.ThemeColours;
 import entities.Slide;
 import handlers.Handlers;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -18,6 +20,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 /**
  * The object representing the slides displayed inside the editor.
@@ -37,7 +41,7 @@ public class GuiSlide extends StackPane {
      * @param xLocation - The x location of the slide in the editor
      * @param yLocation - The x location of the slide in the editor
      */
-    public GuiSlide(Slide slide, double xLocation, double yLocation) {
+    public GuiSlide(Slide slide, double xLocation, double yLocation, ThemeColours theme) {
         String id = String.valueOf(slide.getId());
         this.setId(id);
         this.setLayoutX(xLocation);
@@ -46,22 +50,28 @@ public class GuiSlide extends StackPane {
         this.setMinWidth(200);
         this.setMaxHeight(100);
         this.setMinHeight(100);
-        this.setStyle("-fx-background-color: TRANSPARENT;");
+        //this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
 
-        prompt = new Text();
-        prompt.setWrappingWidth(150);
-        prompt.setText(slide.getPrompt());
-//        prompt.setStyle("-fx-blend-mode: overlay");
-        prompt.setFill(Color.BLACK);
-        StackPane.setAlignment(prompt, Pos.CENTER);
+        TextArea temp_prompt = new TextArea(slide.getPrompt());
+        temp_prompt.setMaxHeight(50);
+        temp_prompt.setWrapText(true);
+        if (!Objects.equals(theme.active.slideColour, "#ffffff")) {
+            temp_prompt.setStyle("-fx-background-color: TRANSPARENT;" + "-fx-blend-mode: SOFT_LIGHT;");
+        }
 
-        Button addDecisionButton = new AddDecisionButton(slide, this);
-        Button editButton = new EditSlideButton(slide);
-        Button deleteSlideButton = new DeleteSlideButton(slide);
-        Button setFirstButton = new SetFirstButton(slide);
+        Button editButton = new EditSlideButton(slide, theme);
+        editButton.setOnMouseClicked(mouseEvent ->
+            Handlers.slideHandler.editMessage(slide, temp_prompt.getText())
+        );
+
+
+        Button addDecisionButton = new AddDecisionButton(slide, this, theme);
+
+        Button deleteSlideButton = new DeleteSlideButton(slide, theme);
+        Button setFirstButton = new SetFirstButton(slide, theme);
 
         // main slide
         Rectangle rounded = new Rectangle();
@@ -70,7 +80,7 @@ public class GuiSlide extends StackPane {
         rounded.setArcHeight(30);
         rounded.setArcWidth(30);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf("#fecea8"));
+        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
 //        //shadow
 //        Rectangle shadow = new Rectangle();
@@ -82,9 +92,9 @@ public class GuiSlide extends StackPane {
 //        shadow.setFill(Color.BLACK);
 //        shadow.opacityProperty().set(0.3);
 
-        this.getChildren().addAll(rounded, addDecisionButton, editButton, deleteSlideButton, setFirstButton, prompt);
+        this.getChildren().addAll(rounded, addDecisionButton, editButton, deleteSlideButton, setFirstButton, temp_prompt);
 
-        Circle firstSlideIndicator = new FirstSlideIndicator();
+        Circle firstSlideIndicator = new FirstSlideIndicator(theme);
 
         this.initializeListeners(slide, firstSlideIndicator);
     }
@@ -106,7 +116,7 @@ public class GuiSlide extends StackPane {
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY - 68);
         });
     }
 
@@ -155,17 +165,16 @@ public class GuiSlide extends StackPane {
         slideWindow.initModality(Modality.APPLICATION_MODAL);
         slideWindow.setTitle("Slide Editor");
         slideWindow.setMinWidth(300);
-        TextField input = new TextField(slide.getPrompt());
-        Button btnClose = new Button("Close this window");
-        btnClose.setOnAction(mouseEvent -> slideWindow.close());
+        TextArea input = new TextArea(slide.getPrompt());
+        input.setMinHeight(100);
 
         // Edit the value on entry according to the value on the text field
-        Button btnEdit = new Button("Edit the slide message");
+        Button btnEdit = new Button("Confirm Message Change");
         btnEdit.setOnAction(mouseEvent -> Handlers.slideHandler.editMessage(slide, input.getText()));
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
-        alert.getChildren().addAll(input, btnEdit, btnClose);
+        alert.getChildren().addAll(input, btnEdit);
         alert.setAlignment(Pos.CENTER);
 
         Scene window = new Scene(alert);

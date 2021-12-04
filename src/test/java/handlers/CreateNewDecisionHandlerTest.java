@@ -1,6 +1,7 @@
 package handlers;
 
 import client.Main;
+import client.ThemeColours;
 import entities.EditorGame;
 import entities.Slide;
 import entities.Studio;
@@ -26,7 +27,7 @@ class CreateNewDecisionHandlerTest {
 
         Slide sl = new Slide(5, "");
         CreateNewDecisionHandler decisionHandler = new CreateNewDecisionHandler(s, e);
-        decisionHandler.create(sl, 500, 500);
+        decisionHandler.create(sl, 500, 500, new ThemeColours());
         assertTrue(IdControl.getId() == 1);
         assertTrue(e.getDecisionMap().size() == 1);
     }
