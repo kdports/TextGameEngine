@@ -1,44 +1,27 @@
-@prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
+@prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
 
-# Just the description of a slide that has two options: "Do literally nothing" and "Also literally nothing, but more!".
-# These two decisions lead back into the same slide in a loop forever.
+<2>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <4> ;
+        tgeo:hasText       "I am a new decision" ;
+        tgeo:hasXLocation  "885.0" ;
+        tgeo:hasYLocation  "460.0" .
 
-tged:_scene_1 a tgeo:Slide ;
-    tgeo:categorizedAs tgeo:firstSlide ;
-    tgeo:hasText "This is crazy! You are in a game!" ;
-    tgeo:hasDecision tged:_decision_1_1 ;
-    tgeo:hasDecision tged:_decision_1_2 ;
-    tgeo:hasXLocation 50 ;
-    tgeo:hasYLocation 50 .
+<1>     rdf:type            tgeo:Slide ;
+        tgeo:categorizedAs  tgeo:isFirst ;
+        tgeo:hasDecision    <3> , <2> ;
+        tgeo:hasText        "A New Slide" ;
+        tgeo:hasXLocation   "510.0" ;
+        tgeo:hasYLocation   "510.0" .
 
-tged:_decision_1_1 a tgeo:Decision ;
-    tgeo:hasText "Do literally nothing" ;
-    tgeo:directsTo tged:_scene_1 ;
-    tgeo:hasXLocation 50 ;
-    tgeo:hasYLocation 50 .
+<4>     rdf:type           tgeo:Slide ;
+        tgeo:hasText       "A New Slide" ;
+        tgeo:hasXLocation  "1167.0" ;
+        tgeo:hasYLocation  "527.0" .
 
-tged:_decision_1_2 a tgeo:Decision ;
-    tgeo:hasText "Go a little further!" ;
-    tgeo:directsTo tged:_scene_2 ;
-    tgeo:hasXLocation 50 ;
-    tgeo:hasYLocation 50 .
-
-tged:_scene_2 a tgeo:Slide ;
-    tgeo:hasText "At this point, what do you do?" ;
-    tgeo:hasDecision tged:_decision_2_1 ;
-    tgeo:hasDecision tged:_decision_2_2 ;
-    tgeo:hasXLocation 50 ;
-    tgeo:hasYLocation 50 .
-
-tged:_decision_2_1 a tgeo:Decision ;
-    tgeo:hasText "Do nothing again!" ;
-    tgeo:directsTo tged:_scene_2 ;
-    tgeo:hasXLocation 50 ;
-    tgeo:hasYLocation 50 .
-
-tged:_decision_2_2 a tgeo:Decision ;
-    tgeo:hasText "Go back to the beginning!" ;
-    tgeo:directsTo tged:_scene_1 ;
-    tgeo:hasXLocation 50 ;
-    tgeo:hasYLocation 50 .
+<3>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <4> ;
+        tgeo:hasText       "I am a new decision" ;
+        tgeo:hasXLocation  "916.0" ;
+        tgeo:hasYLocation  "515.0" .

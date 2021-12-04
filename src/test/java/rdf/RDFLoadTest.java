@@ -43,14 +43,14 @@ class RDFLoadTest {
         String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
         try {
             String[] args = new String[] {} ;
-            // Main.main(args);
+            Main.main(args);
             RDFLoadToStudio loader = new RDFLoadToStudio(rdfFilepath);
             EditorGame e = loader.loadEditorGameFromFile();
             // This test opens the studio and gamerenderer over the course of its function
             // Please close those windows for the test to complete!
 
             assertEquals(2, e.getSlideMap().size());
-            assertEquals(4, e.getDecisionMap().size());
+            assertEquals(2, e.getDecisionMap().size());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
