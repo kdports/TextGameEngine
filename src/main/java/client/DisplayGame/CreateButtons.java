@@ -176,7 +176,6 @@ public class CreateButtons extends CreateButtonPane{
         VBox root = new VBox();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-        player.getInventory().add("pie");
         // Count the number of items to adjust the inventory menu accordingly
         int count = 0;
 
