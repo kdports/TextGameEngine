@@ -72,8 +72,6 @@ public class RootDisplayer extends Application {
         primaryStage.setScene(window);
         primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         primaryStage.show();
-        System.out.println(this.root.getScene());
-        System.out.println(this.root.getChildren());
 
 
     }

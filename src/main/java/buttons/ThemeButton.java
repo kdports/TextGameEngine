@@ -42,7 +42,7 @@ public class ThemeButton extends MenuButton {
         );
 
         this.setText("Change Theme");
-
+        this.setId("button-change-theme");
         // set the theme to the current active theme
         this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
                 "-fx-text-fill: " + theme.active.textColour);
@@ -79,6 +79,7 @@ public class ThemeButton extends MenuButton {
             VBox alert = new VBox();
             alert.getChildren().addAll(choiceBox);
             alert.setAlignment(Pos.CENTER);
+            choiceBox.setId("theme-picker");
 
             Scene window = new Scene(alert);
             themeWindow.setScene(window);

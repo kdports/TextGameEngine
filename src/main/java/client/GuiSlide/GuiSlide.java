@@ -74,6 +74,7 @@ public class GuiSlide extends StackPane {
 
         Button addDecisionButton = new AddDecisionButton(slide, this, theme);
         Button deleteSlideButton = new DeleteSlideButton(slide, theme);
+        deleteSlideButton.setId("#delete-slide");
         Button setFirstButton = new SetFirstButton(slide, theme);
 
         // main slide
@@ -142,13 +143,11 @@ public class GuiSlide extends StackPane {
         this.setOnMousePressed(event -> {
             mouseAnchorX = event.getX();
             mouseAnchorY = event.getY();
-            System.out.println(this.getLayoutY());
         });
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
             double screenSize = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-            System.out.println(screenSize);
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY + (1080 - (screenSize * 2)) / 18);
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY + (1080 - (screenSize)) / 18);
         });
     }
 
@@ -184,7 +183,6 @@ public class GuiSlide extends StackPane {
         this.setOnDragDropped((DragEvent event) -> {
             Dragboard db = event.getDragboard();
             Handlers.slideHandler.dropEvent(slide, this, db.getString());
-            System.out.println(slide.outgoingDecisions);
         });
     }
 }

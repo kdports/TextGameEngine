@@ -34,6 +34,7 @@ public class SaveButton extends MenuButton {
         this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
                 "-fx-text-fill: " + theme.active.textColour);
         this.setLayoutY(215);
+        this.setId("save-button");
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 215)
         );
 
