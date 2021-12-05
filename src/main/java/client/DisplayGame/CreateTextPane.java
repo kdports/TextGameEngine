@@ -102,7 +102,6 @@ public class CreateTextPane {
         // Gets the current text
         String slideText = player.currentSlide.getPrompt();
 
-
         final IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
         KeyFrame keyFrame = new KeyFrame(
@@ -118,7 +117,6 @@ public class CreateTextPane {
         timeline.getKeyFrames().add(keyFrame);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
 
         // If the user clicks the text, it will skip the animation
         box.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {

@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -63,6 +64,8 @@ public class CreateButtons extends CreateButtonPane{
         return b;
     }
 
+
+
     /**
      * Creates buttons for all the decisions in a slide.
      *
@@ -80,6 +83,8 @@ public class CreateButtons extends CreateButtonPane{
         if (createRestartButton(root, redArrow, arrow)){
             return 1;
         }
+        createInventorButton(root);
+        count +=1 ;
         // Creates the other buttons if it is not the last slide
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
@@ -96,7 +101,7 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Creates the restart button when the last slide is reached
      *
-     * @return - The number of buttons.
+     * @return - Whether or not it was created.
      */
     public boolean createRestartButton(Pane root, ImageView redArrow, ImageView arrow){
         // Checks if there are any more decisions, if not then it creates the replay buttons
@@ -133,5 +138,66 @@ public class CreateButtons extends CreateButtonPane{
             player.AddToPastChosenDecisions(player.currentValidDecisions.get(index));
             player.playScene();
         });
+    }
+
+    /**
+     * Creates the inventory button that shows the current inventory when pressed
+     *
+     * @return - The number of buttons.
+     */
+    private void createInventorButton(Pane root){
+        Image image = new Image("file:src/main/resources/player/backpack.png", 25, 20, false, true);
+        ImageView backpack = new ImageView(image);
+        Button b = createButton(backpack);
+        b.setText("Inventory");
+        addListeners(b, backpack, backpack);
+
+        b.setOnAction(arg0 -> {
+            this.displayInventory();
+        });
+
+        root.getChildren().add(b);
+
+    }
+
+    /**
+     * Creates the inventory button that shows the current inventory when pressed
+     *
+     * @return - The number of buttons.
+     */
+    private void displayInventory(){
+        VBox root = new VBox();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        player.addToItems("pie");
+        player.addToItems("pi");
+        player.addToItems("pie4");
+        player.addToItems("pie3");
+        player.addToItems("pie2");
+        player.addToItems("pie45");
+        player.addToItems("pie66");
+        player.addToItems("pie6666");
+        player.addToItems("pi44e");
+        player.addToItems("pi44e");
+
+
+        int count = 0;
+        root.setStyle("-fx-background-color: " + theme.active.backgroundColour);
+        for (String item: player.getInventory()){
+            Label text = new Label(item);
+            Image image = new Image("file:src/main/resources/player/itemArrow.png",
+                    25, 20, false, true);
+            ImageView arrow = new ImageView(image);
+            text.setGraphic(arrow);
+            text.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
+                    "-fx-fill: " + theme.active.textColour);
+            text.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 25));
+            root.getChildren().add(text);
+            count += 1;
+        }
+        root.setPrefSize(200, count * 99);
+        stage.setTitle("Inventory");
+        stage.setScene(scene);
+        stage.show();
     }
 }
