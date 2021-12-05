@@ -46,9 +46,6 @@ public class CreateButtonPane {
     }
 
 
-
-
-
     /**
      * Adds listeners to the button choices so that they change color when hovered.
      *

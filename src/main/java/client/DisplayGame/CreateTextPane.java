@@ -1,6 +1,7 @@
 package client.DisplayGame;
 
 import client.ThemeColours;
+import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -24,7 +25,8 @@ public class CreateTextPane {
      * The method creates a main text area for the game screen.
      *
      * @param player - The player of the game
-     * @param theme
+     * @param theme -  The color theme for the panel
+     * @param animationSpeed -  The speed to write the text on the screen
      */
     CreateTextPane(Player player, ThemeColours theme, int animationSpeed){
         this.player = player;
@@ -48,7 +50,6 @@ public class CreateTextPane {
                 CornerRadii.EMPTY, Insets.EMPTY))); */
         box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         addAnimation(label, box);
-
         return box;
     }
 
@@ -56,6 +57,7 @@ public class CreateTextPane {
 
     public Label createText() {
         Label label = new Label();
+        label.setPadding(new Insets(20));
         label.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD,FontPosture.REGULAR,20));
         label.setText(player.currentSlide.getPrompt());
         label.setTextFill(Color.web(theme.active.textColour));

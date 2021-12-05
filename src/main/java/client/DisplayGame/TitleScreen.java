@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -65,12 +67,6 @@ public class TitleScreen extends GameRenderer{
 
         box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         title.setStyle("-fx-text-fill: " + theme.active.textColour);
-        start.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
-        settings.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
-        quit.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
     }
 
     public Button createStartButton(){
@@ -131,12 +127,24 @@ public class TitleScreen extends GameRenderer{
         button.setPrefSize(180, 80);
         button.setCursor(Cursor.HAND);
         button.setWrapText(true);
-        button.setStyle("-fx-background-color: #ADD8E6; -fx-border-width: 2px;" + "-fx-text-fill: " + theme.active.textColour);
+        button.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour +";");
+        addListeners(button);
         return button;
     }
 
     private void addButtonAnimation(Button button, Color color){
 
+    }
+
+    public void addListeners(Button button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button.setStyle("-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
+                        "-fx-text-fill: " + theme.active.slideColour));
+
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button.setStyle("-fx-background-color:" + theme.active.slideColour + "; -fx-border-width: 0px;" +
+                        "-fx-text-fill: " + theme.active.textColour));
     }
 
     private void addFadeAnimation(List<Node> nodes, Duration duration){
