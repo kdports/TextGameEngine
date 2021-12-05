@@ -15,7 +15,7 @@ public class Decision {
     public int id;
     private HashSet<Decision> decisionConditionals;
     private HashSet<String> itemConditionals;
-    private String itemToGive;
+    public String itemToGive;
 
     public Decision(String text) {
         this.text = text;
@@ -23,7 +23,7 @@ public class Decision {
         this.itemConditionals = new HashSet<String>();
     }
 
-    public Decision(String text, Slide origin, int id, Slide target, String itemToGive) {
+    public Decision(String text, Slide origin, int id, Slide target) {
         this.text = text;
         this.origin = origin;
         this.id = id;

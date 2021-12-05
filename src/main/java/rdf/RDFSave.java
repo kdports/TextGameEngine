@@ -83,6 +83,8 @@ public class RDFSave {
                 currDecisionNode.addProperty(TGEO.givesItem, currDecision.getItemToGive());
             }
 
+
+
             // -------------- ADDING CONDITIONALS DECISIONS
             HashSet<Decision> conditionals = currDecision.getDecisionConditionals();
             ArrayList<Decision> reliesOn = new ArrayList<>();
@@ -91,7 +93,18 @@ public class RDFSave {
                     reliesOn.add(entry2.getKey());
                 }
             }
-            currDecisionNode.addProperty(TGEO.requiresDecision, String.valueOf(reliesOn));
+            if (reliesOn.size() != 0) {
+                Resource decisionConditionals = model.createResource(String.valueOf(Math.round(Math.random() * 1000000)));
+                decisionConditionals.addProperty(RDF.type, TGEO.DecisionConditionalsList);
+
+                for (Decision d : reliesOn) {
+                    Resource decisionNode = model.getResource(String.valueOf(d.id));
+                    decisionConditionals.addProperty(TGEO.hasItem, decisionNode);
+                }
+
+                currDecisionNode.addProperty(TGEO.requiresDecisionList, decisionConditionals);
+            }
+
 
             //-------------- ADDING CONDITIONAL ITEMS ----------
             // get all items in game
@@ -103,9 +116,15 @@ public class RDFSave {
                     }
                 }
             }
-            currDecisionNode.addProperty(TGEO.requiresItem, String.valueOf(items));
-            // SAVE THE ITEM AND DECISION HERE
-            //currDecisionNode.addProperty(TGEO.requiresItem, currDecision.)
+
+            if (items.size() != 0) {
+                Resource itemConditionals = model.createResource(String.valueOf(Math.floor(Math.random() * 1000000)));
+                itemConditionals.addProperty(RDF.type, TGEO.ItemConditionalsList);
+                for (String item : items) {
+                    itemConditionals.addProperty(TGEO.hasItem, item);
+                }
+                currDecisionNode.addProperty(TGEO.requiresItemList, itemConditionals);
+            }
 
         }
 

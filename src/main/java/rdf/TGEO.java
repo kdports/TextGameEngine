@@ -12,6 +12,8 @@ import java.security.PublicKey;
 public class TGEO {
     public static Resource Slide =  makeTgeoNode("Slide");
     public static Resource Decision = makeTgeoNode("Decision");
+    public static Resource ItemConditionalsList = makeTgeoNode("ItemConditionalsList");
+    public static Resource DecisionConditionalsList = makeTgeoNode("DecisionConditionalsList");
     public static Property categorizedAs = makeTgeoProperty("categorizedAs");
     public static Resource isFirst = makeTgeoNode("isFirst");
     public static Property hasDecision = makeTgeoProperty("hasDecision");
@@ -20,8 +22,9 @@ public class TGEO {
     public static Property hasXLocation = makeTgeoProperty("hasXLocation");
     public static Property hasYLocation = makeTgeoProperty("hasYLocation");
     public static Property givesItem = makeTgeoProperty("givesItem");
-    public static Property requiresDecision = makeTgeoProperty("requiresDecision");
-    public static Property requiresItem = makeTgeoProperty("requiresItem");
+    public static Property requiresDecisionList = makeTgeoProperty("requiresDecisionList");
+    public static Property requiresItemList = makeTgeoProperty("requiresItemList");
+    public static Property hasItem = makeTgeoProperty("hasItem");
 
     /**
      * Create a Node (Resource) using the tgeo prefix
