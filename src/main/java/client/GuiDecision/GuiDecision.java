@@ -184,8 +184,11 @@ public class GuiDecision extends StackPane {
         // A dropdown list of all decisions to select from
         ComboBox<Decision> decisionComboBox = new ComboBox<>(FXCollections.observableArrayList(possibleConditionals));
         decisionComboBox.setPromptText("Choose Decision Conditional");
+        decisionComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
+            System.out.println(decision.getDecisionConditionals().toString());
+        });
 
-        decisionComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue()));
 
         TextField itemInput = new TextField(decision.getItemToGive());
         itemInput.setPromptText("Enter collected item...");

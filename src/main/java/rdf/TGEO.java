@@ -3,6 +3,8 @@ package rdf;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
+import java.security.PublicKey;
+
 /**
  * Defines and creates Resources and Properties that are used in saving and loading
  * RDF files.
@@ -17,6 +19,9 @@ public class TGEO {
     public static Property directsTo = makeTgeoProperty("directsTo");
     public static Property hasXLocation = makeTgeoProperty("hasXLocation");
     public static Property hasYLocation = makeTgeoProperty("hasYLocation");
+    public static Property givesItem = makeTgeoProperty("givesItem");
+    public static Property requiresDecision = makeTgeoProperty("requiresDecision");
+    public static Property requiresItem = makeTgeoProperty("requiresItem");
 
     /**
      * Create a Node (Resource) using the tgeo prefix

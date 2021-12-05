@@ -75,6 +75,11 @@ public class RDFSave {
             currDecisionNode.addProperty(TGEO.hasYLocation, String.valueOf(guiDecision.getLayoutY()));
             currDecisionNode.addProperty(TGEO.hasText, currDecision.getText());
             currDecisionNode.addProperty(TGEO.directsTo, model.getResource(String.valueOf(currDecision.target.getId())));
+            currDecisionNode.addProperty(TGEO.givesItem, currDecision.getItemToGive());
+
+            // SAVE THE ITEM AND DECISION HERE
+            //currDecisionNode.addProperty(TGEO.requiresDecision, currDecision.getDecisionConditionals());
+            //currDecisionNode.addProperty(TGEO.requiresItem, currDecision.)
 
         }
 
