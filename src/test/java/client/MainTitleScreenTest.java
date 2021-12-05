@@ -9,23 +9,21 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import javafx.stage.Stage;
 
+import static javafx.application.Application.launch;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
 
 @ExtendWith(ApplicationExtension.class)
+public class MainTitleScreenTest {
+        @Start
+        public void start(Stage stage) throws Exception {
+            launch(MainTitleScreen.class);
+            stage.show();
+        }
 
-public class RootDisplayerTest {
-    private final RootDisplayer rootDisplayer = new RootDisplayer();
-    @Start
-    public void start(Stage stage) throws Exception {
-        rootDisplayer.start(stage);
-        stage.setScene(rootDisplayer.root.getScene());
-
-        stage.show();
-    }
-
-    @Test
-    void should_contain_button_with_text() {
-    }
+        @Test
+        void should_contain_button_with_text() {
+        }
 
 }
+
