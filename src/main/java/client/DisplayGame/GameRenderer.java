@@ -36,6 +36,12 @@ public class GameRenderer extends Application implements PlayDisplayer {
         theme = new ThemeColours();
     }
 
+    public GameRenderer(ThemeColours theme) {
+        root = new BorderPane();
+        animationSpeed = 30;
+        this.theme = theme;
+    }
+
     public void begin(String[] args){
         launch(args);
     }
@@ -46,7 +52,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
         // Sets the image in the top left, currently no image
         // Image image = new Image("");
         // stage.getIcons().add(image);
-        TitleScreen titleScreen = new TitleScreen();
+        TitleScreen titleScreen = new TitleScreen(theme, this);
         titleScreen.displayFirstSlide();
     }
 
@@ -54,14 +60,13 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * This method displays each of the slides onto the JFrame.
      */
     public void display() {
-        CreateMenu menu = new CreateMenu(theme, player, animationSpeed, root, this);
+        CreateMenu menu = new CreateMenu(theme, this);
         MenuBar mbar = menu.createMenu();
 
         // Creates a new root and add text and buttons to it
         root = new BorderPane();
         CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
         CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
-        root.setStyle("-fx-border-width: 5px; -fx-border-color: "+ "#FFFFFF");
         root.setCenter(TPane.createTPane());
         root.setTop(mbar);
         root.setBottom(buttonPane.createBPane());
