@@ -88,7 +88,7 @@ public class CreateButtonPane {
 
     // Temp function
     public ImageView createIcon(String filename, String string) {
-        Image image  = new Image("file:src/main/resources/player/" + filename, 25, 20, false, true);
+        Image image  = new Image("file:src/main/resources/player/" + filename, 24, 24, false, true);
         Lighting lighting = new Lighting(new Light.Distant(45, 90, Color.web(string)));
         ColorAdjust bright = new ColorAdjust(0, 1, 1, 1);
         lighting.setContentInput(bright);

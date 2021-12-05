@@ -44,7 +44,7 @@ public class CreateButtons extends CreateButtonPane{
         Button b = new Button();
         b.setMaxWidth(MAX_VALUE);
         b.setBorder(null);
-        b.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 25));
+        b.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR,25));
 
         b.setGraphic(arrow);
         b.setAlignment(Pos.CENTER_LEFT);
@@ -81,8 +81,8 @@ public class CreateButtons extends CreateButtonPane{
             if (!player.currentValidDecisions.contains(decision)){
                 count++;
                 // Creates the button
-                Button b = createButton(createIcon("redArrow.png", "Red"));
-                b.setText(decision.text + " (Conditions are not met)");
+                Button b = createButton(createIcon("redX.png", "Red"));
+                b.setText(" " + decision.text + " (Conditions are not met)");
                 b.setCursor(Cursor.DEFAULT);
                 b.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
                         "-fx-text-fill: red");
@@ -95,7 +95,7 @@ public class CreateButtons extends CreateButtonPane{
             count++;
             // Creates the button
             Button b = createButton(createIcon("redArrow.png", theme.active.textColour));
-            b.setText(player.currentValidDecisions.get(i).text);
+            b.setText(" " + player.currentValidDecisions.get(i).text);
             addDestinationAction(player, b, i);
             addListeners(b, createIcon("redArrow.png", theme.active.slideColour), createIcon("redArrow.png", theme.active.textColour));
             root.getChildren().add(b);
@@ -113,7 +113,7 @@ public class CreateButtons extends CreateButtonPane{
         // and returns true
         if (player.currentValidDecisions.size() == 0) {
             Button b = createButton(arrow);
-            b.setText("Replay the game?");
+            b.setText(" Replay the game?");
             addListeners(b, hoverArrow, arrow);
             // Handles the action of when the button is pressed
             b.setOnAction(arg0 -> {
@@ -158,7 +158,7 @@ public class CreateButtons extends CreateButtonPane{
 
         // Creates the button and adds the listeners
         Button b = createButton(backpack);
-        b.setText("Inventory");
+        b.setText(" Inventory");
         addListeners(b, hoverBackpack, backpack);
 
         // Make the button display a new screen with the inventory items listed
@@ -177,7 +177,7 @@ public class CreateButtons extends CreateButtonPane{
         VBox root = new VBox();
         Scene scene = new Scene(root);
         Stage stage = new Stage();
-
+        player.getInventory().add("pie");
         // Count the number of items to adjust the inventory menu accordingly
         int count = 0;
 
@@ -186,7 +186,7 @@ public class CreateButtons extends CreateButtonPane{
 
         // Creates a label for each item to display the item and add an arrow icon
         for (String item: player.getInventory()){
-            Label text = new Label("   " + item);
+            Label text = new Label(item);
             final ImageView arrow = createIcon("itemArrow.png", theme.active.textColour);
             text.setGraphic(arrow);
             // Makes sure the text follows the theme as well

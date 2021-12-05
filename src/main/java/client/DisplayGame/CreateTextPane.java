@@ -32,7 +32,6 @@ public class CreateTextPane {
         this.player = player;
         this.theme = theme;
         this.animationSpeed = animationSpeed;
-
     }
 
     /**
@@ -58,7 +57,6 @@ public class CreateTextPane {
     public Label createText() {
         Label label = new Label();
         label.setPadding(new Insets(20));
-        label.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD,FontPosture.REGULAR,20));
         label.setText(player.currentSlide.getPrompt());
         label.setTextFill(Color.web(theme.active.textColour));
         VBox.setVgrow(label, Priority.ALWAYS);
@@ -76,8 +74,8 @@ public class CreateTextPane {
      */
     public void getFont(Label text) {
         // Gets the font from the resources folder
-        text.setFont(Font.loadFont("file:resources/player/OpenSans-Regular.ttf", 25));
-        text.setStyle("-fx-font-size: 25px");
+        text.setFont(Font.loadFont("file:resources/player/OpenSans-Regular.ttf", 28));
+        text.setStyle("-fx-font-size: 28px");
     }
 
 
