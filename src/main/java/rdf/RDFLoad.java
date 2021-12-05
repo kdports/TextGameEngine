@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -73,6 +74,17 @@ public abstract class RDFLoad {
                 Slide targetSlide = slideNodeMap.get(targetSlideNode);
                 Decision decision = new Decision(decisionText, originSlide, (int) (Math.random() * 100000), targetSlide);
 
+                if (decisionNode.getProperty(TGEO.givesItem) != null) {
+                    decision.itemToGive = decisionNode.getProperty(TGEO.givesItem).getString();
+                }
+
+
+
+                //listofdecisionconditionals = decisionNode.getProperty(TGEO.requiresDecision)
+                //listofitemconditionals = decisionNode.getProperty(TGEO.requiresItem)
+                // Loop through the items, add it to decision.addtoitemconditionals
+                // loop through the decision pointers, add that to decision.addtodecisionconditionals
+
                 this.decisionNodeMap.put(decisionNode, decision);
             }
         }
@@ -89,6 +101,28 @@ public abstract class RDFLoad {
 
             Resource targetSlideNode = decisionNode.getPropertyResourceValue(TGEO.directsTo);
             decision.setTarget(this.slideNodeMap.get(targetSlideNode));
+
+
+            Resource itemListNode = decisionNode.getPropertyResourceValue(TGEO.requiresItemList);
+            if (itemListNode != null) {
+                NodeIterator itemIterator = this.model.listObjectsOfProperty(itemListNode, TGEO.hasItem);
+
+                while (itemIterator.hasNext()) {
+                    String item = itemIterator.nextNode().toString();
+
+                    decision.addToItemConditionals(item);
+                }
+            }
+            Resource decisionListNode = decisionNode.getPropertyResourceValue(TGEO.requiresDecisionList);
+            if (decisionListNode != null) {
+                NodeIterator decisionIterator = this.model.listObjectsOfProperty(decisionListNode, TGEO.hasItem);
+
+                while (decisionIterator.hasNext()) {
+                    Resource decisionResource = decisionIterator.nextNode().asResource();
+                    Decision d = decisionNodeMap.get(decisionResource);
+                    decision.addToDecisionConditionals(d);
+                }
+            }
         }
     }
 

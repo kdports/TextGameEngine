@@ -31,8 +31,7 @@ public class PlayTestButton extends MenuButton {
     public PlayTestButton(EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme) {
         super(scrollPane);
         this.setText("Play Test");
-        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour);
+        this.setTheme(theme);
         this.setLayoutY(112.5);
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 112.5)
         );
@@ -59,6 +58,7 @@ public class PlayTestButton extends MenuButton {
             else {
                 Stage stage = new Stage();
                 player.playGame(stage);
+
             }
         });
     }
