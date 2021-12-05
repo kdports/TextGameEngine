@@ -72,21 +72,15 @@ public class GameRenderer extends Application implements PlayDisplayer {
         Scene scene=new Scene(root,1200,800);
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
-//        stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+     //stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         stage.show();
     }
 
-//    private <T extends Event> void closeWindowEvent(T t) {
-//        if (closed){
-//            GameRenderer gr = new GameRenderer();
-//            try {
-//                gr.start(new Stage());
-//                closed = false;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    private <T extends Event> void closeWindowEvent(T t) {
+        MainTitleScreen title = new MainTitleScreen();
+        stage.close();
+        title.start(new Stage());
+    }
 
     public void setStage(Stage stage){
         GameRenderer.stage = stage;
