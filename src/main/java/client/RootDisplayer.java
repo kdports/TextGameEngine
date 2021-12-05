@@ -110,7 +110,6 @@ public class RootDisplayer extends Application {
         // Set root to observe and delete slides properly
         this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) listener -> {
             if (listener.wasAdded()) {
-                System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().remove(listener.getValueAdded());
             }
         });
@@ -153,8 +152,9 @@ public class RootDisplayer extends Application {
 
         this.editorGame.deletedDecisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecision>) listener -> {
             if (listener.wasAdded()) {
-                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().remove(listener.getValueAdded().leftLine);
                 this.root.getChildren().remove(listener.getValueAdded());
+                this.root.getChildren().remove(listener.getValueAdded().rightLine);
             }
         });
 

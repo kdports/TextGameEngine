@@ -43,19 +43,16 @@ public class RootDisplayerTest {
         robot.clickOn("#button-change-theme");
         robot.clickOn("#theme-picker");
         robot.clickOn("Peachy");
-        robot.clickOn(1025,505);
-        robot.drag(1025, 505).drag(1400, 700).drop();
+        robot.drag(1025, 505).dropTo(1400, 700);
         robot.clickOn("SET FIRST SLIDE");
         robot.clickOn("Save");
         robot.closeCurrentWindow();
         robot.clickOn("Play Test");
         robot.clickOn("I am a new decision");
         robot.closeCurrentWindow();
-        robot.closeCurrentWindow();
-        robot.closeCurrentWindow(); // Should only need to close window once
         robot.clickOn("EDIT");
         robot.clickOn("Delete Decision");
-        robot.clickOn(450, 230);
+        robot.clickOn(450, 300);
 //        robot.clickOn(970, 505);
     }
 

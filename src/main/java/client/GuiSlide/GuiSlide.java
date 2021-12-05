@@ -147,7 +147,11 @@ public class GuiSlide extends StackPane {
         this.setOnMouseDragged(event -> {
             this.setLayoutX(sceneX + event.getScreenX() - mouseAnchorX);
             double screenSize = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY + (1080 - (screenSize)) / 18);
+            if (screenSize >= 1080) {
+            this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY + (1080 - (screenSize)) / 18);}
+            else{
+                this.setLayoutY(sceneY + event.getScreenY() - mouseAnchorY);
+            }
         });
     }
 
