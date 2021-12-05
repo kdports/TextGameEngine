@@ -119,8 +119,7 @@ public class CreateButtons extends CreateButtonPane{
             b.setOnAction(arg0 -> {
                 player.clearPastChosenDecisions();
                 player.clearInventory();
-                TitleScreen titleScreen = new TitleScreen();
-                titleScreen.displayFirstSlide();
+                player.playGame();
             });
             root.getChildren().add(b);
             return true;
