@@ -178,12 +178,14 @@ public class GuiDecision extends StackPane {
             Decision d = e.getKey();
             if (d != decision) {
                 possibleConditionals.add(d);
+                System.out.println("HELLO");
             }
         }
 
         // A dropdown list of all decisions to select from
         ComboBox<Decision> decisionComboBox = new ComboBox<Decision>(FXCollections.observableArrayList(possibleConditionals));
         decisionComboBox.setPromptText("Choose Decision Conditional");
+
         decisionComboBox.setOnAction(mouseEvent -> {
             Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
         });

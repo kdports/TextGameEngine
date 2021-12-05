@@ -93,7 +93,7 @@ public class MainTitleScreen extends Application {
         });
         button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
         button.setWrapText(true);
-        button.setText("Game Engine");
+        button.setText("Launch Creator Studio");
         return button;
     }
 
@@ -101,7 +101,7 @@ public class MainTitleScreen extends Application {
         Button button = createButton();
         button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
         button.setWrapText(true);
-        button.setText("Game Player");
+        button.setText("Launch Player");
 
         button.setOnAction(arg0 -> {
             stage.close();
@@ -132,7 +132,7 @@ public class MainTitleScreen extends Application {
         button.setPrefSize(180, 80);
         button.setCursor(Cursor.HAND);
         button.setWrapText(true);
-        button.setStyle("-fx-background-color: #ADD8E6; -fx-border-width: 2px;" + "-fx-text-fill: " + theme.active.textColour);
+        button.setStyle("-fx-background-color:" + theme.active.slideColour + ";" +" -fx-border-width: 2px;" + "-fx-text-fill: " + theme.active.textColour);
         return button;
     }
 

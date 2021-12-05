@@ -83,6 +83,7 @@ public class ThemeButton extends MenuButton {
             Scene window = new Scene(alert);
             themeWindow.setScene(window);
             themeWindow.show();
+            themeWindow.setFullScreen(false);
         });
     }
 

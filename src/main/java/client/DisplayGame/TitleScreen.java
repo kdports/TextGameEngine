@@ -1,7 +1,10 @@
 package client.DisplayGame;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
+import client.Main;
+import client.MainTitleScreen;
 import client.PlayDisplayer;
+import client.RootDisplayer;
 import entities.*;
 import javafx.animation.*;
 import javafx.geometry.Pos;
@@ -17,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import rdf.RDFLoadToPlayer;
@@ -109,17 +113,20 @@ public class TitleScreen extends GameRenderer{
         return button;
     }
 
-
     private Button createQuitButton(){
         Button button = createButton();
-        button.setOnAction(arg0 -> stage.close());
-        button.setText("Quit");
+        button.setOnAction(arg0 -> {
+            stage.close();
+            MainTitleScreen back = new MainTitleScreen();
+            back.start(new Stage());
+        });
+        button.setText("Back");
         return button;
     }
 
     private Button createButton() {
         Button button = new Button();
-        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 25));
+        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
         button.setMaxWidth(MAX_VALUE);
         button.setPrefSize(180, 80);
         button.setCursor(Cursor.HAND);
