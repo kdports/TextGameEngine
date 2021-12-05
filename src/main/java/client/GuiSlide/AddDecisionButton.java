@@ -15,8 +15,8 @@ public class AddDecisionButton extends Button {
     AddDecisionButton(Slide slide, GuiSlide guiSlide, ThemeColours theme) {
         this.setText("+");
         this.setShape(new Circle(5.0));
-        this.setMinSize(20.0, 20.0);
-        this.setMaxSize(20.0, 20.0);
+        this.setMinSize(30.0, 30.0);
+        this.setMaxSize(30.0, 30.0);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
                 " -fx-background-color: TRANSPARENT;" +
@@ -26,4 +26,5 @@ public class AddDecisionButton extends Button {
         );
         StackPane.setAlignment(this, Pos.TOP_RIGHT);
     }
+
 }

@@ -1,18 +1,19 @@
 package client.DisplayGame;
 
 
-import client.Theme;
+import client.MainTitleScreen;
 import client.ThemeColours;
 import entities.Player;
 import entities.CreateSampleGame;
 import client.PlayDisplayer;
 
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import static javafx.application.Application.launch;
 
@@ -70,7 +71,14 @@ public class GameRenderer extends Application implements PlayDisplayer {
         Scene scene=new Scene(root,1200,800);
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
+        stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         stage.show();
+    }
+
+    private <T extends Event> void closeWindowEvent(T t) {
+        MainTitleScreen title = new MainTitleScreen();
+        stage.close();
+        title.start(new Stage());
     }
 
     public void setStage(Stage stage){
@@ -89,8 +97,8 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * Main method
      */
     public static void main(String[] args) {
-        GameRenderer gr = new  GameRenderer();
-        new Player(gr, CreateSampleGame.returnGame());
+        GameRenderer gr = new GameRenderer();
+        // new Player(gr, CreateSampleGame.returnGame());
         gr.begin(args);
     }
 

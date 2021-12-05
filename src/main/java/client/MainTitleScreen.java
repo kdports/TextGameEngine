@@ -1,12 +1,12 @@
-package client.DisplayGame;
+package client;
+import client.DisplayGame.GameRenderer;
+import client.DisplayGame.TitleScreen;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
-import client.Main;
-import client.MainTitleScreen;
 import client.PlayDisplayer;
-import client.RootDisplayer;
 import entities.*;
 import javafx.animation.*;
+import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -35,18 +35,26 @@ import java.util.Map;
 
 import static java.lang.Long.MAX_VALUE;
 
-public class TitleScreen extends GameRenderer{
+public class MainTitleScreen extends Application {
 
-    public void displayFirstSlide(){
+    ThemeColours theme  = new ThemeColours();
+
+    @Override
+    public void start(Stage primaryStage)  {
+        primaryStage.setTitle("Text Game Engine");
+        displayFirstSlide(primaryStage);
+        primaryStage.show();
+    }
+    public void displayFirstSlide(Stage stage){
         VBox box = new VBox(400);
         box.setAlignment(Pos.TOP_CENTER);
-        Label title =  new Label("Welcome, Player!");
+        Label title =  new Label("Text Game Engine!");
         title.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 55));
         title.setAlignment(Pos.TOP_CENTER);
 
-        Button settings = createStartButton();
-        Button start = createSettingsButton();
-        Button quit = createQuitButton();
+        Button settings = createGEButton(stage);
+        Button start = createGPButton(stage);
+        Button quit = createQuitButton(stage);
 
         HBox hBox = new HBox(25);
         hBox.getChildren().addAll(start, settings, quit);
@@ -61,7 +69,6 @@ public class TitleScreen extends GameRenderer{
         addMoveAnimation(title, scene, duration);
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
-        stage.show();
 
         box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         title.setStyle("-fx-text-fill: " + theme.active.textColour);
@@ -73,70 +80,60 @@ public class TitleScreen extends GameRenderer{
                 "-fx-text-fill: " + theme.active.textColour +";");
     }
 
-    public Button createStartButton(){
+    public Button createGEButton(Stage stage){
         Button button = createButton();
-        //button.setOnAction(arg0 -> player.playGame());
-        button.setText("Settings");
+        button.setOnAction(arg0 -> {
+            stage.close();
+            RootDisplayer gui = new RootDisplayer();
+            try {
+                gui.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        button.setWrapText(true);
+        button.setText("Launch Creator Studio");
         return button;
     }
 
-    private Button createSettingsButton(){
+    private Button createGPButton(Stage stage){
         Button button = createButton();
-        button.setText("Load Game");
-        VBox box = new VBox(400);
-        Scene window = new Scene(box,1200,800);
+        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        button.setWrapText(true);
+        button.setText("Launch Player");
 
-        button.setOnMouseClicked(event -> {
-            PlayDisplayer playDisplayer = new GameRenderer();
-
-
-            FileChooser fileChooser = new FileChooser();
-            FileChooser.ExtensionFilter exFilter = new FileChooser.ExtensionFilter("Turtle File (.ttl)", "*.ttl");
-            fileChooser.getExtensionFilters().add(exFilter);
-            File location = fileChooser.showOpenDialog(window.getWindow());
-
-            // If the user chose a valid file to load from, load it in.
-            if (location != null){
-                String path = location.getAbsolutePath();
-                try {
-                    RDFLoadToPlayer loader = new RDFLoadToPlayer(path);
-                    Game loadedGame = loader.loadGameFromFile();
-                    Player player = new Player(playDisplayer, loadedGame);
-                    player.playGame();
-
-                }
-                catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+        button.setOnAction(arg0 -> {
+            stage.close();
+            GameRenderer gr = new GameRenderer();
+            try {
+                gr.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
         return button;
     }
 
-    private Button createQuitButton(){
+
+    private Button createQuitButton(Stage stage){
         Button button = createButton();
-        button.setOnAction(arg0 -> {
-            stage.close();
-            MainTitleScreen back = new MainTitleScreen();
-            back.start(new Stage());
-        });
-        button.setText("Back");
+        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        button.setWrapText(true);
+        button.setOnAction(arg0 -> stage.close());
+        button.setText("Quit");
         return button;
     }
 
     private Button createButton() {
         Button button = new Button();
-        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
+        button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 25));
         button.setMaxWidth(MAX_VALUE);
         button.setPrefSize(180, 80);
         button.setCursor(Cursor.HAND);
         button.setWrapText(true);
-        button.setStyle("-fx-background-color: #ADD8E6; -fx-border-width: 2px;" + "-fx-text-fill: " + theme.active.textColour);
+        button.setStyle("-fx-background-color:" + theme.active.slideColour + ";" +" -fx-border-width: 2px;" + "-fx-text-fill: " + theme.active.textColour);
         return button;
-    }
-
-    private void addButtonAnimation(Button button, Color color){
-
     }
 
     private void addFadeAnimation(List<Node> nodes, Duration duration){
@@ -158,3 +155,4 @@ public class TitleScreen extends GameRenderer{
     }
 
 }
+

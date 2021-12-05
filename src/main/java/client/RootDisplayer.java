@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.MapChangeListener;
+import javafx.event.Event;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import rdf.RDFLoadToStudio;
 import javafx.scene.control.ScrollBar;
 
@@ -42,7 +44,7 @@ public class RootDisplayer extends Application {
     public void start(Stage primaryStage) throws Exception {
         StackPane holder = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
-        Canvas canvas = new Canvas(9600,  5400);
+        Canvas canvas = new Canvas(5000,  5000);
         holder.getChildren().add(canvas);
         scrollPane.setContent(this.root);
         scrollPane.setMaxHeight(canvas.getHeight());
@@ -68,11 +70,18 @@ public class RootDisplayer extends Application {
         holder.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);
+        primaryStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         primaryStage.show();
         System.out.println(this.root.getScene());
         System.out.println(this.root.getChildren());
 
 
+    }
+
+    // filled in automtically
+    private <T extends Event> void closeWindowEvent(T t) {
+        MainTitleScreen title = new MainTitleScreen();
+        title.start(new Stage());
     }
 
 
