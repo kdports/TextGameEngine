@@ -1,13 +1,10 @@
 package client.DisplayGame;
 
 import client.EditorTheme;
-import client.Theme;
 import client.ThemeColours;
 import entities.Player;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-
-import javax.swing.*;
 
 public class CreateMenu {
     GameRenderer gameRenderer;

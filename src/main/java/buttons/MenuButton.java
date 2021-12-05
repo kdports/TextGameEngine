@@ -1,5 +1,6 @@
 package buttons;
 
+import client.ThemeColours;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 
@@ -24,5 +25,9 @@ public class MenuButton extends Button {
 
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutX(abs(newvalue.getMinX()) + 10)
         );
+    }
+
+    public void setTheme(ThemeColours theme){
+        this.setStyle("-fx-background-color: " + theme.active.backgroundColour);
     }
 }
