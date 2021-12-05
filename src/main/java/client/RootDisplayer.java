@@ -69,6 +69,8 @@ public class RootDisplayer extends Application {
         primaryStage.setTitle("Text Studio");
         primaryStage.setScene(window);
         primaryStage.show();
+        System.out.println(this.root.getScene());
+        System.out.println(this.root.getChildren());
 
 
     }
