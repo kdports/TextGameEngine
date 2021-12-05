@@ -1,6 +1,5 @@
 package client.GuiDecision;
 
-import buttons.MenuButton;
 import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
@@ -184,8 +183,10 @@ public class GuiDecision extends StackPane {
         // A dropdown list of all decisions to select from
         ComboBox<Decision> decisionComboBox = new ComboBox<>(FXCollections.observableArrayList(possibleConditionals));
         decisionComboBox.setPromptText("Choose Decision Conditional");
+        decisionComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
+        });
 
-        decisionComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue()));
 
         TextField itemInput = new TextField(decision.getItemToGive());
         itemInput.setPromptText("Enter collected item...");

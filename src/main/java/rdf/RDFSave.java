@@ -12,6 +12,9 @@ import org.apache.jena.vocabulary.RDF;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -75,6 +78,53 @@ public class RDFSave {
             currDecisionNode.addProperty(TGEO.hasYLocation, String.valueOf(guiDecision.getLayoutY()));
             currDecisionNode.addProperty(TGEO.hasText, currDecision.getText());
             currDecisionNode.addProperty(TGEO.directsTo, model.getResource(String.valueOf(currDecision.target.getId())));
+
+            if (currDecision.hasItemToGive()) {
+                currDecisionNode.addProperty(TGEO.givesItem, currDecision.getItemToGive());
+            }
+
+
+
+            // -------------- ADDING CONDITIONALS DECISIONS
+            HashSet<Decision> conditionals = currDecision.getDecisionConditionals();
+            ArrayList<Decision> reliesOn = new ArrayList<>();
+            for (Map.Entry<Decision, GuiDecision> entry2 : editorGame.getAllEntriesDecision()){
+                if (conditionals.contains(entry2.getKey())){
+                    reliesOn.add(entry2.getKey());
+                }
+            }
+            if (reliesOn.size() != 0) {
+                Resource decisionConditionals = model.createResource(String.valueOf(Math.round(Math.random() * 1000000)));
+                decisionConditionals.addProperty(RDF.type, TGEO.DecisionConditionalsList);
+
+                for (Decision d : reliesOn) {
+                    Resource decisionNode = model.getResource(String.valueOf(d.id));
+                    decisionConditionals.addProperty(TGEO.hasItem, decisionNode);
+                }
+
+                currDecisionNode.addProperty(TGEO.requiresDecisionList, decisionConditionals);
+            }
+
+
+            //-------------- ADDING CONDITIONAL ITEMS ----------
+            // get all items in game
+            ArrayList<String> items = new ArrayList<>();
+            for (Map.Entry<Decision, GuiDecision> entry2 : editorGame.getAllEntriesDecision()){
+                if (entry2.getKey().hasItemToGive()) {
+                    if (currDecision.getItemConditionals().contains(entry2.getKey().getItemToGive())){
+                        items.add(entry2.getKey().getItemToGive());
+                    }
+                }
+            }
+
+            if (items.size() != 0) {
+                Resource itemConditionals = model.createResource(String.valueOf(Math.floor(Math.random() * 1000000)));
+                itemConditionals.addProperty(RDF.type, TGEO.ItemConditionalsList);
+                for (String item : items) {
+                    itemConditionals.addProperty(TGEO.hasItem, item);
+                }
+                currDecisionNode.addProperty(TGEO.requiresItemList, itemConditionals);
+            }
 
         }
 

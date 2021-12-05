@@ -44,8 +44,7 @@ public class ThemeButton extends MenuButton {
         this.setText("Change Theme");
 
         // set the theme to the current active theme
-        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour);
+        this.setTheme(theme);
 
         this.setOnMouseClicked(event -> {
             Stage themeWindow = new Stage();
