@@ -3,6 +3,7 @@ package buttons;
 import client.ThemeColours;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 
 import static java.lang.Math.abs;
 
@@ -28,6 +29,15 @@ public class MenuButton extends Button {
     }
 
     public void setTheme(ThemeColours theme){
-        this.setStyle("-fx-background-color: " + theme.active.backgroundColour);
+        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
+                "-fx-text-fill: " + theme.active.textColour);
+
+        this.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> this.setStyle("-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
+                        "-fx-text-fill: " + theme.active.sidebarColour));
+
+        this.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> this.setStyle("-fx-background-color:" + theme.active.sidebarColour + "; -fx-border-width: 0px;" +
+                        "-fx-text-fill: " + theme.active.textColour));
     }
 }

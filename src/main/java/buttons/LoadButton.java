@@ -8,6 +8,7 @@ import entities.EditorGame;
 import entities.Slide;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import rdf.RDFLoadToStudio;
 
@@ -32,9 +33,7 @@ public class LoadButton extends MenuButton {
      */
     public LoadButton(Scene window, EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme){
         super(scrollPane);
-
-        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour);
+        this.setTheme(theme);
         this.setText("Load");
         this.setLayoutY(320);
         scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {
@@ -44,7 +43,6 @@ public class LoadButton extends MenuButton {
 
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 320)
         );
-
 
 
         // When button is clicked, open a file explorer and load in data from a file
