@@ -36,12 +36,6 @@ public class GameRenderer extends Application implements PlayDisplayer {
         theme = new ThemeColours();
     }
 
-    public GameRenderer(ThemeColours theme) {
-        root = new BorderPane();
-        animationSpeed = 30;
-        this.theme = theme;
-    }
-
     public void begin(String[] args){
         launch(args);
     }
