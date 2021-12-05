@@ -104,14 +104,15 @@ public abstract class RDFLoad {
 
 
             Resource itemListNode = decisionNode.getPropertyResourceValue(TGEO.requiresItemList);
-            NodeIterator itemIterator = this.model.listObjectsOfProperty(itemListNode, TGEO.hasItem);
+            if (itemListNode != null) {
+                NodeIterator itemIterator = this.model.listObjectsOfProperty(itemListNode, TGEO.hasItem);
 
-            while (itemIterator.hasNext()){
-                String item = itemIterator.nextNode().toString();
+                while (itemIterator.hasNext()) {
+                    String item = itemIterator.nextNode().toString();
 
-                decision.addToItemConditionals(item);
+                    decision.addToItemConditionals(item);
+                }
             }
-
             Resource decisionListNode = decisionNode.getPropertyResourceValue(TGEO.requiresDecisionList);
             if (decisionListNode != null) {
                 NodeIterator decisionIterator = this.model.listObjectsOfProperty(decisionListNode, TGEO.hasItem);

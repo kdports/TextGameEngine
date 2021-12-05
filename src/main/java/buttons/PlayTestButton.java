@@ -58,6 +58,7 @@ public class PlayTestButton extends MenuButton {
             else {
                 Stage stage = new Stage();
                 player.playGame(stage);
+
             }
         });
     }
