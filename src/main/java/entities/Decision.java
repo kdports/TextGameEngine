@@ -67,6 +67,11 @@ public class Decision {
         return decisionConditionals;
     }
 
+    public HashSet<String> getItemConditionals() {
+        return itemConditionals;
+    }
+
+
     /**
      * Certifies that every decision in the decisionConditionals HashSet is also in the inputted set
      * @param checkAgainst A given set, normally player.pastChosenDecisions

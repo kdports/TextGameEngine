@@ -12,6 +12,9 @@ import org.apache.jena.vocabulary.RDF;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -75,10 +78,33 @@ public class RDFSave {
             currDecisionNode.addProperty(TGEO.hasYLocation, String.valueOf(guiDecision.getLayoutY()));
             currDecisionNode.addProperty(TGEO.hasText, currDecision.getText());
             currDecisionNode.addProperty(TGEO.directsTo, model.getResource(String.valueOf(currDecision.target.getId())));
-            currDecisionNode.addProperty(TGEO.givesItem, currDecision.getItemToGive());
 
+            if (currDecision.hasItemToGive()) {
+                currDecisionNode.addProperty(TGEO.givesItem, currDecision.getItemToGive());
+            }
+
+            // -------------- ADDING CONDITIONALS DECISIONS
+            HashSet<Decision> conditionals = currDecision.getDecisionConditionals();
+            ArrayList<Decision> reliesOn = new ArrayList<>();
+            for (Map.Entry<Decision, GuiDecision> entry2 : editorGame.getAllEntriesDecision()){
+                if (conditionals.contains(entry2.getKey())){
+                    reliesOn.add(entry2.getKey());
+                }
+            }
+            currDecisionNode.addProperty(TGEO.requiresDecision, String.valueOf(reliesOn));
+
+            //-------------- ADDING CONDITIONAL ITEMS ----------
+            // get all items in game
+            ArrayList<String> items = new ArrayList<>();
+            for (Map.Entry<Decision, GuiDecision> entry2 : editorGame.getAllEntriesDecision()){
+                if (entry2.getKey().hasItemToGive()) {
+                    if (currDecision.getItemConditionals().contains(entry2.getKey().getItemToGive())){
+                        items.add(entry2.getKey().getItemToGive());
+                    }
+                }
+            }
+            currDecisionNode.addProperty(TGEO.requiresItem, String.valueOf(items));
             // SAVE THE ITEM AND DECISION HERE
-            //currDecisionNode.addProperty(TGEO.requiresDecision, currDecision.getDecisionConditionals());
             //currDecisionNode.addProperty(TGEO.requiresItem, currDecision.)
 
         }

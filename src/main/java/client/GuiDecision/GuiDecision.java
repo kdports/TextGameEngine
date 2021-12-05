@@ -186,7 +186,6 @@ public class GuiDecision extends StackPane {
         decisionComboBox.setPromptText("Choose Decision Conditional");
         decisionComboBox.setOnAction(mouseEvent -> {
             Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
-            System.out.println(decision.getDecisionConditionals().toString());
         });
 
 
