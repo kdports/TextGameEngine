@@ -1,27 +1,14 @@
 package client.DisplayGame;
 
-import client.Theme;
 import client.ThemeColours;
 import entities.Player;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
-import javafx.stage.Stage;
 
 import static java.lang.Long.MAX_VALUE;
 

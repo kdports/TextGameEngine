@@ -24,6 +24,8 @@ import javafx.stage.Stage;
 import java.util.Map;
 import java.util.Objects;
 
+import static java.lang.Math.abs;
+
 /**
  * The button that allows the user to create a new slide.
  */
@@ -32,6 +34,8 @@ public class ThemeButton extends MenuButton {
     public ThemeButton(ThemeColours theme, ScrollPane scrollPane, Pane root) {
         super(scrollPane);
         this.setLayoutY(425);
+        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 425)
+        );
         scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {
                     this.setLayoutY(newvalue.doubleValue() + 425);
                 }
@@ -45,9 +49,11 @@ public class ThemeButton extends MenuButton {
 
         this.setOnMouseClicked(event -> {
             Stage themeWindow = new Stage();
+            themeWindow.setX(60);
+            themeWindow.setY(430);
             themeWindow.initModality(Modality.APPLICATION_MODAL);
             themeWindow.setTitle("Theme Editor");
-            themeWindow.setMinWidth(300);
+            themeWindow.setMinWidth(140);
 
             ChoiceBox<String> choiceBox = new ChoiceBox<>();
             choiceBox.setValue(theme.active.name);
@@ -64,6 +70,7 @@ public class ThemeButton extends MenuButton {
                         ChangeTheme(root, theme.active, theme);
                     }
                 }
+                themeWindow.close();
             });
 
 
@@ -76,6 +83,7 @@ public class ThemeButton extends MenuButton {
             Scene window = new Scene(alert);
             themeWindow.setScene(window);
             themeWindow.show();
+            themeWindow.setFullScreen(false);
         });
     }
 
@@ -92,7 +100,8 @@ public class ThemeButton extends MenuButton {
                 element.setStyle("-fx-background-color: " + active.backgroundColour);
             }
             else if (element instanceof Button){
-                element.setStyle("-fx-background-color: " + active.sidebarColour);
+                element.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
+                        "-fx-text-fill: " + theme.active.textColour);
             }
 
         }

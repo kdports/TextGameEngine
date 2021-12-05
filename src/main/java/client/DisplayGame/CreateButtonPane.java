@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 
 import static javafx.application.Application.launch;
 import entities.Player;
-import client.Theme;
 
 
 public class CreateButtonPane {
