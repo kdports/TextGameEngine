@@ -2,6 +2,7 @@ package entities;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * The decision entity that represents the decision components in the game
@@ -14,7 +15,7 @@ public class Decision {
     public int id;
     private HashSet<Decision> decisionConditionals;
     private HashSet<String> itemConditionals;
-    private String itemToGive;
+    public String itemToGive;
 
     public Decision(String text) {
         this.text = text;
@@ -29,6 +30,7 @@ public class Decision {
         this.target = target;
         this.decisionConditionals = new HashSet();
         this.itemConditionals = new HashSet<String>();
+        this.itemToGive = itemToGive;
     }
 
     public Decision(String text, Slide origin, int id) {
@@ -65,6 +67,11 @@ public class Decision {
     public HashSet<Decision> getDecisionConditionals() {
         return decisionConditionals;
     }
+
+    public HashSet<String> getItemConditionals() {
+        return itemConditionals;
+    }
+
 
     /**
      * Certifies that every decision in the decisionConditionals HashSet is also in the inputted set

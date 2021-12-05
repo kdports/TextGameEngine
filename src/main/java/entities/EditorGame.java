@@ -61,6 +61,7 @@ public class EditorGame {
      */
     public void connectDecisionAndRenderableDecision(Decision decision, GuiDecision guiDecision) {
         this.decisionMap.put(decision, guiDecision);
+        totalDecisions = new ArrayList<>(this.decisionMap.entrySet());
     }
 
     /**
@@ -178,6 +179,8 @@ public class EditorGame {
                 guiDecision.rightLine.recalculateY();
             }
         }
+
+        totalDecisions = new ArrayList<>(this.decisionMap.entrySet());
     }
 
     /**
@@ -212,10 +215,6 @@ public class EditorGame {
         }
     }
 
-    public void addDecisionConditional(Decision decision, Decision toAdd) {
-
-    }
-
     /**
      * Clear all the data out of the editorGame instance.
      */
@@ -231,5 +230,6 @@ public class EditorGame {
             this.deleteDecision(entry.getKey());
 
         }
+        totalDecisions = new ArrayList<>(this.decisionMap.entrySet());
     }
 }

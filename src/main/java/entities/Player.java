@@ -127,6 +127,13 @@ public class Player {
     }
 
     /**
+     * Returns the full inventory
+     */
+    public HashSet<String> getInventory() {
+        return this.inventory.getItems();
+    }
+
+    /**
      * Returns true if this game will throw an error during runtime
      */
     public boolean isMalformedGame() {

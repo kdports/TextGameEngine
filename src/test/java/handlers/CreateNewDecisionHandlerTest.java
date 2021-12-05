@@ -21,14 +21,11 @@ class CreateNewDecisionHandlerTest {
     void testCreateNewDecisionHandler() {
         Studio s = new Studio();
         EditorGame e = new EditorGame();
-        String[] args = new String[] {} ;
-        Main.main(args);
         // Please close the window that appears in order for the unit tests to complete!
 
         Slide sl = new Slide(5, "");
         CreateNewDecisionHandler decisionHandler = new CreateNewDecisionHandler(s, e);
-        decisionHandler.create(sl, 500, 500, new ThemeColours());
-        assertTrue(IdControl.getId() == 1);
+        decisionHandler.testCreate(sl, 500, 500, new ThemeColours());
         assertTrue(e.getDecisionMap().size() == 1);
     }
 }

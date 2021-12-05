@@ -79,6 +79,7 @@ public class RootDisplayer extends Application {
     // filled in automtically
     private <T extends Event> void closeWindowEvent(T t) {
         MainTitleScreen title = new MainTitleScreen();
+        this.editorGame.clearAll();
         title.start(new Stage());
     }
 

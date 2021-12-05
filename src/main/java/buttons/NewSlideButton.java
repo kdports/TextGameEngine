@@ -19,8 +19,7 @@ public class NewSlideButton extends MenuButton {
         super(scrollPane);
         this.setText("Add Slide");
         this.setId("button-add-slide");
-        this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour);
+        this.setTheme(theme);
         this.setLayoutY(10);
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 10)
         );

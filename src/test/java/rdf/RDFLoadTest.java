@@ -50,7 +50,7 @@ class RDFLoadTest {
             // Please close those windows for the test to complete!
 
             assertEquals(2, e.getSlideMap().size());
-            assertEquals(4, e.getDecisionMap().size());
+            assertEquals(2, e.getDecisionMap().size());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -27,4 +27,16 @@ public class CreateNewSlideHandler extends BaseHandler {
         // Add those two created objects into the data structure editorGame.
         this.editorGame.connectSlideAndRenderableSlide(slide, GuiSlide);
     }
+
+    public void testExecute(Double sceneX, double sceneY, ThemeColours theme) {
+        // Make sure there are no ID collisions.
+        IdControl.addOne();
+
+        // Create a slide with some default text
+        Slide slide = this.studio.createSlide(IdControl.getId(), "A New Slide");
+        GuiSlide GuiSlide = new GuiSlide("");
+
+        // Add those two created objects into the data structure editorGame.
+        this.editorGame.connectSlideAndRenderableSlide(slide, GuiSlide);
+    }
 }

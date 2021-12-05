@@ -36,4 +36,15 @@ public class CreateNewDecisionHandler extends BaseHandler {
         slide.addDecision(decision);
         this.editorGame.connectDecisionAndRenderableDecision(decision, guiDecision);
     }
+
+    public void testCreate(Slide slide, double x, double y, ThemeColours theme){
+        IdControl.addOne();
+        // Create the decision
+        Decision decision = new Decision("I am a new decision", slide, IdControl.getId());
+        GuiDecision guiDecision = new GuiDecision("");
+
+        // Add the decision
+        slide.addDecision(decision);
+        this.editorGame.connectDecisionAndRenderableDecision(decision, guiDecision);
+    }
 }
