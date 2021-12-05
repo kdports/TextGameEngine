@@ -178,7 +178,6 @@ public class GuiDecision extends StackPane {
             Decision d = e.getKey();
             if (d != decision) {
                 possibleConditionals.add(d);
-                System.out.println("HELLO");
             }
         }
 
