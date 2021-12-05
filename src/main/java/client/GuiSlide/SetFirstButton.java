@@ -28,6 +28,6 @@ public class SetFirstButton extends Button{
                 "-fx-background-color: " + theme.active.backgroundColour + ";" +
                 "-fx-text-fill: " + theme.active.textColour +";");
         this.setOnMousePressed(event -> Handlers.slideHandler.setMain(slide));
-        StackPane.setAlignment(this, Pos.BOTTOM_CENTER);
+        StackPane.setAlignment(this, Pos.TOP_CENTER);
     }
 }

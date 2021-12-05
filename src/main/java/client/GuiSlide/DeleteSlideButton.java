@@ -15,8 +15,8 @@ public class DeleteSlideButton extends Button {
     DeleteSlideButton(Slide slide, ThemeColours theme) {
         this.setText("x");
         this.setShape(new Circle(5.0));
-        this.setMinSize(20.0, 20.0);
-        this.setMaxSize(20.0, 20.0);
+        this.setMinSize(30.0, 30.0);
+        this.setMaxSize(30.0, 30.0);
         this.setStyle("-fx-background-insets: 0;" +
                 "-fx-font-size: 10;"+
                 " -fx-background-color: TRANSPARENT;" +
