@@ -25,8 +25,6 @@ public class GameRenderer extends Application implements PlayDisplayer {
     ThemeColours theme;
     protected static Player player;
     protected static Stage stage;
-
-//    protected boolean closed = true;
     int animationSpeed;
 
     /**
@@ -35,7 +33,6 @@ public class GameRenderer extends Application implements PlayDisplayer {
     public GameRenderer() {
         root = new BorderPane();
         animationSpeed = 30;
-
         theme = new ThemeColours();
     }
 
@@ -51,7 +48,6 @@ public class GameRenderer extends Application implements PlayDisplayer {
         // stage.getIcons().add(image);
         TitleScreen titleScreen = new TitleScreen();
         titleScreen.displayFirstSlide();
-
     }
 
     /**
@@ -61,15 +57,17 @@ public class GameRenderer extends Application implements PlayDisplayer {
         CreateMenu menu = new CreateMenu(theme, player, animationSpeed, root, this);
         MenuBar mbar = menu.createMenu();
 
+        // Creates a new root and add text and buttons to it
         root = new BorderPane();
-        root.setTop(mbar);
-
         CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
-        root.setCenter(TPane.createTPane());
-        root.setStyle("-fx-border-width: 5px; -fx-border-color: "+ "#FFFFFF");
         CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
+        root.setStyle("-fx-border-width: 5px; -fx-border-color: "+ "#FFFFFF");
+        root.setCenter(TPane.createTPane());
+        root.setTop(mbar);
         root.setBottom(buttonPane.createBPane());
+
         Scene scene=new Scene(root,1200,800);
+        // Gets the font from google fonts
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
      //stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
