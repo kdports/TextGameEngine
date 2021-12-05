@@ -1,6 +1,7 @@
 package client.DisplayGame;
 
 import client.ThemeColours;
+import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -24,13 +25,13 @@ public class CreateTextPane {
      * The method creates a main text area for the game screen.
      *
      * @param player - The player of the game
-     * @param theme
+     * @param theme -  The color theme for the panel
+     * @param animationSpeed -  The speed to write the text on the screen
      */
     CreateTextPane(Player player, ThemeColours theme, int animationSpeed){
         this.player = player;
         this.theme = theme;
         this.animationSpeed = animationSpeed;
-
     }
 
     /**
@@ -48,7 +49,6 @@ public class CreateTextPane {
                 CornerRadii.EMPTY, Insets.EMPTY))); */
         box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         addAnimation(label, box);
-
         return box;
     }
 
@@ -56,7 +56,7 @@ public class CreateTextPane {
 
     public Label createText() {
         Label label = new Label();
-        label.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD,FontPosture.REGULAR,20));
+        label.setPadding(new Insets(20));
         label.setText(player.currentSlide.getPrompt());
         label.setTextFill(Color.web(theme.active.textColour));
         VBox.setVgrow(label, Priority.ALWAYS);
@@ -74,8 +74,8 @@ public class CreateTextPane {
      */
     public void getFont(Label text) {
         // Gets the font from the resources folder
-        text.setFont(Font.loadFont("file:resources/player/OpenSans-Regular.ttf", 25));
-        text.setStyle("-fx-font-size: 25px");
+        text.setFont(Font.loadFont("file:resources/player/OpenSans-Regular.ttf", 28));
+        text.setStyle("-fx-font-size: 28px");
     }
 
 
@@ -87,7 +87,6 @@ public class CreateTextPane {
     public void addAnimation(Label text, VBox box) {
         // Gets the current text
         String slideText = player.currentSlide.getPrompt();
-
 
         final IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
@@ -104,7 +103,6 @@ public class CreateTextPane {
         timeline.getKeyFrames().add(keyFrame);
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
 
         // If the user clicks the text, it will skip the animation
         box.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {

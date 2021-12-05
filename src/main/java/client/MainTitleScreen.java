@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -72,12 +73,6 @@ public class MainTitleScreen extends Application {
 
         box.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         title.setStyle("-fx-text-fill: " + theme.active.textColour);
-        start.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
-        settings.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
-        quit.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
     }
 
     public Button createGEButton(Stage stage){
@@ -95,6 +90,16 @@ public class MainTitleScreen extends Application {
         button.setWrapText(true);
         button.setText("Launch Creator Studio");
         return button;
+    }
+
+    public void addListeners(Button button) {
+        button.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button.setStyle("-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
+                        "-fx-text-fill: " + theme.active.slideColour));
+
+        button.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button.setStyle("-fx-background-color:" + theme.active.slideColour + "; -fx-border-width: 0px;" +
+                        "-fx-text-fill: " + theme.active.textColour));
     }
 
     private Button createGPButton(Stage stage){
@@ -133,6 +138,7 @@ public class MainTitleScreen extends Application {
         button.setCursor(Cursor.HAND);
         button.setWrapText(true);
         button.setStyle("-fx-background-color:" + theme.active.slideColour + ";" +" -fx-border-width: 2px;" + "-fx-text-fill: " + theme.active.textColour);
+        addListeners(button);
         return button;
     }
 

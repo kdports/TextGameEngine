@@ -172,8 +172,8 @@ public class GuiDecision extends StackPane {
         });
 
         // Decision conditionals - a list of all decisions that aren't the one being edited
-        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = editorGame.getTotalDecisions();
-        ArrayList<Decision> possibleConditionals = new ArrayList<Decision>();
+        ArrayList<Map.Entry<Decision, GuiDecision>> allDecisions = EditorGame.getTotalDecisions();
+        ArrayList<Decision> possibleConditionals = new ArrayList<>();
         for (Map.Entry<Decision, GuiDecision> e : allDecisions) {
             Decision d = e.getKey();
             if (d != decision) {
@@ -183,12 +183,10 @@ public class GuiDecision extends StackPane {
         }
 
         // A dropdown list of all decisions to select from
-        ComboBox<Decision> decisionComboBox = new ComboBox<Decision>(FXCollections.observableArrayList(possibleConditionals));
+        ComboBox<Decision> decisionComboBox = new ComboBox<>(FXCollections.observableArrayList(possibleConditionals));
         decisionComboBox.setPromptText("Choose Decision Conditional");
 
-        decisionComboBox.setOnAction(mouseEvent -> {
-            Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
-        });
+        decisionComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue()));
 
         TextField itemInput = new TextField(decision.getItemToGive());
         itemInput.setPromptText("Enter collected item...");
@@ -196,7 +194,7 @@ public class GuiDecision extends StackPane {
         // Edit the value on entry according to the value on the text field
 
         // A hashset of all items given by other decisions
-        HashSet<String> allItems = new HashSet<String>();
+        HashSet<String> allItems = new HashSet<>();
         for (Decision d : possibleConditionals) {
             if (d.getItemToGive() != null) {
                 allItems.add(d.getItemToGive());
@@ -204,11 +202,9 @@ public class GuiDecision extends StackPane {
         }
 
         // A dropdown list of all decisions to select from
-        ComboBox<String> itemComboBox = new ComboBox<String>(FXCollections.observableArrayList(allItems));
+        ComboBox<String> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
         itemComboBox.setPromptText("Choose Item Conditional");
-        itemComboBox.setOnAction(mouseEvent -> {
-            Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue());
-        });
+        itemComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue()));
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
