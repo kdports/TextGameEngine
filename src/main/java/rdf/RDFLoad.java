@@ -71,7 +71,14 @@ public abstract class RDFLoad {
                 Slide originSlide = slideNodeMap.get(originSlideNode);
                 Resource targetSlideNode = decisionNode.getPropertyResourceValue(TGEO.directsTo);
                 Slide targetSlide = slideNodeMap.get(targetSlideNode);
-                Decision decision = new Decision(decisionText, originSlide, (int) (Math.random() * 100000), targetSlide);
+                String decisionItem = decisionNode.getProperty(TGEO.givesItem).getString();
+                Decision decision = new Decision(decisionText, originSlide, (int) (Math.random() * 100000), targetSlide,decisionItem);
+
+                //listofdecisionconditionals = decisionNode.getProperty(TGEO.requiresDecision)
+                //listofitemconditionals = decisionNode.getProperty(TGEO.requiresItem)
+                // Loop through the items, add it to decision.addtoitemconditionals
+                // loop through the decision pointers, add that to decision.addtodecisionconditionals
+
 
                 this.decisionNodeMap.put(decisionNode, decision);
             }

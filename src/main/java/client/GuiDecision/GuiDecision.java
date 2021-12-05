@@ -1,6 +1,5 @@
 package client.GuiDecision;
 
-import buttons.MenuButton;
 import client.GuiDecision.DecisionConnectionPoint.LeftDecisionConnectionPoint;
 import client.GuiDecision.DecisionConnectionPoint.RightDecisionConnectionPoint;
 import client.GuiSlide.GuiSlide;
