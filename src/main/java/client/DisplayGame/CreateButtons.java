@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
@@ -92,13 +93,13 @@ public class CreateButtons extends CreateButtonPane{
      *
      * @return - Whether or not it was created.
      */
-    public boolean createRestartButton(Pane root, ImageView redArrow, ImageView arrow){
+    public boolean createRestartButton(Pane root, ImageView hoverArrow, ImageView arrow){
         // Checks if there are any more decisions, if not then it creates the replay buttons
         // and returns true
         if (player.currentValidDecisions.size() == 0) {
             Button b = createButton(arrow);
             b.setText("Replay the game?");
-            addListeners(b, redArrow, arrow);
+            addListeners(b, hoverArrow, arrow);
             // Handles the action of when the button is pressed
             b.setOnAction(arg0 -> {
                 player.clearPastChosenDecisions();
@@ -135,11 +136,11 @@ public class CreateButtons extends CreateButtonPane{
      * @return - The number of buttons.
      */
     private void createInventorButton(Pane root){
-        Image image = new Image("file:src/main/resources/player/backpack.png", 25, 20, false, true);
-        ImageView backpack = new ImageView(image);
+        final ImageView backpack = createIcon("backpack.png", theme.active.textColour);
+        final ImageView hoverBackpack = createIcon("redArrow.png", theme.active.slideColour);
         Button b = createButton(backpack);
         b.setText("Inventory");
-        addListeners(b, backpack, backpack);
+        addListeners(b, backpack, hoverBackpack);
 
         b.setOnAction(arg0 -> {
             this.displayInventory();
@@ -173,18 +174,16 @@ public class CreateButtons extends CreateButtonPane{
         int count = 0;
         root.setStyle("-fx-background-color: " + theme.active.backgroundColour);
         for (String item: player.getInventory()){
-            Label text = new Label(item);
-            Image image = new Image("file:src/main/resources/player/itemArrow.png",
-                    25, 20, false, true);
-            ImageView arrow = new ImageView(image);
+            Label text = new Label(" " + item);
+            final ImageView arrow = createIcon("itemArrow.png", theme.active.textColour);
             text.setGraphic(arrow);
             text.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
-                    "-fx-fill: " + theme.active.textColour);
+                    "-fx-text-fill: " + theme.active.textColour);
             text.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 25));
             root.getChildren().add(text);
             count += 1;
         }
-        root.setPrefSize(200, count * 99);
+        root.setPrefSize(300, count * 25);
         stage.setTitle("Inventory");
         stage.setScene(scene);
         stage.show();
