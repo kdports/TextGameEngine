@@ -185,7 +185,7 @@ public class GuiDecision extends StackPane {
         ArrayList<Text> allDecisionTexts = new ArrayList<>();
         for (Decision possibleDecision : possibleConditionals) {
             Text decisionText = new Text(possibleDecision.getText());
-            Boolean alreadyHas = Handlers.decisionHandler.hasDecisionConditional(decision, possibleDecision);
+            boolean alreadyHas = Handlers.decisionHandler.hasDecisionConditional(decision, possibleDecision);
             if (alreadyHas) { decisionText.setUnderline(true); }
             else { decisionText.setUnderline(false); }
             allDecisionTexts.add(decisionText);
@@ -197,7 +197,7 @@ public class GuiDecision extends StackPane {
 
         decisionComboBox.setOnAction(mouseEvent -> {
             String chosenText = decisionComboBox.getValue().getText();
-            Boolean textChosen = false;
+            boolean textChosen = false;
             for (Decision chosenDecision : possibleConditionals) {
                 if (chosenText.equals(chosenDecision.getText()) && !textChosen) {
                     Handlers.decisionHandler.changeDecisionConditional(decision, chosenDecision);
