@@ -28,15 +28,15 @@ public class SetFirstButton extends Button{
                 "-fx-font-size: 10;"+
                 "-fx-background-color: " + theme.active.backgroundColour + ";" +
                 "-fx-text-fill: " + theme.active.textColour +";");
-        this.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                e -> this.setStyle("-fx-background-insets: 0;" +
-                        "-fx-font-size: 10;"+"-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
-                        "-fx-text-fill: " + theme.active.backgroundColour));
-
-        this.addEventHandler(MouseEvent.MOUSE_EXITED,
-                e -> this.setStyle("-fx-background-insets: 0;" +
-                        "-fx-font-size: 10;"+"-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
-                        "-fx-text-fill: " + theme.active.textColour));
+//        this.addEventHandler(MouseEvent.MOUSE_ENTERED,
+//                e -> this.setStyle("-fx-background-insets: 0;" +
+//                        "-fx-font-size: 10;"+"-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
+//                        "-fx-text-fill: " + theme.active.backgroundColour));
+//
+//        this.addEventHandler(MouseEvent.MOUSE_EXITED,
+//                e -> this.setStyle("-fx-background-insets: 0;" +
+//                        "-fx-font-size: 10;"+"-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
+//                        "-fx-text-fill: " + theme.active.textColour));
         this.setOnMousePressed(event -> Handlers.slideHandler.setMain(slide));
         StackPane.setAlignment(this, Pos.TOP_CENTER);
     }

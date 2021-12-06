@@ -63,6 +63,8 @@ public class LoadButton extends MenuButton {
 
                     // Fill the editorGame maps with the loaded data.
                     for (Map.Entry<Slide, GuiSlide> entry : loadedEditorGame.getAllEntriesSlide()) {
+                        entry.getValue().setTheme(theme);
+
                         editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
 
                         // SETTING FIRST SLIDE ----------------------
@@ -71,6 +73,7 @@ public class LoadButton extends MenuButton {
                         }
                     }
                     for (Map.Entry<Decision, GuiDecision> entry : loadedEditorGame.getAllEntriesDecision()) {
+                        entry.getValue().setTheme(theme);
                         editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());
                     }
                 }
