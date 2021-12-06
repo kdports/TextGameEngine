@@ -73,8 +73,9 @@ public class GuiSlide extends StackPane {
 
 
         Button addDecisionButton = new AddDecisionButton(slide, this, theme);
+        addDecisionButton.setId("add-decision-button");
         Button deleteSlideButton = new DeleteSlideButton(slide, theme);
-        deleteSlideButton.setId("#delete-slide");
+        deleteSlideButton.setId("delete-slide");
         Button setFirstButton = new SetFirstButton(slide, theme);
 
         // main slide

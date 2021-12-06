@@ -12,6 +12,7 @@ public class RightDecisionConnectionPoint extends DecisionConnectionPoint {
     public RightDecisionConnectionPoint(Decision decision, ThemeColours theme) {
         super(decision);
         this.setFill(Color.valueOf(theme.active.sidebarColour));
+        this.setId("right-decision-connector");
     }
 
     @Override

@@ -60,6 +60,7 @@ public class GuiDecision extends StackPane {
         this.setMaxWidth(120);
         this.setMinHeight(26);
         this.setMaxHeight(26);
+        this.setId("GuiDecision");
 
         // Drag event handling
         this.initializeDragHandling();

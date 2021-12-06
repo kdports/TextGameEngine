@@ -1,11 +1,16 @@
 package client;
 
+import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.robot.Robot;
+import javafx.scene.shape.Circle;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -34,26 +39,34 @@ public class RootDisplayerTest {
     void try_opening_editor(FxRobot robot) {
         robot.clickOn("#button-add-slide");
         Assertions.assertThat(robot.lookup("#button-add-slide").queryAs(Button.class)).hasText("Add Slide");
-//        robot.clickOn("#1").type(KeyCode.T);
-        robot.clickOn(700, 500);
+        // robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("A New Slide").queryAs(TextArea.class)).write("I am a test subject");
+        robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("#add-decision-button").queryAs(Button.class));
         robot.drag(670, 500).drag(600,300).drop();
-
         robot.clickOn("#button-add-slide");
         robot.drag(670, 500).drag(1400,700).drop();
         robot.clickOn("#button-change-theme");
         robot.clickOn("#theme-picker");
         robot.clickOn("Peachy");
-        robot.drag(1025, 505).dropTo(1400, 700);
+        robot.drag(robot.from(robot.lookup("#GuiDecision").queryAs(GuiDecision.class)).
+                lookup("#right-decision-connector").queryAs(Circle.class)).dropTo("#3");
         robot.clickOn("SET FIRST SLIDE");
         robot.clickOn("Save");
         robot.closeCurrentWindow();
         robot.clickOn("Play Test");
-        robot.clickOn("I am a new decision");
         robot.closeCurrentWindow();
         robot.clickOn("EDIT");
+        robot.clickOn("Enter collected item...").write("Cool Item");
+        robot.closeCurrentWindow();
+        robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("#add-decision-button").queryAs(Button.class));
+        robot.drag(1020, 510).dropTo(1500, 200);
+        robot.clickOn("EDIT");
         robot.clickOn("Delete Decision");
+        robot.clickOn("EDIT");
+        robot.clickOn("Choose Item Conditional");
+        robot.clickOn("Cool Item");;
+        robot.closeCurrentWindow();
         robot.clickOn(450, 300);
-//        robot.clickOn(970, 505);
+        robot.clickOn("Load");
     }
 
 }
