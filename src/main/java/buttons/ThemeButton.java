@@ -4,33 +4,34 @@ import client.EditorTheme;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import client.ThemeColours;
-import entities.EditorGame;
-import entities.Slide;
-import handlers.Handlers;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.Math.abs;
 
 /**
- * The button that allows the user to create a new slide.
+ * The button that controls the theme
  */
 public class ThemeButton extends MenuButton {
 
+    /**
+     * Creates the button that controls the theme
+     *
+     * @param theme - the theme of the gui
+     * @param scrollPane - the pane where the buttons are located
+     * @param root - where all gui elements are located
+     */
     public ThemeButton(ThemeColours theme, ScrollPane scrollPane, Pane root) {
         super(scrollPane);
         this.setLayoutY(425);
@@ -42,7 +43,7 @@ public class ThemeButton extends MenuButton {
         );
 
         this.setText("Change Theme");
-
+        this.setId("button-change-theme");
         // set the theme to the current active theme
         this.setTheme(theme);
 
@@ -78,6 +79,7 @@ public class ThemeButton extends MenuButton {
             VBox alert = new VBox();
             alert.getChildren().addAll(choiceBox);
             alert.setAlignment(Pos.CENTER);
+            choiceBox.setId("theme-picker");
 
             Scene window = new Scene(alert);
             themeWindow.setScene(window);
@@ -86,6 +88,13 @@ public class ThemeButton extends MenuButton {
         });
     }
 
+    /**
+     * Changes the theme of all gui elements
+     *
+     * @param theme - the theme of the gui
+     * @param root - where all gui elements are located
+     * @param active - the current EditorTheme instance
+     */
     public void ChangeTheme(Pane root, EditorTheme active, ThemeColours theme){
         for (Node element : root.getChildren()){
 

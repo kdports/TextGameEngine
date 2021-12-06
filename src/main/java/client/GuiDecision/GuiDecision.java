@@ -25,7 +25,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,6 +52,7 @@ public class GuiDecision extends StackPane {
      * @param guiSlide - The slide that this decision comes from.
      * @param x - The x location of the decision in the editor
      * @param y - The x location of the decision in the editor
+     * @param theme - the theme of the gui
      */
     public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y, ThemeColours theme) {
         this.originSlide = guiSlide;
@@ -62,6 +62,7 @@ public class GuiDecision extends StackPane {
         this.setMaxWidth(120);
         this.setMinHeight(26);
         this.setMaxHeight(26);
+        this.setId("GuiDecision");
 
         // Drag event handling
         this.initializeDragHandling();
@@ -77,7 +78,6 @@ public class GuiDecision extends StackPane {
         rounded.setArcHeight(15);
         rounded.setArcWidth(15);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
         this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 
@@ -98,15 +98,15 @@ public class GuiDecision extends StackPane {
                 ConnectionDirection.TARGET,
                 targetSlide
         );
+        this.setTheme(theme);
 
-        leftLine.setStroke(Color.valueOf(theme.active.textColour));
-        rightLine.setStroke(Color.valueOf(theme.active.textColour));
-
-//         targetSlide.addListener(event -> {
-//             rightLine.setSlide(this.targetSlide.getValue());
-//         });
     }
 
+    /**
+     * Sets the theme of the decision and its elements
+     *
+     * @param theme - the ThemeColours instance containing the active theme
+     */
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
         leftLine.setStroke(Color.valueOf(theme.active.textColour));
@@ -185,7 +185,7 @@ public class GuiDecision extends StackPane {
         ArrayList<Text> allDecisionTexts = new ArrayList<>();
         for (Decision possibleDecision : possibleConditionals) {
             Text decisionText = new Text(possibleDecision.getText());
-            Boolean alreadyHas = Handlers.decisionHandler.hasDecisionConditional(decision, possibleDecision);
+            boolean alreadyHas = Handlers.decisionHandler.hasDecisionConditional(decision, possibleDecision);
             if (alreadyHas) { decisionText.setUnderline(true); }
             else { decisionText.setUnderline(false); }
             allDecisionTexts.add(decisionText);
@@ -197,7 +197,7 @@ public class GuiDecision extends StackPane {
 
         decisionComboBox.setOnAction(mouseEvent -> {
             String chosenText = decisionComboBox.getValue().getText();
-            Boolean textChosen = false;
+            boolean textChosen = false;
             for (Decision chosenDecision : possibleConditionals) {
                 if (chosenText.equals(chosenDecision.getText()) && !textChosen) {
                     Handlers.decisionHandler.changeDecisionConditional(decision, chosenDecision);
@@ -212,17 +212,22 @@ public class GuiDecision extends StackPane {
         // Edit the value on entry according to the value on the text field
 
         // A hashset of all items given by other decisions
-        HashSet<String> allItems = new HashSet<>();
+        HashSet<Text> allItems = new HashSet<>();
         for (Decision d : possibleConditionals) {
             if (d.getItemToGive() != null) {
-                allItems.add(d.getItemToGive());
+                Text itemText = new Text(d.getItemToGive());
+                if (decision.getItemConditionals().contains(d.getItemToGive())) { itemText.setUnderline(true); }
+                else { itemText.setUnderline(false); }
+                allItems.add(itemText);
             }
         }
 
         // A dropdown list of all decisions to select from
-        ComboBox<String> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
+        ComboBox<Text> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
         itemComboBox.setPromptText("Choose Item Conditional");
-        itemComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue()));
+        itemComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue().getText());
+        });
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();

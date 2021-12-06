@@ -1,8 +1,8 @@
 package client;
 
-import java.util.ArrayList;
-
-// This is what a theme is comprised of. 4 colours and a name
+/**
+ * The attributes of a theme that are used throughout the GUI
+ */
 public class EditorTheme {
     public String backgroundColour;
     public String textColour;

@@ -2,8 +2,9 @@ package client;
 
 import java.util.ArrayList;
 
-// Each theme is hardcoded into here. the default theme is default but can be changed
-// each theme is stored in a list of themes
+/**
+ * Constructor of all themes and make them available for the GUI.
+ */
 public class ThemeColours {
     public EditorTheme active;
     public ArrayList<EditorTheme> themes = new ArrayList<>();
@@ -21,10 +22,30 @@ public class ThemeColours {
         EditorTheme Crimson = new EditorTheme("#132052", "#EDCEA8", "#4D2E5B", "#7F2639",
                 "Crimson");
 
+        EditorTheme SeaPort = new EditorTheme("#073b4c", "#748cab", "#f29ca3", "#f4b942",
+                "Sea Port");
+
+        EditorTheme Forest = new EditorTheme("#536c45", "#bd9b16", "#244334", "#073630",
+                "Forest");
+
+        EditorTheme Tranquil = new EditorTheme("#38a094", "#ffffff", "#33a27f", "#39c7ba",
+                "Tranquil");
+
+        EditorTheme Purpleish = new EditorTheme("#735ab3", "#64a7cc", "#9cafff", "#5f6ba4",
+                "Purple-ish");
+
+        EditorTheme Boring = new EditorTheme("#875e59", "#f6dca7", "#f4a573", "#864263",
+                "Boring");
+
         this.themes.add(defaultTheme);
         this.themes.add(Peachy);
         this.themes.add(Ocean);
         this.themes.add(Crimson);
+        this.themes.add(SeaPort);
+        this.themes.add(Forest);
+        this.themes.add(Tranquil);
+        this.themes.add(Purpleish);
+        this.themes.add(Boring);
         this.active = Crimson;
     }
 }

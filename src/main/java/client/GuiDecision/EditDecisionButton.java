@@ -4,12 +4,11 @@ import client.ThemeColours;
 import entities.Decision;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 /**
- * A button on the decision that allows the user to edit the text of the decision.
+ * A button on the decision that allows the user to edit the proeprties of the decision.
  */
 public class EditDecisionButton extends Button {
     EditDecisionButton(Decision decision, ThemeColours theme) {
@@ -27,15 +26,7 @@ public class EditDecisionButton extends Button {
                 "-fx-font-size: 10;"+
                 "-fx-background-color: " + theme.active.backgroundColour + ";" +
                 "-fx-text-fill: " + theme.active.textColour +";");
-        this.addEventHandler(MouseEvent.MOUSE_ENTERED,
-                e -> this.setStyle("-fx-background-insets: 0;" +
-                        "-fx-font-size: 10;"+"-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
-                        "-fx-text-fill: " + theme.active.backgroundColour));
 
-        this.addEventHandler(MouseEvent.MOUSE_EXITED,
-                e -> this.setStyle("-fx-background-insets: 0;" +
-                        "-fx-font-size: 10;"+"-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
-                        "-fx-text-fill: " + theme.active.textColour));
         this.setOnMousePressed(event -> GuiDecision.showEdit(decision));
         StackPane.setAlignment(this, Pos.CENTER);
     }

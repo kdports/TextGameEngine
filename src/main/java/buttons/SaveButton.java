@@ -4,7 +4,6 @@ import client.ThemeColours;
 import entities.EditorGame;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.FileChooser;
 import rdf.RDFSave;
@@ -23,9 +22,11 @@ public class SaveButton extends MenuButton {
      * Creates a Button instance of the save button that is displayed in the game.
      * Also handles what happens when the button is clicked (saving an editor
      * to a file)
-     *  @param window - The window in which the file explorer resides when clicking save
+     *
+     * @param window - The window in which the file explorer resides when clicking save
      * @param editorGame - The existing EditorGame instance that will have its data
-     * @param theme
+     * @param theme - the theme of the gui
+     * @param scrollPane - the pane where the buttons are located
      */
     public SaveButton(Scene window, EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme) {
         super(scrollPane);
@@ -33,6 +34,7 @@ public class SaveButton extends MenuButton {
         this.setText("Save");
         this.setTheme(theme);
         this.setLayoutY(215);
+        this.setId("save-button");
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 215)
         );
 

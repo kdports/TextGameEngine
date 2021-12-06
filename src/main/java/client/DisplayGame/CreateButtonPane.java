@@ -1,4 +1,5 @@
 package client.DisplayGame;
+
 import client.ThemeColours;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -10,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import static javafx.application.Application.launch;
 import entities.Player;
 
 

@@ -1,7 +1,5 @@
 package entities;
 
-import client.DisplayGame.GameRenderer;
-
 import java.util.ArrayList;
 
 /**
@@ -9,16 +7,6 @@ import java.util.ArrayList;
  */
 public class Studio {
     public Game game = new Game();
-
-//    public void loadGame(Game loadedGame) {
-//        this.game = loadedGame;
-//    }
-//
-//    public void playGame() {
-//        GameRenderer gr = new GameRenderer();
-//        Player p = new Player(gr, this.game);
-//        p.playGame();
-//    }
 
     /**
      * Creates a slide instance with the given ID and dialogue
@@ -38,7 +26,4 @@ public class Studio {
      */
     public ArrayList<Slide> getSlides() { return this.game.getSlides(); }
 
-//    public void createDecision(Slide parentSlide, Decision newDecision) {
-//        this.game.createDecision("text");
-//    }
 }

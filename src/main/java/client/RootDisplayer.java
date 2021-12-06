@@ -9,23 +9,14 @@ import entities.EditorGame;
 import entities.Slide;
 import handlers.Handlers;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.MapChangeListener;
 import javafx.event.Event;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import rdf.RDFLoadToStudio;
-import javafx.scene.control.ScrollBar;
-
-import java.util.Map;
 
 import static java.lang.Math.abs;
 
@@ -111,7 +102,6 @@ public class RootDisplayer extends Application {
         // Set root to observe and delete slides properly
         this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) listener -> {
             if (listener.wasAdded()) {
-                System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().remove(listener.getValueAdded());
             }
         });
@@ -120,7 +110,6 @@ public class RootDisplayer extends Application {
         // Set root to initialize connecting lines and decisions
         this.editorGame.decisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecision>) listener -> {
             if (listener.wasAdded()) {
-                System.out.println(listener.getValueAdded().toString());
                 this.root.getChildren().add(listener.getValueAdded());
                 listener.getValueAdded().originSlide.layoutXProperty().addListener(
                         (observable, oldvalue, newvalue) -> listener.getValueAdded().leftLine.recalculateX()
@@ -131,9 +120,13 @@ public class RootDisplayer extends Application {
                 this.editorGame.deletedSlideMapProperty().addListener((MapChangeListener<? super Slide, ? super GuiSlide>) slideRemoved -> {
                     if (slideRemoved.getValueAdded() == listener.getValueAdded().originSlide) {
                         listener.getValueAdded().originSlide = null;
-                        listener.getValueAdded().leftLine.recalculateX();
-                    }}
-                );
+                        listener.getValueAdded().leftLine.setVisible(false);
+                    }
+                    if (slideRemoved.getValueAdded() == listener.getValueAdded().targetSlide) {
+                        listener.getValueAdded().targetSlide = null;
+                        listener.getValueAdded().rightLine.setVisible(false);
+                    }
+                });
                 root.getChildren().add(listener.getValueAdded().leftLine);
                 root.getChildren().add(listener.getValueAdded().rightLine);
 
@@ -154,8 +147,9 @@ public class RootDisplayer extends Application {
 
         this.editorGame.deletedDecisionMapProperty().addListener((MapChangeListener<? super Decision, ? super GuiDecision>) listener -> {
             if (listener.wasAdded()) {
-                System.out.println(listener.getValueAdded().toString());
+                this.root.getChildren().remove(listener.getValueAdded().leftLine);
                 this.root.getChildren().remove(listener.getValueAdded());
+                this.root.getChildren().remove(listener.getValueAdded().rightLine);
             }
         });
 
