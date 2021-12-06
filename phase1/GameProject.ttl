@@ -2,175 +2,175 @@
 @prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
 @prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
 
-<79310>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <50207> ;
-        tgeo:hasText       "Ok i will enjoy it!" ;
-        tgeo:hasXLocation  "698.0" ;
-        tgeo:hasYLocation  "721.0" .
-
-<6>     rdf:type           tgeo:Slide ;
-        tgeo:hasText       "Calver: SAVE YOUR COMPLIMENTS. You know why you're here right? You wanted to understand SOLID principles. Well I can certainly show you something solid..." ;
-        tgeo:hasXLocation  "1778.0" ;
-        tgeo:hasYLocation  "15.0" .
-
-<32441>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <23843> ;
-        tgeo:hasText       "Interface segregation principle" ;
-        tgeo:hasXLocation  "523.0" ;
-        tgeo:hasYLocation  "429.0" .
-
-<5347>  rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <57273> ;
-        tgeo:hasText       "Take the chance" ;
-        tgeo:hasXLocation  "386.0" ;
-        tgeo:hasYLocation  "474.0" .
-
-<5>     rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <7> ;
-        tgeo:hasText       "Ask about clean architecture" ;
-        tgeo:hasXLocation  "1628.0" ;
-        tgeo:hasYLocation  "111.0" .
-
-<7886>  rdf:type           tgeo:Slide ;
-        tgeo:hasDecision   <3> ;
-        tgeo:hasText       "I understand.                            Unfortunately we are passed the drop deadline. You fail the course and all of your friends laugh at you. Your parents are disappointed and love your brother much more instead. What a foolish decision you made, don't you agree?" ;
-        tgeo:hasXLocation  "1019.0" ;
-        tgeo:hasYLocation  "226.0" .
-
-<23843>  rdf:type          tgeo:Slide ;
-        tgeo:hasDecision   <57401> , <66594> , <46614> ;
-        tgeo:hasText       "Trick question, the key to programming is to HOPE your program follows these principles." ;
-        tgeo:hasXLocation  "669.0" ;
-        tgeo:hasYLocation  "102.0" .
-
-<57401>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <7886> ;
-        tgeo:hasText       "I hate trick questions. I want to drop the course" ;
-        tgeo:hasXLocation  "868.0" ;
-        tgeo:hasYLocation  "205.0" .
-
-<90155>  rdf:type          tgeo:Slide ;
-        tgeo:hasDecision   <8> ;
-        tgeo:hasText       "Pffft that's not tedious. Wanna know what a code smell is?" ;
-        tgeo:hasXLocation  "1020.0" ;
-        tgeo:hasYLocation  "122.0" .
-
-<1319>  rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <23843> ;
-        tgeo:hasText       "Liskov substituion principle" ;
-        tgeo:hasXLocation  "528.0" ;
-        tgeo:hasYLocation  "376.0" .
-
-<86852>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <23843> ;
-        tgeo:hasText       "Open/closed principle" ;
-        tgeo:hasXLocation  "533.0" ;
-        tgeo:hasYLocation  "325.0" .
-
-<4>     rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <6> ;
-        tgeo:hasText       "Compliment his style" ;
-        tgeo:hasXLocation  "1649.0" ;
-        tgeo:hasYLocation  "7.0" .
-
-<71970>  rdf:type          tgeo:Slide ;
-        tgeo:hasDecision   <1> ;
-        tgeo:hasText       "Funny fella you are. Calver is impressed, he wants to see you in his office" ;
-        tgeo:hasXLocation  "1014.0" ;
-        tgeo:hasYLocation  "16.0" .
-
-<34608>  rdf:type          tgeo:Slide ;
-        tgeo:hasDecision   <76000> , <5347> ;
-        tgeo:hasText       "You fail the class. You also die of a heart attack and Yaniv spits on your grave. Thankfully, God Emporor Calver gives you another chance!" ;
-        tgeo:hasXLocation  "331.0" ;
-        tgeo:hasYLocation  "585.0" .
-
-<76000>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <50207> ;
-        tgeo:hasText       "Don't take the chance and continue being dead and defiled" ;
-        tgeo:hasXLocation  "537.0" ;
-        tgeo:hasYLocation  "612.0" .
-
-<3>     rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <34608> ;
+<71570>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <10247> ;
         tgeo:hasText       "That is just rude" ;
         tgeo:hasXLocation  "1060.0" ;
         tgeo:hasYLocation  "340.0" .
 
-<10419>  rdf:type           tgeo:Slide ;
-        tgeo:categorizedAs  tgeo:isFirst ;
-        tgeo:hasDecision    <54619> , <85698> ;
-        tgeo:hasText        "Welcome to CSC207, the objective of the game is to pass phase 1. Are you ready?" ;
-        tgeo:hasXLocation   "39.0" ;
-        tgeo:hasYLocation   "459.0" .
+<1504>  rdf:type           tgeo:Slide ;
+        tgeo:hasDecision   <93828> , <94663> , <50867> ;
+        tgeo:hasText       "Trick question, the key to programming is to HOPE your program follows these principles." ;
+        tgeo:hasXLocation  "669.0" ;
+        tgeo:hasYLocation  "102.0" .
 
-<57273>  rdf:type          tgeo:Slide ;
-        tgeo:hasDecision   <86852> , <32441> , <1319> , <82024> , <88600> ;
-        tgeo:hasText       "Great! First, you must understand all of the SOLID principles. Which would you like to explore?" ;
-        tgeo:hasXLocation  "336.0" ;
-        tgeo:hasYLocation  "311.0" .
+<87437>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <78297> ;
+        tgeo:hasText       "Don't take the chance and continue being dead and defiled" ;
+        tgeo:hasXLocation  "537.0" ;
+        tgeo:hasYLocation  "612.0" .
 
-<54619>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <34608> ;
-        tgeo:hasText       "No" ;
-        tgeo:hasXLocation  "236.0" ;
-        tgeo:hasYLocation  "537.0" .
+<64434>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <71570> ;
+        tgeo:hasText       "I understand.                            Unfortunately we are passed the drop deadline. You fail the course and all of your friends laugh at you. Your parents are disappointed and love your brother much more instead. What a foolish decision you made, don't you agree?" ;
+        tgeo:hasXLocation  "1019.0" ;
+        tgeo:hasYLocation  "226.0" .
 
-<85698>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <57273> ;
-        tgeo:hasText       "Yes" ;
-        tgeo:hasXLocation  "238.0" ;
-        tgeo:hasYLocation  "410.0" .
+<58776>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <78297> ;
+        tgeo:hasText       "Ok i will enjoy it!" ;
+        tgeo:hasXLocation  "698.0" ;
+        tgeo:hasYLocation  "721.0" .
 
-<66594>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <71970> ;
-        tgeo:hasText       "But I WANT to know how to implement these!" ;
-        tgeo:hasXLocation  "868.0" ;
-        tgeo:hasYLocation  "44.0" .
+<63160>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <34437> ;
+        tgeo:hasText       "Take the chance" ;
+        tgeo:hasXLocation  "386.0" ;
+        tgeo:hasYLocation  "474.0" .
 
-<2>     rdf:type           tgeo:Slide ;
-        tgeo:hasDecision   <5> , <4> ;
-        tgeo:hasText       "Calver is sitting in his office, in the very same tracksuit he wore for the last 4 trillion years." ;
-        tgeo:hasXLocation  "1410.0" ;
-        tgeo:hasYLocation  "16.0" .
-
-<8>     rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <57273> ;
-        tgeo:hasText       "This narrator guy is pretty creepy. Take me back to SOLID" ;
-        tgeo:hasXLocation  "1246.0" ;
-        tgeo:hasYLocation  "153.0" .
-
-<82024>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <23843> ;
-        tgeo:hasText       "Single responsibility principle" ;
-        tgeo:hasXLocation  "533.0" ;
-        tgeo:hasYLocation  "271.0" .
-
-<50207>  rdf:type          tgeo:Slide ;
-        tgeo:hasDecision   <79310> ;
-        tgeo:hasText       "How disappointing. Stay dead nerd. Enjoy eternity in a decision circle" ;
-        tgeo:hasXLocation  "652.0" ;
-        tgeo:hasYLocation  "586.0" .
-
-<88600>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <23843> ;
-        tgeo:hasText       "Depedency inversion principle" ;
-        tgeo:hasXLocation  "525.0" ;
-        tgeo:hasYLocation  "478.0" .
-
-<1>     rdf:type           tgeo:Decision ;
-        tgeo:directsTo     <2> ;
-        tgeo:hasText       "Okay......." ;
-        tgeo:hasXLocation  "1282.0" ;
-        tgeo:hasYLocation  "38.0" .
-
-<46614>  rdf:type          tgeo:Decision ;
-        tgeo:directsTo     <90155> ;
+<93828>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <65733> ;
         tgeo:hasText       "Thank god! Those looked very tedious" ;
         tgeo:hasXLocation  "896.0" ;
         tgeo:hasYLocation  "124.0" .
 
-<7>     rdf:type           tgeo:Slide ;
+<65133>  rdf:type          tgeo:Slide ;
         tgeo:hasText       "Calver: Listen pal, stop talking about my entities and i'll stop thinking about letting you pass my course." ;
         tgeo:hasXLocation  "1767.0" ;
         tgeo:hasYLocation  "117.0" .
+
+<92058>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <1504> ;
+        tgeo:hasText       "Depedency inversion principle" ;
+        tgeo:hasXLocation  "525.0" ;
+        tgeo:hasYLocation  "478.0" .
+
+<9370>  rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <34437> ;
+        tgeo:hasText       "This narrator guy is pretty creepy. Take me back to SOLID" ;
+        tgeo:hasXLocation  "1246.0" ;
+        tgeo:hasYLocation  "153.0" .
+
+<50867>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <30035> ;
+        tgeo:hasText       "But I WANT to know how to implement these!" ;
+        tgeo:hasXLocation  "868.0" ;
+        tgeo:hasYLocation  "44.0" .
+
+<28461>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <65850> ;
+        tgeo:hasText       "Compliment his style" ;
+        tgeo:hasXLocation  "1649.0" ;
+        tgeo:hasYLocation  "7.0" .
+
+<65733>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <9370> ;
+        tgeo:hasText       "Pffft that's not tedious. Wanna know what a code smell is?" ;
+        tgeo:hasXLocation  "1020.0" ;
+        tgeo:hasYLocation  "122.0" .
+
+<59616>  rdf:type           tgeo:Slide ;
+        tgeo:categorizedAs  tgeo:isFirst ;
+        tgeo:hasDecision    <49985> , <36495> ;
+        tgeo:hasText        "Welcome to CSC207, the objective of the game is to pass phase 1. Are you ready?" ;
+        tgeo:hasXLocation   "39.0" ;
+        tgeo:hasYLocation   "459.0" .
+
+<78297>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <58776> ;
+        tgeo:hasText       "How disappointing. Stay dead nerd. Enjoy eternity in a decision circle" ;
+        tgeo:hasXLocation  "652.0" ;
+        tgeo:hasYLocation  "586.0" .
+
+<75206>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <28461> , <23926> ;
+        tgeo:hasText       "Calver is sitting in his office, in the very same tracksuit he wore for the last 4 trillion years." ;
+        tgeo:hasXLocation  "1410.0" ;
+        tgeo:hasYLocation  "16.0" .
+
+<34437>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <92058> , <84181> , <14307> , <70049> , <11047> ;
+        tgeo:hasText       "Great! First, you must understand all of the SOLID principles. Which would you like to explore?" ;
+        tgeo:hasXLocation  "336.0" ;
+        tgeo:hasYLocation  "311.0" .
+
+<94663>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <64434> ;
+        tgeo:hasText       "I hate trick questions. I want to drop the course" ;
+        tgeo:hasXLocation  "868.0" ;
+        tgeo:hasYLocation  "205.0" .
+
+<65850>  rdf:type          tgeo:Slide ;
+        tgeo:hasText       "Calver: SAVE YOUR COMPLIMENTS. You know why you're here right? You wanted to understand SOLID principles. Well I can certainly show you something solid..." ;
+        tgeo:hasXLocation  "1778.0" ;
+        tgeo:hasYLocation  "15.0" .
+
+<36495>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <34437> ;
+        tgeo:hasText       "Yes" ;
+        tgeo:hasXLocation  "238.0" ;
+        tgeo:hasYLocation  "410.0" .
+
+<49985>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <10247> ;
+        tgeo:hasText       "No" ;
+        tgeo:hasXLocation  "236.0" ;
+        tgeo:hasYLocation  "537.0" .
+
+<30035>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <78859> ;
+        tgeo:hasText       "Funny fella you are. Calver is impressed, he wants to see you in his office" ;
+        tgeo:hasXLocation  "1014.0" ;
+        tgeo:hasYLocation  "16.0" .
+
+<78859>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <75206> ;
+        tgeo:hasText       "Okay......." ;
+        tgeo:hasXLocation  "1282.0" ;
+        tgeo:hasYLocation  "38.0" .
+
+<70049>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <1504> ;
+        tgeo:hasText       "Liskov substituion principle" ;
+        tgeo:hasXLocation  "528.0" ;
+        tgeo:hasYLocation  "376.0" .
+
+<14307>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <1504> ;
+        tgeo:hasText       "Single responsibility principle" ;
+        tgeo:hasXLocation  "533.0" ;
+        tgeo:hasYLocation  "271.0" .
+
+<11047>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <1504> ;
+        tgeo:hasText       "Open/closed principle" ;
+        tgeo:hasXLocation  "533.0" ;
+        tgeo:hasYLocation  "325.0" .
+
+<23926>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <65133> ;
+        tgeo:hasText       "Ask about clean architecture" ;
+        tgeo:hasXLocation  "1628.0" ;
+        tgeo:hasYLocation  "111.0" .
+
+<84181>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <1504> ;
+        tgeo:hasText       "Interface segregation principle" ;
+        tgeo:hasXLocation  "523.0" ;
+        tgeo:hasYLocation  "429.0" .
+
+<10247>  rdf:type          tgeo:Slide ;
+        tgeo:hasDecision   <87437> , <63160> ;
+        tgeo:hasText       "You fail the class. You also die of a heart attack and Yaniv spits on your grave. Thankfully, God Emporor Calver gives you another chance!" ;
+        tgeo:hasXLocation  "331.0" ;
+        tgeo:hasYLocation  "585.0" .
