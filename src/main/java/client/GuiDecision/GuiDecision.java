@@ -12,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
@@ -20,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -181,13 +183,29 @@ public class GuiDecision extends StackPane {
             }
         }
 
-        // A dropdown list of all decisions to select from
-        ComboBox<Decision> decisionComboBox = new ComboBox<>(FXCollections.observableArrayList(possibleConditionals));
-        decisionComboBox.setPromptText("Choose Decision Conditional");
-        decisionComboBox.setOnAction(mouseEvent -> {
-            Handlers.decisionHandler.changeDecisionConditional(decision, decisionComboBox.getValue());
-        });
+        ArrayList<Text> allDecisionTexts = new ArrayList<>();
+        for (Decision possibleDecision : possibleConditionals) {
+            Text decisionText = new Text(possibleDecision.getText());
+            boolean alreadyHas = Handlers.decisionHandler.hasDecisionConditional(decision, possibleDecision);
+            if (alreadyHas) { decisionText.setUnderline(true); }
+            else { decisionText.setUnderline(false); }
+            allDecisionTexts.add(decisionText);
+        }
 
+        // A dropdown list of all decisions to select from
+        ComboBox<Text> decisionComboBox = new ComboBox<>(FXCollections.observableArrayList(allDecisionTexts));
+        decisionComboBox.setPromptText("Choose Decision Conditional");
+
+        decisionComboBox.setOnAction(mouseEvent -> {
+            String chosenText = decisionComboBox.getValue().getText();
+            boolean textChosen = false;
+            for (Decision chosenDecision : possibleConditionals) {
+                if (chosenText.equals(chosenDecision.getText()) && !textChosen) {
+                    Handlers.decisionHandler.changeDecisionConditional(decision, chosenDecision);
+                    textChosen = true;
+                }
+            }
+        });
 
         TextField itemInput = new TextField(decision.getItemToGive());
         itemInput.setPromptText("Enter collected item...");
@@ -195,17 +213,22 @@ public class GuiDecision extends StackPane {
         // Edit the value on entry according to the value on the text field
 
         // A hashset of all items given by other decisions
-        HashSet<String> allItems = new HashSet<>();
+        HashSet<Text> allItems = new HashSet<>();
         for (Decision d : possibleConditionals) {
             if (d.getItemToGive() != null) {
-                allItems.add(d.getItemToGive());
+                Text itemText = new Text(d.getItemToGive());
+                if (decision.getItemConditionals().contains(d.getItemToGive())) { itemText.setUnderline(true); }
+                else { itemText.setUnderline(false); }
+                allItems.add(itemText);
             }
         }
 
         // A dropdown list of all decisions to select from
-        ComboBox<String> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
+        ComboBox<Text> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
         itemComboBox.setPromptText("Choose Item Conditional");
-        itemComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue()));
+        itemComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue().getText());
+        });
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
