@@ -25,7 +25,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
@@ -53,6 +52,7 @@ public class GuiDecision extends StackPane {
      * @param guiSlide - The slide that this decision comes from.
      * @param x - The x location of the decision in the editor
      * @param y - The x location of the decision in the editor
+     * @param theme - the theme of the gui
      */
     public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y, ThemeColours theme) {
         this.originSlide = guiSlide;
@@ -78,7 +78,6 @@ public class GuiDecision extends StackPane {
         rounded.setArcHeight(15);
         rounded.setArcWidth(15);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
         this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 
@@ -99,15 +98,15 @@ public class GuiDecision extends StackPane {
                 ConnectionDirection.TARGET,
                 targetSlide
         );
+        this.setTheme(theme);
 
-        leftLine.setStroke(Color.valueOf(theme.active.textColour));
-        rightLine.setStroke(Color.valueOf(theme.active.textColour));
-
-//         targetSlide.addListener(event -> {
-//             rightLine.setSlide(this.targetSlide.getValue());
-//         });
     }
 
+    /**
+     * Sets the theme of the decision and its elements
+     *
+     * @param theme - the ThemeColours instance containing the active theme
+     */
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
         leftLine.setStroke(Color.valueOf(theme.active.textColour));

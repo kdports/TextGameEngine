@@ -2,8 +2,9 @@ package client;
 
 import java.util.ArrayList;
 
-// Each theme is hardcoded into here. the default theme is default but can be changed
-// each theme is stored in a list of themes
+/**
+ * Constructor of all themes and make them available for the GUI.
+ */
 public class ThemeColours {
     public EditorTheme active;
     public ArrayList<EditorTheme> themes = new ArrayList<>();

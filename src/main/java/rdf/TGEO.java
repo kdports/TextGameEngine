@@ -3,8 +3,6 @@ package rdf;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 
-import java.security.PublicKey;
-
 /**
  * Defines and creates Resources and Properties that are used in saving and loading
  * RDF files.

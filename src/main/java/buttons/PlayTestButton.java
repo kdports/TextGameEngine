@@ -27,7 +27,9 @@ public class PlayTestButton extends MenuButton {
      *
      * @param editorGame - The existing EditorGame instance that will be used to
      *                   populate a game instance with existing data
-     * @param theme
+     * @param scrollPane - The pane where the button resides, ensures the button
+     *                   scrolls with the screen
+     * @param theme - The theme containing the varied active theme
      */
     public PlayTestButton(EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme) {
         super(scrollPane);
@@ -52,6 +54,7 @@ public class PlayTestButton extends MenuButton {
                 }
                 game.addSlide(slide);
             }
+
             if (player.isMalformedGame()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Your game is malformed! Make sure you have a firstslide set and all decisions going to a slide!");
                 alert.showAndWait();

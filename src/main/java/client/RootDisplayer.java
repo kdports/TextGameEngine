@@ -9,23 +9,14 @@ import entities.EditorGame;
 import entities.Slide;
 import handlers.Handlers;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.MapChangeListener;
 import javafx.event.Event;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import rdf.RDFLoadToStudio;
-import javafx.scene.control.ScrollBar;
-
-import java.util.Map;
 
 import static java.lang.Math.abs;
 

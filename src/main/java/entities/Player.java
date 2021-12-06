@@ -1,4 +1,5 @@
 package entities;
+
 import client.PlayDisplayer;
 import javafx.stage.Stage;
 import java.util.ArrayList;

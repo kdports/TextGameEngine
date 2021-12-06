@@ -5,24 +5,18 @@ import entities.Slide;
 import handlers.Handlers;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
 
 import java.awt.*;
 import java.util.Objects;
@@ -55,7 +49,6 @@ public class GuiSlide extends StackPane {
         this.setMinWidth(200);
         this.setMaxHeight(100);
         this.setMinHeight(100);
-        //this.setStyle("-fx-background-color: TRANSPARENT;");
 
         // Drag event handling
         this.initializeDragHandling();
@@ -87,16 +80,6 @@ public class GuiSlide extends StackPane {
         rounded.setStroke(Color.BLACK);
         rounded.setFill(Color.valueOf(theme.active.slideColour));
 
-//        //shadow
-//        Rectangle shadow = new Rectangle();
-//        shadow.setLayoutX(50);
-//        shadow.setWidth(240);
-//        shadow.setHeight(140);
-//        shadow.setArcHeight(30);
-//        shadow.setArcWidth(30);
-//        shadow.setFill(Color.BLACK);
-//        shadow.opacityProperty().set(0.3);
-
         this.getChildren().addAll(rounded, addDecisionButton, deleteSlideButton, setFirstButton, temp_prompt);
 
         Circle firstSlideIndicator = new FirstSlideIndicator(theme);
@@ -104,6 +87,11 @@ public class GuiSlide extends StackPane {
         this.initializeListeners(slide, firstSlideIndicator);
     }
 
+    /**
+     * Sets the theme of the slde and its elements
+     *
+     * @param theme - the ThemeColours instance containing the active theme
+     */
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
 
