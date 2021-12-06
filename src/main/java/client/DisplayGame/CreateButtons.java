@@ -9,11 +9,9 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
@@ -23,7 +21,7 @@ import static java.lang.Long.MAX_VALUE;
  * Creates the buttons for the create button panel
  */
 public class CreateButtons extends CreateButtonPane{
-
+    Stage inventoryStage;
     /**
      * Creates the panel with all the buttons to add to the screen.
      *  @param player - The player instance that is currently being used by GameRenderer
@@ -31,6 +29,7 @@ public class CreateButtons extends CreateButtonPane{
      */
     CreateButtons(Player player, ThemeColours theme) {
         super(player, theme);
+        this.inventoryStage = new Stage();
     }
 
     /**
@@ -96,7 +95,7 @@ public class CreateButtons extends CreateButtonPane{
             // Creates the button
             Button b = createButton(createIcon("redArrow.png", theme.active.textColour));
             b.setText(" " + player.currentValidDecisions.get(i).text);
-            addDestinationAction(player, b, i);
+            addDestinationAction(player, b, i, inventoryStage);
             addListeners(b, createIcon("redArrow.png", theme.active.slideColour), createIcon("redArrow.png", theme.active.textColour));
             root.getChildren().add(b);
         }
@@ -133,9 +132,10 @@ public class CreateButtons extends CreateButtonPane{
      * @param button - The button that will be clicked.
      * @param index - The index of the decision linked to the button.
      */
-    private static void addDestinationAction(Player player, Button button, int index) {
+    private static void addDestinationAction(Player player, Button button, int index, Stage inventoryStage) {
         // Adds a listener to the button that goes to the next scene
         button.setOnAction(arg0 -> {
+            inventoryStage.close();
             player.currentSlide = player.currentValidDecisions.get(index).target;
             // Gives the player an item if there is an item to give
             if (player.currentValidDecisions.get(index).hasItemToGive()) {
@@ -159,9 +159,9 @@ public class CreateButtons extends CreateButtonPane{
         Button b = createButton(backpack);
         b.setText(" Inventory");
         addListeners(b, hoverBackpack, backpack);
-
+        initializeInventory();
         // Make the button display a new screen with the inventory items listed
-        b.setOnAction(arg0 -> this.displayInventory());
+        b.setOnAction(arg0 -> displayInventory());
 
         root.getChildren().add(b);
 
@@ -171,11 +171,10 @@ public class CreateButtons extends CreateButtonPane{
      * Displays the inventory of items in a new screen
      *
      */
-    private void displayInventory(){
-        // Makes a new root and stage and scene for the new window
+    private void initializeInventory(){
+        // Makes a new root and scene for the new window
         VBox root = new VBox();
         Scene scene = new Scene(root);
-        Stage stage = new Stage();
         // Count the number of items to adjust the inventory menu accordingly
         int count = 0;
 
@@ -196,8 +195,13 @@ public class CreateButtons extends CreateButtonPane{
         }
         // Sets the size for the root
         root.setPrefSize(300, Math.max(count * 25, 200));
-        stage.setTitle("Inventory");
-        stage.setScene(scene);
-        stage.show();
+        inventoryStage.setTitle("Inventory");
+        inventoryStage.setScene(scene);
+    }
+
+    public void displayInventory(){
+        inventoryStage.close();
+        initializeInventory();
+        inventoryStage.show();
     }
 }
