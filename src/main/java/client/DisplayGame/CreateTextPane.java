@@ -53,10 +53,9 @@ public class CreateTextPane {
     }
 
 
-
     public Label createText() {
         Label label = new Label();
-        label.setPadding(new Insets(20));
+        label.setPadding(new Insets(15,20,15,20));
         label.setText(player.currentSlide.getPrompt());
         label.setTextFill(Color.web(theme.active.textColour));
         VBox.setVgrow(label, Priority.ALWAYS);
@@ -64,7 +63,6 @@ public class CreateTextPane {
         label.setWrapText(true);
         return label;
     }
-
 
 
     /**
@@ -108,7 +106,6 @@ public class CreateTextPane {
         box.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
             text.setText(slideText);
             timeline.stop();
-
         });
     }
 

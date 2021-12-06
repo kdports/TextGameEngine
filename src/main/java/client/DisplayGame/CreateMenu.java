@@ -2,25 +2,20 @@ package client.DisplayGame;
 
 import client.EditorTheme;
 import client.ThemeColours;
-import entities.Player;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 public class CreateMenu {
     GameRenderer gameRenderer;
-    Player player;
     ThemeColours theme;
-    int animationSpeed;
-    Pane pane;
     /**
      * Creates the menu bar at the top of the window.
      *
      */
-    CreateMenu(ThemeColours theme, Player player, int animationSpeed, Pane pane, GameRenderer gameRenderer) {
+    CreateMenu(ThemeColours theme, GameRenderer gameRenderer) {
         this.theme = theme;
-        this.animationSpeed  = animationSpeed;
-        this.player = player;
-        this.pane = pane;
         this.gameRenderer = gameRenderer;
     }
 
@@ -43,7 +38,8 @@ public class CreateMenu {
         // Adds the themes dropdown and the animation dropdown to the menu bar
         mb.getMenus().add(themes);
         mb.getMenus().add(animation);
-        mb.setStyle("-fx-background-color: #FFFFFF");
+        mb.setStyle(".label {-fx-background-color:" + theme.active.backgroundColour +
+                ";-fx-font-size:16;" + "-fx-text-fill:" + theme.active.textColour + ";}");
         return mb;
     }
 
@@ -55,7 +51,7 @@ public class CreateMenu {
     public Menu createAnimationMenu() {
         // Crates an animation speed dropdown to allow users to switch the animation speed
         // Speed contains the 4 options for the animation speed
-        String[] speed = {"off", "fast", "medium", "slow"};
+        String[] speed = {"Off", "Fast", "Medium", "Slow"};
         Menu animation = new Menu("Animation");
         int speed_num = 0;
         for (String s : speed) {

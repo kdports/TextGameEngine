@@ -1,10 +1,7 @@
 package client.DisplayGame;
-import client.GuiDecision.GuiDecision;
-import client.GuiSlide.GuiSlide;
-import client.Main;
 import client.MainTitleScreen;
 import client.PlayDisplayer;
-import client.RootDisplayer;
+import client.ThemeColours;
 import entities.*;
 import javafx.animation.*;
 import javafx.geometry.Pos;
@@ -13,31 +10,36 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 import rdf.RDFLoadToPlayer;
-import rdf.RDFLoadToStudio;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static java.lang.Long.MAX_VALUE;
 
 public class TitleScreen extends GameRenderer{
+
+    GameRenderer gameRenderer;
+    ThemeColours theme;
+    /**
+     * Creates the menu bar at the top of the window.
+     *
+     */
+    TitleScreen(ThemeColours theme, GameRenderer gameRenderer) {
+        this.theme = theme;
+        this.gameRenderer = gameRenderer;
+    }
 
     public void displayFirstSlide(){
         VBox box = new VBox(400);
@@ -46,8 +48,8 @@ public class TitleScreen extends GameRenderer{
         title.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 55));
         title.setAlignment(Pos.TOP_CENTER);
 
-        Button settings = createStartButton();
-        Button start = createSettingsButton();
+        Button settings = createSettingsButton();
+        Button start = createStartButton();
         Button quit = createQuitButton();
 
         HBox hBox = new HBox(25);
@@ -55,7 +57,7 @@ public class TitleScreen extends GameRenderer{
         hBox.setAlignment(Pos.BASELINE_CENTER);
 
         List<Node> nodes = Arrays.asList(quit, settings,start, title);
-        Duration duration = new Duration(2400);
+        Duration duration = new Duration(2000);
         addFadeAnimation(nodes, duration);
         box.getChildren().addAll(title, hBox);
 
@@ -69,23 +71,27 @@ public class TitleScreen extends GameRenderer{
         title.setStyle("-fx-text-fill: " + theme.active.textColour);
     }
 
-    public Button createStartButton(){
+    public void reDisplay(){
+        stage.close();
+        displayFirstSlide();
+    }
+
+    public Button createSettingsButton(){
         Button button = createButton();
-        //button.setOnAction(arg0 -> player.playGame());
+        SettingsMenu menu =  new SettingsMenu(theme, this);
+        menu.initializeSettings();
+        button.setOnMouseClicked(event -> menu.displaySettings());
         button.setText("Settings");
         return button;
     }
 
-    private Button createSettingsButton(){
+    private Button createStartButton(){
         Button button = createButton();
         button.setText("Load Game");
         VBox box = new VBox(400);
         Scene window = new Scene(box,1200,800);
 
         button.setOnMouseClicked(event -> {
-            PlayDisplayer playDisplayer = new GameRenderer();
-
-
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter exFilter = new FileChooser.ExtensionFilter("Turtle File (.ttl)", "*.ttl");
             fileChooser.getExtensionFilters().add(exFilter);
@@ -97,7 +103,7 @@ public class TitleScreen extends GameRenderer{
                 try {
                     RDFLoadToPlayer loader = new RDFLoadToPlayer(path);
                     Game loadedGame = loader.loadGameFromFile();
-                    Player player = new Player(playDisplayer, loadedGame);
+                    Player player = new Player(gameRenderer, loadedGame);
                     player.playGame();
 
                 }
@@ -133,9 +139,6 @@ public class TitleScreen extends GameRenderer{
         return button;
     }
 
-    private void addButtonAnimation(Button button, Color color){
-
-    }
 
     public void addListeners(Button button) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,
