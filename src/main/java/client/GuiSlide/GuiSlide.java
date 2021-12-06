@@ -79,6 +79,7 @@ public class GuiSlide extends StackPane {
         rounded.setArcWidth(30);
         rounded.setStroke(Color.BLACK);
         rounded.setFill(Color.valueOf(theme.active.slideColour));
+        rounded.setId("GuiRectangle");
 
         this.getChildren().addAll(rounded, addDecisionButton, deleteSlideButton, setFirstButton, temp_prompt);
 
