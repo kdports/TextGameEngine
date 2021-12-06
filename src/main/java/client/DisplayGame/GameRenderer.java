@@ -9,6 +9,7 @@ import client.PlayDisplayer;
 
 import javafx.application.Application;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +50,11 @@ public class GameRenderer extends Application implements PlayDisplayer {
         // Sets the image in the top left, currently no image
         // Image image = new Image("");
         // stage.getIcons().add(image);
-        TitleScreen titleScreen = new TitleScreen();
+        stage.setOnCloseRequest(we -> {
+            MainTitleScreen title = new MainTitleScreen();
+            title.start(new Stage());
+        });
+        TitleScreen titleScreen = new TitleScreen(theme, this);
         titleScreen.displayFirstSlide();
     }
 
@@ -57,7 +62,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
      * This method displays each of the slides onto the JFrame.
      */
     public void display() {
-        CreateMenu menu = new CreateMenu(theme, player, animationSpeed, root, this);
+        CreateMenu menu = new CreateMenu(theme, this);
         MenuBar mbar = menu.createMenu();
 
         root = new BorderPane();
@@ -71,14 +76,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
         Scene scene=new Scene(root,1200,800);
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
-         // stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         stage.show();
-    }
-
-    private <T extends Event> void closeWindowEvent(T t) {
-        MainTitleScreen title = new MainTitleScreen();
-        stage.close();
-        title.start(new Stage());
     }
 
     public void setStage(Stage stage){

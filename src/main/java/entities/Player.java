@@ -24,7 +24,7 @@ public class Player {
         this.dp = dp;
         this.game = game;
         dp.setPlayer(this);
-        this.pastChosenDecisions = new HashSet();
+        this.pastChosenDecisions = new HashSet<>();
         this.inventory = new Inventory();
     }
 
@@ -33,14 +33,12 @@ public class Player {
      */
     public void playGame() {
         currentSlide = game.firstSlide;
-        checkValidChoices();
         playScene();
     }
 
     public void playGame(Stage stage) {
         dp.setStage(stage);
         currentSlide = game.firstSlide;
-        checkValidChoices();
         playScene();
     }
 
@@ -96,7 +94,7 @@ public class Player {
      * Returns the entire set of past chosen decisions. Probably just for testing
      * @return pastChosenDecisions
      */
-    public HashSet GetPastChosenDecisions() { return this.pastChosenDecisions; }
+    public HashSet<Decision> GetPastChosenDecisions() { return this.pastChosenDecisions; }
 
     /**
      * Empties pastChosenDecisions
