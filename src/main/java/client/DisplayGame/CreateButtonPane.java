@@ -1,5 +1,6 @@
 package client.DisplayGame;
 import client.ThemeColours;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.effect.*;
 import javafx.scene.image.Image;
@@ -37,7 +38,7 @@ public class CreateButtonPane {
     public Pane createBPane(){
         VBox bPane = new VBox();
         bPane.setStyle("-fx-background-color: " + theme.active.backgroundColour);
-        bPane.setStyle("-fx-border-width: 0px;");
+        bPane.setPadding(new Insets(6,2,6,2));
         CreateButtons buttons = new CreateButtons(player, theme);
         int num = buttons.createButtons(bPane);
         // Sets the size of the window and the layout
