@@ -212,17 +212,22 @@ public class GuiDecision extends StackPane {
         // Edit the value on entry according to the value on the text field
 
         // A hashset of all items given by other decisions
-        HashSet<String> allItems = new HashSet<>();
+        HashSet<Text> allItems = new HashSet<>();
         for (Decision d : possibleConditionals) {
             if (d.getItemToGive() != null) {
-                allItems.add(d.getItemToGive());
+                Text itemText = new Text(d.getItemToGive());
+                if (decision.getItemConditionals().contains(d.getItemToGive())) { itemText.setUnderline(true); }
+                else { itemText.setUnderline(false); }
+                allItems.add(itemText);
             }
         }
 
         // A dropdown list of all decisions to select from
-        ComboBox<String> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
+        ComboBox<Text> itemComboBox = new ComboBox<>(FXCollections.observableArrayList(allItems));
         itemComboBox.setPromptText("Choose Item Conditional");
-        itemComboBox.setOnAction(mouseEvent -> Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue()));
+        itemComboBox.setOnAction(mouseEvent -> {
+            Handlers.decisionHandler.changeItemConditional(decision, itemComboBox.getValue().getText());
+        });
 
         // Make the Slide Edit Window Show
         VBox alert = new VBox();
