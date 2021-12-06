@@ -57,7 +57,7 @@ public class TitleScreen extends GameRenderer{
         hBox.setAlignment(Pos.BASELINE_CENTER);
 
         List<Node> nodes = Arrays.asList(quit, settings,start, title);
-        Duration duration = new Duration(2400);
+        Duration duration = new Duration(2000);
         addFadeAnimation(nodes, duration);
         box.getChildren().addAll(title, hBox);
 
