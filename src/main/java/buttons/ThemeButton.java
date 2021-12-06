@@ -42,7 +42,7 @@ public class ThemeButton extends MenuButton {
         );
 
         this.setText("Change Theme");
-
+        this.setId("button-change-theme");
         // set the theme to the current active theme
         this.setTheme(theme);
 
@@ -78,6 +78,7 @@ public class ThemeButton extends MenuButton {
             VBox alert = new VBox();
             alert.getChildren().addAll(choiceBox);
             alert.setAlignment(Pos.CENTER);
+            choiceBox.setId("theme-picker");
 
             Scene window = new Scene(alert);
             themeWindow.setScene(window);
