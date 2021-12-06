@@ -51,7 +51,7 @@ public class CreateMenu {
     public Menu createAnimationMenu() {
         // Crates an animation speed dropdown to allow users to switch the animation speed
         // Speed contains the 4 options for the animation speed
-        String[] speed = {"off", "fast", "medium", "slow"};
+        String[] speed = {"Off", "Fast", "Medium", "Slow"};
         Menu animation = new Menu("Animation");
         int speed_num = 0;
         for (String s : speed) {
