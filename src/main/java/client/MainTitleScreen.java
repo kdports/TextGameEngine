@@ -86,6 +86,7 @@ public class MainTitleScreen extends Application {
                 e.printStackTrace();
             }
         });
+        button.setId("create-editor-game");
         button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
         button.setWrapText(true);
         button.setText("Launch Creator Studio");

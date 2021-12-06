@@ -33,6 +33,7 @@ public class SaveButton extends MenuButton {
         this.setText("Save");
         this.setTheme(theme);
         this.setLayoutY(215);
+        this.setId("save-button");
         scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 215)
         );
 

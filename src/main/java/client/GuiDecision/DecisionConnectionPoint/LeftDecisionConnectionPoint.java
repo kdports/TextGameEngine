@@ -12,6 +12,7 @@ public class LeftDecisionConnectionPoint extends DecisionConnectionPoint {
     public LeftDecisionConnectionPoint(Decision decision, ThemeColours theme) {
         super(decision);
         this.setFill(Color.valueOf(theme.active.sidebarColour));
+        this.setId("left-decision-connector");
     }
 
     @Override

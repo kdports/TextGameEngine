@@ -9,6 +9,7 @@ import client.PlayDisplayer;
 
 import javafx.application.Application;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
@@ -25,6 +26,8 @@ public class GameRenderer extends Application implements PlayDisplayer {
     ThemeColours theme;
     protected static Player player;
     protected static Stage stage;
+
+
     int animationSpeed;
 
     /**
@@ -33,6 +36,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
     public GameRenderer() {
         root = new BorderPane();
         animationSpeed = 30;
+
         theme = new ThemeColours();
     }
 
@@ -46,6 +50,10 @@ public class GameRenderer extends Application implements PlayDisplayer {
         // Sets the image in the top left, currently no image
         // Image image = new Image("");
         // stage.getIcons().add(image);
+        stage.setOnCloseRequest(we -> {
+            MainTitleScreen title = new MainTitleScreen();
+            title.start(new Stage());
+        });
         TitleScreen titleScreen = new TitleScreen(theme, this);
         titleScreen.displayFirstSlide();
     }
@@ -57,26 +65,18 @@ public class GameRenderer extends Application implements PlayDisplayer {
         CreateMenu menu = new CreateMenu(theme, this);
         MenuBar mbar = menu.createMenu();
 
-        // Creates a new root and add text and buttons to it
         root = new BorderPane();
-        CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
-        CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
-        root.setCenter(TPane.createTPane());
         root.setTop(mbar);
-        root.setBottom(buttonPane.createBPane());
 
+        CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
+        root.setCenter(TPane.createTPane());
+        root.setStyle("-fx-border-width: 5px; -fx-border-color: "+ "#FFFFFF");
+        CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
+        root.setBottom(buttonPane.createBPane());
         Scene scene=new Scene(root,1200,800);
-        // Gets the font from google fonts
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
-     //stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         stage.show();
-    }
-
-    private <T extends Event> void closeWindowEvent(T t) {
-        MainTitleScreen title = new MainTitleScreen();
-        stage.close();
-        title.start(new Stage());
     }
 
     public void setStage(Stage stage){
