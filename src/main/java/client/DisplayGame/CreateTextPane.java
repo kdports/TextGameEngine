@@ -85,22 +85,26 @@ public class CreateTextPane {
     public void addAnimation(Label text, VBox box) {
         // Gets the current text
         String slideText = player.currentSlide.getPrompt();
-
         final IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(
-                Duration.millis(animationSpeed),
-                event -> {
-                    if (i.get() > slideText.length()) {
-                        timeline.stop();
-                    } else {
-                        text.setText(slideText.substring(0, i.get()));
-                        i.set(i.get() + 1);
-                    }
-                });
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();
+        if(animationSpeed == 0) {
+            text.setText(slideText);
+        }
+        else {
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.millis(animationSpeed),
+                    event -> {
+                        if (i.get() > slideText.length()) {
+                            timeline.stop();
+                        } else {
+                            text.setText(slideText.substring(0, i.get()));
+                            i.set(i.get() + 1);
+                        }
+                    });
+            timeline.getKeyFrames().add(keyFrame);
+            timeline.setCycleCount(Animation.INDEFINITE);
+            timeline.play();
+        }
 
         // If the user clicks the text, it will skip the animation
         box.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
