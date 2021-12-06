@@ -3,9 +3,6 @@ package client.DisplayGame;
 import client.EditorTheme;
 import client.ThemeColours;
 import javafx.scene.control.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 
 public class CreateMenu {
     GameRenderer gameRenderer;

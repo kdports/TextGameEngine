@@ -16,7 +16,6 @@ public class MenuButton extends Button {
     public MenuButton(ScrollPane scrollPane){
         this.setPrefHeight(90);
         this.setPrefWidth(120);
-        // this.setStyle("-fx-background-color: #c72c41; ");
         this.setLayoutX(10);
 
         scrollPane.hvalueProperty().addListener((observable, oldvalue, newvalue) -> {

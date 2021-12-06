@@ -8,7 +8,6 @@ import entities.EditorGame;
 import entities.Slide;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import rdf.RDFLoadToStudio;
 

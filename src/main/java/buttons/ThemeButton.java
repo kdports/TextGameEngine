@@ -4,24 +4,18 @@ import client.EditorTheme;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import client.ThemeColours;
-import entities.EditorGame;
-import entities.Slide;
-import handlers.Handlers;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.Math.abs;

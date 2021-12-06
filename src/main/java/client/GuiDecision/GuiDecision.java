@@ -25,7 +25,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
@@ -78,7 +77,6 @@ public class GuiDecision extends StackPane {
         rounded.setArcHeight(15);
         rounded.setArcWidth(15);
         rounded.setStroke(Color.BLACK);
-        rounded.setFill(Color.valueOf(theme.active.slideColour));
 
         this.getChildren().addAll(rounded, editButton,rightConnection,leftConnection);
 
@@ -99,13 +97,8 @@ public class GuiDecision extends StackPane {
                 ConnectionDirection.TARGET,
                 targetSlide
         );
+        this.setTheme(theme);
 
-        leftLine.setStroke(Color.valueOf(theme.active.textColour));
-        rightLine.setStroke(Color.valueOf(theme.active.textColour));
-
-//         targetSlide.addListener(event -> {
-//             rightLine.setSlide(this.targetSlide.getValue());
-//         });
     }
 
     public void setTheme(ThemeColours theme){

@@ -4,19 +4,13 @@ package client.DisplayGame;
 import client.MainTitleScreen;
 import client.ThemeColours;
 import entities.Player;
-import entities.CreateSampleGame;
 import client.PlayDisplayer;
 
 import javafx.application.Application;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
-import static javafx.application.Application.launch;
 
 /**
  * The class that is in charge of rendering the game.
@@ -96,7 +90,6 @@ public class GameRenderer extends Application implements PlayDisplayer {
      */
     public static void main(String[] args) {
         GameRenderer gr = new GameRenderer();
-        // new Player(gr, CreateSampleGame.returnGame());
         gr.begin(args);
     }
 

@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.*;
 import entities.Player;
 import javafx.scene.text.Font;
 import javafx.animation.Animation;

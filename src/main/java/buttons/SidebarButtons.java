@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * A wrapper for all the buttons drawn on the sidebar of the app.

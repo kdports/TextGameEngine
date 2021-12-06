@@ -4,7 +4,6 @@ import client.ThemeColours;
 import entities.EditorGame;
 import entities.Slide;
 import entities.Studio;
-import javafx.scene.input.MouseEvent;
 import client.GuiSlide.GuiSlide;
 import utils.IdControl;
 

@@ -1,9 +1,6 @@
 package client.GuiDecision;
 
 import client.GuiSlide.GuiSlide;
-import javafx.beans.binding.Binding;
-import javafx.beans.property.Property;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.shape.Line;
 
 /**
