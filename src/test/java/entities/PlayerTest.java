@@ -22,16 +22,14 @@ class PlayerTest {
     void testCheckChoiceTrue() {
         Decision d = new Decision("test");
         Game sampleGame = CreateSampleGame.returnGame();
-        GameRenderer renderer = new GameRenderer();
-        Player p = new Player(renderer, sampleGame);
+        Player p = new Player(sampleGame);
         assertTrue(p.checkChoice(d));
     }
 
     @Test
     void testFirstSlideStart() {
         Game sampleGame = CreateSampleGame.returnGame();
-        GameRenderer renderer = new GameRenderer();
-        Player p = new Player(renderer, sampleGame);
+        Player p = new Player(sampleGame);
         p.playGame();
         assertTrue(p.currentSlide.getPrompt().equals(sampleGame.firstSlide.getPrompt()));
     }
@@ -39,8 +37,7 @@ class PlayerTest {
     @Test
     void testCheckValidChoices() {
         Game sampleGame = CreateSampleGame.returnGame();
-        GameRenderer renderer = new GameRenderer();
-        Player p = new Player(renderer, sampleGame);
+        Player p = new Player(sampleGame);
         p.playGame();
         p.checkValidChoices();
         assertTrue(p.currentValidDecisions.size() == 2);
@@ -49,9 +46,8 @@ class PlayerTest {
     @Test
     void testGetPastChosenDecisions() {
         Game sampleGame = CreateSampleGame.returnGame();
-        GameRenderer renderer = new GameRenderer();
         Decision d = new Decision("test");
-        Player p = new Player(renderer, sampleGame);
+        Player p = new Player(sampleGame);
         p.playGame();
 
         assertTrue(p.GetPastChosenDecisions().isEmpty());

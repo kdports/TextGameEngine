@@ -2,8 +2,10 @@ package rdf;
 
 import client.DisplayGame.GameRenderer;
 import client.Main;
+import client.MainTitleScreen;
 import entities.*;
 //import rdf.RDFLoadToPlayer;
+import javafx.application.Platform;
 import rdf.RDFLoad;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +15,26 @@ import java.io.FileNotFoundException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class RDFLoadTest {
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
+import javafx.stage.Stage;
 
-    @BeforeEach
-    void setUp() {
+import static javafx.application.Application.launch;
+import static org.testfx.api.FxAssert.verifyThat;
+
+@ExtendWith(ApplicationExtension.class)
+
+class RDFLoadTest {
+    private final MainTitleScreen mainTitleScreen = new MainTitleScreen();
+    @Start
+    public void start(Stage stage) throws Exception {
+        mainTitleScreen.start(stage);
+
+        stage.show();
     }
 
 //    @Test
@@ -36,16 +54,15 @@ class RDFLoadTest {
 //    }
 
     @Test
-    void testRDFLoadToStudio() {
+    void testRDFLoadToStudio(FxRobot robot) {
         /*
         * Should be called individually from CreateNewSlideHandlerTest!
         */
         String rdfFilepath = "src/main/resources/rdf/scratch_game.ttl";
         try {
-            String[] args = new String[] {} ;
-            Main.main(args);
             RDFLoadToStudio loader = new RDFLoadToStudio(rdfFilepath);
             EditorGame e = loader.loadEditorGameFromFile();
+            robot.clickOn("Quit");
             // This test opens the studio and gamerenderer over the course of its function
             // Please close those windows for the test to complete!
 
