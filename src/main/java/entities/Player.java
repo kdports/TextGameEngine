@@ -3,6 +3,7 @@ import client.PlayDisplayer;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * The class that is in charge of playing the game
@@ -28,12 +29,20 @@ public class Player {
         this.inventory = new Inventory();
     }
 
+    public Player(Game game){
+        this.game = game;
+        this.pastChosenDecisions = new HashSet<>();
+        this.inventory = new Inventory();
+    }
+
     /**
      * Plays the game from the first slide
      */
     public void playGame() {
         currentSlide = game.firstSlide;
-        playScene();
+        if(Objects.nonNull(dp)) {
+            playScene();
+        }
     }
 
     public void playGame(Stage stage) {
