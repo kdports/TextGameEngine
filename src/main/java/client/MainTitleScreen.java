@@ -23,6 +23,9 @@ import java.util.List;
 
 import static java.lang.Long.MAX_VALUE;
 
+/**
+ * The title screen that shows up when you first launch Main.java
+ */
 public class MainTitleScreen extends Application {
 
     ThemeColours theme  = new ThemeColours();
