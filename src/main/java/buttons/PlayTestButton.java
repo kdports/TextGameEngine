@@ -2,6 +2,7 @@ package buttons;
 
 import client.DisplayGame.GameRenderer;
 import client.GuiSlide.GuiSlide;
+import client.MainTitleScreen;
 import client.ThemeColours;
 import entities.*;
 
@@ -60,6 +61,8 @@ public class PlayTestButton extends MenuButton {
             }
             else {
                 Stage stage = new Stage();
+                stage.setOnCloseRequest(we -> {
+                });
                 player.playGame(stage);
 
             }
