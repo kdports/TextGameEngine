@@ -3,6 +3,8 @@ package client;
 import client.GuiDecision.GuiDecision;
 import client.GuiSlide.GuiSlide;
 import javafx.geometry.Bounds;
+import javafx.geometry.HorizontalDirection;
+import javafx.geometry.VerticalDirection;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -19,6 +21,8 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import javafx.stage.Stage;
 import javafx.scene.control.ChoiceBox;
+
+import java.util.Set;
 
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.util.NodeQueryUtils.hasText;
@@ -37,13 +41,12 @@ public class RootDisplayerTest {
 
     @Test
     void try_opening_editor(FxRobot robot) {
-        robot.clickOn("#button-add-slide");
         Assertions.assertThat(robot.lookup("#button-add-slide").queryAs(Button.class)).hasText("Add Slide");
-        // robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("A New Slide").queryAs(TextArea.class)).write("I am a test subject");
-        robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("#add-decision-button").queryAs(Button.class));
-        robot.drag(670, 500).drag(600,300).drop();
         robot.clickOn("#button-add-slide");
-        robot.drag(670, 500).drag(1400,700).drop();
+        robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("#add-decision-button").queryAs(Button.class));
+        robot.drag(robot.lookup("#1").queryAs(GuiSlide.class).getLayoutX() + 35,robot.lookup("#1").queryAs(GuiSlide.class).getLayoutY()).drag(600,300).drop();
+        robot.clickOn("#button-add-slide");
+
         robot.clickOn("#button-change-theme");
         robot.clickOn("#theme-picker");
         robot.clickOn("Peachy");
@@ -52,20 +55,30 @@ public class RootDisplayerTest {
         robot.clickOn("SET FIRST SLIDE");
         robot.clickOn("Save");
         robot.closeCurrentWindow();
-        robot.clickOn("Play Test");
-        robot.closeCurrentWindow();
+
         robot.clickOn("EDIT");
         robot.clickOn("Enter collected item...").write("Cool Item");
+        robot.clickOn("I am a new decision").write(" Test");
+        robot.closeCurrentWindow();
+        robot.clickOn("Play Test");
+        robot.clickOn("Themes");
+        robot.clickOn("Peachy");
+        robot.clickOn("Animation");
+        robot.clickOn("Fast");
         robot.closeCurrentWindow();
         robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("#add-decision-button").queryAs(Button.class));
-        robot.drag(1020, 510).dropTo(1500, 200);
+        robot.drag(robot.lookup("#GuiDecision").queryAs(GuiDecision.class).getLayoutX() +70,robot.lookup("#1").queryAs(GuiSlide.class).getLayoutY() + 10).dropTo(1500, 200);
+        robot.scroll(20, VerticalDirection.DOWN);
+        robot.scroll(20, VerticalDirection.UP);
         robot.clickOn("EDIT");
+        robot.clickOn("Choose Decision Conditional");
+        robot.clickOn("I am a new decision");
         robot.clickOn("Delete Decision");
         robot.clickOn("EDIT");
         robot.clickOn("Choose Item Conditional");
         robot.clickOn("Cool Item");;
         robot.closeCurrentWindow();
-        robot.clickOn(450, 300);
+        robot.clickOn(robot.from(robot.lookup("#1").queryAs(GuiSlide.class)).lookup("#delete-slide").queryAs(Button.class));
         robot.clickOn("Load");
     }
 
