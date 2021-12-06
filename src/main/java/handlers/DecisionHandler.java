@@ -43,4 +43,14 @@ public class DecisionHandler extends BaseHandler {
     public void changeGivenItem(Decision decision, String item) {
         decision.setItemToGive(item);
     }
+
+    /**
+     * Returns true if toGet is in decision's list of conditionals
+     * @param decision Decision to check conditionals of
+     * @param toGet Decision to check for presence of
+     * @return true if toGet is in decision's conditionals
+     */
+    public boolean hasDecisionConditional(Decision decision, Decision toGet) {
+        return decision.getDecisionConditionals().contains(toGet);
+    }
 }
