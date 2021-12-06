@@ -18,15 +18,15 @@ public class MenuButton extends Button {
         this.setPrefWidth(120);
         this.setLayoutX(10);
 
-        scrollPane.hvalueProperty().addListener((observable, oldvalue, newvalue) -> {
-                    this.setLayoutX(newvalue.doubleValue() + 10);
-                }
-        );
-
-        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutX(abs(newvalue.getMinX()) + 10)
-        );
+        scrollPane.hvalueProperty().addListener((observable, oldvalue, newvalue) -> {this.setLayoutX(newvalue.doubleValue() + 10);});
+        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutX(abs(newvalue.getMinX()) + 10));
     }
 
+    /**
+     * Sets the theme of the child class buttons using the active theme
+     *
+     * @param theme - the ThemeColours instance containing the active theme
+     */
     public void setTheme(ThemeColours theme){
         this.setStyle("-fx-background-color: " + theme.active.sidebarColour + ";" +
                 "-fx-text-fill: " + theme.active.textColour);

@@ -14,6 +14,9 @@ public class NewSlideButton extends MenuButton {
     /**
      * Creates a Button instance of the new slide button that is displayed in the game.
      * Calls the respective handler when the button is clicked
+     *
+     * @param theme - the theme of the gui
+     * @param scrollPane - the pane where the buttons are located
      */
     public NewSlideButton(ScrollPane scrollPane, ThemeColours theme) {
         super(scrollPane);

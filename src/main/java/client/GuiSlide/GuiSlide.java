@@ -87,6 +87,11 @@ public class GuiSlide extends StackPane {
         this.initializeListeners(slide, firstSlideIndicator);
     }
 
+    /**
+     * Sets the theme of the slde and its elements
+     *
+     * @param theme - the ThemeColours instance containing the active theme
+     */
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
 

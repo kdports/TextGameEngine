@@ -9,7 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 /**
- * A button to allow the user to change the text on a slide.
+ * A button to set the first slide of the program
  */
 public class SetFirstButton extends Button{
     SetFirstButton(Slide slide, ThemeColours theme) {

@@ -26,25 +26,22 @@ public class LoadButton extends MenuButton {
      * Creates a Button instance of the load button that is displayed in the game.
      * Also handles what happens when the button is clicked (loading up an
      * editor from file)
-     *  @param window - The window in which the file explorer resides when clicking load
+     *
+     * @param window - The window in which the file explorer resides when clicking load
      * @param editorGame - The existing EditorGame instance that will be filled with
-     * @param theme
+     * @param theme - the theme of the gui
+     * @param scrollPane - The pane where the buttons are located
      */
     public LoadButton(Scene window, EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme){
         super(scrollPane);
         this.setTheme(theme);
         this.setText("Load");
         this.setLayoutY(320);
-        scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {
-                    this.setLayoutY(newvalue.doubleValue() + 320);
-                }
-        );
-
-        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 320)
-        );
+        scrollPane.vvalueProperty().addListener((observable, oldvalue, newvalue) -> {this.setLayoutY(newvalue.doubleValue() + 320);});
+        scrollPane.viewportBoundsProperty().addListener((observable, oldvalue, newvalue) -> this.setLayoutY(abs(newvalue.getMinY()) + 320));
 
 
-        // When button is clicked, open a file explorer and load in data from a file
+        // Set the event for the button
         this.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
             FileChooser.ExtensionFilter exFilter = new FileChooser.ExtensionFilter("Turtle File (.ttl)", "*.ttl");
@@ -66,11 +63,12 @@ public class LoadButton extends MenuButton {
 
                         editorGame.connectSlideAndRenderableSlide(entry.getKey(), entry.getValue());
 
-                        // SETTING FIRST SLIDE ----------------------
+                        // Set the first slide
                         if (entry.getKey().getObservableFirstSlide().get()){
                             editorGame.firstSlide = entry.getKey();
                         }
                     }
+
                     for (Map.Entry<Decision, GuiDecision> entry : loadedEditorGame.getAllEntriesDecision()) {
                         entry.getValue().setTheme(theme);
                         editorGame.connectDecisionAndRenderableDecision(entry.getKey(), entry.getValue());

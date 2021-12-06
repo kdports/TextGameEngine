@@ -8,7 +8,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 /**
- * A button on the decision that allows the user to edit the text of the decision.
+ * A button on the decision that allows the user to edit the proeprties of the decision.
  */
 public class EditDecisionButton extends Button {
     EditDecisionButton(Decision decision, ThemeColours theme) {

@@ -52,6 +52,7 @@ public class GuiDecision extends StackPane {
      * @param guiSlide - The slide that this decision comes from.
      * @param x - The x location of the decision in the editor
      * @param y - The x location of the decision in the editor
+     * @param theme - the theme of the gui
      */
     public GuiDecision(Decision decision, GuiSlide guiSlide, double x, double y, ThemeColours theme) {
         this.originSlide = guiSlide;
@@ -101,6 +102,11 @@ public class GuiDecision extends StackPane {
 
     }
 
+    /**
+     * Sets the theme of the decision and its elements
+     *
+     * @param theme - the ThemeColours instance containing the active theme
+     */
     public void setTheme(ThemeColours theme){
         rounded.setFill(Color.valueOf(theme.active.slideColour));
         leftLine.setStroke(Color.valueOf(theme.active.textColour));

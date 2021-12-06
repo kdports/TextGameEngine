@@ -17,9 +17,12 @@ public class SidebarButtons extends ArrayList<Button> {
 
     /**
      * Creates button instances of all 4 buttons and adds them to the editor
-     *  @param window - The window in which the file explorer resides
+     *
+     * @param window - The window in which the file explorer resides
      * @param editorGame - The existing EditorGame instance
-     * @param root
+     * @param theme - the theme of the gui
+     * @param scrollPane - the pane where the buttons are located
+     * @param root - where all gui elements are located
      */
     public SidebarButtons(Scene window, EditorGame editorGame, ScrollPane scrollPane, ThemeColours theme, Pane root) {
         Button createNewSlideButton = new NewSlideButton(scrollPane, theme);
