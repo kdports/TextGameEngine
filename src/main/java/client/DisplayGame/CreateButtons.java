@@ -3,7 +3,6 @@ package client.DisplayGame;
 import client.ThemeColours;
 import entities.Decision;
 import entities.Player;
-
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -12,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import static java.lang.Long.MAX_VALUE;
@@ -20,11 +21,13 @@ import static java.lang.Long.MAX_VALUE;
 /**
  * Creates the buttons for the create button panel
  */
-public class CreateButtons extends CreateButtonPane{
+public class CreateButtons extends CreateButtonPane {
     Stage inventoryStage;
+
     /**
      * Creates the panel with all the buttons to add to the screen.
-     *  @param player - The player instance that is currently being used by GameRenderer
+     *
+     * @param player - The player instance that is currently being used by GameRenderer
      * @param theme  - The theme that the GameRenderer is currently using
      */
     CreateButtons(Player player, ThemeColours theme) {
@@ -41,10 +44,10 @@ public class CreateButtons extends CreateButtonPane{
     private Button createButton(ImageView arrow) {
         // Creates a button and sets the theme, font, image, etc of the button.
         Button b = new Button();
+        // Sets the style of the button
         b.setMaxWidth(MAX_VALUE);
         b.setBorder(null);
-        b.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR,25));
-
+        b.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 25));
         b.setGraphic(arrow);
         b.setAlignment(Pos.CENTER_LEFT);
         b.setWrapText(true);
@@ -68,16 +71,16 @@ public class CreateButtons extends CreateButtonPane{
         final ImageView redArrow = createIcon("redArrow.png", theme.active.slideColour);
 
         // If this is the last slide then create the restart button
-        if (createRestartButton(root, redArrow, arrow)){
+        if (createRestartButton(root, redArrow, arrow)) {
             return 1;
         }
         // Creates a button to check the items that the player has gotten
         createInventorButton(root);
-        count +=1 ;
+        count += 1;
 
         // Creates the invalid buttons
-        for (Decision decision: player.currentSlide.outgoingDecisions) {
-            if (!player.currentValidDecisions.contains(decision)){
+        for (Decision decision : player.currentSlide.outgoingDecisions) {
+            if (!player.currentValidDecisions.contains(decision)) {
                 count++;
                 // Creates the button
                 Button b = createButton(createIcon("redX.png", "Red"));
@@ -89,7 +92,7 @@ public class CreateButtons extends CreateButtonPane{
             }
         }
 
-        // Creates the other buttons if it is not the last slide
+        // Creates the valid buttons if it is not the last slide
         for (int i = 0; i < player.currentValidDecisions.size(); i++) {
             count++;
             // Creates the button
@@ -105,9 +108,12 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Creates the restart button when the last slide is reached
      *
+     * @param root       -  The pane that the button will be created on
+     * @param hoverArrow - The image when it is being hovered on
+     * @param arrow      -  The image that should be there normally
      * @return - Whether or not it was created.
      */
-    public boolean createRestartButton(Pane root, ImageView hoverArrow, ImageView arrow){
+    public boolean createRestartButton(Pane root, ImageView hoverArrow, ImageView arrow) {
         // Checks if there are any more decisions, if not then it creates the replay buttons
         // and returns true
         if (player.currentValidDecisions.size() == 0) {
@@ -129,12 +135,14 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Adds which slide to go to when the button is clicked.
      *
-     * @param button - The button that will be clicked.
-     * @param index - The index of the decision linked to the button.
+     * @param button         - The button that will be clicked.
+     * @param index          - The index of the decision linked to the button.
+     * @param inventoryStage -  the stage that the invenotory is displayed on.
      */
     private static void addDestinationAction(Player player, Button button, int index, Stage inventoryStage) {
         // Adds a listener to the button that goes to the next scene
         button.setOnAction(arg0 -> {
+            // Closes the inventory so that there aren't multiple inventories opened
             inventoryStage.close();
             player.currentSlide = player.currentValidDecisions.get(index).target;
             // Gives the player an item if there is an item to give
@@ -149,8 +157,9 @@ public class CreateButtons extends CreateButtonPane{
     /**
      * Creates the inventory button that shows the current inventory when pressed
      *
+     * @param root - the pane that the inventory button will be displayed on
      */
-    private void createInventorButton(Pane root){
+    private void createInventorButton(Pane root) {
         // Creates the backpack image icons from the inventory button
         final ImageView backpack = createIcon("backpack.png", theme.active.textColour);
         final ImageView hoverBackpack = createIcon("backpack.png", theme.active.slideColour);
@@ -158,20 +167,19 @@ public class CreateButtons extends CreateButtonPane{
         // Creates the button and adds the listeners
         Button b = createButton(backpack);
         b.setText(" Inventory");
+        // Adds the hover effect to the buttons
         addListeners(b, hoverBackpack, backpack);
+        // Sets up the window with the inventory
         initializeInventory();
         // Make the button display a new screen with the inventory items listed
         b.setOnAction(arg0 -> displayInventory());
-
         root.getChildren().add(b);
-
     }
 
     /**
      * Displays the inventory of items in a new screen
-     *
      */
-    private void initializeInventory(){
+    private void initializeInventory() {
         // Makes a new root and scene for the new window
         VBox root = new VBox();
         Scene scene = new Scene(root);
@@ -182,14 +190,14 @@ public class CreateButtons extends CreateButtonPane{
         root.setStyle("-fx-background-color: " + theme.active.backgroundColour);
 
         // Creates a label for each item to display the item and add an arrow icon
-        for (String item: player.getInventory()){
+        for (String item : player.getInventory()) {
             Label text = new Label(item);
             final ImageView arrow = createIcon("itemArrow.png", theme.active.textColour);
             text.setGraphic(arrow);
             // Makes sure the text follows the theme as well
             text.setStyle("-fx-background-color:" + theme.active.backgroundColour + "; -fx-border-width: 0px;" +
                     "-fx-text-fill: " + theme.active.textColour);
-            text.setFont(Font.font("Abyssinica SIL",FontWeight.BOLD,FontPosture.REGULAR, 25));
+            text.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 25));
             root.getChildren().add(text);
             count += 1;
         }
@@ -199,7 +207,11 @@ public class CreateButtons extends CreateButtonPane{
         inventoryStage.setScene(scene);
     }
 
-    public void displayInventory(){
+    /**
+     * Redisplays the inventory
+     */
+    public void displayInventory() {
+        // Closes the current inventory if it is open, reinitalizes it and redisplays the inventory
         inventoryStage.close();
         initializeInventory();
         inventoryStage.show();

@@ -2,20 +2,30 @@ package client.DisplayGame;
 
 import client.EditorTheme;
 import client.ThemeColours;
-import javafx.scene.control.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 
 public class CreateMenu {
     GameRenderer gameRenderer;
     ThemeColours theme;
+
     /**
-     * Creates the menu bar at the top of the window.
+     * The class that creates the menu bar
      *
+     * @param theme        - the color theme for the panel
+     * @param gameRenderer - the gameRenderer that the menu is on
      */
     CreateMenu(ThemeColours theme, GameRenderer gameRenderer) {
         this.theme = theme;
         this.gameRenderer = gameRenderer;
     }
 
+    /**
+     * Creates the menu bar at the top of the window.
+     *
+     * @return - the menubar that was created
+     */
     public MenuBar createMenu() {
         MenuBar mb = new MenuBar();
         // Creates the theme dropdown
