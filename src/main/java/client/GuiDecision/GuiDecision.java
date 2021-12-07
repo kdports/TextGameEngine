@@ -182,6 +182,7 @@ public class GuiDecision extends StackPane {
             }
         }
 
+        // Constructs an ArrayList of all decision's texts
         ArrayList<Text> allDecisionTexts = new ArrayList<>();
         for (Decision possibleDecision : possibleConditionals) {
             Text decisionText = new Text(possibleDecision.getText());
@@ -195,6 +196,7 @@ public class GuiDecision extends StackPane {
         ComboBox<Text> decisionComboBox = new ComboBox<>(FXCollections.observableArrayList(allDecisionTexts));
         decisionComboBox.setPromptText("Choose Decision Conditional");
 
+        // When a decision is selected the actual decision object is gotten from its text and added
         decisionComboBox.setOnAction(mouseEvent -> {
             String chosenText = decisionComboBox.getValue().getText();
             boolean textChosen = false;

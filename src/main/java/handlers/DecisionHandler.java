@@ -37,8 +37,18 @@ public class DecisionHandler extends BaseHandler {
 
     }
 
+    /**
+     * Calls decision's switchItemConditional function to either add or remove an item from a conditional
+     * @param decision The decision's item conditional to switch
+     * @param item The item to switch
+     */
     public void changeItemConditional(Decision decision, String item) { decision.switchItemConditional(item); }
 
+    /**
+     * Changes what item the decision gives when selected
+     * @param decision The decision that will give an item
+     * @param item The item that will be given
+     */
     public void changeGivenItem(Decision decision, String item) {
         decision.setItemToGive(item);
     }
