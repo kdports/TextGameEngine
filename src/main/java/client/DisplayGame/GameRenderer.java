@@ -2,10 +2,9 @@ package client.DisplayGame;
 
 
 import client.MainTitleScreen;
+import client.PlayDisplayer;
 import client.ThemeColours;
 import entities.Player;
-import client.PlayDisplayer;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -34,16 +33,19 @@ public class GameRenderer extends Application implements PlayDisplayer {
         theme = new ThemeColours();
     }
 
-    public void begin(String[] args){
+    public void begin(String[] args) {
         launch(args);
     }
+
+    /**
+     * Begins the display of the game
+     *
+     * @param primaryStage -  the stage that the game will be on
+     */
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) {
         stage = primaryStage;
-        stage.setTitle("First JavaFX Application");
-        // Sets the image in the top left, currently no image
-        // Image image = new Image("");
-        // stage.getIcons().add(image);
+        stage.setTitle("Game Player");
         stage.setOnCloseRequest(we -> {
             MainTitleScreen title = new MainTitleScreen();
             title.start(new Stage());
@@ -62,35 +64,31 @@ public class GameRenderer extends Application implements PlayDisplayer {
         root = new BorderPane();
         root.setTop(mbar);
 
-        CreateTextPane TPane =  new CreateTextPane(player, theme, animationSpeed);
+        CreateTextPane TPane = new CreateTextPane(player, theme, animationSpeed);
         root.setCenter(TPane.createTPane());
-        root.setStyle("-fx-border-width: 5px; -fx-border-color: "+ "#FFFFFF");
+        root.setStyle("-fx-border-width: 5px; -fx-border-color: " + "#FFFFFF");
         CreateButtonPane buttonPane = new CreateButtonPane(player, theme);
         root.setBottom(buttonPane.createBPane());
-        Scene scene=new Scene(root,1200,800);
+        Scene scene = new Scene(root, 1200, 800);
+        // Gets a custom font from google fonts
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
         stage.show();
     }
 
-    public void setStage(Stage stage){
+    /**
+     * Sets the stage for the game
+     */
+    public void setStage(Stage stage) {
         GameRenderer.stage = stage;
     }
 
     /**
      * Sets the game player
+     *
      * @param player The player to be used as the game player
      */
-    public void setPlayer(Player player){
+    public void setPlayer(Player player) {
         GameRenderer.player = player;
     }
-
-    /**
-     * Main method
-     */
-    public static void main(String[] args) {
-        GameRenderer gr = new GameRenderer();
-        gr.begin(args);
-    }
-
 }

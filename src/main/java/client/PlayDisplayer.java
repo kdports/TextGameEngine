@@ -1,4 +1,5 @@
 package client;
+
 import entities.Player;
 import javafx.stage.Stage;
 
@@ -9,8 +10,11 @@ public interface PlayDisplayer {
 
     void begin(String[] args);
 
-
+    /**
+     * Sets the stage for the game
+     */
     void setStage(Stage stage);
+
     /**
      * Displays the game
      */
@@ -18,6 +22,7 @@ public interface PlayDisplayer {
 
     /**
      * Sets the game player
+     *
      * @param player The player to be used as the game player
      */
     void setPlayer(Player player);
