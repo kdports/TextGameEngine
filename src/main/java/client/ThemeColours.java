@@ -46,6 +46,6 @@ public class ThemeColours {
         this.themes.add(Tranquil);
         this.themes.add(Purpleish);
         this.themes.add(Boring);
-        this.active = Crimson;
+        this.active = Forest;
     }
 }

@@ -1,0 +1,58 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
+@prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
+
+<4>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <3> ;
+        tgeo:hasText       "take the left path" ;
+        tgeo:hasXLocation  "542.0" ;
+        tgeo:hasYLocation  "371.8888888888889" .
+
+<9>     rdf:type           tgeo:Slide ;
+        tgeo:hasText       "you go poor, right path taker" ;
+        tgeo:hasXLocation  "1203.0" ;
+        tgeo:hasYLocation  "552.8888888888889" .
+
+<485923>  rdf:type    tgeo:DecisionConditionalsList ;
+        tgeo:hasItem  <4> .
+
+<2>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <3> ;
+        tgeo:hasText       "Take the right path" ;
+        tgeo:hasXLocation  "483.0" ;
+        tgeo:hasYLocation  "579.8888888888889" .
+
+<7>     rdf:type                   tgeo:Decision ;
+        tgeo:directsTo             <9> ;
+        tgeo:hasText               "only those who took the right path may go this way" ;
+        tgeo:hasXLocation          "1014.0" ;
+        tgeo:hasYLocation          "584.7777777777778" ;
+        tgeo:requiresDecisionList  <406639> .
+
+<3>     rdf:type           tgeo:Slide ;
+        tgeo:hasDecision   <7> , <6> ;
+        tgeo:hasText       "now what are you gonna do?" ;
+        tgeo:hasXLocation  "718.0" ;
+        tgeo:hasYLocation  "436.7777777777778" .
+
+<8>     rdf:type           tgeo:Slide ;
+        tgeo:hasText       "you end up as royalty!" ;
+        tgeo:hasXLocation  "1189.0" ;
+        tgeo:hasYLocation  "339.8888888888889" .
+
+<406639>  rdf:type    tgeo:DecisionConditionalsList ;
+        tgeo:hasItem  <2> .
+
+<1>     rdf:type            tgeo:Slide ;
+        tgeo:categorizedAs  tgeo:isFirst ;
+        tgeo:hasDecision    <4> , <2> ;
+        tgeo:hasText        "choose a path" ;
+        tgeo:hasXLocation   "259.0" ;
+        tgeo:hasYLocation   "455.8888888888889" .
+
+<6>     rdf:type                   tgeo:Decision ;
+        tgeo:directsTo             <8> ;
+        tgeo:hasText               "only those who took the left path may go this way" ;
+        tgeo:hasXLocation          "1002.0" ;
+        tgeo:hasYLocation          "374.7777777777778" ;
+        tgeo:requiresDecisionList  <485923> .

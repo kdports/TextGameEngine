@@ -1,0 +1,32 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
+@prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
+
+<24640>  rdf:type          tgeo:Decision ;
+        tgeo:directsTo     <45116> ;
+        tgeo:givesItem     "coin" ;
+        tgeo:hasText       "Collect a coin " ;
+        tgeo:hasXLocation  "697.0" ;
+        tgeo:hasYLocation  "216.0" .
+
+<2>     rdf:type           tgeo:Slide ;
+        tgeo:hasText       "You deposited the coin!" ;
+        tgeo:hasXLocation  "996.0" ;
+        tgeo:hasYLocation  "248.88888888888889" .
+
+<69363>  rdf:type              tgeo:Decision ;
+        tgeo:directsTo         <2> ;
+        tgeo:hasText           "deposit a coin" ;
+        tgeo:hasXLocation      "710.0" ;
+        tgeo:hasYLocation      "470.0" ;
+        tgeo:requiresItemList  <661712.0> .
+
+<661712.0>  rdf:type  tgeo:ItemConditionalsList ;
+        tgeo:hasItem  "coin" .
+
+<45116>  rdf:type           tgeo:Slide ;
+        tgeo:categorizedAs  tgeo:isFirst ;
+        tgeo:hasDecision    <69363> , <24640> ;
+        tgeo:hasText        "Item collection example" ;
+        tgeo:hasXLocation   "399.0" ;
+        tgeo:hasYLocation   "327.7777777777778" .

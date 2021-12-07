@@ -1,0 +1,69 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix tged: <https://github.com/kdports/TextGameEngine/data/> .
+@prefix tgeo: <https://github.com/kdports/TextGameEngine/ontology/> .
+
+<4>     rdf:type           tgeo:Slide ;
+        tgeo:hasDecision   <5> ;
+        tgeo:hasText       "ur welcome for the coin, heres  a pie" ;
+        tgeo:hasXLocation  "752.0" ;
+        tgeo:hasYLocation  "282.7777777777778" .
+
+<9>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <10> ;
+        tgeo:hasText       "dont give pie or coin" ;
+        tgeo:hasXLocation  "1260.0" ;
+        tgeo:hasYLocation  "461.7777777777778" .
+
+<2>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <4> ;
+        tgeo:givesItem     "coin" ;
+        tgeo:hasText       "collect coin" ;
+        tgeo:hasXLocation  "774.0" ;
+        tgeo:hasYLocation  "446.0" .
+
+<10>    rdf:type           tgeo:Slide ;
+        tgeo:hasText       "you suck" ;
+        tgeo:hasXLocation  "1425.0" ;
+        tgeo:hasYLocation  "443.8888888888889" .
+
+<7>     rdf:type               tgeo:Decision ;
+        tgeo:directsTo         <8> ;
+        tgeo:hasText           "give a coin and a pie" ;
+        tgeo:hasXLocation      "1267.0" ;
+        tgeo:hasYLocation      "735.7777777777778" ;
+        tgeo:requiresItemList  <403791.0> .
+
+<5>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <6> ;
+        tgeo:givesItem     "apple pie" ;
+        tgeo:hasText       "collect pie" ;
+        tgeo:hasXLocation  "1208.0" ;
+        tgeo:hasYLocation  "239.77777777777783" .
+
+<403791.0>  rdf:type  tgeo:ItemConditionalsList ;
+        tgeo:hasItem  "apple pie" , "coin" .
+
+<3>     rdf:type           tgeo:Decision ;
+        tgeo:directsTo     <6> ;
+        tgeo:givesItem     "pie" ;
+        tgeo:hasText       "collect pie" ;
+        tgeo:hasXLocation  "878.0" ;
+        tgeo:hasYLocation  "744.0" .
+
+<8>     rdf:type           tgeo:Slide ;
+        tgeo:hasText       "thanks" ;
+        tgeo:hasXLocation  "1395.0" ;
+        tgeo:hasYLocation  "573.7777777777778" .
+
+<1>     rdf:type            tgeo:Slide ;
+        tgeo:categorizedAs  tgeo:isFirst ;
+        tgeo:hasDecision    <3> , <2> ;
+        tgeo:hasText        "do something" ;
+        tgeo:hasXLocation   "477.0" ;
+        tgeo:hasYLocation   "478.8888888888889" .
+
+<6>     rdf:type           tgeo:Slide ;
+        tgeo:hasDecision   <9> , <7> ;
+        tgeo:hasText       "i require a coin and a pie" ;
+        tgeo:hasXLocation  "1061.0" ;
+        tgeo:hasYLocation  "533.7777777777778" .

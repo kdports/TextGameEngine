@@ -35,7 +35,7 @@ public class RootDisplayer extends Application {
     public void start(Stage primaryStage) throws Exception {
         StackPane holder = new StackPane();
         ScrollPane scrollPane = new ScrollPane();
-        Canvas canvas = new Canvas(5000,  5000);
+        Canvas canvas = new Canvas(3000,  3000);
         holder.getChildren().add(canvas);
         scrollPane.setContent(this.root);
         scrollPane.setMaxHeight(canvas.getHeight());
