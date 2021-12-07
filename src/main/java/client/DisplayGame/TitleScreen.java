@@ -2,8 +2,10 @@ package client.DisplayGame;
 
 import client.MainTitleScreen;
 import client.ThemeColours;
-import entities.*;
-import javafx.animation.*;
+import entities.Game;
+import entities.Player;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -28,40 +30,43 @@ import java.util.List;
 
 import static java.lang.Long.MAX_VALUE;
 
-public class TitleScreen extends GameRenderer{
+public class TitleScreen extends GameRenderer {
 
     GameRenderer gameRenderer;
     ThemeColours theme;
+
     /**
      * Creates the menu bar at the top of the window.
-     *
      */
     TitleScreen(ThemeColours theme, GameRenderer gameRenderer) {
         this.theme = theme;
         this.gameRenderer = gameRenderer;
     }
 
-    public void displayFirstSlide(){
+    /**
+     * Displays the title screen of the game player.
+     */
+    public void displayFirstSlide() {
         VBox box = new VBox(400);
         box.setAlignment(Pos.TOP_CENTER);
-        Label title =  new Label("Welcome, Player!");
+        Label title = new Label("Welcome, Player!");
         title.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 55));
         title.setAlignment(Pos.TOP_CENTER);
 
         Button settings = createSettingsButton();
         Button start = createStartButton();
-        Button quit = createQuitButton();
+        Button quit = createBackButton();
 
         HBox hBox = new HBox(25);
         hBox.getChildren().addAll(start, settings, quit);
         hBox.setAlignment(Pos.BASELINE_CENTER);
 
-        List<Node> nodes = Arrays.asList(quit, settings,start, title);
+        List<Node> nodes = Arrays.asList(quit, settings, start, title);
         Duration duration = new Duration(2000);
         addFadeAnimation(nodes, duration);
         box.getChildren().addAll(title, hBox);
 
-        Scene scene=new Scene(box,1200,800);
+        Scene scene = new Scene(box, 1200, 800);
         addMoveAnimation(title, scene, duration);
         scene.getStylesheets().add("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
         stage.setScene(scene);
@@ -71,25 +76,38 @@ public class TitleScreen extends GameRenderer{
         title.setStyle("-fx-text-fill: " + theme.active.textColour);
     }
 
-    public void reDisplay(){
+    /**
+     * updates the title screen
+     */
+    public void reDisplay() {
         stage.close();
         displayFirstSlide();
     }
 
-    public Button createSettingsButton(){
+    /**
+     * Creates the settings button that displays the settings when pressed.
+     *
+     * @return - The button that was created
+     */
+    public Button createSettingsButton() {
         Button button = createButton();
-        SettingsMenu menu =  new SettingsMenu(theme, this);
+        SettingsMenu menu = new SettingsMenu(theme, this);
         menu.initializeSettings();
         button.setOnMouseClicked(event -> menu.displaySettings());
         button.setText("Settings");
         return button;
     }
 
-    private Button createStartButton(){
+    /**
+     * Creates the start button that starts the game when pressed
+     *
+     * @return - The start button that was created
+     */
+    private Button createStartButton() {
         Button button = createButton();
         button.setText("Load Game");
         VBox box = new VBox(400);
-        Scene window = new Scene(box,1200,800);
+        Scene window = new Scene(box, 1200, 800);
 
         button.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
@@ -98,7 +116,7 @@ public class TitleScreen extends GameRenderer{
             File location = fileChooser.showOpenDialog(window.getWindow());
 
             // If the user chose a valid file to load from, load it in.
-            if (location != null){
+            if (location != null) {
                 String path = location.getAbsolutePath();
                 try {
                     RDFLoadToPlayer loader = new RDFLoadToPlayer(path);
@@ -106,8 +124,7 @@ public class TitleScreen extends GameRenderer{
                     Player player = new Player(gameRenderer, loadedGame);
                     player.playGame();
 
-                }
-                catch (FileNotFoundException e) {
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -115,7 +132,12 @@ public class TitleScreen extends GameRenderer{
         return button;
     }
 
-    private Button createQuitButton(){
+    /**
+     * Creates the back button that returns to the main title screen when pressed.
+     *
+     * @return - The back button that was created
+     */
+    private Button createBackButton() {
         Button button = createButton();
         button.setOnAction(arg0 -> {
             stage.close();
@@ -126,6 +148,11 @@ public class TitleScreen extends GameRenderer{
         return button;
     }
 
+    /**
+     * Creates the basic template for a button.
+     *
+     * @return - The button that was created
+     */
     private Button createButton() {
         Button button = new Button();
         button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 15));
@@ -134,12 +161,14 @@ public class TitleScreen extends GameRenderer{
         button.setCursor(Cursor.HAND);
         button.setWrapText(true);
         button.setStyle("-fx-background-color: " + theme.active.slideColour + ";" +
-                "-fx-text-fill: " + theme.active.textColour +";");
+                "-fx-text-fill: " + theme.active.textColour + ";");
         addListeners(button);
         return button;
     }
 
-
+    /**
+     * Adds the hover effect to the buttons.
+     */
     public void addListeners(Button button) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> button.setStyle("-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
@@ -150,7 +179,10 @@ public class TitleScreen extends GameRenderer{
                         "-fx-text-fill: " + theme.active.textColour));
     }
 
-    private void addFadeAnimation(List<Node> nodes, Duration duration){
+    /**
+     * Adds the fading in animation to the title screen.
+     */
+    private void addFadeAnimation(List<Node> nodes, Duration duration) {
         for (Node node : nodes) {
             FadeTransition ft = new FadeTransition(duration, node);
             ft.setFromValue(0);
@@ -159,7 +191,10 @@ public class TitleScreen extends GameRenderer{
         }
     }
 
-    private void addMoveAnimation(Node title, Scene scene, Duration duration){
+    /**
+     * Adds the moving animation to the title screen.
+     */
+    private void addMoveAnimation(Node title, Scene scene, Duration duration) {
         double sceneWidth = scene.getHeight();
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(title);
