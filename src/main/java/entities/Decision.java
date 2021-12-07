@@ -71,6 +71,12 @@ public class Decision {
         return itemConditionals;
     }
 
+    public void setItemToGive(String s) { this.itemToGive = s; }
+
+    public String getItemToGive() { return this.itemToGive; }
+
+    public boolean hasItemToGive() { return this.itemToGive != null; }
+
 
     /**
      * Certifies that every decision in the decisionConditionals HashSet is also in the inputted set
@@ -97,10 +103,18 @@ public class Decision {
         return true;
     }
 
+    /**
+     * Adds the given decision to this decision's conditionals
+     * @param d The decision to add to conditionals
+     */
     public void addToDecisionConditionals(Decision d) {
         this.decisionConditionals.add(d);
     }
 
+    /**
+     * If decision d is already in conditionals it is removed. Otherwise it is added.
+     * @param d The decision to either remove or add
+     */
     public void switchDecisionConditional(Decision d) {
         if (this.decisionConditionals.contains(d)) {
             this.decisionConditionals.remove(d);
@@ -110,10 +124,18 @@ public class Decision {
         }
     }
 
+    /**
+     * Adds the given item to this decision's conditionals
+     * @param s The item to add to the conditionals
+     */
     public void addToItemConditionals(String s) {
         this.itemConditionals.add(s);
     }
 
+    /**
+     * If item d is already in conditionals it is removed. Otherwise it is added.
+     * @param s The item to remove or add
+     */
     public void switchItemConditional(String s) {
         if (this.itemConditionals.contains(s)) {
             this.itemConditionals.remove(s);
@@ -122,10 +144,4 @@ public class Decision {
             addToItemConditionals(s);
         }
     }
-
-    public void setItemToGive(String s) { this.itemToGive = s; }
-
-    public String getItemToGive() { return this.itemToGive; }
-
-    public boolean hasItemToGive() { return this.itemToGive != null; }
 }
