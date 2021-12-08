@@ -216,6 +216,7 @@ public class SettingsMenu {
      */
     public Button createMenuButton(String text) {
         Button button = new Button(text);
+        button.setId("button-" + text);
         button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 22));
         button.setPrefSize(200, 75);
         button.setCursor(Cursor.HAND);
