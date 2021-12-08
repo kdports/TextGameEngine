@@ -29,10 +29,13 @@ public class GameRenderer extends Application implements PlayDisplayer {
     public GameRenderer() {
         root = new BorderPane();
         animationSpeed = 30;
-
         theme = new ThemeColours();
     }
 
+    /**
+     * Calls the launch function of JavaFX
+     * @param args String needed for launch
+     */
     public void begin(String[] args) {
         launch(args);
     }
@@ -55,7 +58,7 @@ public class GameRenderer extends Application implements PlayDisplayer {
     }
 
     /**
-     * This method displays each of the slides onto the JFrame.
+     * This method displays the current slide on the screen
      */
     public void display() {
         CreateMenu menu = new CreateMenu(theme, this);

@@ -18,7 +18,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Creates the Settings Menu for the main title screen of the Game Player
+ */
 public class SettingsMenu {
     TitleScreen titleScreen;
     ThemeColours theme;

@@ -17,6 +17,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
+/**
+ * Object that creates the Text Pane for the Game Renderer
+ */
 public class CreateTextPane {
     int animationSpeed;
     ThemeColours theme;
@@ -72,7 +75,7 @@ public class CreateTextPane {
 
 
     /**
-     * The method sets the font for a given JTextArea.
+     * The method sets the font for a given Label.
      *
      * @param text - The panel to create the text area in.
      */
