@@ -77,13 +77,6 @@ public abstract class RDFLoad {
                     decision.itemToGive = decisionNode.getProperty(TGEO.givesItem).getString();
                 }
 
-
-
-                //listofdecisionconditionals = decisionNode.getProperty(TGEO.requiresDecision)
-                //listofitemconditionals = decisionNode.getProperty(TGEO.requiresItem)
-                // Loop through the items, add it to decision.addtoitemconditionals
-                // loop through the decision pointers, add that to decision.addtodecisionconditionals
-
                 this.decisionNodeMap.put(decisionNode, decision);
             }
         }
