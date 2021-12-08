@@ -14,7 +14,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-
+/**
+ * This class creates the Button Pane for the Game Renderer
+ */
 public class CreateButtonPane {
     Player player;
     ThemeColours theme;

@@ -79,7 +79,6 @@ public class Slide {
         this.outgoingDecisions = outgoingDecisions;
     }
 
-
     public void setAsFirstSlide(boolean toSet) {
         firstSlide.set(toSet);
     }
@@ -92,10 +91,20 @@ public class Slide {
         return this.firstSlide;
     }
 
+    /**
+     * Adda decision to the outgoing decisions
+     * @param decision Decision to add
+     * @return true
+     */
     public boolean addDecision(Decision decision) {
         return this.outgoingDecisions.add(decision);
     }
 
+    /**
+     * Removes decision
+     * @param decision Decision to remove
+     * @return true if list contained decision
+     */
     public boolean removeDecision(Decision decision) {
         return this.outgoingDecisions.remove(decision);
     }

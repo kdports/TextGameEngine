@@ -30,6 +30,10 @@ public class Player {
         this.inventory = new Inventory();
     }
 
+    /**
+     * Constructs a player without a displayer
+     * @param game - The game to play
+     */
     public Player(Game game){
         this.game = game;
         this.pastChosenDecisions = new HashSet<>();
@@ -46,6 +50,10 @@ public class Player {
         }
     }
 
+    /**
+     * Plays the game using a stage
+     * @param stage - The stage to display
+     */
     public void playGame(Stage stage) {
         dp.setStage(stage);
         currentSlide = game.firstSlide;
@@ -54,8 +62,6 @@ public class Player {
 
     /**
      * Method to play the current scene,
-     * Will be used to keep track of decision and other game elements but will be
-     * implemented later
      */
     public void playScene(){
         checkValidChoices();
@@ -146,12 +152,7 @@ public class Player {
      */
     public boolean isMalformedGame() {
         try {
-            System.out.println("a");
-            // currentSlide.getId();
-            System.out.println("b");
             game.firstSlide.getId();
-            System.out.println("c");
-            // currentSlide.outgoingDecisions.isEmpty();
         } catch (NullPointerException e) { return true; }
         return false;
     }

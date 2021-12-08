@@ -6,12 +6,15 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
+/**
+ * The class that creates the menu bar at the top of the Game Renderer Screen
+ */
 public class CreateMenu {
     GameRenderer gameRenderer;
     ThemeColours theme;
 
     /**
-     * The class that creates the menu bar
+     * Creates a CreateMenu object and sets the theme and gameRenderer
      *
      * @param theme        - the color theme for the panel
      * @param gameRenderer - the gameRenderer that the menu is on

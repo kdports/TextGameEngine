@@ -30,12 +30,21 @@ public class MainTitleScreen extends Application {
 
     ThemeColours theme  = new ThemeColours();
 
+    /**
+     * Start method required for Application
+     * @param primaryStage Stage to use
+     */
     @Override
     public void start(Stage primaryStage)  {
         primaryStage.setTitle("Text Game Engine");
         displayFirstSlide(primaryStage);
         primaryStage.show();
     }
+
+    /**
+     * Display the title screen
+     * @param stage Stage to display one
+     */
     public void displayFirstSlide(Stage stage){
         VBox box = new VBox(400);
         box.setAlignment(Pos.TOP_CENTER);
@@ -65,6 +74,12 @@ public class MainTitleScreen extends Application {
         title.setStyle("-fx-text-fill: " + theme.active.textColour);
     }
 
+    /**
+     * Creates the button for the game engine
+     *
+     * @param stage stage to display on
+     * @return Button - Button that starts the game engine
+     */
     public Button createGEButton(Stage stage){
         Button button = createButton();
         button.setOnAction(arg0 -> {
@@ -83,6 +98,11 @@ public class MainTitleScreen extends Application {
         return button;
     }
 
+    /**
+     * creates the hover effects for the buttons
+     *
+     * @param button - button to add effects to
+     */
     public void addListeners(Button button) {
         button.addEventHandler(MouseEvent.MOUSE_ENTERED,
                 e -> button.setStyle("-fx-background-color:" + theme.active.textColour + "; -fx-border-width: 0px;" +
@@ -92,6 +112,13 @@ public class MainTitleScreen extends Application {
                 e -> button.setStyle("-fx-background-color:" + theme.active.slideColour + "; -fx-border-width: 0px;" +
                         "-fx-text-fill: " + theme.active.textColour));
     }
+
+    /**
+     * Creates the button for the game player
+     *
+     * @param stage stage to display on
+     * @return Button - Button that starts the game player
+     */
 
     private Button createGPButton(Stage stage){
         Button button = createButton();
@@ -111,6 +138,12 @@ public class MainTitleScreen extends Application {
         return button;
     }
 
+    /**
+     * Creates the button that exits the screen
+     *
+     * @param stage stage to close on click
+     * @return Button that exits the screen
+     */
 
     private Button createQuitButton(Stage stage){
         Button button = createButton();
@@ -121,6 +154,11 @@ public class MainTitleScreen extends Application {
         return button;
     }
 
+    /**
+     * Creates the basic template for a button.
+     *
+     * @return - The button that was created
+     */
     private Button createButton() {
         Button button = new Button();
         button.setFont(Font.font("Abyssinica SIL", FontWeight.BOLD, FontPosture.REGULAR, 25));
@@ -133,6 +171,9 @@ public class MainTitleScreen extends Application {
         return button;
     }
 
+    /**
+     * Adds the fading in animation to the title screen.
+     */
     private void addFadeAnimation(List<Node> nodes, Duration duration){
         for (Node node : nodes) {
             FadeTransition ft = new FadeTransition(duration, node);
@@ -142,6 +183,9 @@ public class MainTitleScreen extends Application {
         }
     }
 
+    /**
+     * Adds the moving animation to the title screen.
+     */
     private void addMoveAnimation(Node title, Scene scene, Duration duration){
         double sceneWidth = scene.getHeight();
         TranslateTransition translate = new TranslateTransition();

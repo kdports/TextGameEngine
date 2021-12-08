@@ -8,6 +8,10 @@ import javafx.stage.Stage;
  */
 public interface PlayDisplayer {
 
+    /**
+     * Method to launch the displayer
+     * @param args String to use to launc
+     */
     void begin(String[] args);
 
     /**
